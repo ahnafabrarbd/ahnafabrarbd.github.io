@@ -1,30 +1,24 @@
-# DESIGN.md — rizvi-noir design system (G3 lock)
+# DESIGN.md — Rizvi Fashions design system (shipped identity)
 
 Audience lens (§2): sourcing managers at international fast-fashion retailers. Expensive = restraint, precision, pacing. Every visual decision below is a named token; shipped CSS may not contain a raw value absent from the `tokens` block (enforced by `setup/token-lint.mjs`).
 
+> Note: this project began as "rizvi-noir" (black ground, magenta accent, Clash/Switzer/Martian type) and was deliberately moved to the warm-editorial identity documented below. The prose here describes the **shipped** site. Token names are historical in one place — `--accent` was once `--pink`; see the rename note in the Tokens section.
+
 ## Concept — The Continuous Thread
 
-One 1px line in the brand pink travels the entire experience: draws the wordmark in the preloader, runs the right-edge scroll rail, stitches chapter seams, pulls the hero weave together, runs out into a selvedge knot beside the footer logo. It is the single flourish; everything else is severe.
+One 1px line in the forest-green accent travels the experience: it runs the scroll-progress rail, stitches chapter seams, and runs out into a selvedge knot beside the footer wordmark. It is the single flourish; everything else is restrained.
 
-## Palette (HARD: black/white/grey + one logo pink)
+## Palette (HARD: warm off-white / ink / grey + one forest-green accent)
 
-- Ground `#0A0A0A`; pure `#000000` permitted in hero/products only.
-- Ink `#FFFFFF`; body text on dark uses `#D6D6D6` (≥4.5:1 on ground); muted `#8A8A8A` (labels/annotations, large/uppercase only); hairlines `#1E1E1E`.
-- Pink `#AC2171` — sampled from the live wordmark (104,837px flat fill; alternative edge tone `#B12F7A` recorded, unused). Used ONLY for: the thread (rail, seams, selvedge), chapter numerals, spec-block emphasis glyphs, portrait hover frames, focus ring. Never body text (contrast 4.0:1 < 4.5:1), never backgrounds, never nav.
-- Pink on `#0A0A0A` ≈ 4.0:1 — acceptable for the 1px thread and ≥24px numerals (AA large-text 3:1), not for prose.
+- Ground `#F8F6F2` (warm off-white); `--ground-pure` `#FFFFFF` for the home hero and the frosted glass.
+- Ink `#111111` (display + primary); body text `#2C2C28` (`--ink-body`); muted labels/annotations `#646B5E` (`--ink-muted`); faint decorative/borders `#9EA295` (`--ink-faint`, non-text — see the accessibility token note); hairlines `#E8E4DC`.
+- Accent forest green `#1A3828` (`--accent`). Used for: the thread (rail, seams, selvedge knot), chapter numerals, the active wayfinding dot, keyline CTAs, focus ring, and partner-name hover. Never body prose, never as a large background field.
 
 ## Type system
 
-Three roles: DISPLAY (chapter titles, oversized uppercase, tracked), BODY (16–18px, lh ≥1.6), UTILITY (spec blocks, labels, nav meta — true tabular numerals required).
-Bake-off of three pairings rendered at `qa/bakeoff/index.html`, scored by fresh-context critic — winner recorded here and tokenised below:
+Two families, three roles: DISPLAY — **Cormorant** (chapter/page titles, oversized uppercase, tracked, weight 700); BODY — **Montserrat** (16–18px, lh ~1.7); UTILITY — **Montserrat** for spec blocks, labels and nav meta, with true tabular numerals (`font-variant-numeric: tabular-nums`).
 
-- **P1 BRUTAL** — Outward Block (OFL, Velvetyne) / Public Sans (OFL, USWDS) / Martian Mono (OFL, Evil Martians)
-- **P2 MACHINED** — Clash Display (ITF FFL, Fontshare) / Switzer (ITF FFL) / JetBrains Mono (OFL)
-- **P3 EURO-STUDIO** — Apfel Grotezk Satt (OFL, Collletttivo) / General Sans (ITF FFL) / Necto Mono (OFL, Collletttivo)
-
-**Winner: P2 with the panel's unanimous graft → Clash Display / Switzer / Martian Mono.** Three-judge fresh-context panel (wf_fb96d253-c2e, scores in PROGRESS.md §G3): P2 won 2–1 on display authority + instant legibility ("flattened superellipses with flat-cut terminals — curves that look milled, not drawn"); P1's Outward Block was eliminated by all three for counter collapse at scale; all three judges independently recommended grafting P1's Martian Mono as utility (slashed engineering zero, digit weight matching the display mass, and it breaks the recognizable Clash+JetBrains pairing judge 3 flagged as template-adjacent). Watch-item from judge 3: Clash's open L–T pair at hero scale — hand-kern via CSS where a title contains "LT"-class pairs (verified per page at QA).
-Body-face justification (§4): Switzer is a deliberate workhorse — the judges' words: "its neutrality is the correct counter-voice to a loud display"; body must disappear under the display voice.
-All faces self-host as subset woff2, preloaded; licences in CREDITS.md (Clash/Switzer: ITF FFL, self-host sanctioned; Martian Mono: OFL).
+Cormorant is a high-contrast Didone-class serif: its thick/thin stroke modulation carries the editorial, "expensive" authority at hero scale, set against Montserrat's neutral geometric sans as the quiet body counter-voice. Both self-host as subset woff2 and are preloaded (`cormorant-normal`, `cormorant-italic`, `montserrat`); licences in CREDITS.md (Cormorant: OFL; Montserrat: OFL).
 
 ## Tokens
 
