@@ -466,6 +466,13 @@ main { flex: 1; }
 }
 /* the cover is just its title (a narrow room that merges into the next) */
 .hscroll-on .hpanel.is-cover .page-head__intro { display: none; }
+/* the cover title must show in full — drop the 16ch title cap (it cropped long
+   single words like SUSTAINABILITY) and fluid-scale so the longest word still
+   fits the viewport. The room is content-width, so it grows to the title. */
+.hscroll-on .hpanel.is-cover h1 {
+  max-width: none;
+  font-size: clamp(var(--text-xl), 9vw, var(--space-7));
+}
 
 /* prose-heavy tall rooms flow into TWO columns so the copy FITS the room as an
    editorial spread (engine adds .is-cols); the heading spans both columns. */
