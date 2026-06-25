@@ -2,9 +2,18 @@
 
 > Rule (§7): licence read from the actual LICENSE file/page before anything ships; unclear ⇒ reimplement or swap. Quotes below were verified 2026-06-10 (full record: `reference/design-research.json`).
 
-## Typefaces (bake-off candidates; only the winning pairing ships in the theme)
+## Typefaces
 
-| Family | Foundry / Source | Licence | Verification |
+**Shipped (the only fonts in `dist/`):**
+
+| Family | Foundry / Source | Licence |
+|---|---|---|
+| **Cormorant** (display) | Catharsis Fonts / Google Fonts — github.com/CatharsisFonts/Cormorant | SIL OFL 1.1 |
+| **Montserrat** (body + utility) | Julieta Ulanovsky / Google Fonts — github.com/JulietaUla/Montserrat | SIL OFL 1.1 |
+
+Self-hosted woff2 subsets (`cormorant-normal`, `cormorant-italic`, `montserrat`), preloaded. The earlier "rizvi-noir" bake-off candidates below are **historical and no longer ship** (the Clash/Switzer/Martian font files were removed); kept for the audit trail.
+
+| Family (historical, not shipped) | Foundry / Source | Licence | Verification |
 |---|---|---|---|
 | Outward (Block) | Velvetyne Type Foundry (Raoul Audouin) — velvetyne.fr/fonts/outward, github.com/raoulaudouin/Outward | SIL OFL 1.1 | Stated on foundry page; GitHub licence detection OFL-1.1. OFL: "used, studied, modified and redistributed freely as long as they are not sold by themselves." |
 | Apfel Grotezk (Satt, Fett) | Collletttivo — collletttivo.it, github.com/collletttivo/apfel-grotezk | SIL OFL 1.1 | LICENSE.txt in repo. |
@@ -59,7 +68,7 @@ Brand-fit rejection rationale (D-016): the visual system is severe editorial-ind
 ## Delivery confirmation (G8, 2026-06-11)
 
 Everything that ships in `dist/` / `rizvi-site.zip` is accounted for above with a verified licence:
-- **Fonts (self-hosted woff2 subsets):** Clash Display + Switzer (ITF Free Font License, self-host sanctioned) · Martian Mono (SIL OFL 1.1). 4 files, 82KB total.
+- **Fonts (self-hosted woff2 subsets):** Cormorant (display) + Montserrat (body/utility), both SIL OFL 1.1. 3 files (cormorant-normal, cormorant-italic, montserrat).
 - **Motion:** GSAP + ScrollTrigger 3.15.0 (Webflow Standard "No-Charge" License — free commercial, verified at gsap.com/licensing) — loaded only on the home page, idle-deferred.
 - **Icons:** 6 Phosphor glyphs (MIT) vendored into `src/illustrations/icons/` — the `@phosphor-icons/core` package was removed after vendoring (provenance retained here).
 - **Imagery:** owner-supplied only (no third-party stock). AI-watermark / third-party-IP files flagged in RISKS R-008 are quarantined pending owner sign-off — they do not ship without it.

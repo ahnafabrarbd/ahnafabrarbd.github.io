@@ -247,6 +247,15 @@ main { flex: 1; }
   grid-auto-columns: minmax(var(--space-8), max-content);
 }
 .hscroll-on .hpanel .stats dd { white-space: nowrap; }
+/* corridor: the accreditation logo band lays out as TWO horizontal rows spanning
+   its true width (not a tall, squashed 2-column stack). Logos keep their original
+   proportions (object-fit: contain on each cell's image, set in LogoBand). */
+.hscroll-on .hpanel .logo-band--band {
+  grid-template-columns: none;
+  grid-template-rows: repeat(2, auto);
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(var(--space-8), max-content);
+}
 
 /* ---- thread rail */
 .thread-rail {
