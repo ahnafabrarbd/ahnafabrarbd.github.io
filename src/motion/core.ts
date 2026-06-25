@@ -203,7 +203,8 @@ function knotDraw() {
 
 /* ---- B9: products rail arrow keys */
 function railKeys() {
-  for (const rail of document.querySelectorAll<HTMLElement>('.rail')) {
+  // product galleries use `.cat-panel__rail`; the generic `.rail` covers any other
+  for (const rail of document.querySelectorAll<HTMLElement>('.rail, .cat-panel__rail')) {
     rail.addEventListener('keydown', (e) => {
       if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
       e.preventDefault();

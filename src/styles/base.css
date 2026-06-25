@@ -603,8 +603,16 @@ main { flex: 1; }
   gap: var(--space-2);
   overflow: hidden;
 }
+/* the clickable target is a ≥24px box (WCAG 2.5.8); the visible dot stays 8px,
+   drawn as a centred ::before so the larger hit-area never enlarges the dot */
 .rail-index__dot {
-  display: block;
+  display: grid;
+  place-items: center;
+  width: var(--space-3);
+  height: var(--space-3);
+}
+.rail-index__dot::before {
+  content: '';
   width: var(--space-1);
   height: var(--space-1);
   border-radius: 50%;
@@ -614,17 +622,17 @@ main { flex: 1; }
     background var(--dur-fast) var(--ease-out),
     border-color var(--dur-fast) var(--ease-out);
 }
-.rail-index__dot:hover {
+.rail-index__dot:hover::before {
   border-color: var(--accent);
   background: var(--ink-faint);
 }
-.rail-index__dot.is-active {
+.rail-index__dot.is-active::before {
   background: var(--accent);
   border-color: var(--accent);
 }
 .rail-index__dot:focus-visible {
   outline: var(--rail-w) solid var(--accent);
-  outline-offset: var(--space-1);
+  outline-offset: calc(-1 * var(--rail-w));
 }
 
 /* masked HEADING RISE (Aston, resistive): each WORD rides up out of its own clip

@@ -181,7 +181,9 @@ const description = lead.length > 155 ? `${lead.slice(0, 152)}…` : lead;
   }
   .enquiry__field input::placeholder,
   .enquiry__field textarea::placeholder {
-    color: var(--ink-faint);
+    /* AA contrast for placeholder text (--ink-faint is ~2.4:1, fails); --ink-muted
+       is ~5.5:1 on the ground. --ink-faint stays for non-text borders/decoration. */
+    color: var(--ink-muted);
   }
   .enquiry__field textarea {
     resize: vertical;

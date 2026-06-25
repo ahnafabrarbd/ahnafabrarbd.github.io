@@ -192,6 +192,11 @@ if (
     for (const p of panels) {
       const h = p.querySelector<HTMLElement>('h1, h2, h3');
       if (!h || h.querySelector('.hrise')) continue;
+      // only split headings that are a SINGLE text node — rebuilding from
+      // textContent would silently flatten inline markup (<em>, <a>, <br>, hidden
+      // spans) and break the accessible name. Headings with element children keep
+      // their markup and simply skip the rise.
+      if (h.childNodes.length !== 1 || h.firstChild?.nodeType !== 3) continue;
       const parts = (h.textContent ?? '').split(/(\s+)/); // keep the whitespace runs
       const wordCount = parts.filter((w) => w.trim().length).length;
       if (!wordCount) continue;
