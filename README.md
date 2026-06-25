@@ -57,5 +57,12 @@ publishes `dist/` to GitHub Pages.
 
 ## Stack
 
-Astro 5 · GSAP · Lenis · sharp · vanilla CSS (no Tailwind/React) · zero client JS on content
+Astro 7 · GSAP · Lenis · sharp · vanilla CSS (no Tailwind/React) · zero client JS on content
 pages except the motion layer.
+
+## Contact form
+
+The contact form submits to [Web3Forms](https://web3forms.com) (a no-backend static
+service — GitHub Pages can't run server code). Set `PUBLIC_CONTACT_ACCESS_KEY` (see
+`.env.example`) in your build/CI env. If unset, a placeholder ships and the form
+won't deliver until you add a real key.
