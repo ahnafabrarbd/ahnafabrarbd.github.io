@@ -232,6 +232,15 @@ main { flex: 1; }
 @media (min-width: 768px) {
   .stats dd { font-size: var(--text-xl); }
 }
+/* corridor: a stat block must span its true width as one horizontal row. In a
+   content-width room the `auto-fit` grid otherwise collapses to a squashed single
+   column — force a single row of content-sized cells (figures never wrap). */
+.hscroll-on .hpanel .stats {
+  grid-template-columns: none;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(var(--space-8), max-content);
+}
+.hscroll-on .hpanel .stats dd { white-space: nowrap; }
 
 /* ---- thread rail */
 .thread-rail {
