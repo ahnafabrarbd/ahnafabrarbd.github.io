@@ -71,8 +71,7 @@ const STORY = [
   { id: 'manufacturing', n: '03', data: manufacturing, target: TEASER_TARGET['Manufacturing teaser'], ...(await slotImage('home', 'manufacturing-teaser')) },
 ];
 
-// hero field — the LineWaves WebGL canvas mounts into #hero-waves at idle
-// (src/motion/linewaves.ts), replacing the old image constellation.
+// hero — a clean centred thesis on the plain ground (no background graphic).
 
 // environmental spec glyphs by cell order (manifest slots — V7 §8.3 one-line swap)
 const ENV_ICONS = ['env-recycle', 'env-water', 'env-energy'];
@@ -98,7 +97,6 @@ const description = heroBody.length > 155 ? `${heroBody.slice(0, 152)}…` : her
 ---
 <Base title={title} description={description} pure>
   <section class="hero">
-    <div id="hero-waves" class="hero__waves" aria-hidden="true"></div>
     <div class="hero__copy">
       <h1>{hero.heading}</h1>
       {hero.body.map((p: string) => <p>{p}</p>)}
@@ -182,40 +180,16 @@ const description = heroBody.length > 155 ? `${heroBody.slice(0, 152)}…` : her
   </section>
 </Base>
 
-{/* home-only hero field: the LineWaves WebGL canvas (ogl), loaded dynamically at
-    idle on the home page alone — content pages stay 0KB. src/motion/linewaves.ts */}
-<script>
-  import '../motion/linewaves.ts';
-</script>
-
 <style>
-  /* ---- hero: a centred thesis over the LineWaves field (the home signature).
-     The animated forest-green wave field fills the hero behind the copy; the
-     text is centred and width-capped for a calm, deliberate first screen. On
-     mobile / reduced-motion / no-WebGL the field simply never mounts and the
-     clean centred hero stands on its own. */
+  /* ---- hero: a clean centred thesis on the plain ground — no background graphic. */
   .hero {
     position: relative;
     min-height: 100svh;
     display: grid;
     place-items: center;
     padding-block: var(--space-7);
-    overflow: hidden;
-    isolation: isolate;
-  }
-  .hero__waves {
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-  }
-  .hero__waves :global(.hero-waves__canvas) {
-    display: block;
-    width: 100%;
-    height: 100%;
   }
   .hero__copy {
-    position: relative;
-    z-index: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -226,17 +200,6 @@ const description = heroBody.length > 155 ? `${heroBody.slice(0, 152)}…` : her
   }
   @media (min-width: 768px) {
     .hero__copy { padding-inline: var(--gutter); }
-  }
-  /* a soft scrim of the ground behind the copy keeps the headline legible over
-     the densest part of the field without hiding the motion at the edges */
-  .hero__copy::before {
-    content: '';
-    position: absolute;
-    z-index: -1;
-    inset: calc(-1 * var(--space-7)) calc(-1 * var(--space-6));
-    background: radial-gradient(closest-side, var(--ground-pure) 55%, transparent);
-    opacity: 0.9;
-    pointer-events: none;
   }
   .hero__copy h1 {
     font-size: var(--text-display-sub);
