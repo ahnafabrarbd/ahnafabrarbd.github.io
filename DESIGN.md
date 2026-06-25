@@ -33,6 +33,7 @@ Cormorant is a high-contrast Didone-class serif: its thick/thin stroke modulatio
 --pink: #1A3828;
 --glass: rgba(248, 246, 242, 0.72);
 --scrim-img: rgba(17, 17, 17, 0.55);
+--shadow-soft: rgba(17, 17, 17, 0.06);
 --font-display: 'Cormorant', Georgia, serif;
 --font-body: 'Montserrat', system-ui, sans-serif;
 --font-utility: 'Montserrat', system-ui, sans-serif;

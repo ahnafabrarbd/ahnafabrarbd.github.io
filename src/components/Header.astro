@@ -36,8 +36,13 @@ const NAV = [
     position: sticky;
     top: 0;
     z-index: var(--z-topbar);
-    background: var(--ground);
+    /* frosted, floating glass bar — content blurs as it scrolls beneath, and a
+       soft shadow lifts it off the page for a tactile, three-dimensional feel */
+    background: var(--glass);
+    -webkit-backdrop-filter: blur(var(--space-2));
+    backdrop-filter: blur(var(--space-2));
     border-bottom: var(--rail-w) solid var(--hairline);
+    box-shadow: 0 var(--rail-w) var(--space-3) var(--shadow-soft);
   }
   .topbar__in {
     display: flex;
@@ -67,6 +72,7 @@ const NAV = [
     align-items: center;
   }
   .topbar__nav a {
+    display: inline-block;
     color: var(--ink-muted);
     text-decoration: none;
     font-family: var(--font-body);
@@ -74,9 +80,12 @@ const NAV = [
     font-weight: var(--fw-body-strong);
     letter-spacing: var(--tracking-nav);
     text-transform: uppercase;
-    transition: color var(--dur-fast) var(--ease-out);
+    transition:
+      color var(--dur-fast) var(--ease-out),
+      transform var(--dur-fast) var(--ease-out);
   }
-  .topbar__nav a:hover { color: var(--ink); }
+  /* tactile lift on hover — the link rises slightly toward the cursor */
+  .topbar__nav a:hover { color: var(--ink); transform: translateY(-1px); }
   .topbar__nav a[aria-current="page"] { color: var(--pink); }
   .topbar__nav li:not(:last-child) { display: none; }
   @media (min-width: 768px) {
@@ -92,7 +101,9 @@ const NAV = [
     letter-spacing: var(--tracking-nav);
     text-transform: uppercase;
     cursor: pointer;
-    transition: color var(--dur-fast) var(--ease-out);
+    transition:
+      color var(--dur-fast) var(--ease-out),
+      transform var(--dur-fast) var(--ease-out);
   }
-  .topbar__menu:hover { color: var(--ink); }
+  .topbar__menu:hover { color: var(--ink); transform: translateY(-1px); }
 </style>
