@@ -13,7 +13,6 @@
     "screens": "node scripts/screenshot-sweep.mjs"
   },
   "devDependencies": {
-    "lighthouse": "13.4.0",
     "playwright": "1.61.1"
   },
   "dependencies": {

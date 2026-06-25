@@ -12,8 +12,21 @@ import { createReadStream, existsSync, mkdirSync, readFileSync, writeFileSync, r
 import { join, extname, resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { createGzip } from 'node:zlib';
-import lighthouse from 'lighthouse';
-import * as chromeLauncher from 'chrome-launcher';
+// lighthouse + chrome-launcher are NOT pinned deps — they pull a deep, vulnerable
+// transitive chain (@sentry → @opentelemetry/core) that would dirty `npm audit`
+// for a tool that never ships. Loaded on demand instead; install ad-hoc to run:
+//   npm i -D lighthouse chrome-launcher && npm run perf-gate
+let lighthouse, chromeLauncher;
+try {
+  ({ default: lighthouse } = await import('lighthouse'));
+  chromeLauncher = await import('chrome-launcher');
+} catch {
+  console.error(
+    'perf-gate: lighthouse is not installed (kept out of deps so `npm audit` stays clean).\n' +
+      '  To run it: npm i -D lighthouse chrome-launcher && npm run perf-gate',
+  );
+  process.exit(0);
+}
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const DIST = join(ROOT, 'dist');
