@@ -103,50 +103,45 @@ Cormorant is a high-contrast Didone-class serif: its thick/thin stroke modulatio
 
 Notes (G4 addition, ratified by the G4 critic): `--bp-rail: 768px` tokenises the rail/label breakpoint already named in the thread spec prose — media queries cannot consume `var()`, so the breakpoint value must be a token for token-lint to admit it. (G5 addition, pending critic ratification at G5 close): `--card-h: 26rem` — cutout card/panel height cap ≈ 416px, the token form of D-004's "resolution-honest sizes ≤420px" rule for product-rail and hero-weave panels. (G6 additions, same protocol): `--seam-w: 120px` — the thread-spec prose's "~120px" stitched seam segment, tokenised; `--knot-len: 90` — the selvedge-knot SVG path length for its stroke-draw (dasharray/dashoffset unit). Type scale is a 1.31 modular ratio off 17px body; radius-0 is the default everywhere (radius-frame only on portrait hover frames); `--numeric` is applied as `font-variant-numeric: tabular-nums` on every `--font-utility` element (the spec blocks demand true tabular figures); entrances run `--dur-entrance`→`--dur-entrance-max` `--ease-out`, transform/opacity only.
 
-## Thread specification (HARD bounds: never enters top bar, never crosses text or imagery)
+## Thread & wayfinding (as shipped)
 
-- **Form:** 1px `--accent` line, `--z-thread`, pointer-events none.
-- **Preloader (first visit per session only):** SVG stroke draws the RIZVI wordmark ≤1.8s (`--dur-preloader-max`), then the stroke "releases" — translates to the right edge and becomes the rail. Session-cached via sessionStorage; reduced-motion ⇒ instant skip.
-- **Rail (≥768px):** fixed right edge at `--rail-offset`; height = scroll progress (grows top→bottom, pink above `--hairline` track below). Section labels hang left of the rail in `--font-utility` `--text-2xs` caps, `--tracking-caps`; active = `--ink`, inactive = `--ink-muted`; all clickable (scrollspy). The rail occupies the gutter — content max-width keeps text/imagery clear of it (the no-crossing rule is layout-guaranteed, not clipped).
-- **<768px:** bare 1px progress line, no labels; section index moves into the overlay menu.
-- **Chapter seams:** at each chapter boundary a short stitched-line (dashed 1px segment, ~120px) draws across the seam as it enters the viewport — 450ms `--ease-thread`, once per visit.
-- **Overlay menu:** thread runs along the overlay's left edge while open.
-- **Footer:** rail runs out horizontally and terminates in a selvedge knot — a small SVG loop beside the logo, drawn on first footer reveal.
+- **Form:** 1px `--accent` (forest-green) line, `--z-thread`, pointer-events none.
+- **Progress rail:** a thin scroll-progress hairline — a top bar under the horizontal corridor, the right-gutter rail (≥768px) on plain-vertical pages. Fill is the accent over a `--hairline` track.
+- **Corridor wayfinding:** the frosted bottom bar — a running `NN / NN` index + a row of dots, one per room, the active dot filled `--accent`. It replaces the old right-rail section labels under the corridor.
+- **Footer:** a small selvedge-knot SVG loop sits beside the footer wordmark.
+- *(The original session preloader and the dashed chapter-seam stitches are not shipped in the current build.)*
 
-## Hero storyboard (Home, one orchestrated moment, never repeated)
+## Home hero (as shipped)
 
-1. **t=0** (post-preloader): ground `--ground-pure`. The thread enters from the wordmark's release point.
-2. **Weave in (0–1.2s):** 5 cutout panels (garments on transparency, resolution-honest sizes ≤420px) drift in as warp/weft — vertical panels from top, horizontal from right, each tied to the thread line passing behind them (thread passes BEHIND imagery: z-imagery > z-thread within the hero only — satisfying "never crosses" visually).
-3. **Settle (1.2–1.8s):** panels rest in a loose constellation right-of-centre; headline sets left: "CRAFTING A SUSTAINABLE LEGACY IN GLOBAL APPAREL" in display caps, body + Learn More beneath.
-4. **First scroll:** constellation releases — panels drift apart with parallax clipped by overflow, headline holds; thread re-anchors to the rail. ScrollTrigger scrub, transform/opacity only.
-5. **Reduced motion / revisit:** static composition, no weave; panels pre-settled.
-Budget: ≤5 build attempts (§17 time-box), else simplify to static constellation + thread draw.
+A clean, centred thesis on the pure ground (`--ground-pure`): the headline "CRAFTING A SUSTAINABLE LEGACY IN GLOBAL APPAREL" in display caps, body, and a Learn More CTA — **no background graphic** (the earlier image "weave" and a trialled WebGL line-field were both removed). On desktop the hero is a **vertical front screen**: you scroll DOWN through it, then the horizontal corridor takes over; the footer is a vertical coda at the end. Mobile / reduced-motion: the same centred hero, static.
 
-## Scroll grammar
+## Scroll grammar (as shipped)
 
-Vertical full-viewport chapters; oversized left-anchored uppercase titles; chapter numeral chips (CSS counters in `--font-utility`, fused into keylines — pattern study: thenewindustrials). Smooth scroll via Lenis (flag-gated). Departures: Products = pinned horizontal gallery (mobile: native swipe + scroll-snap; reduced-motion: vertical list); Partners may run as a slow horizontal band; ≤1 full-bleed breather per long page, caption below. DOM stays in logical reading order under all pinning.
+Desktop (≥1025px, motion on): a single horizontal **corridor** — the page pins and the track translates LEFT, each block a "room", over a Lenis smooth-scroll (weighty lerp + reduced wheel sensitivity = unhurried, tactile). Depth is restrained: subtle bg/fg parallax + a bezier-eased per-room reveal (clip-opening images, rising heading words) that never animates back out. The home hero (front) and the footer (coda) are vertical; the corridor runs between. Products keeps its pinned horizontal category rail; Partners is a plain vertical ladder. Mobile / reduced-motion / no-JS: the markup is a clean vertical document (the fallback). DOM stays in logical reading order throughout.
 
-## Navigation
+## Navigation (as shipped)
 
-- Top bar: wordmark left (SVG, white), right: Overview · Capabilities · Products · Sustainability · Partners · Contact + "Menu" (word trigger). Plain white `--text-sm`, `--tracking-nav`, **zero hover effects** (HARD). Bar is ground-coloured, hairline bottom border, `--z-topbar`; thread never enters it.
-- Overlay: full-screen `--ground-pure`; all ten pages in `--text-display-sub` display caps; current page's section index beneath in utility caps; thread along left edge; ESC + visible Close; focus-trapped, restored on close.
+- Top bar: wordmark left — **Cormorant italic text** ("RIZVI FASHIONS", not an SVG), right: Overview · Capabilities · Products · Sustainability · Partners · Contact + "Menu". Links are `--ink-muted` → `--ink` on hover, `--text-sm`, `--tracking-nav`, with a subtle lift; the active page is `--accent`. The bar is **frosted glass** (translucent + backdrop-blur + soft shadow), hairline bottom border, `--z-topbar`.
+- Overlay: full-screen `--ground-pure` menu; pages in display caps; ESC + visible Close; focus-trapped, restored on close.
 - Mobile: wordmark + Menu only.
 
-## Page wireframes (chapter order; copy = copy-deck.md verbatim)
+## Page wireframes (chapter intent; copy = copy-deck.md verbatim)
 
-1. **Home:** hero weave → spec counters (4 cells) → sustainability: 6 cards as keyline list rows (title/line/Read More→anchor) → Mission / Vision / Manufacturing as alternating half-image chapters → environmental spec block (3 cells) → accreditations logo band (re-toned) → partners teaser band → contact strip.
-2. **Overview:** Who We Are (2 text chapters, floor photo) → Technology / Scale / Range (keyline trio) → aerial breather → BGMEA strip (utility caps, hairline frame).
-3. **Company Profile:** Mission → accreditations band → Vision → counters → Manufacturing → growth charts as inline SVG (white bars/pink goal line, decoded data) with captions. Anchors preserved.
-4. **Management:** MD profile = text-led chapter (no portrait on live, HARD) with pull-quote rhythm → team grid: 2 keyline rows (BE people-page pattern), portraits small fixed-size, pink hover frame (`--radius-frame`).
-5. **Partners (new):** logo wall, white/grey re-toned logos on keyline grid cells, pink frame on hover; intro line.
-6. **Capabilities:** 8 chapters, left titles, right rail labels; spec blocks per section (real values from RECON); Finishing + Knitting = spec-only rows.
-7. **Sustainability:** 6 anchored chapters, bullet lists set as keyline rows; welfare image in Health chapter (R-008 noted).
-8. **Products:** pinned horizontal rail; category index one-third down (active white/others dimmed); cutouts float on `--ground-pure`; arrows + keyboard + drag; snap tuned; mobile native swipe per category.
+> These describe each page's content/chapter order. The shipped *layout* renders them through the corridor model above; exact per-page layout tuning is Phase 2.
+
+1. **Home:** hero → spec counters → sustainability keyline rows → Mission / Vision / Manufacturing scenes → environmental spec block → accreditations logo band → partners teaser (rolling marquee) → contact + footer coda.
+2. **Overview:** Who We Are → Technology / Scale / Range trio → aerial breather → BGMEA strip.
+3. **Company Profile:** Mission → accreditations band → Vision → counters → Manufacturing → growth charts (inline SVG, accent goal line) with captions. Anchors preserved.
+4. **Management:** MD profile = text-led chapter (no portrait on live, HARD) → team grid, portraits with an `--accent` hover frame (`--radius-frame`).
+5. **Partners:** a vertical ladder of the 20 named brands with a black logo-imprint beside each name.
+6. **Capabilities:** 8 process chapters, spec blocks per section (real values), each paired with a factory photo.
+7. **Sustainability:** anchored chapters as keyline rows; welfare image in the Health chapter (R-008 noted).
+8. **Products:** category rail; on-model garment imagery per category; arrows + keyboard.
 9. **Career:** single chapter, copy-deck text, mailto link.
-10. **Gallery:** editorial keyline grid by album captions; lightbox-free (caption below, full view via native click-through acceptable v1).
-11. **Contact:** Write to Us headline → CF7 form (real output, restyled) → Key Contacts keyline rows → two office cards → footer.
-12. **404/search:** minimal, thread present, utility-caps message.
+10. **Gallery:** editorial keyline grid by album captions.
+11. **Contact:** Write to Us headline → static Web3Forms enquiry form → Key Contacts rows → two office cards → footer.
+12. **404:** minimal, utility-caps message.
 
 ## Cutout & imagery treatment
 
-Cutouts: transparent WebP on `--ground-pure`, 1px alpha erode + 0.75px feather, despill; never painted-black fakes. Photography: graded toward the ground (slight desaturation, lifted blacks crushed to `#0A0A0A`), no text overlays ever, captions below in utility caps. Partner/accreditation logos: white/grey re-tone (tonal only, no redrawing).
+Imagery sits on the warm ground; partner/accreditation logos render as a uniform **ink imprint** (CSS filter, tonal only — no redrawing). Photography is used as full-bleed section media and as contained editorial images. **Text-on-image is used** for continuity (headline/copy over photo with a legibility scrim) — the original "no text overlays ever" / "crush blacks to `#0A0A0A`" rules belonged to the retired noir design and no longer apply.
