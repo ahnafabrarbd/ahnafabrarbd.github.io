@@ -141,7 +141,11 @@ if (
     // motion. Desktop-engine only, so mobile stays native + light.
     const { default: Lenis } = await import('lenis');
     // lower lerp = weightier, more physical glide (owner: "more tactility")
-    const lenis = new Lenis({ lerp: 0.06 });
+    // Aston-faithful smooth-scroll physics (the last /site-teardown reference): a
+    // weighty lerp glide with reduced wheel sensitivity so the scroll feels
+    // unhurried and intentional — the intra-room slowness comes from SCROLL_FACTOR
+    // + the bezier reveal; this sets the overall hand-feel.
+    const lenis = new Lenis({ lerp: 0.075, wheelMultiplier: 0.85 });
     const onLenisScroll = () => ScrollTrigger.update();
     lenis.on('scroll', onLenisScroll);
     const tick = (time: number) => lenis.raf(time * 1000);
