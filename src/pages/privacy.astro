@@ -1,0 +1,91 @@
+---
+// Privacy notice. Plain-language, conservative, accurately reflecting what the
+// site actually does. Uses the Base layout in plain-vertical mode (opts out of
+// the horizontal corridor via `lshape`). Indexable + in the sitemap.
+//
+// OWNER ACTION: have this text reviewed by legal counsel before relying on it.
+// It is a careful template, not verified legal advice.
+import Base from '../layouts/Base.astro';
+
+const title = 'Privacy Notice — Rizvi Fashions Limited';
+const description =
+  'How Rizvi Fashions Limited collects and handles personal data submitted through this website.';
+---
+
+<Base title={title} description={description} lshape>
+  <article class="legal wrap">
+    <h1>Privacy Notice</h1>
+    <p class="legal__intro">
+      This notice explains what personal data Rizvi Fashions Limited collects through this
+      website and how it is used. It covers this website only.
+    </p>
+
+    <section class="legal__section">
+      <h2>What we collect</h2>
+      <p>
+        The only personal data this site collects is what you choose to enter into the contact
+        form: your <strong>name</strong>, <strong>email address</strong>, and your
+        <strong>message</strong> (and an optional subject). We do not ask for anything else.
+      </p>
+    </section>
+
+    <section class="legal__section">
+      <h2>How it is processed</h2>
+      <p>
+        Contact-form submissions are delivered through a third-party form service (Web3Forms),
+        which transmits your message to us by email. Your details are used solely to read and
+        respond to your enquiry. We do not sell or rent your personal data, and we do not use it
+        for advertising.
+      </p>
+    </section>
+
+    <section class="legal__section">
+      <h2>Retention</h2>
+      <p>
+        Enquiry emails are kept only as long as needed to handle your request and for reasonable
+        business record-keeping, after which they are deleted. If you would like your enquiry data
+        removed sooner, contact us using the address below.
+      </p>
+    </section>
+
+    <section class="legal__section">
+      <h2>Tracking</h2>
+      <p>
+        This site uses <strong>no advertising and no analytics tracking</strong>, and sets no
+        tracking cookies. (If analytics are ever added, this notice will be updated to say so.)
+      </p>
+    </section>
+
+    <section class="legal__section">
+      <h2>Your requests</h2>
+      <p>
+        To ask what data we hold about you, or to have it corrected or deleted, email
+        <a href="mailto:info@rizvifashions.com">info@rizvifashions.com</a>.
+      </p>
+    </section>
+  </article>
+</Base>
+
+<style>
+  .legal {
+    padding-block: var(--space-8) var(--space-7);
+    max-width: var(--measure-body);
+  }
+  .legal__intro {
+    margin-block: var(--space-4) var(--space-6);
+    color: var(--ink-body);
+  }
+  .legal__section {
+    margin-block-end: var(--space-6);
+  }
+  .legal__section h2 {
+    font-size: var(--text-lg);
+    margin-block-end: var(--space-3);
+  }
+  .legal__section p {
+    color: var(--ink-body);
+  }
+  .legal a {
+    color: var(--accent);
+  }
+</style>
