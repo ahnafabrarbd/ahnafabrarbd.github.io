@@ -5,7 +5,10 @@ import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
-  site: 'https://rizvifashions.com',
+  // live origin for canonical URLs + sitemap (GitHub Pages user site, served at
+  // root so no `base` is needed). Flip back to https://rizvifashions.com if the
+  // project later moves to its own domain.
+  site: 'https://ahnafabrarbd.github.io',
   output: 'static',
   trailingSlash: 'always',
   // inline ALL stylesheets: removes the render-blocking external-CSS round
