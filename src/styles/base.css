@@ -426,12 +426,6 @@ main { flex: 1; }
 }
 /* full-bleed rooms keep a full viewport */
 .hscroll-on .hpanel:has(> .photo-chapter) { width: 100vw; }
-/* the hero is the full-bleed opening screen — the LineWaves field + centred copy
-   own the whole first viewport before the corridor scrolls on to the figures */
-.hscroll-on .hpanel:has(> .hero) {
-  width: 100vw;
-  padding: 0;
-}
 /* TALL rooms scroll INTERNALLY so copy is never clipped (content-reachability) */
 .hscroll-on .hpanel.is-tall {
   justify-content: flex-start;

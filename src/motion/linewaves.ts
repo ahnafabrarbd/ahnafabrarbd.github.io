@@ -114,12 +114,12 @@ if (container && desktop && !reduced) {
 }
 
 function boot(host: HTMLElement) {
-  // accent + brightness from CSS tokens — the forest green stays the single
-  // source of truth, and the wave intensity is a JS-driven scalar (no design
-  // value), so the whole field is two-colour: green lines over the ground.
+  // MONOCHROME field: the waves are drawn in ink (read from --ink) over the white
+  // ground — black-and-white, never the green accent (the green is reserved for
+  // precise marks: thread/numerals/frames/CTA, never a full background field).
   const css = getComputedStyle(document.documentElement);
-  const accent = css.getPropertyValue('--pink').trim() || '#1a3828';
-  const green = hexToVec3(accent);
+  const inkHex = css.getPropertyValue('--ink').trim() || '#111111';
+  const ink = hexToVec3(inkHex);
 
   const renderer = new Renderer({ alpha: true, premultipliedAlpha: false, dpr: Math.min(2, devicePixelRatio || 1) });
   const gl = renderer.gl;
@@ -153,11 +153,11 @@ function boot(host: HTMLElement) {
       uWarpIntensity: { value: 0.9 },
       uRotation: { value: (-32 * Math.PI) / 180 },
       uEdgeFadeWidth: { value: 0.0 },
-      uColorCycleSpeed: { value: 0.0 }, // no rainbow cycle — hold one hue (the green)
-      uBrightness: { value: 0.5 },
-      uColor1: { value: green },
-      uColor2: { value: green },
-      uColor3: { value: green },
+      uColorCycleSpeed: { value: 0.0 }, // no hue cycle — monochrome ink, black & white
+      uBrightness: { value: 1.5 }, // ink is dark; lift so the lines read as charcoal on white
+      uColor1: { value: ink },
+      uColor2: { value: ink },
+      uColor3: { value: ink },
       uMouse: { value: new Float32Array([0.5, 0.5]) },
       uMouseInfluence: { value: 0.9 }, // gentle cursor pull
       uEnableMouse: { value: true },

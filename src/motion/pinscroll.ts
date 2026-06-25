@@ -88,6 +88,11 @@ if (
     const blocks: HTMLElement[] = [];
     for (const child of [...main.children] as HTMLElement[]) {
       if (child.tagName === 'SCRIPT') continue;
+      // the home HERO stays a VERTICAL front screen ABOVE the corridor (owner):
+      // you scroll DOWN through it first, then the pinned viewport (built after it)
+      // takes over and scrolls HORIZONTALLY. Leaving it out of the track keeps it
+      // in place as the first child; the viewport is appended after it.
+      if (child.classList.contains('hero')) continue;
       const inner = child.querySelector<HTMLElement>('.products-track, .story-stage__track');
       if (inner) {
         const cells = [...inner.children].filter((c): c is HTMLElement => c instanceof HTMLElement);
