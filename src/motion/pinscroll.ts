@@ -141,7 +141,7 @@ if (
     // motion. Desktop-engine only, so mobile stays native + light.
     const { default: Lenis } = await import('lenis');
     // lower lerp = weightier, more physical glide (owner: "more tactility")
-    const lenis = new Lenis({ lerp: 0.08 });
+    const lenis = new Lenis({ lerp: 0.06 });
     const onLenisScroll = () => ScrollTrigger.update();
     lenis.on('scroll', onLenisScroll);
     const tick = (time: number) => lenis.raf(time * 1000);
@@ -237,7 +237,7 @@ if (
     // parallax drift + a scroll-driven IMAGE REVEAL (the Halston tactile feel —
     // the photo clip-opens as the room reaches centre; CSS maps --reveal). The
     // pin is stretched (SCROLL_FACTOR) so MORE scrolling is needed per sub-section.
-    const SCROLL_FACTOR = 1.7; // weightier: 1.7× the scroll distance per room
+    const SCROLL_FACTOR = 2.7; // lots of room to breathe: ~2.7× scroll distance per room (less sensitive, more tactile)
     const ease = (t: number) => 1 - Math.pow(1 - t, 3); // easeOutCubic glide for paging
     const clamp = (v: number, a: number, b: number) => Math.max(a, Math.min(b, v));
 
