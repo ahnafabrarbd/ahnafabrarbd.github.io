@@ -106,11 +106,11 @@ if (
     // the Footer becomes the FINAL room (owner: terminal panel, Sylver-faithful)
     // rather than a vertical coda. It now nests inside <main>, so keep its
     // landmark with an explicit role="contentinfo" (restored on teardown).
+    // the Footer stays a VERTICAL coda BELOW the corridor (owner): after the
+    // horizontal rooms end and the pin releases, you scroll DOWN to reach it. It
+    // is NOT moved into the track — it remains the body's top-level <footer>
+    // landmark after <main>, so every page ends on a normal vertical footer.
     const footer = document.querySelector<HTMLElement>('body > footer.footer');
-    if (footer) {
-      footer.setAttribute('role', 'contentinfo');
-      blocks.push(footer);
-    }
 
     if (blocks.length < 2) {
       teardownClassOnly(); // single-room page: stay vertical
