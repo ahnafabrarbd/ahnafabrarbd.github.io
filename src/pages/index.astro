@@ -1,0 +1,389 @@
+---
+// Home — wireframe 1 (pure ground): hero weave (static constellation; motion is
+// G6) → capacity counters → sustainability keyline rows → Mission / Vision /
+// Manufacturing alternating PhotoChapters → environmental spec block →
+// accreditations band → partners teaser → contact strip. Copy = copy-deck
+// verbatim via src/data/copy/home.json (fidelity-gated); targets = the HARD
+// slug/anchor registry (RAILS §4, byte-exact with Footer's map).
+import Base from '../layouts/Base.astro';
+import SpecBlock from '../components/SpecBlock.astro';
+import LogoBand from '../components/LogoBand.astro';
+import { Image } from 'astro:assets';
+import { slot, resolveImage, slotImage } from '../lib/images';
+import home from '../data/copy/home.json';
+import contact from '../data/copy/contact.json';
+import accreditations from '../data/accreditations.json';
+import partnersData from '../data/partners.json';
+
+const sections = home.sections as Record<string, any>[];
+const byBlock = (name: string) => {
+  const s = sections.find((x) => x.block === name);
+  if (!s) throw new Error(`copy/home: block "${name}" missing — deck drift`);
+  return s;
+};
+const byHeading = (h: string) => {
+  const s = sections.find((x) => x.heading === h);
+  if (!s) throw new Error(`copy/home: heading "${h}" missing — deck drift`);
+  return s;
+};
+
+const hero = byBlock('Hero');
+const counters = byBlock('Capacity counters');
+const sustainability = byHeading('Sustainability');
+const mission = byBlock('Mission teaser');
+const vision = byBlock('Vision teaser');
+const manufacturing = byBlock('Manufacturing teaser');
+const environmental = byBlock('Environmental section');
+const accredSection = byHeading('Accreditations & Certifications');
+const partnersSection = byBlock('Partners teaser');
+
+// HARD anchors (RAILS §4): the six cards deep-link to the Sustainability page
+// registry byte-exact — build fails if the deck loses one.
+const REQUIRED_ANCHORS = [
+  'financial-stability',
+  'health-and-family-wellbeing',
+  'educational-and-professional-development',
+  'safe-and-healthy-work-environment',
+  'equality-and-acceptance',
+  'best-practices',
+];
+const cardAnchors = new Set(sustainability.items.map((it: any) => it.anchor));
+const missingAnchors = REQUIRED_ANCHORS.filter((a) => !cardAnchors.has(a));
+if (missingAnchors.length) {
+  throw new Error(`HARD anchor(s) missing in copy/home sustainability cards: #${missingAnchors.join(', #')} — RAILS.md §4`);
+}
+
+// teaser Read More targets — byte-exact with Footer's registry map
+const TEASER_TARGET: Record<string, string> = {
+  'Mission teaser': '/company-profile/#our-mission',
+  'Vision teaser': '/company-profile/#our-vision',
+  'Manufacturing teaser': '/company-profile/#manufacturing',
+};
+
+// STORY STAGE (v1.3, flag storyStage): Mission → Vision → Manufacturing as
+// three pinned scenes that crossfade on scroll (the Breakthrough study, on the
+// one page authored for it). Default markup is three stacked chapters — the
+// mobile / reduced-motion / no-JS fallback; story.ts upgrades to the pinned
+// crossfade on desktop. Images resolved here (no longer via PhotoChapter).
+const STORY = [
+  { id: 'mission', n: '01', data: mission, target: TEASER_TARGET['Mission teaser'], ...(await slotImage('home', 'mission-teaser')) },
+  { id: 'vision', n: '02', data: vision, target: TEASER_TARGET['Vision teaser'], ...(await slotImage('home', 'vision-teaser')) },
+  { id: 'manufacturing', n: '03', data: manufacturing, target: TEASER_TARGET['Manufacturing teaser'], ...(await slotImage('home', 'manufacturing-teaser')) },
+];
+
+// hero weave — 5 QA-passed cutouts, decorative by design (empty alt + aria-hidden)
+const weave = slot('home', 'hero-weave') as { items?: { src: string; alt: string }[] };
+if (!weave.items?.length) throw new Error('image-map: home.hero-weave has no items');
+const panels = await Promise.all(weave.items.map((it) => resolveImage(it.src)));
+
+// environmental spec glyphs by cell order (manifest slots — V7 §8.3 one-line swap)
+const ENV_ICONS = ['env-recycle', 'env-water', 'env-energy'];
+if (environmental.stats.length !== ENV_ICONS.length) {
+  throw new Error(`copy/home environmental stats: expected ${ENV_ICONS.length} cells, got ${environmental.stats.length}`);
+}
+const envStats = environmental.stats.map((s: any, i: number) => ({ ...s, icon: ENV_ICONS[i] }));
+
+// partners teaser — a few curator-identified names, never invented (D rule);
+// throws if a name drifts out of src/data/partners.json
+const TEASER_PARTNERS = ['Next', 'Primark', 'Puma', 'ALDI', 'Lidl', 'Costco Wholesale'];
+const knownPartners = new Set(partnersData.partners.map((p) => p.name));
+const ghosts = TEASER_PARTNERS.filter((n) => !knownPartners.has(n));
+if (ghosts.length) throw new Error(`partners teaser: not in data/partners.json: ${ghosts.join(', ')}`);
+
+// contact strip — no contact-strip block in the Home deck, so the deck's
+// closing CTA strings (Contact hero) carry the strip, verbatim
+const contactIntro = contact.sections[0] as Record<string, any>;
+
+const title = `${home.title} — Rizvi Fashions Limited`;
+const heroBody: string = hero.body[0];
+const description = heroBody.length > 155 ? `${heroBody.slice(0, 152)}…` : heroBody;
+---
+<Base title={title} description={description} pure>
+  <section class="hero">
+    <div class="hero__copy">
+      <h1>{hero.heading}</h1>
+      {hero.body.map((p: string) => <p>{p}</p>)}
+      <a class="cta u-caps" href="/overview/">{hero.button}<span class="visually-hidden"> — Company Overview</span></a>
+    </div>
+    <div class="hero__weave" aria-hidden="true">
+      {panels.map((image, i) => (
+        <figure class={`hero__panel hero__panel--${i + 1}`}>
+          <Image
+            src={image}
+            alt=""
+            {/* single 340 rung: decorative garnish must not race the display
+                font for bandwidth (G5 refactor — the h1's font-swap LCP) */}
+            widths={[340]}
+            sizes="(min-width: 768px) 280px, 130px"
+            {/* decorative panels must never be the LCP (G5 refactor: home LCP
+                2276ms with eager panels) — the h1 carries first paint; G6
+                fades these in anyway */}
+            loading="lazy"
+            fetchpriority="low"
+            format="webp"
+          />
+        </figure>
+      ))}
+    </div>
+  </section>
+
+  <section class="chapter" id="capacity" aria-label="Capacity counters">
+    <span class="chapter__num" aria-hidden="true"></span>
+    <SpecBlock stats={counters.stats} />
+  </section>
+
+  <section class="chapter" id="sustainability">
+    <span class="chapter__num" aria-hidden="true"></span>
+    <h2>{sustainability.heading}</h2>
+    <ul class="sus-rows">
+      {sustainability.items.map((it: any) => (
+        <li>
+          <h3>{it.title}</h3>
+          <p>{it.text}</p>
+          <a class="row-link u-caps" href={`/sustainability/#${it.anchor}`}>
+            {it.button}<span class="visually-hidden"> — {it.title}</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  {/* STORY STAGE — Mission/Vision/Manufacturing. Default: three stacked scenes
+     (semantic, complete, the fallback). story.ts pins this on desktop+motion and
+     crossfades the scenes on scroll. Scenes alternate media side via :nth-child. */}
+  <section class="story-stage" aria-label="Mission, vision and manufacturing">
+    <div class="story-stage__track">
+      {STORY.map(({ id, n, data, target, image, alt }, i) => (
+        <article class="story-scene" id={id} data-scene={i}>
+          <div class="story-scene__media">
+            <Image src={image} alt={alt} widths={[480, 760]} sizes="(min-width: 768px) 44vw, 90vw" quality={62} format="webp" loading="lazy" />
+          </div>
+          <div class="story-scene__copy">
+            <span class="story-scene__n u-caps" aria-hidden="true">{n} / 03</span>
+            <p class="teaser-label u-caps">{data.label}</p>
+            <h2>{data.heading}</h2>
+            {data.body.map((p: string) => <p>{p}</p>)}
+            <a class="cta u-caps" href={target}>
+              {data.button}<span class="visually-hidden"> — {data.label}</span>
+            </a>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="chapter" id="responsibility">
+    <span class="chapter__num" aria-hidden="true"></span>
+    <h2>{environmental.heading}</h2>
+    <SpecBlock stats={envStats} />
+  </section>
+
+  <section class="chapter" id="accreditations">
+    <span class="chapter__num" aria-hidden="true"></span>
+    <h2>{accredSection.heading}</h2>
+    <LogoBand entries={accreditations.logos} label={accredSection.heading} variant="band" />
+  </section>
+
+  <section class="chapter" id="partners">
+    <span class="chapter__num" aria-hidden="true"></span>
+    <h2>{partnersSection.heading}</h2>
+    <ul class="partners-band">
+      {TEASER_PARTNERS.map((name) => (
+        <li>{name}</li>
+      ))}
+    </ul>
+    <a class="cta u-caps" href="/partners/">All Partners</a>
+  </section>
+
+  <section class="chapter" id="contact">
+    <span class="chapter__num" aria-hidden="true"></span>
+    <h2>{contactIntro.heading}</h2>
+    <p>{contactIntro.subLine}</p>
+    <a class="cta u-caps" href="/contact/">Contact Us</a>
+  </section>
+</Base>
+
+{/* G6 home-only hero weave (flag heroWeave; GSAP loaded dynamically at idle,
+    home page alone — content pages keep 0KB). Storyboard: src/motion/weave.ts */}
+<script>
+  import '../motion/weave.ts';
+</script>
+
+<style>
+  /* ---- hero: pure ground, static settled constellation (weave motion = G6) */
+  .hero {
+    min-height: 100svh;
+    display: grid;
+    gap: var(--space-6);
+    align-content: center;
+    padding-block: var(--space-7);
+  }
+  @media (min-width: 768px) {
+    .hero {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      align-items: center;
+    }
+  }
+  .hero__copy p { margin-block: var(--space-4); }
+  /* the hero headline is a full SENTENCE in a half-width column — the global
+     display cap (8rem) is sized for short one-word page titles and overflowed
+     the column, so the hero gets its own fit-to-column scale that wraps at
+     word boundaries (ship-panel blocker fix). text-wrap:balance evens the rag. */
+  .hero__copy h1 {
+    font-size: var(--text-display-sub);
+    max-width: none;
+  }
+
+  /* <768px: constellation stacks below the headline, smaller */
+  .hero__weave {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    align-items: flex-start;
+  }
+  .hero__panel img {
+    height: calc(var(--space-8) + var(--space-4));
+    width: auto;
+  }
+  /* ≥768px: loose constellation right-of-centre — its own grid track, so the
+     panels can never cross the headline column; percent offsets per brief.
+     Offsets keep every left-anchored panel ≥2rem clear of the thread rail at
+     the 768px floor (panels are 2:3 portrait; widths follow from heights). */
+  @media (min-width: 768px) {
+    .hero__weave {
+      display: block;
+      position: relative;
+      min-height: calc(var(--card-h) + var(--space-8) + var(--space-7));
+    }
+    .hero__panel { position: absolute; z-index: var(--z-base); }
+    .hero__panel--1 { top: 4%; left: 2%; z-index: var(--z-imagery); }
+    .hero__panel--1 img { height: var(--card-h); }
+    .hero__panel--2 { top: 0; left: 28%; }
+    .hero__panel--2 img { height: calc(var(--card-h) - var(--space-7)); }
+    .hero__panel--3 { top: 48%; left: 18%; z-index: var(--z-imagery); }
+    .hero__panel--3 img { height: calc(var(--card-h) - var(--space-6)); }
+    .hero__panel--4 { top: 58%; right: 16%; }
+    .hero__panel--4 img { height: calc(var(--card-h) - var(--space-8)); }
+    .hero__panel--5 { top: 24%; right: 0; }
+    .hero__panel--5 img { height: calc(var(--card-h) - var(--space-8)); }
+  }
+
+  /* ---- shared keyline CTA: forest green border with fill-on-hover */
+  .cta {
+    display: inline-block;
+    color: var(--pink);
+    text-decoration: none;
+    border: var(--rail-w) solid var(--pink);
+    padding: var(--space-1) var(--space-3);
+    font-family: var(--font-body);
+    font-size: var(--text-sm);
+    font-weight: var(--fw-body-strong);
+    letter-spacing: var(--tracking-nav);
+    text-transform: uppercase;
+    transition:
+      background var(--dur-fast) var(--ease-out),
+      color var(--dur-fast) var(--ease-out);
+  }
+  .cta:hover {
+    background: var(--pink);
+    color: var(--ground);
+  }
+
+  /* ---- sustainability cards as keyline list rows */
+  .sus-rows {
+    list-style: none;
+    border-top: var(--rail-w) solid var(--hairline);
+  }
+  .sus-rows li {
+    max-width: none;
+    display: grid;
+    gap: var(--space-1) var(--space-4);
+    padding-block: var(--space-3);
+    border-bottom: var(--rail-w) solid var(--hairline);
+  }
+  @media (min-width: 768px) {
+    .sus-rows li {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 2fr) auto;
+      align-items: baseline;
+    }
+  }
+  .sus-rows h3 { font-size: var(--text-md); }
+  .sus-rows p { margin-block-end: 0; }
+  .row-link {
+    color: var(--ink-muted);
+    text-decoration: none;
+    transition: color var(--dur-fast) var(--ease-out);
+  }
+  .row-link:hover { color: var(--pink); }
+
+  /* ---- teaser eyebrow labels (Our Mission / Our Vision / Manufacturing) */
+  .teaser-label {
+    color: var(--ink-muted);
+    letter-spacing: var(--tracking-caps-wide);
+  }
+
+  /* ================= STORY STAGE (Mission / Vision / Manufacturing) =========
+     DEFAULT (mobile / reduced-motion / no-JS): three stacked two-column scenes,
+     media side alternating — a complete, readable fallback. story.ts upgrades
+     to the pinned crossfade on desktop + motion (.is-staged). */
+  .story-stage__track {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-8);
+  }
+  .story-scene { display: grid; gap: var(--space-4); }
+  .story-scene__media { overflow: hidden; }
+  .story-scene__media img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border: var(--rail-w) solid var(--hairline);
+  }
+  .story-scene__n { color: var(--pink); display: block; margin-block-end: var(--space-2); }
+  @media (min-width: 768px) {
+    .story-scene {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: var(--space-6);
+      align-items: center;
+    }
+  }
+
+  /* STAGED: the stage pins, scenes stack in one full-viewport frame and
+     crossfade (opacity + a settling zoom set by story.ts). */
+  .story-stage.is-staged .story-stage__track {
+    position: relative;
+    height: 100svh;
+  }
+  .story-stage.is-staged .story-scene {
+    position: absolute;
+    inset: 0;
+    height: 100svh;
+    margin: 0;
+    align-content: center;
+    opacity: 0;
+    will-change: opacity;
+  }
+  .story-stage.is-staged .story-scene[data-scene='0'] { opacity: 1; }
+  .story-stage.is-staged .story-scene__media img { max-height: 70svh; will-change: transform; }
+
+  /* ---- partners teaser band: names only, display caps; logos live on /partners/ */
+  .partners-band {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2) var(--space-5);
+    margin-block-end: var(--space-5);
+  }
+  .partners-band li {
+    max-width: none;
+    padding-block: 0;
+    border-bottom: none;
+    font-family: var(--font-display);
+    font-weight: var(--fw-display-sub);
+    font-size: var(--text-lg);
+    line-height: var(--leading-snug);
+    letter-spacing: var(--tracking-display);
+    text-transform: uppercase;
+    color: var(--ink-body);
+  }
+</style>

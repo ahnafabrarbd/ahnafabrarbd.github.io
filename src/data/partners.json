@@ -1,0 +1,107 @@
+{
+  "comment": "G5 curator pass (setup/retone-logos.py): every live partner logo identified by vision from the mark itself — no invented names. 22 source files -> 21 unique logos -> 20 unique brands (Primark appears twice live; trade-mark-tex-bd-1.png is a byte-duplicate). file=null means re-tone needs manual work; source kept out of shipped assets. introSeed remains SEED copy (G5 owner item).",
+  "introSeed": "The retailers and brands we manufacture for.",
+  "totalLiveLogos": 21,
+  "partners": [
+    {
+      "name": "ALDI",
+      "file": null,
+      "identified": true
+    },
+    {
+      "name": "Costco Wholesale",
+      "file": "assets/logos/partners/costco-wholesale.png",
+      "identified": true
+    },
+    {
+      "name": "FILA",
+      "file": "assets/logos/partners/fila.png",
+      "identified": true
+    },
+    {
+      "name": "FM London",
+      "file": "assets/logos/partners/fm-london.png",
+      "identified": true
+    },
+    {
+      "name": "Jack Wills",
+      "file": "assets/logos/partners/jack-wills.png",
+      "identified": true
+    },
+    {
+      "name": "Lefties",
+      "file": "assets/logos/partners/lefties.png",
+      "identified": true
+    },
+    {
+      "name": "Lidl",
+      "file": null,
+      "identified": true
+    },
+    {
+      "name": "Lonsdale London",
+      "file": "assets/logos/partners/lonsdale-london.png",
+      "identified": true
+    },
+    {
+      "name": "LPP",
+      "file": "assets/logos/partners/lpp.png",
+      "identified": true
+    },
+    {
+      "name": "Matalan",
+      "file": "assets/logos/partners/matalan.png",
+      "identified": true
+    },
+    {
+      "name": "NEO Tools",
+      "file": "assets/logos/partners/neo-tools.png",
+      "identified": true
+    },
+    {
+      "name": "Next",
+      "file": "assets/logos/partners/next.png",
+      "identified": true
+    },
+    {
+      "name": "OVS",
+      "file": "assets/logos/partners/ovs.png",
+      "identified": true
+    },
+    {
+      "name": "Pepco",
+      "file": null,
+      "identified": true
+    },
+    {
+      "name": "Primark",
+      "file": "assets/logos/partners/primark.png",
+      "identified": true
+    },
+    {
+      "name": "Puma",
+      "file": "assets/logos/partners/puma.png",
+      "identified": true
+    },
+    {
+      "name": "REWE Group",
+      "file": "assets/logos/partners/rewe-group.png",
+      "identified": true
+    },
+    {
+      "name": "Scanwear Apparel",
+      "file": "assets/logos/partners/scanwear-apparel.png",
+      "identified": true
+    },
+    {
+      "name": "Sports Direct",
+      "file": "assets/logos/partners/sports-direct.png",
+      "identified": true
+    },
+    {
+      "name": "Trademark Textiles",
+      "file": "assets/logos/partners/trademark-textiles.png",
+      "identified": true
+    }
+  ]
+}

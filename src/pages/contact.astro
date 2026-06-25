@@ -1,0 +1,314 @@
+---
+// Contact — wireframe 11: "Write to Us" headline chapter (subLine + privacyNote
+// verbatim) → the POST form against the D-017 self-hosted handler (contract
+// gated by setup/form-mock-test.mjs: labelled name/email/subject/message,
+// honeypot "website" inside a .visually-hidden wrapper, JS-progressive "ts"
+// time-trap stamped by this page's ONE permitted inline script, visible mailto
+// fallback) → Key Contacts as keyline rows → two office cards in a hairline
+// keyline grid. No HARD anchors are registered for /contact/ (RAILS §4) and
+// the image-map carries no contact slots — this page is deliberately type-only.
+// Chanel cut: pink required-asterisks on the three mandatory labels were
+// drafted and removed — native required messaging plus the focus ring already
+// carry it, and pink in prose would breach the palette law regardless.
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import { getEntry } from 'astro:content';
+
+const entry = await getEntry('copy', 'contact');
+if (!entry) throw new Error('copy/contact missing — run: node setup/extract-copy.mjs');
+const { title, sections = [] } = entry.data as { title: string; sections: Record<string, any>[] };
+
+const writeUs = sections.find((s) => s.heading === 'Write to Us');
+if (!writeUs?.subLine || !writeUs?.privacyNote || !writeUs?.button) {
+  throw new Error('copy/contact: "Write to Us" needs subLine + privacyNote + button — deck drift');
+}
+
+const contacts = sections.find((s) => s.heading === 'Key Contacts');
+if (!contacts?.people?.length) {
+  throw new Error('copy/contact: "Key Contacts" carries no people — deck drift');
+}
+for (const p of contacts.people) {
+  if (!p.name || !p.role || !p.email) {
+    throw new Error(`copy/contact: person "${p.name ?? '?'}" needs name/role/email — deck drift`);
+  }
+}
+
+const officeSec = sections.find((s) => (s.offices ?? []).length > 0);
+if (!officeSec || officeSec.offices.length !== 2) {
+  throw new Error('copy/contact: exactly two office cards expected (wireframe 11) — deck drift');
+}
+for (const o of officeSec.offices) {
+  if (!o.name || !o.address || !(o.phones?.length > 0) || !o.email) {
+    throw new Error(`copy/contact: office "${o.name ?? '?'}" needs name/address/phones/email — deck drift`);
+  }
+}
+
+const tel = (n: string) => `tel:${n.replace(/[^+\d]/g, '')}`;
+const lead = `${writeUs.subLine} ${writeUs.privacyNote}`;
+const description = lead.length > 155 ? `${lead.slice(0, 152)}…` : lead;
+---
+<Base title={`${title} — Rizvi Fashions Limited`} description={description}>
+  <h1>{title}</h1>
+
+  <section class="chapter">
+    <span class="chapter__num" aria-hidden="true"></span>
+    <h2>{writeUs.heading}</h2>
+    <p class="write-sub">{writeUs.subLine}</p>
+
+    <form class="enquiry" method="POST" action="/contact.php">
+      <div class="enquiry__field">
+        <label class="u-caps" for="enquiry-name">Name</label>
+        <input type="text" id="enquiry-name" name="name" required autocomplete="name" />
+      </div>
+      <div class="enquiry__field">
+        <label class="u-caps" for="enquiry-email">Email</label>
+        <input type="email" id="enquiry-email" name="email" required autocomplete="email" />
+      </div>
+      <div class="enquiry__field">
+        <label class="u-caps" for="enquiry-subject">Subject (optional)</label>
+        <input type="text" id="enquiry-subject" name="subject" />
+      </div>
+      <div class="enquiry__field">
+        <label class="u-caps" for="enquiry-message">Message</label>
+        <textarea id="enquiry-message" name="message" rows="8" required></textarea>
+      </div>
+
+      {/* honeypot — humans never see it, bots fill it (handler drops silently);
+          .visually-hidden wrapper, never display:none on the input itself */}
+      <div class="visually-hidden" aria-hidden="true">
+        <label for="enquiry-website">Leave this field empty</label>
+        <input type="text" id="enquiry-website" name="website" tabindex="-1" autocomplete="off" />
+      </div>
+
+      {/* JS-progressive time-trap (D-017): stays empty without JS */}
+      <input type="hidden" name="ts" value="" />
+
+      <button class="enquiry__submit" type="submit">{writeUs.button}</button>
+    </form>
+    {/* the page's single permitted inline script: stamp the time-trap */}
+    <script is:inline>document.querySelector('input[name="ts"]').value = Math.floor(Date.now() / 1000);</script>
+
+    <p class="write-fallback">
+      Prefer email? <a href="mailto:info@rizvifashions.com">info@rizvifashions.com</a>
+    </p>
+    <p class="write-privacy">{writeUs.privacyNote}</p>
+  </section>
+
+  <section class="chapter">
+    <span class="chapter__num" aria-hidden="true"></span>
+    <h2>{contacts.heading}</h2>
+    <ul class="people">
+      {contacts.people.map((p: any) => (
+        <li class="person-row">
+          <div>
+            <h3 class="person-row__name">{p.name}</h3>
+            <p class="person-row__role u-caps">{p.role}</p>
+            {p.department && <p class="person-row__dept u-caps">{p.department}</p>}
+          </div>
+          <div class="person-row__channels">
+            <a href={`mailto:${p.email}`}>
+              <Icon slot_name="contact-email" size={20} />
+              <span class="u-num">{p.email}</span>
+            </a>
+            {p.cell && (
+              <a href={tel(p.cell)}>
+                <Icon slot_name="contact-phone" size={20} />
+                <span class="u-num">{p.cell}</span>
+              </a>
+            )}
+          </div>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <section class="chapter" aria-label={officeSec.block ?? 'Offices'}>
+    <span class="chapter__num" aria-hidden="true"></span>
+    <div class="offices">
+      {officeSec.offices.map((o: any) => (
+        <div class="office">
+          <h3 class="office__name">
+            <Icon slot_name="contact-office" size={20} />
+            {o.name}
+          </h3>
+          <address class="office__details">
+            <p>{o.address}</p>
+            {o.phones.map((ph: string) => (
+              <a href={tel(ph)}><span class="u-num">{ph}</span></a>
+            ))}
+            <a href={`mailto:${o.email}`}><span class="u-num">{o.email}</span></a>
+          </address>
+        </div>
+      ))}
+    </div>
+  </section>
+</Base>
+
+<style>
+  /* lead line under the headline */
+  .write-sub {
+    font-size: var(--text-md);
+  }
+
+  /* ---- the form: ground fields, hairline borders, ink text; the global
+     :focus-visible pink ring is the only accent (palette law) */
+  .enquiry {
+    margin-block-start: var(--space-5);
+    max-width: var(--measure-body);
+    display: grid;
+    gap: var(--space-4);
+  }
+  .enquiry__field {
+    display: grid;
+    gap: var(--space-1);
+  }
+  .enquiry__field label {
+    color: var(--ink-muted);
+  }
+  .enquiry__field input,
+  .enquiry__field textarea {
+    /* ground-pure (white) distinguishes inputs from the off-white page; ink-muted
+       border gives 5.1:1 against ground-pure — clears WCAG 3:1 for UI components */
+    background: var(--ground-pure);
+    border: var(--rail-w) solid var(--ink-muted);
+    border-radius: var(--radius-0);
+    color: var(--ink);
+    font-family: inherit;
+    font-size: var(--text-base);
+    line-height: var(--leading-body);
+    padding: var(--space-2);
+    inline-size: 100%;
+  }
+  .enquiry__field input::placeholder,
+  .enquiry__field textarea::placeholder {
+    color: var(--ink-faint);
+  }
+  .enquiry__field textarea {
+    resize: vertical;
+    min-block-size: var(--space-8);
+  }
+  .enquiry__submit {
+    justify-self: start;
+    font-family: var(--font-utility);
+    font-size: var(--text-xs);
+    font-weight: var(--fw-utility-strong);
+    letter-spacing: var(--tracking-caps);
+    text-transform: uppercase;
+    background: var(--ink);
+    color: var(--ground-pure);
+    border: var(--rail-w) solid var(--ink);
+    border-radius: var(--radius-0);
+    padding: var(--space-2) var(--space-5);
+    cursor: pointer;
+    transition:
+      background var(--dur-fast) var(--ease-out),
+      color var(--dur-fast) var(--ease-out);
+  }
+  .enquiry__submit:hover {
+    background: transparent;
+    color: var(--ink);
+  }
+
+  .write-fallback {
+    margin-block-start: var(--space-5);
+  }
+  .write-fallback a {
+    color: var(--pink);
+    text-decoration: none;
+    transition: color var(--dur-fast) var(--ease-out);
+  }
+  .write-fallback a:hover {
+    color: var(--ink);
+  }
+  .write-privacy {
+    color: var(--ink-muted);
+    font-size: var(--text-sm);
+  }
+
+  /* ---- key contacts: keyline rows (base .chapter li supplies the hairline
+     seam); rows widen past the measure so channels sit in their own column */
+  .people .person-row {
+    max-width: none;
+    display: grid;
+    gap: var(--space-2) var(--space-5);
+    padding-block: var(--space-4);
+    align-items: start;
+  }
+  @media (min-width: 768px) {
+    .people .person-row {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  .person-row p {
+    margin-block-end: 0;
+  }
+  .person-row__name {
+    font-size: var(--text-md);
+  }
+  .person-row__role {
+    margin-block-start: var(--space-1);
+  }
+  .person-row__role,
+  .person-row__dept {
+    color: var(--ink-muted);
+  }
+  .person-row__channels {
+    display: grid;
+    gap: var(--space-2);
+    justify-items: start;
+    align-content: start;
+  }
+  .person-row__channels a {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    color: var(--ink-body);
+    font-size: var(--text-sm);
+    text-decoration: none;
+    transition: color var(--dur-fast) var(--ease-out);
+  }
+  .person-row__channels a:hover { color: var(--pink); }
+
+  /* ---- office cards: keyline grid (hairline gaps, .stats grammar) */
+  .offices {
+    margin-block-start: var(--space-4);
+    display: grid;
+    gap: var(--rail-w);
+    background: var(--hairline);
+    border: var(--rail-w) solid var(--hairline);
+  }
+  @media (min-width: 768px) {
+    .offices {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  .office {
+    background: var(--ground);
+    padding: var(--space-4);
+    display: grid;
+    gap: var(--space-2);
+    align-content: start;
+  }
+  .office__name {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: var(--text-md);
+  }
+  .office__details {
+    font-style: normal;
+    display: grid;
+    gap: var(--space-2);
+    justify-items: start;
+  }
+  .office__details p {
+    margin-block-end: 0;
+  }
+  .office__details a {
+    color: var(--ink-body);
+    font-size: var(--text-sm);
+    text-decoration: none;
+    transition: color var(--dur-fast) var(--ease-out);
+  }
+  .office__details a:hover { color: var(--pink); }
+</style>

@@ -1,0 +1,98 @@
+---
+// Header — sticky top bar: wordmark left (Cormorant italic), nav right (Montserrat caps).
+// Hover: ink-muted → ink on links; active page gets --pink accent. Menu opens overlay.
+import OverlayMenu from './OverlayMenu.astro';
+
+const NAV = [
+  { label: 'Overview', href: '/overview/' },
+  { label: 'Capabilities', href: '/our-capabilities/' },
+  { label: 'Products', href: '/our-products/' },
+  { label: 'Sustainability', href: '/sustainability/' },
+  { label: 'Partners', href: '/partners/' },
+  { label: 'Contact', href: '/contact/' },
+];
+---
+<header class="topbar">
+  <div class="topbar__in">
+    <a class="topbar__mark" href="/">
+      <span class="topbar__rizvi">Rizvi</span><span class="topbar__fashions">&nbsp;Fashions</span>
+    </a>
+    <nav class="topbar__nav" aria-label="Primary">
+      <ul>
+        {NAV.map(({ label, href }) => (
+          <li><a href={href} aria-current={Astro.url.pathname === href ? 'page' : undefined}>{label}</a></li>
+        ))}
+        <li>
+          <button class="topbar__menu" type="button" data-overlay-open aria-haspopup="dialog">Menu</button>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+<OverlayMenu />
+
+<style>
+  .topbar {
+    position: sticky;
+    top: 0;
+    z-index: var(--z-topbar);
+    background: var(--ground);
+    border-bottom: var(--rail-w) solid var(--hairline);
+  }
+  .topbar__in {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-2) var(--gutter-mobile);
+  }
+  @media (min-width: 768px) {
+    .topbar__in { padding-inline: var(--gutter); }
+  }
+  .topbar__mark {
+    font-family: var(--font-display);
+    font-weight: var(--fw-display);
+    font-style: italic;
+    font-size: var(--text-md);
+    letter-spacing: var(--tracking-display);
+    text-transform: uppercase;
+    color: var(--ink);
+    text-decoration: none;
+    line-height: var(--leading-tight);
+  }
+  .topbar__fashions { font-weight: var(--fw-display-sub); color: var(--ink-muted); }
+  .topbar__nav ul {
+    display: flex;
+    gap: var(--space-2);
+    list-style: none;
+    align-items: center;
+  }
+  .topbar__nav a {
+    color: var(--ink-muted);
+    text-decoration: none;
+    font-family: var(--font-body);
+    font-size: var(--text-sm);
+    font-weight: var(--fw-body-strong);
+    letter-spacing: var(--tracking-nav);
+    text-transform: uppercase;
+    transition: color var(--dur-fast) var(--ease-out);
+  }
+  .topbar__nav a:hover { color: var(--ink); }
+  .topbar__nav a[aria-current="page"] { color: var(--pink); }
+  .topbar__nav li:not(:last-child) { display: none; }
+  @media (min-width: 768px) {
+    .topbar__nav li:not(:last-child) { display: block; }
+  }
+  .topbar__menu {
+    background: none;
+    border: none;
+    color: var(--ink-muted);
+    font-family: var(--font-body);
+    font-size: var(--text-sm);
+    font-weight: var(--fw-body-strong);
+    letter-spacing: var(--tracking-nav);
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: color var(--dur-fast) var(--ease-out);
+  }
+  .topbar__menu:hover { color: var(--ink); }
+</style>

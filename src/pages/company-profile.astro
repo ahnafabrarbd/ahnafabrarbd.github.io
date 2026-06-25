@@ -1,0 +1,144 @@
+---
+// Company Profile — wireframe 3: Mission → accreditations band → Vision →
+// capacity counters → Manufacturing photo chapter → partners band → growth
+// charts (RECON-decoded data as inline SVG, white bars / pink goal frames).
+// Copy renders verbatim from the deck collection; HARD anchors asserted below.
+import Base from '../layouts/Base.astro';
+import PhotoChapter from '../components/PhotoChapter.astro';
+import SpecBlock from '../components/SpecBlock.astro';
+import LogoBand from '../components/LogoBand.astro';
+import GrowthChart from '../components/GrowthChart.astro';
+import { getEntry } from 'astro:content';
+import accreditations from '../data/accreditations.json';
+import partnersData from '../data/partners.json';
+import charts from '../data/charts.json';
+
+const entry = await getEntry('copy', 'company-profile');
+if (!entry) throw new Error('copy/company-profile missing — run: node setup/extract-copy.mjs');
+const { title, sections = [] } = entry.data as { title: string; sections: Record<string, any>[] };
+
+// HARD anchors (RAILS §4) — build-fail if the deck ever loses one
+const REQUIRED = ['our-mission', 'our-vision', 'manufacturing'];
+const ids = new Set(sections.map((s) => s.id).filter(Boolean));
+const missingAnchors = REQUIRED.filter((a) => !ids.has(a));
+if (missingAnchors.length) {
+  throw new Error(
+    `HARD anchor(s) missing in copy/company-profile: #${missingAnchors.join(', #')} — RAILS.md §4`,
+  );
+}
+
+const sec = (pred: (s: Record<string, any>) => boolean, name: string) => {
+  const s = sections.find(pred);
+  if (!s) throw new Error(`copy/company-profile: "${name}" section missing from the deck`);
+  return s;
+};
+const mission = sec((s) => s.id === 'our-mission', 'our-mission');
+const accreditationsCopy = sec((s) => s.heading === 'Accreditations & Certifications', 'accreditations');
+const vision = sec((s) => s.id === 'our-vision', 'our-vision');
+const counters = sec((s) => (s.stats ?? []).length > 0, 'capacity counters');
+const manufacturing = sec((s) => s.id === 'manufacturing', 'manufacturing');
+const partnersCopy = sec((s) => s.heading === 'Our Partners', 'our partners');
+const growth = sec((s) => s.heading === 'Our Business Growth', 'our business growth');
+
+const [revenueCaption, goalCaption] = growth.chartCaptions ?? [];
+if (!revenueCaption || !goalCaption) {
+  throw new Error('copy/company-profile: both growth chartCaptions are required (wireframe 3)');
+}
+
+const firstBody: string = mission.body?.[0] ?? title;
+const description = firstBody.length > 155 ? `${firstBody.slice(0, 152)}…` : firstBody;
+---
+<Base title={`${title} — Rizvi Fashions Limited`} description={description}>
+  <h1>{title}</h1>
+
+  <section class="chapter" id={mission.id}>
+    <span class="chapter__num" aria-hidden="true"></span>
+    {mission.label && <p class="profile-kicker u-caps">{mission.label}</p>}
+    <h2>{mission.heading}</h2>
+    {mission.body.map((p: string) => <p>{p}</p>)}
+  </section>
+
+  <section class="chapter">
+    <span class="chapter__num" aria-hidden="true"></span>
+    <h2>{accreditationsCopy.heading}</h2>
+    <LogoBand entries={accreditations.logos} label={accreditationsCopy.heading} variant="band" />
+  </section>
+
+  <section class="chapter" id={vision.id}>
+    <span class="chapter__num" aria-hidden="true"></span>
+    {vision.label && <p class="profile-kicker u-caps">{vision.label}</p>}
+    <h2>{vision.heading}</h2>
+    {vision.body.map((p: string) => <p>{p}</p>)}
+  </section>
+
+  {/* capacity counters — un-numbered spec strip, as scripted on Home */}
+  <section aria-label={counters.block ?? 'Capacity counters'}>
+    <SpecBlock stats={counters.stats} />
+  </section>
+
+  <PhotoChapter
+    page="company-profile"
+    slotName="manufacturing"
+    id={manufacturing.id}
+    heading={manufacturing.heading}
+    body={manufacturing.body}
+  />
+
+  <section class="chapter">
+    <span class="chapter__num" aria-hidden="true"></span>
+    <h2>{partnersCopy.heading}</h2>
+    <LogoBand entries={partnersData.partners} label={partnersCopy.heading} variant="band" />
+    <a class="profile-more u-caps" href="/partners/">All partners</a>
+  </section>
+
+  <section class="chapter">
+    <span class="chapter__num" aria-hidden="true"></span>
+    <h2>{growth.heading}</h2>
+    {growth.intro && <p>{growth.intro}</p>}
+    <div class="profile-chart">
+      <h3 class="u-caps">{revenueCaption}</h3>
+      <GrowthChart
+        points={charts.revenue.points}
+        caption={charts.revenue.caption}
+        unit={charts.revenue.unit}
+      />
+    </div>
+    <div class="profile-chart">
+      <h3 class="u-caps">{goalCaption}</h3>
+      <GrowthChart
+        points={charts.futureGoal.points}
+        caption={charts.futureGoal.caption}
+        unit={charts.futureGoal.unit}
+        goal
+      />
+    </div>
+  </section>
+</Base>
+
+<style>
+  /* section kicker (deck "label": Our Mission / Our Vision) — muted utility caps.
+     Chanel cut: a dashed stitch-underline shipped here briefly; it aped the
+     thread's seam grammar without being the thread, so it went. */
+  .profile-kicker {
+    color: var(--ink-muted);
+    margin-block-start: var(--space-3);
+  }
+
+  /* utility link out to the Partners wall (Chapter.astro read-more grammar) */
+  .profile-more {
+    display: inline-block;
+    margin-block-start: var(--space-3);
+    color: var(--ink-muted);
+    text-decoration: none;
+    transition: color var(--dur-fast) var(--ease-out);
+  }
+  .profile-more:hover { color: var(--pink); }
+
+  /* chart exhibits: caps overline above, GrowthChart figcaption below */
+  .profile-chart {
+    margin-block-start: var(--space-6);
+  }
+  .profile-chart :global(.growth) {
+    margin-block: var(--space-2) 0;
+  }
+</style>

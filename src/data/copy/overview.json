@@ -1,0 +1,48 @@
+{
+  "slug": "/overview/",
+  "deckSection": "2 · Overview",
+  "title": "Overview",
+  "sections": [
+    {
+      "id": null,
+      "heading": "Who We Are",
+      "body": [
+        "Rizvi Fashions Limited is a 100% export-oriented knit composite and ready-made garment manufacturer, established in 2013. Within years of its founding, the company achieved full compliance with international labour and environmental standards — a milestone that continues to define the manner in which it conducts itself.",
+        "The facility is itself a statement of intent: a self-sufficient campus with its own power supply, dormitory, medical centre, workshop, mosque, and water infrastructure, secured by a walled perimeter and a trained security team. It is an infrastructure conceived for independent, consistent operation at scale — and for permanence."
+      ],
+      "items": [],
+      "stats": []
+    },
+    {
+      "id": null,
+      "block": "Three aligned blocks",
+      "heading": null,
+      "body": [],
+      "items": [
+        {
+          "title": "Technology",
+          "text": "Product development at Rizvi Fashions is driven by CAD-CAM technology, ensuring consistent quality at every price point. Its management carries an equal fluency in the demands of Western markets and the dynamics of Eastern production — closing the distance between what international buyers require and what the factory floor delivers."
+        },
+        {
+          "title": "Scale",
+          "text": "With 2,631 modern machines, a workforce of 5,120 professionals, and a monthly output of 5.0 to 5.5 million pieces, the company manufactures at a scale that justifies confidence. Prospective partners are warmly invited to visit the facility and observe its operations at first hand."
+        },
+        {
+          "title": "Range",
+          "text": "The product range spans trousers, jerseys, T-shirts, polo shirts, hoodies, sweatshirts, shorts, lingerie, babywear, and underwear — the full spectrum of contemporary knitwear."
+        }
+      ],
+      "stats": []
+    },
+    {
+      "id": null,
+      "block": "Standalone strip",
+      "heading": null,
+      "body": [
+        "Rizvi Fashions Limited is a member of the Bangladesh Garment Manufacturers and Exporters Association (BGMEA)."
+      ],
+      "items": [],
+      "stats": []
+    }
+  ]
+}

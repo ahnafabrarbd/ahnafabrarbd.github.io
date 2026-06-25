@@ -1,0 +1,79 @@
+---
+// Sustainability — wireframe 7: six chapters at HARD anchors (RAILS §4; Home's
+// six cards deep-link to exactly these ids), rendered in deck order with bullet
+// lists set as hairline keyline rows. The welfare photograph enters the Health
+// chapter via its curated image-map slot (R-008 is noted on the slot itself —
+// final-seed, used as mapped; owner sign-off tracked in the map's note field).
+import { getEntry } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import PhotoChapter from '../components/PhotoChapter.astro';
+
+const entry = await getEntry('copy', 'sustainability');
+if (!entry) throw new Error('copy/sustainability missing — run: node setup/extract-copy.mjs');
+const { title, sections = [] } = entry.data as { title: string; sections: Record<string, any>[] };
+
+// HARD anchors — byte-exact live ids, asserted as a gate, not a hope (RAILS §4)
+const REQUIRED = [
+  'financial-stability',
+  'health-and-family-wellbeing',
+  'educational-and-professional-development',
+  'safe-and-healthy-work-environment',
+  'equality-and-acceptance',
+  'best-practices',
+];
+const ids = new Set(sections.map((s) => s.id));
+const missing = REQUIRED.filter((a) => !ids.has(a));
+if (missing.length) {
+  throw new Error(`HARD anchor(s) missing in copy/sustainability: #${missing.join(', #')} — RAILS.md §4`);
+}
+
+// the single image-led chapter on this page (image-map sustainability section)
+const PHOTO_ID = 'health-and-family-wellbeing';
+
+const firstBody: string =
+  sections.flatMap((s) => s.body ?? []).find((p: string) => typeof p === 'string' && p.length > 40) ?? title;
+const description = firstBody.length > 155 ? `${firstBody.slice(0, 152)}…` : firstBody;
+---
+<Base title={`${title} — Rizvi Fashions Limited`} description={description}>
+  <header class="page-head">
+    <h1>{title}</h1>
+  </header>
+
+  {sections.map((s) =>
+    s.id === PHOTO_ID ? (
+      <PhotoChapter page="sustainability" slotName={PHOTO_ID} id={s.id} heading={s.heading} body={s.body} flip>
+        {(s.items ?? []).length > 0 && (
+          <ul class="keyline-list">
+            {s.items.map((it: string) => <li>{it}</li>)}
+          </ul>
+        )}
+      </PhotoChapter>
+    ) : (
+      <section class="chapter" id={s.id}>
+        <span class="chapter__num" aria-hidden="true"></span>
+        <h2>{s.heading}</h2>
+        {(s.body ?? []).map((p: string) => <p>{p}</p>)}
+        {(s.items ?? []).length > 0 && (
+          <ul class="keyline-list">
+            {s.items.map((it: string) => <li>{it}</li>)}
+          </ul>
+        )}
+      </section>
+    ),
+  )}
+</Base>
+
+<style>
+  .page-head {
+    padding-block: var(--space-7) var(--space-5);
+  }
+
+  /* ---- keyline rows (wireframe 7): the deck's bullet items as hairline rows.
+     base.css rules each row's seat (li border-bottom); the list's own top rule
+     closes the frame so the block reads as stitched rows, not floating bullets */
+  .keyline-list {
+    border-top: var(--rail-w) solid var(--hairline);
+    max-width: var(--measure-body);
+    margin-block-start: var(--space-4);
+  }
+</style>

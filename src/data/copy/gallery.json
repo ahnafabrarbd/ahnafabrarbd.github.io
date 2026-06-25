@@ -1,0 +1,20 @@
+{
+ "slug": "/gallery/",
+ "deckSection": "9 · Gallery",
+ "title": "Gallery",
+ "sections": [
+  {
+   "id": null,
+   "heading": null,
+   "note": "Optional album captions",
+   "body": [],
+   "items": [
+    "The Campus",
+    "Production Floors",
+    "Cutting & Sewing",
+    "Finishing & Despatch"
+   ],
+   "stats": []
+  }
+ ]
+}

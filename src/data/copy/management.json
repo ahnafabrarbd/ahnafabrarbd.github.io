@@ -1,0 +1,45 @@
+{
+  "slug": "/management/",
+  "deckSection": "4 · Management",
+  "title": "The leadership guiding our progress",
+  "sections": [
+    {
+      "id": null,
+      "heading": "Managing Director's Profile",
+      "person": {
+        "name": "Md. Shakil Rizvi",
+        "role": "Managing Director"
+      },
+      "body": [
+        "Mr. Md. Shakil Rizvi is a distinguished figure in Bangladesh's capital markets, where his career now spans more than three decades. Since 1987 he has worked, at both institutional and regulatory levels, toward a more balanced, transparent, and accountable financial landscape — and has done so with consistent distinction.",
+        "As President of the Dhaka Stock Exchange from 2010 to 2011, he was instrumental in raising the institution's international profile, most notably through its introduction to the World Federation of Exchanges and to several other internationally recognised exchanges. He had earlier served as Vice-President of the DSE in 2009, as Director from 2004 to 2006, and as President of the DSE TREC Holders' Club in 2002 and 2003; he later sat as Shareholder Director on the demutualised DSE Board from February 2014 to March 2018, and was elected Shareholder Director of National Tea Company Limited in December 2017.",
+        "Beyond the capital markets, Mr. Rizvi serves as Managing Director of Rizvi Fashions Limited, Shakil Rizvi Stock Limited, and Shakil Rizvi Asset Limited, leading each with the governance and strategic discipline that have defined his career — and contributing, through them, to Bangladesh's foreign-currency earnings and to its standing in the world economy."
+      ],
+      "items": [],
+      "stats": []
+    },
+    {
+      "id": null,
+      "heading": "Management Team",
+      "people": [
+        {
+          "name": "Rehana Rizvi",
+          "role": "Chairman",
+          "body": [
+            "Mrs. Rehana Rizvi is a respected business leader across Bangladesh's capital markets, real estate, and garment manufacturing sectors. As Chairman of Rizvi Fashions Limited, Shakil Rizvi Stock Limited, and Rizvi Trims Limited, she provides the strategic oversight and principled leadership on which each organisation's growth and integrity rest. She serves additionally as Director of Shakil Rizvi Asset Limited, and through these offices continues to advance Bangladesh's export economy and its position in the international marketplace."
+          ]
+        },
+        {
+          "name": "Shaikh Rezwan",
+          "role": "Director",
+          "body": [
+            "Mr. Shaikh Rezwan is a prominent figure in Bangladesh's garment manufacturing sector, bringing focused expertise and assured operational leadership to each office he holds. He serves as Company Secretary and Chief Executive Officer of Shakil Rizvi Stock Limited, and as Director of both Rizvi Fashions Limited and Rizvi Trims Limited — contributing in each capacity to the group's export performance and to Bangladesh's standing in the global garment trade."
+          ]
+        }
+      ],
+      "body": [],
+      "items": [],
+      "stats": []
+    }
+  ]
+}

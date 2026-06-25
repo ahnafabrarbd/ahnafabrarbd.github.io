@@ -1,0 +1,71 @@
+{
+  "slug": "/contact/",
+  "deckSection": "10 · Contact",
+  "title": "Contact",
+  "sections": [
+    {
+      "id": null,
+      "heading": "Write to Us",
+      "subLine": "We are pleased to answer any enquiry.",
+      "privacyNote": "Your information is held in confidence; it will never be sold, rented, or otherwise passed on.",
+      "button": "Send Message",
+      "body": [],
+      "items": [],
+      "stats": []
+    },
+    {
+      "id": null,
+      "heading": "Key Contacts",
+      "people": [
+        {
+          "name": "Mr. Md. Shakil Rizvi",
+          "role": "Managing Director",
+          "email": "rizvi@rizvifashions.com"
+        },
+        {
+          "name": "Mr. Shaikh Rezwan",
+          "role": "Director",
+          "email": "shaikhrezwan@rizvifashions.com"
+        },
+        {
+          "department": "Marketing & Merchandising",
+          "name": "Mr. Muhammad Mizanur Rahman",
+          "role": "Deputy General Manager",
+          "email": "mizan@rizvifashions.com",
+          "cell": "+880 1674-173 462"
+        }
+      ],
+      "body": [],
+      "items": [],
+      "stats": []
+    },
+    {
+      "id": null,
+      "block": "Office cards",
+      "heading": null,
+      "offices": [
+        {
+          "name": "Head Office",
+          "address": "158–160 Motijheel C/A, Modhumita Building, 4th Floor, Dhaka-1000, Bangladesh",
+          "phones": [
+            "+88 027 120 899",
+            "09617 000 444"
+          ],
+          "email": "info@rizvifashions.com"
+        },
+        {
+          "name": "Factory Office",
+          "address": "Anwar Jang Road, 1 No. Kalma Bazar, Savar, Dhaka-1341, Bangladesh",
+          "phones": [
+            "+880 9617 000 442",
+            "+880 1912 708 566"
+          ],
+          "email": "info@rizvifashions.com"
+        }
+      ],
+      "body": [],
+      "items": [],
+      "stats": []
+    }
+  ]
+}

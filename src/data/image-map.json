@@ -1,0 +1,394 @@
+{
+ "_meta": {
+  "doc": "slot -> asset map; change src to swap an image, see CONTENT-GUIDE.md",
+  "generated_by": "setup/build-image-map.py"
+ },
+ "home": {
+  "hero-weave": {
+   "status": "final-seed",
+   "note": "hero weave panels — QA-passed cutouts, decorative (empty alt by design); 02/03/20/05/18",
+   "items": [
+    {
+     "src": "assets/cutouts/02.png",
+     "alt": ""
+    },
+    {
+     "src": "assets/cutouts/03.png",
+     "alt": ""
+    },
+    {
+     "src": "assets/cutouts/20.png",
+     "alt": ""
+    },
+    {
+     "src": "assets/cutouts/05.png",
+     "alt": ""
+    },
+    {
+     "src": "assets/cutouts/18.png",
+     "alt": ""
+    }
+   ]
+  },
+  "mission-teaser": {
+   "src": "assets/img/site/company-profile.jpg",
+   "status": "final-seed",
+   "alt": "Sewing line at the Rizvi Fashions factory: a machinist works a flatlock seam",
+   "origin": "live-site",
+   "note": "1920x1280, editorial-grade (D-008)"
+  },
+  "vision-teaser": {
+   "src": "assets/img/site/img_0976-scaled.jpg",
+   "status": "final-seed",
+   "alt": "Product development showroom with garment ranges on display walls",
+   "origin": "live-site",
+   "note": "2560x1232 showroom panorama"
+  },
+  "manufacturing-teaser": {
+   "src": "assets/img/site/15-1-min.jpg",
+   "status": "final-seed",
+   "alt": "A production aisle between sewing lines on the factory floor",
+   "origin": "live-site",
+   "note": "1920x1100 deep-perspective floor shot"
+  },
+  "breather": {
+   "src": "assets/img/site/overview.jpg",
+   "status": "final-seed",
+   "alt": "The folding and packing area of the factory at full operation",
+   "origin": "live-site",
+   "note": "single full-bleed breather, caption below per no-text-on-imagery rail"
+  }
+ },
+ "overview": {
+  "who-we-are": {
+   "src": "assets/img/site/overview.jpg",
+   "status": "final-seed",
+   "alt": "The folding and packing area of the factory at full operation",
+   "origin": "live-site",
+   "note": "1920x1280"
+  },
+  "technology": {
+   "src": "assets/img/site/img_0976-scaled.jpg",
+   "status": "final-seed",
+   "alt": "Product development showroom used for CAD-CAM led development",
+   "origin": "live-site",
+   "note": "reused from home vision-teaser - acceptable cross-page reuse, logged"
+  },
+  "scale": {
+   "src": "assets/img/site/15-1-min.jpg",
+   "status": "final-seed",
+   "alt": "Rows of sewing stations stretching the length of a production floor",
+   "origin": "live-site",
+   "note": ""
+  },
+  "range": {
+   "status": "final-seed",
+   "note": "overview range constellation",
+   "items": [
+    {
+     "src": "assets/cutouts/02.png",
+     "alt": ""
+    },
+    {
+     "src": "assets/cutouts/20.png",
+     "alt": ""
+    },
+    {
+     "src": "assets/cutouts/21.png",
+     "alt": "Garment cutout from the production range"
+    }
+   ]
+  },
+  "breather-aerial": {
+   "src": "assets/img/drive/DJI_0580_dev.jpeg",
+   "status": "final-seed",
+   "alt": "Aerial view of the Rizvi Fashions campus rising above the tree canopy",
+   "origin": "drive",
+   "note": "grade toward dark ground; sole breather on this page"
+  }
+ },
+ "company-profile": {
+  "manufacturing": {
+   "src": "assets/img/site/sewing.jpg",
+   "status": "final-seed",
+   "alt": "Machinists at work on an active sewing line",
+   "origin": "live-site",
+   "note": "958x676"
+  },
+  "chart-revenue": {
+   "status": "final-seed",
+   "src": "svg:inline",
+   "note": "rebuilt as white/pink-on-black SVG from decoded data (RECON.md); not a bitmap slot"
+  },
+  "chart-future-goal": {
+   "status": "final-seed",
+   "src": "svg:inline",
+   "note": "rebuilt as SVG from decoded data"
+  }
+ },
+ "management": {
+  "md-portrait": {
+   "status": "final-seed",
+   "src": null,
+   "note": "HARD: live site has no MD portrait - text-led profile preserved"
+  },
+  "chairman-portrait": {
+   "src": "assets/portraits/avatar-1577909_1280.webp",
+   "status": "final-seed",
+   "alt": "Rehana Rizvi, Chairman",
+   "origin": "live-site",
+   "note": "HARD: kept exactly as live (stock avatar)"
+  },
+  "director-portrait": {
+   "src": "assets/portraits/Shaikh-Rezwan-Director-Sir.jpg",
+   "status": "final-seed",
+   "alt": "Shaikh Rezwan, Director",
+   "origin": "live-site",
+   "note": "HARD: kept exactly as live"
+  }
+ },
+ "capabilities": {
+  "sourcing": {
+   "src": "assets/img/site/threads_large.webp",
+   "status": "final-seed",
+   "alt": "Spools of dyed thread in the material store",
+   "origin": "live-site",
+   "note": "480x320 - small render only"
+  },
+  "sourcing-fabric": {
+   "src": "assets/img/site/fabric.jpg",
+   "status": "final-seed",
+   "alt": "Folded knit fabric stock",
+   "origin": "live-site",
+   "note": ""
+  },
+  "sourcing-label": {
+   "src": "assets/img/site/garment-labelling.jpeg",
+   "status": "final-seed",
+   "alt": "Woven garment labels",
+   "origin": "live-site",
+   "note": ""
+  },
+  "sourcing-accessories": {
+   "src": "assets/img/site/images.jpg",
+   "status": "final-seed",
+   "alt": "Garment trims and accessories",
+   "origin": "live-site",
+   "note": ""
+  },
+  "sourcing-trims": {
+   "status": "todo-owner",
+   "src": null,
+   "note": "live site never had a Trims image; owner to supply"
+  },
+  "product-development": {
+   "src": "assets/img/site/product-development.jpg",
+   "status": "final-seed",
+   "alt": "Pattern development work in the sample room",
+   "origin": "live-site",
+   "note": "525x350 - small render only"
+  },
+  "sampling": {
+   "src": "assets/img/site/sample.jpg",
+   "status": "final-seed",
+   "alt": "Sample garments under review",
+   "origin": "live-site",
+   "note": ""
+  },
+  "cutting": {
+   "src": "assets/img/site/cutting1.jpg",
+   "status": "final-seed",
+   "alt": "The cutting floor with fabric laid for cutting",
+   "origin": "live-site",
+   "note": "958x676"
+  },
+  "sewing": {
+   "src": "assets/img/site/sewing.jpg",
+   "status": "final-seed",
+   "alt": "An active sewing line",
+   "origin": "live-site",
+   "note": "958x676"
+  },
+  "finishing": {
+   "src": "assets/img/site/finishing.jpg",
+   "status": "final-seed",
+   "alt": "Finishing and pressing stations",
+   "origin": "live-site",
+   "note": ""
+  },
+  "knitting": {
+   "src": "assets/img/site/knitting.jpg",
+   "status": "final-seed",
+   "alt": "Circular knitting machines",
+   "origin": "live-site",
+   "note": ""
+  },
+  "printing": {
+   "src": "assets/img/site/printing.png",
+   "status": "final-seed",
+   "alt": "Screen printing tables",
+   "origin": "live-site",
+   "note": ""
+  }
+ },
+ "products": {
+  "mens": {
+   "status": "final-seed",
+   "note": "on-model lookbook rail — menswear; professional STIL shots on neutral light-grey seamless, replacing the older cutouts (curated best 4 of the men's candidates)",
+   "items": [
+    {
+     "src": "assets/img/drive/products/mens-01.jpg",
+     "alt": "Male model wearing a Rizvi-made burgundy-and-navy block-stripe cotton polo with olive chinos and tan derby shoes, full-length on a light-grey studio background"
+    },
+    {
+     "src": "assets/img/drive/products/mens-02.jpg",
+     "alt": "Male model wearing a Rizvi-made pale-pink pullover hoodie with olive chinos and white sneakers, full-length on a light-grey studio background"
+    },
+    {
+     "src": "assets/img/drive/products/mens-03.jpg",
+     "alt": "Male model wearing a Rizvi-made grey marl 'Happiness is often a choice' slogan tee with olive chinos and brown brogues, full-length on a light-grey studio background"
+    },
+    {
+     "src": "assets/img/drive/products/mens-04.jpg",
+     "alt": "Mature male model wearing a Rizvi-made grey marl slogan tee with olive chinos and white sneakers, full-length on a light-grey studio background"
+    }
+   ]
+  },
+  "womens": {
+   "status": "final-seed",
+   "note": "on-model lookbook rail — womenswear; professional STIL shots on neutral light-grey/off-white seamless, replacing the older cutouts (curated best 4 of the women's candidates)",
+   "items": [
+    {
+     "src": "assets/img/drive/products/womens-01.jpg",
+     "alt": "Female model wearing a Rizvi-made fuchsia ribbed cotton tank top with pale-pink tapered trousers and blush sneakers, full-length on a light studio background"
+    },
+    {
+     "src": "assets/img/drive/products/womens-02.jpg",
+     "alt": "Female model wearing a Rizvi-made navy sleeveless jumpsuit in a scattered wildflower print with leather sandals, full-length on an off-white studio background"
+    },
+    {
+     "src": "assets/img/drive/products/womens-03.jpg",
+     "alt": "Female model wearing a Rizvi-made light-blue graphic-print tee with pink cropped lounge trousers and slippers, full-length on an off-white studio background"
+    },
+    {
+     "src": "assets/img/drive/products/womens-04.jpg",
+     "alt": "Female model wearing a Rizvi-made sky-blue sleeveless empire-waist tunic with pink cargo trousers and white sneakers, full-length on an off-white studio background"
+    }
+   ]
+  },
+  "kids": {
+   "status": "final-seed",
+   "note": "on-model lookbook rail — kidswear; professional STIL shots on neutral light-grey/off-white seamless, replacing the older cutouts (curated mix of boys and girls)",
+   "items": [
+    {
+     "src": "assets/img/drive/products/kids-01.jpg",
+     "alt": "Young boy modelling a Rizvi-made navy Peanuts graphic sweatshirt with pink jersey joggers and white sneakers, full-length on an off-white studio background"
+    },
+    {
+     "src": "assets/img/drive/products/kids-02.jpg",
+     "alt": "Young girl modelling a Rizvi-made cream floral-print tee with pink drawstring shorts and slip-on shoes, full-length on a light-grey studio background"
+    },
+    {
+     "src": "assets/img/drive/products/kids-03.jpg",
+     "alt": "Young boy modelling a Rizvi-made pale-yellow 'Relax Mode' all-over-print tee and matching printed shorts, full-length on an off-white studio background"
+    },
+    {
+     "src": "assets/img/drive/products/kids-04.jpg",
+     "alt": "Young girl modelling a Rizvi-made yellow Sonic graphic tee with lime-green shorts and high-top trainers, full-length on an off-white studio background"
+    }
+   ]
+  },
+  "underwear": {
+   "status": "final-seed",
+   "note": "on-model loungewear/intimates rail — one suitable STIL on-model shot (yellow lace-trim cami lounge set); remaining cutouts retired with the cutout style; only one model shot in the set fits this category, so the rail is kept tasteful at one rather than padded",
+   "items": [
+    {
+     "src": "assets/img/drive/products/underwear-01.jpg",
+     "alt": "Female model wearing a Rizvi-made pale-yellow cotton camisole with lace-trim hem and matching lounge trousers, full-length on a light studio background"
+    }
+   ]
+  },
+  "newborn": {
+   "status": "todo-owner",
+   "note": "no cutout in the set depicts a newborn/infant garment (the only candidate, 007_m, is a school-age boy = kidswear); rail intentionally empty so the page renders an honest 'imagery being prepared' state — owner to supply newborn imagery",
+   "items": []
+  }
+ },
+ "sustainability": {
+  "health-and-family-wellbeing": {
+   "src": "assets/img/drive/000000.jpeg",
+   "status": "final-seed",
+   "alt": "A worker carries her child past the breast-feeding corner at the factory",
+   "origin": "drive",
+   "note": "AI-provenance flag R-008 - owner sign-off before production"
+  }
+ },
+ "gallery": {
+  "campus": {
+   "status": "final-seed",
+   "items": [
+    {
+     "src": "assets/img/drive/DJI_0580_dev.jpeg",
+     "alt": "Aerial view of the factory campus"
+    }
+   ],
+   "note": "thin album - owner photography requested (IMAGES_TODO)"
+  },
+  "production-floors": {
+   "status": "final-seed",
+   "items": [
+    {
+     "src": "assets/img/site/overview.jpg",
+     "alt": "Folding and packing area"
+    },
+    {
+     "src": "assets/img/site/15-1-min.jpg",
+     "alt": "A production aisle between sewing lines"
+    }
+   ]
+  },
+  "cutting-sewing": {
+   "status": "final-seed",
+   "items": [
+    {
+     "src": "assets/img/site/cutting1.jpg",
+     "alt": "The cutting floor"
+    },
+    {
+     "src": "assets/img/site/sewing.jpg",
+     "alt": "An active sewing line"
+    },
+    {
+     "src": "assets/img/site/company-profile.jpg",
+     "alt": "A machinist works a flatlock seam"
+    }
+   ]
+  },
+  "finishing-despatch": {
+   "status": "final-seed",
+   "items": [
+    {
+     "src": "assets/img/site/finishing.jpg",
+     "alt": "Finishing and pressing stations"
+    },
+    {
+     "src": "assets/img/site/knitting.jpg",
+     "alt": "Circular knitting machines"
+    }
+   ]
+  }
+ },
+ "partners": {
+  "logo-wall": {
+   "status": "final-seed",
+   "note": "re-toned white/grey for dark ground at derivative stage; list in inc/data/partners.json"
+  }
+ },
+ "accreditations": {
+  "logo-band": {
+   "status": "final-seed",
+   "note": "re-toned white/grey; list in inc/data/accreditations.json"
+  }
+ },
+ "contact": {}
+}

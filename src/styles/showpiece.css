@@ -1,0 +1,46 @@
+/* showpiece.css — G7 "The Unbroken Thread" (D-019). Cross-document View
+   Transitions: the pink thread is ONE continuous element across navigation
+   instead of dying in a white flash. 0KB JS, pure CSS; degrades to normal
+   navigation on engines without cross-document VT.
+
+   Injected into <head> by Base.astro via set:html ONLY when FLAGS.unbrokenThread
+   is true (one-line off). Lives in a real .css file so token-lint scans it —
+   every duration/easing here is a DESIGN.md token.
+
+   Reduced-motion: the transition animations are cancelled (author `animation:
+   none` overrides the UA default — no !important needed), so navigation is
+   instant. The thread still appears at its new position — a designed state. */
+
+@view-transition {
+  navigation: auto;
+}
+
+/* the rail and its fill are their own transition groups → they morph to the
+   new page's geometry (re-tension) rather than cross-fading out and back in */
+.thread-rail {
+  view-transition-name: thread-rail;
+}
+.thread-rail__fill {
+  view-transition-name: thread-fill;
+}
+
+::view-transition-group(thread-rail),
+::view-transition-group(thread-fill) {
+  animation-duration: var(--dur-base);
+  animation-timing-function: var(--ease-thread);
+}
+
+/* content cross-fades gently while the thread holds */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: var(--dur-base);
+  animation-timing-function: var(--ease-out);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none;
+  }
+}

@@ -1,0 +1,75 @@
+{
+  "comment": "Curator pass 2026-06-10 (setup/retone-accreditations.py, tonal machinery from setup/retone-logos.py): all 14 accreditation marks in reference/site-assets/accreditation/ identified by vision from the mark itself \u2014 no invented certifications. Known-set cross-check: amfori, Better Work Bangladesh, STeP, OCS, GRS, RCS, BSCI present; NO BGMEA mark exists in the source folder \u2014 do not add one. file paths are relative to src/; file=null means the #D6D6D6 re-tone failed the dark-ground legibility check (needs-manual, preview kept in setup/retone-preview/).",
+  "logos": [
+    {
+      "name": "amfori BSCI",
+      "file": "assets/logos/accreditations/amfori-bsci.png",
+      "identified": true
+    },
+    {
+      "name": "Better Work Bangladesh",
+      "file": "assets/logos/accreditations/better-work-bangladesh.png",
+      "identified": true
+    },
+    {
+      "name": "BSCI",
+      "file": "assets/logos/accreditations/bsci.png",
+      "identified": true
+    },
+    {
+      "name": "Global Recycled Standard (GRS)",
+      "file": "assets/logos/accreditations/global-recycled-standard.png",
+      "identified": true
+    },
+    {
+      "name": "Global Organic Textile Standard (GOTS)",
+      "file": "assets/logos/accreditations/gots.png",
+      "identified": true
+    },
+    {
+      "name": "Higg Index",
+      "file": "assets/logos/accreditations/higg-index.png",
+      "identified": true
+    },
+    {
+      "name": "OEKO-TEX Standard 100",
+      "file": "assets/logos/accreditations/oeko-tex-standard-100.png",
+      "identified": true
+    },
+    {
+      "name": "OEKO-TEX Standard 100 (Confidence in Textiles badge)",
+      "file": "assets/logos/accreditations/oeko-tex-standard-100-badge.png",
+      "identified": true
+    },
+    {
+      "name": "OEKO-TEX STeP",
+      "file": "assets/logos/accreditations/oeko-tex-step.png",
+      "identified": true
+    },
+    {
+      "name": "Organic Content Standard (OCS)",
+      "file": "assets/logos/accreditations/organic-content-standard.png",
+      "identified": true
+    },
+    {
+      "name": "Recycled Claim Standard (RCS)",
+      "file": "assets/logos/accreditations/recycled-claim-standard.png",
+      "identified": true
+    },
+    {
+      "name": "RMG Sustainability Council (RSC)",
+      "file": "assets/logos/accreditations/rmg-sustainability-council.png",
+      "identified": true
+    },
+    {
+      "name": "Sedex",
+      "file": "assets/logos/accreditations/sedex.png",
+      "identified": true
+    },
+    {
+      "name": "WRAP",
+      "file": "assets/logos/accreditations/wrap.png",
+      "identified": true
+    }
+  ]
+}

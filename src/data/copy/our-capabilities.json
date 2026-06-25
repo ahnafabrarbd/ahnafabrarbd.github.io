@@ -1,0 +1,142 @@
+{
+  "slug": "/our-capabilities/",
+  "deckSection": "5 · Our Capabilities",
+  "title": "Our Capabilities",
+  "sections": [
+    {
+      "id": "material-sourcing-management",
+      "heading": "Material Sourcing Management",
+      "subLabels": [
+        "Fabric",
+        "Trims",
+        "Label",
+        "Accessories"
+      ],
+      "body": [
+        "Material sourcing accounts for more than half of the product-development process, which makes it the single most consequential function in the operation. The company's Merchant Team manages sourcing directly, drawing on a select network of fabric suppliers and partners assembled over years of proven reliability."
+      ],
+      "items": [],
+      "stats": []
+    },
+    {
+      "id": "product-development",
+      "heading": "Product Development",
+      "body": [
+        "The company's involvement begins at concept and ends at the retail floor. Experienced pattern makers work alongside customers, translating briefs into production-ready designs at the speed, and with the accuracy, that commercial timelines demand."
+      ],
+      "items": [],
+      "stats": []
+    },
+    {
+      "id": "sample",
+      "heading": "Sampling",
+      "body": [
+        "A self-contained sampling facility serves the complete product range. Its team works through continuous research and development toward a single object: the customer's complete satisfaction."
+      ],
+      "items": [],
+      "stats": [
+        {
+          "label": "Samples Per Day",
+          "value": "400",
+          "source": "recon"
+        },
+        {
+          "label": "Sewing Machines",
+          "value": "88",
+          "source": "recon"
+        }
+      ]
+    },
+    {
+      "id": "cutting",
+      "heading": "Cutting",
+      "body": [
+        "The cutting floor operates on a double-shift schedule, supplying both undergarment and outerwear lines. Volume and organisation are treated as non-negotiable, and the floor is arranged accordingly."
+      ],
+      "items": [],
+      "stats": [
+        {
+          "label": "Cutting Capacity Per Day",
+          "value": "250,000",
+          "source": "recon"
+        },
+        {
+          "label": "Cutting Tables",
+          "value": "10",
+          "source": "recon"
+        }
+      ]
+    },
+    {
+      "id": "sewing",
+      "heading": "Sewing",
+      "body": [
+        "Each sewing line is configured for a specific product type, with defined quality standards and output targets; layouts vary with the requirement. The constant is efficiency that never comes at the cost of precision."
+      ],
+      "items": [],
+      "stats": [
+        {
+          "label": "Sewing Lines",
+          "value": "74",
+          "source": "recon"
+        },
+        {
+          "label": "Sewing Machines",
+          "value": "2,631",
+          "source": "recon"
+        },
+        {
+          "label": "Sewing Capacity Per Day",
+          "value": "220,000",
+          "source": "recon"
+        }
+      ]
+    },
+    {
+      "id": "finishing",
+      "heading": "Finishing",
+      "note": "stats only — no body text",
+      "body": [],
+      "items": [],
+      "stats": [
+        {
+          "label": "Finishing Capacity Per Day",
+          "value": "240,000",
+          "unit": "pcs"
+        }
+      ]
+    },
+    {
+      "id": "knitting",
+      "heading": "Knitting",
+      "note": "stats only — no body text",
+      "body": [],
+      "items": [],
+      "stats": [
+        {
+          "label": "Machines",
+          "value": "20"
+        },
+        {
+          "label": "Knitting Capacity Per Day (kg)",
+          "value": "8,000"
+        }
+      ]
+    },
+    {
+      "id": "printing",
+      "heading": "Printing",
+      "body": [
+        "Rizvi Fashions operates a fully export-oriented printing facility, registered with the Bangladesh Garments Accessories & Packaging Manufacturers & Exporters Association (BGAPMEA). Equipped with fifteen printing tables of seventy-two feet each, it executes the full range of screen-printing techniques — rubber, puff, glitter, pigment, foil, flock, metallic, discharge, radium, reflective, high-density, plastisol, and silicon."
+      ],
+      "items": [],
+      "stats": [
+        {
+          "label": "Printing Capacity Per Day",
+          "value": "60,000",
+          "source": "recon"
+        }
+      ]
+    }
+  ]
+}

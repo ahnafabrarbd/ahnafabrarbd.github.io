@@ -1,0 +1,85 @@
+{
+  "slug": "/sustainability/",
+  "deckSection": "7 · Sustainability",
+  "title": "Sustainability",
+  "sections": [
+    {
+      "id": "financial-stability",
+      "heading": "Financial Stability",
+      "body": [
+        "Rizvi Fashions is committed to the financial empowerment of its workforce — to equipping workers with the knowledge and the means to manage, save, and invest their earnings with confidence. The programme rests on four initiatives:"
+      ],
+      "items": [
+        "Awareness programmes on money management, conducted in partnership with banks and financial institutions",
+        "Practical instruction in the use of the formal banking system",
+        "Structured financial-literacy efforts that encourage disciplined saving",
+        "The opening of individual bank accounts, so that salaries are disbursed securely and transparently"
+      ],
+      "stats": []
+    },
+    {
+      "id": "health-and-family-wellbeing",
+      "heading": "Health & Family Wellbeing",
+      "body": [
+        "The company's responsibility to its people extends well beyond the factory floor. Structured programmes address the physical, mental, and family needs of every employee:"
+      ],
+      "items": [
+        "Targeted awareness initiatives covering HIV/AIDS and reproductive health",
+        "Women's health programmes built on BSR's HER Project, designed with female factory workers in mind",
+        "A nutrition programme anchored by a free breakfast and a subsidised lunch, with menus reviewed regularly so that meals remain as nourishing as they are accessible"
+      ],
+      "stats": []
+    },
+    {
+      "id": "safe-and-healthy-work-environment",
+      "heading": "Safe & Healthy Work Environment",
+      "body": [
+        "The health and safety of every person within the company's facilities is a responsibility accepted without compromise. Comprehensive safety programmes operate across all sites, designed to hold under routine conditions and in emergency alike; LEED Gold certification extends that commitment further, toward working conditions in which people are safe, healthy, and able to perform at their best. The company is equally committed to:"
+      ],
+      "items": [
+        "Embedding its sustainability goals in the training and development of the workforce, internally and externally",
+        "Cultivating an active culture of environmental awareness and responsibility among its people"
+      ],
+      "stats": []
+    },
+    {
+      "id": "educational-and-professional-development",
+      "heading": "Educational & Professional Development",
+      "body": [
+        "Investment in people is how the company keeps its position. Continuous learning and professional growth are not peripheral benefits; they are central to the way Rizvi Fashions operates. The programme includes:"
+      ],
+      "items": [
+        "Personal and life-skills development programmes across all units",
+        "Structured orientation and training that steadily widen the knowledge and capability of the workforce",
+        "Ongoing research into an extended educational initiative for workers' families, shaped to the academic needs of their children"
+      ],
+      "stats": []
+    },
+    {
+      "id": "equality-and-acceptance",
+      "heading": "Equality & Acceptance",
+      "body": [
+        "At Rizvi Fashions, diversity is a practice rather than a policy. Recruitment is conducted without discrimination on grounds of religion, ethnicity, or gender, in the conviction that varied perspectives produce stronger outcomes and more inventive solutions. The company is unequivocal in its opposition to forced labour and to child labour: strict preventive procedures are enforced at every unit, employment practices align fully with BEPZA regulations and national law, and a clearly defined grievance protocol ensures that every concern is addressed with transparency, consistency, and integrity."
+      ],
+      "items": [],
+      "stats": []
+    },
+    {
+      "id": "best-practices",
+      "heading": "Best Practices",
+      "body": [
+        "The company's commitment to its workforce extends well beyond compliance; it invests in its people directly, and continuously."
+      ],
+      "items": [
+        "Free daily bus transport is provided to all workers",
+        "Full medical care — consultations, check-ups, and access to a full-time doctor and gynaecologist — is available to every employee at no cost",
+        "More than US$30,000 is invested each year in cultural programmes and recreational activities",
+        "Performance, innovation, and attendance are formally recognised and rewarded through structured incentive schemes",
+        "Corporate discount schemes extend employee benefits to medical, hospitality, and recreational services at subsidised rates",
+        "Dedicated programmes ensure that differently abled employees are fully supported, with their health and performance given the highest priority",
+        "Motivational awards — zero-absence and single-day-absence recognition, and best-performing-line honours — keep the workforce engaged and acknowledged"
+      ],
+      "stats": []
+    }
+  ]
+}

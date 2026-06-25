@@ -1,0 +1,171 @@
+{
+  "slug": "/",
+  "deckSection": "1 · Home",
+  "title": "Home",
+  "sections": [
+    {
+      "id": null,
+      "block": "Hero",
+      "heading": "Crafting a Sustainable Legacy in Global Apparel",
+      "button": "Learn More",
+      "body": [
+        "Established in 2013, Rizvi Fashions Limited is a 100% export-oriented knit composite and ready-made garment manufacturer. Compliant with international labour and environmental standards, and led by a management intent on Grade-1 standing, the company is positioned for measured, sustained growth in the world's apparel markets."
+      ],
+      "items": [],
+      "stats": []
+    },
+    {
+      "id": null,
+      "block": "Capacity counters",
+      "heading": null,
+      "body": [],
+      "items": [],
+      "stats": [
+        {
+          "label": "Cutting Capacity (Per Day)",
+          "value": "250,000",
+          "source": "recon",
+          "unit": "pcs"
+        },
+        {
+          "label": "Shipment Capacity (Per Month)",
+          "value": "5.5",
+          "source": "recon",
+          "unit": "M pcs"
+        },
+        {
+          "label": "Sewing Capacity (Per Day)",
+          "value": "220,000",
+          "source": "recon",
+          "unit": "pcs"
+        },
+        {
+          "label": "Finishing Capacity (Per Day)",
+          "value": "240,000",
+          "unit": "pcs"
+        }
+      ]
+    },
+    {
+      "id": null,
+      "heading": "Sustainability",
+      "note": "section heading + six cards · each card: title, one line, Read More",
+      "body": [],
+      "items": [
+        {
+          "title": "Financial Stability",
+          "text": "Equipping our workforce to manage, save, and invest their earnings with confidence.",
+          "anchor": "financial-stability",
+          "button": "Read More"
+        },
+        {
+          "title": "Health & Family Wellbeing",
+          "text": "Care that reaches beyond the factory floor, to the health of each employee and of each family.",
+          "anchor": "health-and-family-wellbeing",
+          "button": "Read More"
+        },
+        {
+          "title": "Educational & Professional Development",
+          "text": "Continuous learning, treated not as a benefit but as the basis of our standing.",
+          "anchor": "educational-and-professional-development",
+          "button": "Read More"
+        },
+        {
+          "title": "Safe & Healthy Work Environment",
+          "text": "Comprehensive safety provision in every facility, in routine operation and in emergency alike.",
+          "anchor": "safe-and-healthy-work-environment",
+          "button": "Read More"
+        },
+        {
+          "title": "Equality & Acceptance",
+          "text": "Recruitment without discrimination, in a workplace where varied perspectives are understood as strength.",
+          "anchor": "equality-and-acceptance",
+          "button": "Read More"
+        },
+        {
+          "title": "Best Practices",
+          "text": "Direct, sustained investment in the people who carry the operation.",
+          "anchor": "best-practices",
+          "button": "Read More"
+        }
+      ],
+      "stats": []
+    },
+    {
+      "id": null,
+      "block": "Mission teaser",
+      "heading": "Global Leadership",
+      "label": "Our Mission",
+      "button": "Read More",
+      "body": [
+        "The mission of Rizvi Fashions Limited is to sustain a tradition of leadership in the making of premium apparel and ready-made garments. It is a tradition upheld through exacting craftsmanship, and through the ideals of community and service by which we measure ourselves."
+      ],
+      "items": [],
+      "stats": []
+    },
+    {
+      "id": null,
+      "block": "Vision teaser",
+      "heading": "Define Creativity",
+      "label": "Our Vision",
+      "button": "Read More",
+      "body": [
+        "We hold ourselves to a single standard: precision, reliability, and an unwavering loyalty to quality. Every garment we produce is intended not merely to meet a customer's expectation, but to exceed it — and, in exceeding it, to build partnership of lasting value."
+      ],
+      "items": [],
+      "stats": []
+    },
+    {
+      "id": null,
+      "block": "Manufacturing teaser",
+      "heading": "Capable Products",
+      "label": "Manufacturing",
+      "button": "Read More",
+      "body": [
+        "Rizvi Fashions Limited manufactures the full span of knitwear — lingerie, infant wear, hoodies, polo shirts, T-shirts, shorts, and pyjamas — across 74 integrated production lines and 410,177 square feet of dedicated facility."
+      ],
+      "items": [],
+      "stats": []
+    },
+    {
+      "id": null,
+      "block": "Environmental section",
+      "heading": "Environmental Responsibility, Measured",
+      "body": [],
+      "items": [],
+      "stats": [
+        {
+          "label": "Products manufactured using recycled fabrics",
+          "value": "100,000+"
+        },
+        {
+          "label": "Water conserved through responsible production",
+          "value": "100,000",
+          "unit": "L+"
+        },
+        {
+          "label": "Renewable energy generated annually",
+          "value": "100,000",
+          "unit": "kWh"
+        }
+      ]
+    },
+    {
+      "id": null,
+      "heading": "Accreditations & Certifications",
+      "note": "heading only; logo band carries the section",
+      "body": [],
+      "items": [],
+      "stats": []
+    },
+    {
+      "id": null,
+      "block": "Partners teaser",
+      "heading": "Our Partners",
+      "note": "links to the Partners page",
+      "body": [],
+      "items": [],
+      "stats": []
+    }
+  ]
+}

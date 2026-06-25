@@ -1,0 +1,185 @@
+---
+// Footer — rendered from the copy-deck's Global Footer data (RAILS §1.8,
+// V5 §14.12): contact blocks, four link columns, group link, copyright line
+// verbatim, selvedge knot beside the wordmark. Career/Gallery stay reachable
+// from the footer (RAILS §1.9) via the index strip. Deck strings are the
+// labels; targets map to the HARD slug/anchor registry (RAILS §4).
+import footer from '../data/copy/footer.json';
+
+const [contact, about, capabilities, products, important] = footer.sections;
+
+// deck label → byte-exact target (RAILS §4 registries)
+const TARGETS: Record<string, string> = {
+  Overview: '/overview/',
+  'Our Mission': '/company-profile/#our-mission',
+  'Our Vision': '/company-profile/#our-vision',
+  Management: '/management/',
+  Manufacturing: '/company-profile/#manufacturing',
+  'Contact Us': '/contact/',
+  'Material Sourcing': '/our-capabilities/#material-sourcing-management',
+  'Product Development': '/our-capabilities/#product-development',
+  Sampling: '/our-capabilities/#sample',
+  Cutting: '/our-capabilities/#cutting',
+  Sewing: '/our-capabilities/#sewing',
+  Finishing: '/our-capabilities/#finishing',
+  Knitting: '/our-capabilities/#knitting',
+  Printing: '/our-capabilities/#printing',
+  "Men's Wear": '/our-products/#men',
+  "Women's Wear": '/our-products/#women',
+  "Kids' Wear": '/our-products/#kid',
+  Underwear: '/our-products/#underware',
+  Newborn: '/our-products/#new-born',
+};
+const href = (label: string) => TARGETS[label] ?? '/';
+
+const columns = [about, capabilities, products];
+// keep the copyright year current at build time — the deck's year is frozen,
+// a stale "© 2025" reads as neglect (ship-panel polish). Renders the deck
+// string with its year swapped to the build year; fidelity-check normalises
+// 4-digit years so this is not flagged as drift.
+const year = new Date().getFullYear();
+const copyright = footer.copyright.replace(/\b20\d\d\b/, String(year));
+---
+<footer class="footer">
+  <div class="footer__in">
+    <div class="footer__mark">
+      <span>Rizvi Fashions Limited</span>
+      <svg class="footer__knot" width="40" height="16" viewBox="0 0 40 16" aria-hidden="true">
+        <path d="M0 8 H22 C30 8 30 2 25 2 C20 2 20 14 28 14 H40" fill="none" stroke="var(--pink)" stroke-width="1" />
+      </svg>
+    </div>
+
+    <div class="footer__cols">
+      <section class="footer__col footer__col--contact">
+        <h2 class="u-caps">{contact.heading}</h2>
+        {contact.offices.map((o: any) => (
+          <address>
+            <strong class="u-caps">{o.name}</strong>
+            <span>{o.address}</span>
+            {o.phones.map((ph: string) => <a class="u-num" href={`tel:${ph.replace(/[^+\d]/g, '')}`}>{ph}</a>)}
+            <a href={`mailto:${o.email}`}>{o.email}</a>
+          </address>
+        ))}
+      </section>
+
+      {columns.map((col: any) => (
+        <nav class="footer__col" aria-label={col.heading}>
+          <h2 class="u-caps">{col.heading}</h2>
+          <ul>
+            {col.items.map((label: string) => (
+              <li><a href={href(label)}>{label}</a></li>
+            ))}
+          </ul>
+        </nav>
+      ))}
+
+      <nav class="footer__col" aria-label={important.heading}>
+        <h2 class="u-caps">{important.heading}</h2>
+        <ul>
+          <li><a href="http://rizvistock.com/" rel="external">{important.items[0]}</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <nav aria-label="All pages">
+      <ul class="footer__index u-caps">
+        {[
+          ['Home', '/'],
+          ['Overview', '/overview/'],
+          ['Company Profile', '/company-profile/'],
+          ['Management', '/management/'],
+          ['Capabilities', '/our-capabilities/'],
+          ['Products', '/our-products/'],
+          ['Sustainability', '/sustainability/'],
+          ['Partners', '/partners/'],
+          ['Career', '/career/'],
+          ['Gallery', '/gallery/'],
+          ['Contact', '/contact/'],
+        ].map(([label, url]) => (
+          <li><a href={url}>{label}</a></li>
+        ))}
+      </ul>
+    </nav>
+
+    <p class="footer__legal u-caps">{copyright}</p>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    border-top: var(--rail-w) solid var(--hairline);
+    margin-block-start: var(--space-8);
+  }
+  .footer__in {
+    padding: var(--space-6) var(--gutter-mobile);
+    display: grid;
+    gap: var(--space-5);
+  }
+  @media (min-width: 768px) {
+    .footer__in { padding-inline: var(--gutter); }
+  }
+  .footer__mark {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-family: var(--font-display);
+    font-weight: var(--fw-display-sub);
+    font-style: italic;
+    font-size: var(--text-md);
+    letter-spacing: var(--tracking-display);
+    text-transform: uppercase;
+    color: var(--ink);
+  }
+  .footer__cols {
+    display: grid;
+    gap: var(--space-5);
+  }
+  @media (min-width: 768px) {
+    .footer__cols { grid-template-columns: 2fr 1fr 1fr 1fr 1fr; gap: var(--space-4); }
+  }
+  .footer__col h2 {
+    color: var(--ink-muted);
+    margin-block-end: var(--space-2);
+    letter-spacing: var(--tracking-caps);
+    /* base h2 leading-tight (0.94) collides wrapped caps lines (critic FIX) */
+    line-height: var(--leading-snug);
+  }
+  .footer__col ul { list-style: none; }
+  .footer__col li { padding-block: var(--space-1); }
+  .footer__col a {
+    color: var(--ink-body);
+    text-decoration: none;
+    font-size: var(--text-sm);
+    transition: color var(--dur-fast) var(--ease-out);
+  }
+  .footer__col a:hover { color: var(--pink); }
+  address {
+    font-style: normal;
+    display: grid;
+    gap: var(--space-1);
+    margin-block-end: var(--space-3);
+    font-size: var(--text-sm);
+    max-width: var(--measure-body);
+  }
+  address a {
+    color: var(--ink-body);
+    text-decoration: none;
+    transition: color var(--dur-fast) var(--ease-out);
+  }
+  address a:hover { color: var(--pink); }
+  .footer__index {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2) var(--space-3);
+    border-top: var(--rail-w) solid var(--hairline);
+    padding-block-start: var(--space-3);
+  }
+  .footer__index a {
+    color: var(--ink-muted);
+    text-decoration: none;
+    transition: color var(--dur-fast) var(--ease-out);
+  }
+  .footer__index a:hover { color: var(--ink); }
+  .footer__legal { color: var(--ink-muted); }
+</style>

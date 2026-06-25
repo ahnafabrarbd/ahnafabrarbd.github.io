@@ -1,0 +1,37 @@
+---
+// SpecBlock — the tech-pack device (RAILS §1.10): stats as keyline cells,
+// true tabular numerals in the utility face, uppercase annotation labels.
+// Stats only; never used to decorate prose. Optional icon slot per cell.
+import Icon from './Icon.astro';
+
+interface Stat {
+  label: string;
+  value: string | number;
+  unit?: string;
+  icon?: string;
+}
+interface Props {
+  stats: Stat[];
+}
+const { stats } = Astro.props;
+---
+<dl class="stats">
+  {stats.map((s) => (
+    <div>
+      {/* icon lives INSIDE dt: dl>div may contain only dt/dd (axe definition-list) */}
+      <dt>{s.icon && <Icon slot_name={s.icon} />}{s.label}</dt>
+      <dd>{s.value}{s.unit && <span class="stats__unit"> {s.unit}</span>}</dd>
+    </div>
+  ))}
+</dl>
+
+<style>
+  .stats__unit {
+    font-size: var(--text-sm);
+    font-weight: var(--fw-utility);
+    color: var(--ink-muted);
+    letter-spacing: var(--tracking-caps);
+    text-transform: uppercase;
+  }
+  .stats dt :global(.icon) { display: flex; margin-block-end: var(--space-2); }
+</style>

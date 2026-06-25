@@ -1,0 +1,78 @@
+---
+// GrowthChart — inline SVG recreation of the Company Profile growth charts
+// (RECON-decoded data; live site ships static PNGs). White bars, pink goal
+// accent, utility-face tabular labels, caption below. Inline (<3KB) per §8.2.
+interface Point {
+  label: string;
+  value: number;
+}
+interface Props {
+  points: Point[];
+  caption: string;
+  unit?: string;
+  /** goal charts render pink-framed hollow bars */
+  goal?: boolean;
+}
+const { points, caption, unit = 'USD M', goal = false } = Astro.props;
+
+const W = 760;
+const H = 300;
+const PAD = { t: 24, r: 8, b: 56, l: 8 };
+const max = Math.max(...points.map((p) => p.value)) * 1.12;
+const innerW = W - PAD.l - PAD.r;
+const innerH = H - PAD.t - PAD.b;
+const slotW = innerW / points.length;
+const barW = Math.min(slotW * 0.55, 56);
+const bars = points.map((p, i) => {
+  const h = (p.value / max) * innerH;
+  return {
+    x: PAD.l + i * slotW + (slotW - barW) / 2,
+    y: PAD.t + innerH - h,
+    h,
+    cx: PAD.l + i * slotW + slotW / 2,
+    ...p,
+  };
+});
+---
+<figure class="growth">
+  <svg viewBox={`0 0 ${W} ${H}`} role="img" aria-label={`${caption} — values in ${unit}`}>
+    <line x1={PAD.l} y1={PAD.t + innerH} x2={W - PAD.r} y2={PAD.t + innerH} stroke="var(--hairline)" />
+    {goal && (
+      /* the wireframe's literal "pink goal LINE" — hollow pink bars read
+         near-invisible at 1px on ground (G5 critic FIX) */
+      <polyline
+        points={bars.map((b) => `${b.cx},${b.y}`).join(' ')}
+        fill="none"
+        stroke="var(--pink)"
+        stroke-width="2"
+      />
+    )}
+    {bars.map((b) => (
+      <>
+        {goal ? (
+          <circle cx={b.cx} cy={b.y} r="4" fill="var(--pink)" />
+        ) : (
+          <rect x={b.x} y={b.y} width={barW} height={b.h} fill="var(--ink)" />
+        )}
+        <text class="growth__val" x={b.cx} y={b.y - 12} text-anchor="middle" fill="var(--ink)">{b.value}</text>
+        <text class="growth__lbl" x={b.cx} y={PAD.t + innerH + 22} text-anchor="middle" fill="var(--ink-muted)">{b.label}</text>
+      </>
+    ))}
+  </svg>
+  <figcaption class="u-caps">{caption} · {unit}</figcaption>
+</figure>
+
+<style>
+  .growth { margin-block: var(--space-5); }
+  .growth svg { width: 100%; height: auto; display: block; }
+  .growth__val,
+  .growth__lbl {
+    font-family: var(--font-utility);
+    font-variant-numeric: var(--numeric);
+  }
+  /* one step larger than the page scale: the SVG viewBox scales DOWN on
+     mobile, where xs/2xs labels went near-illegible (G5 critic FIX) */
+  .growth__val { font-size: var(--text-sm); font-weight: var(--fw-utility-strong); }
+  .growth__lbl { font-size: var(--text-xs); letter-spacing: var(--tracking-num); }
+  .growth figcaption { color: var(--ink-muted); margin-block-start: var(--space-2); }
+</style>

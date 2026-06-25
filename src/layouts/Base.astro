@@ -1,0 +1,122 @@
+---
+// Base.astro — global shell: head (per-page meta, V7 §10), skip link, header,
+// thread rail placeholder, footer. Zero framework JS; the overlay's open/close
+// controller is the page's single named inline island (~300B, PLANS/G4.md B4).
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import ThreadRail from '../components/ThreadRail.astro';
+import { FLAGS } from '../config/flags';
+import '../styles/tokens.css';
+import '../styles/base.css';
+// raw CSS string for the flag-gated showpiece (token-lint scans the .css file)
+import showpieceCSS from '../styles/showpiece.css?raw';
+
+interface Props {
+  title: string;
+  description: string;
+  /** pure-black ground pages: hero (home) + products */
+  pure?: boolean;
+  /** LCP image preload (V7 §6.1: LCP image preloaded) — getImage() result */
+  preloadImage?: { src: string; srcSet?: { attribute: string }; attributes?: { sizes?: string } };
+  /** Plain VERTICAL page (Partners): opts OUT of the horizontal corridor and runs
+   *  no motion engine — the page simply scrolls top→bottom (owner: partners is a
+   *  vertical scroll-down, not the corridor and not the old L-shape). */
+  lshape?: boolean;
+}
+const { title, description, pure = false, preloadImage, lshape = false } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:site_name" content="Rizvi Fashions Limited" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="apple-touch-icon" href="/icons/icon-192.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    {/* --ground token value; meta cannot consume var() */}
+    <meta name="theme-color" content="#F8F6F2" />
+    {/* LCP image preload FIRST: on pages whose LCP is an image it must not
+        queue behind the font transfers (G5 refactor: order moved LCP ~0.5s) */}
+    {preloadImage && (
+      <link
+        rel="preload"
+        as="image"
+        href={preloadImage.src}
+        imagesrcset={preloadImage.srcSet?.attribute}
+        imagesizes={preloadImage.attributes?.sizes}
+        fetchpriority="high"
+      />
+    )}
+    <link rel="preload" href="/fonts/cormorant-normal.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/montserrat.woff2" as="font" type="font/woff2" crossorigin />
+    <meta name="generator" content={Astro.generator} />
+    {/* G7 showpiece "The Unbroken Thread" (D-019, flag unbrokenThread): the pink
+        thread is ONE continuous element across navigation — cross-document View
+        Transitions, 0KB JS, pure CSS. Gated by no-preference so reduced-motion
+        (and unsupported engines) get instant navigation — a designed state, not
+        a broken one. The rail/fill get their own transition group so they morph
+        to the new page's geometry instead of cross-fading out and back in. */}
+    {FLAGS.unbrokenThread && <style is:global set:html={showpieceCSS} />}
+    {/* hscroll PRE-PAINT gate: set the engaging class synchronously under the
+        same desktop/motion gate the engine uses, so the horizontal layout state
+        (and its `:has()` holding-clamp) is the first paint — no FOUC, no CLS,
+        no scroll-jump. Does NOT load GSAP (that stays at idle in pinscroll.ts). */}
+    {FLAGS.hscroll && !lshape && (
+      <script
+        is:inline
+        set:html={`if(matchMedia('(min-width:1025px)').matches&&!matchMedia('(prefers-reduced-motion:reduce)').matches){document.documentElement.classList.add('hscroll-on')}`}
+      />
+    )}
+  </head>
+  <body class:list={[{ 'is-pure': pure }]}>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <Header />
+    <ThreadRail />
+    <main id="main" class="wrap chapters">
+      <slot />
+    </main>
+    <Footer />
+    {/* G6 motion core (~3KB gz): thread-rail index is a HARD ≥768px requirement
+        (RAILS §1.9) — the one sanctioned breach of content-pages-0KB, PLANS/G6.md B3.
+        The module sets .js itself: if it ever fails to load, nothing hides. */}
+    <script>
+      import '../motion/core.ts';
+    </script>
+    {/* hscroll engine (flag-gated): horizontal pin+scrub+depth. DYNAMIC import
+        behind the ≥1025px + motion gate so mobile / reduced-motion never fetch
+        or parse the engine chunk (keeps the native-vertical pages light — the
+        engine can't run there anyway). The module re-asserts the gate too. */}
+    {FLAGS.hscroll && !lshape && (
+      <script>
+        if (
+          matchMedia('(min-width: 1025px)').matches &&
+          !matchMedia('(prefers-reduced-motion: reduce)').matches
+        ) {
+          import('../motion/pinscroll.ts');
+        }
+      </script>
+    )}
+    {/* Partners is a PLAIN VERTICAL page (owner): it opts out of the corridor via
+        `lshape` and loads NO motion engine — the default CSS stack scrolls
+        top→bottom. (The retired L-shape engine src/motion/lshape.ts is no longer
+        imported anywhere.) */}
+  </body>
+</html>
+
+<style>
+  body.is-pure { background: var(--ground-pure); }
+</style>

@@ -1,0 +1,171 @@
+---
+// Management — wireframe 4: MD profile as a TEXT-LED chapter (HARD: live site
+// has no MD portrait — none is rendered, and the frontmatter asserts the slot
+// stays empty) with pull-quote rhythm (one sentence already present in the MD
+// body, byte-exact), then the Management Team as two keyline rows with small
+// fixed-size portraits from the image-map (chairman-portrait / director-portrait,
+// exactly as live — Rehana's stock avatar is intentional) and the pink hover
+// frame, an allowed pink use under the palette law.
+// Chanel cut: a deckSection eyebrow kicker above the h1 and a stitched hairline
+// divider between the two team rows were both drafted and removed — the chapter
+// keylines already carry the rhythm.
+import Base from '../layouts/Base.astro';
+import PullQuote from '../components/PullQuote.astro';
+import { Image } from 'astro:assets';
+import { slot, slotImage } from '../lib/images';
+import { getEntry } from 'astro:content';
+
+const entry = await getEntry('copy', 'management');
+if (!entry) throw new Error('copy/management missing — run: node setup/extract-copy.mjs');
+const { title, sections = [] } = entry.data as { title: string; sections: Record<string, any>[] };
+
+const md = sections.find((s) => s.heading === "Managing Director's Profile");
+if (!md?.person?.name || !md?.person?.role || !(md.body?.length > 0)) {
+  throw new Error('copy/management: MD profile section (person + body) missing — deck drift');
+}
+
+// HARD (RAILS / wireframe 4): the MD profile is text-led — live has no portrait.
+// Build-fail if anyone ever wires an image into the slot.
+const mdPortrait = slot('management', 'md-portrait');
+if (mdPortrait.src) {
+  throw new Error('management.md-portrait must stay empty — the MD profile is text-led (HARD, as live)');
+}
+
+// Pull-quote rhythm: ONE strong sentence ALREADY PRESENT in the MD body,
+// rendered twice (body verbatim + pull). Byte-exact or the build fails.
+const pull =
+  'Since 1987 he has worked, at both institutional and regulatory levels, toward a more balanced, transparent, and accountable financial landscape — and has done so with consistent distinction.';
+if (!md.body.some((p: string) => p.includes(pull))) {
+  throw new Error('management pull-quote is no longer verbatim in the MD body — deck drift');
+}
+
+const team = sections.find((s) => s.heading === 'Management Team');
+if (!team?.people || team.people.length !== 2) {
+  throw new Error('copy/management: Management Team section must carry 2 people — deck drift');
+}
+
+// Portraits EXACTLY AS LIVE via the slot system (the avatar placeholder for
+// Rehana is intentional, HARD). Unmapped role = build failure, not a blank.
+const PORTRAIT_SLOTS: Record<string, string> = {
+  Chairman: 'chairman-portrait',
+  Director: 'director-portrait',
+};
+const people = await Promise.all(
+  team.people.map(async (p: Record<string, any>) => {
+    const slotName = PORTRAIT_SLOTS[p.role];
+    if (!slotName) throw new Error(`management: no portrait slot mapped for role "${p.role}"`);
+    if (!p.name || !(p.body?.length > 0)) {
+      throw new Error(`management: person "${p.name ?? '?'}" missing name/body — deck drift`);
+    }
+    return { ...p, portrait: await slotImage('management', slotName) };
+  }),
+);
+
+const firstBody: string = md.body[0];
+const description = firstBody.length > 155 ? `${firstBody.slice(0, 152)}…` : firstBody;
+---
+<Base title={`${title} — Rizvi Fashions Limited`} description={description}>
+  <h1>{title}</h1>
+
+  <section class="chapter md-profile">
+    <span class="chapter__num" aria-hidden="true"></span>
+    <h2>{md.heading}</h2>
+    <div class="person-id">
+      <h3>{md.person.name}</h3>
+      <p class="u-caps">{md.person.role}</p>
+    </div>
+    {md.body.map((p: string, i: number) => (
+      <Fragment>
+        <p>{p}</p>
+        {i === 1 && <PullQuote quote={pull} />}
+      </Fragment>
+    ))}
+  </section>
+
+  <section class="chapter">
+    <span class="chapter__num" aria-hidden="true"></span>
+    <h2>{team.heading}</h2>
+    <ul class="team">
+      {people.map((p) => (
+        <li class="person">
+          <div class="person__media">
+            <Image
+              src={p.portrait.image}
+              alt={p.portrait.alt}
+              widths={[144, 288]}
+              sizes="9rem"
+              loading="lazy"
+              format="webp"
+            />
+          </div>
+          <div class="person__text">
+            <h3 class="person__name">{p.name}</h3>
+            <p class="person__role u-caps">{p.role}</p>
+            {p.body.map((par: string) => <p>{par}</p>)}
+          </div>
+        </li>
+      ))}
+    </ul>
+  </section>
+</Base>
+
+<style>
+  /* MD identity — a quiet masthead for the portrait-less profile (text-led, HARD) */
+  .person-id {
+    margin-block-end: var(--space-5);
+  }
+  .person-id h3 {
+    font-size: var(--text-xl);
+  }
+  .person-id p {
+    color: var(--ink-muted);
+    margin-block-start: var(--space-1);
+  }
+
+  /* team keyline rows — base .chapter li supplies the hairline seam; rows widen
+     past the body measure so the portrait column sits clear of the text */
+  .team .person {
+    max-width: none;
+    display: grid;
+    gap: var(--space-3) var(--space-5);
+    align-content: start;
+    padding-block: var(--space-5);
+  }
+  @media (min-width: 768px) {
+    .team .person {
+      grid-template-columns: var(--space-8) 1fr;
+    }
+  }
+
+  /* small fixed-size portraits; pink hover frame is an ALLOWED pink use
+     (palette law: thread / numerals / spec glyphs / portrait frames / focus) */
+  .person__media {
+    inline-size: var(--space-8);
+    border: var(--radius-frame) solid transparent;
+    border-radius: var(--radius-frame);
+    transition: border-color var(--dur-fast) var(--ease-out);
+  }
+  .person:hover .person__media {
+    border-color: var(--pink);
+  }
+  .person__media img {
+    inline-size: 100%;
+    block-size: auto;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    object-position: top;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .person__media {
+      transition: none;
+    }
+  }
+
+  .person__name {
+    font-size: var(--text-md);
+  }
+  .person__role {
+    color: var(--ink-muted);
+    margin-block: var(--space-1) var(--space-3);
+  }
+</style>

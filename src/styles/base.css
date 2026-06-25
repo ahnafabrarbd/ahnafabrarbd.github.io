@@ -1,0 +1,626 @@
+/* base.css — global shell styles. Every value traces to tokens.css (token-lint enforced). */
+
+/* ---- fonts: self-hosted variable subsets, swap + metric-matched fallbacks */
+@font-face {
+  font-family: 'Cormorant';
+  src: url('/fonts/cormorant-normal.woff2') format('woff2');
+  font-weight: 300 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Cormorant';
+  src: url('/fonts/cormorant-italic.woff2') format('woff2');
+  font-weight: 300 700;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Montserrat';
+  src: url('/fonts/montserrat.woff2') format('woff2');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Cormorant Fallback';
+  src: local('Georgia'), local('Times New Roman');
+  ascent-override: 88%;
+  descent-override: 22%;
+  line-gap-override: 0%;
+  size-adjust: 108%;
+}
+@font-face {
+  font-family: 'Montserrat Fallback';
+  src: local('Helvetica Neue'), local('Arial');
+  ascent-override: 100%;
+  descent-override: 25%;
+  line-gap-override: 0%;
+  size-adjust: 100%;
+}
+
+/* ---- reset */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root { color-scheme: light; }
+html { scroll-behavior: smooth; overflow-x: clip; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
+
+body {
+  background: var(--ground);
+  color: var(--ink-body);
+  font-family: 'Montserrat', 'Montserrat Fallback', system-ui, sans-serif;
+  font-size: var(--text-base);
+  font-weight: var(--fw-body);
+  line-height: var(--leading-body);
+  -webkit-font-smoothing: antialiased;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+}
+
+img, svg, video { display: block; max-width: 100%; }
+a { color: inherit; }
+
+:focus-visible {
+  outline: var(--radius-frame) solid var(--pink);
+  outline-offset: var(--radius-frame);
+}
+
+::selection { background: var(--pink); color: var(--ground); }
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* ---- skip link */
+.skip-link {
+  position: absolute;
+  left: var(--gutter-mobile);
+  top: calc(-1 * var(--space-6));
+  z-index: var(--z-preloader);
+  background: var(--ground-pure);
+  color: var(--ink);
+  font-family: var(--font-utility);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: var(--space-1) var(--space-2);
+  border: var(--rail-w) solid var(--hairline);
+}
+.skip-link:focus-visible { top: var(--space-1); }
+
+/* ---- type roles */
+h1, h2, h3 {
+  font-family: 'Cormorant', 'Cormorant Fallback', Georgia, serif;
+  color: var(--ink);
+  line-height: var(--leading-tight);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-display);
+  font-weight: var(--fw-display);
+  overflow-wrap: break-word;
+}
+h1 { font-size: var(--text-display); max-width: var(--measure-title); }
+h2 { font-size: var(--text-display-sub); max-width: var(--measure-title); }
+h3 { font-size: var(--text-xl); font-weight: var(--fw-display-sub); }
+
+p { max-width: var(--measure-body); }
+
+.u-caps {
+  font-family: var(--font-utility);
+  font-size: var(--text-2xs);
+  font-weight: var(--fw-utility-strong);
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+  font-variant-numeric: var(--numeric);
+}
+
+.u-num {
+  font-family: var(--font-utility);
+  font-variant-numeric: var(--numeric);
+  letter-spacing: var(--tracking-num);
+}
+
+/* ---- layout primitives */
+.wrap {
+  padding-inline: var(--gutter-mobile);
+  width: 100%;
+}
+@media (min-width: 768px) {
+  .wrap { padding-inline: var(--gutter) calc(var(--gutter) + var(--rail-offset)); }
+}
+
+main { flex: 1; }
+
+/* ---- chapters */
+.chapters { counter-reset: chapter; }
+.chapter {
+  counter-increment: chapter;
+  padding-block: var(--space-7);
+  border-top: var(--rail-w) solid var(--hairline);
+  position: relative;
+}
+.chapter__num {
+  font-family: var(--font-utility);
+  font-size: var(--text-lg);
+  font-weight: var(--fw-utility);
+  letter-spacing: var(--tracking-num);
+  color: var(--pink);
+  font-variant-numeric: var(--numeric);
+}
+.chapter__num::before { content: counter(chapter, decimal-leading-zero); }
+.chapter h2 { margin-block: var(--space-3) var(--space-4); }
+.chapter p { margin-block-end: var(--space-3); }
+.chapter ul { list-style: none; }
+.chapter li {
+  padding-block: var(--space-2);
+  border-bottom: var(--rail-w) solid var(--hairline);
+  max-width: var(--measure-body);
+}
+
+/* ---- stats */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--rail-w);
+  background: var(--hairline);
+  border-block: var(--rail-w) solid var(--hairline);
+  margin-block: var(--space-5);
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+/* ambient WASH behind the figures: a few heavily-blurred brand-tone blobs that
+   drift slowly, so the stat panel reads alive but stays disciplined (the React
+   AnimatedGradient idea, redone vanilla + tokenised, transform-only). The cells
+   above are translucent so it glows faintly through; numbers stay crisp on top. */
+.stats::before {
+  content: '';
+  position: absolute;
+  inset: calc(-1 * var(--space-6));
+  z-index: 0;
+  background:
+    radial-gradient(38% 48% at 18% 26%, var(--pink), transparent 70%),
+    radial-gradient(42% 52% at 84% 38%, var(--ink-faint), transparent 72%),
+    radial-gradient(46% 56% at 52% 92%, var(--pink), transparent 70%);
+  opacity: 0.22;
+  filter: blur(var(--space-5));
+  animation: stats-wash 26s var(--ease-inout) infinite alternate;
+  pointer-events: none;
+}
+@keyframes stats-wash {
+  0% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(4%, -3%, 0) scale(1.14); }
+  100% { transform: translate3d(-3%, 4%, 0) scale(1.06); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .stats::before { animation: none; }
+}
+@media (min-width: 768px) {
+  .stats { grid-template-columns: repeat(auto-fit, minmax(var(--space-8), 1fr)); }
+}
+.stats > div {
+  background: var(--glass);
+  padding: var(--space-4) var(--space-3);
+  min-width: 0;
+  position: relative;
+  z-index: 1;
+}
+.stats dt {
+  font-family: var(--font-utility);
+  font-size: var(--text-2xs);
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  margin-block-end: var(--space-2);
+}
+.stats dd {
+  font-family: var(--font-utility);
+  font-size: var(--text-md);
+  font-weight: var(--fw-utility-strong);
+  color: var(--ink);
+  font-variant-numeric: var(--numeric);
+  letter-spacing: var(--tracking-num);
+}
+@media (min-width: 768px) {
+  .stats dd { font-size: var(--text-xl); }
+}
+
+/* ---- thread rail */
+.thread-rail {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--rail-w);
+  background: none;
+  z-index: var(--z-thread);
+  pointer-events: none;
+}
+.thread-rail__fill {
+  position: absolute;
+  inset: 0;
+  background: var(--pink);
+  --progress: 0;
+  transform: scaleX(var(--progress));
+  transform-origin: left;
+}
+.rail-index {
+  position: fixed;
+  top: 50%;
+  right: calc(var(--rail-offset) + var(--space-2));
+  transform: translateY(-50%);
+  z-index: var(--z-thread);
+  display: none;
+}
+.rail-index ul { list-style: none; display: grid; gap: var(--space-1); justify-items: end; }
+.rail-index a {
+  color: var(--ink-muted);
+  text-decoration: none;
+  font-size: var(--text-2xs);
+  transition: color var(--dur-fast) var(--ease-out);
+}
+.rail-index a:hover,
+.rail-index a.is-active { color: var(--ink); }
+@media (min-width: 768px) {
+  .thread-rail {
+    top: var(--space-7);
+    bottom: var(--space-5);
+    left: auto;
+    right: var(--rail-offset);
+    width: var(--rail-w);
+    height: auto;
+    background: var(--hairline);
+  }
+  .thread-rail__fill { transform-origin: top; transform: scaleY(var(--progress)); }
+  .rail-index { display: block; }
+}
+
+/* (the vertical snap-deck — flag snapDeck — was retired by hscroll; its CSS and
+   the dead .pinmode block were removed. The --deck-head-h / --deck-bar-w tokens
+   stay live: the hscroll layout and rail reuse them.) */
+
+/* ---- overlay index */
+.overlay__index {
+  list-style: none;
+  margin-block-start: var(--space-4);
+  display: grid;
+  gap: var(--space-1);
+}
+.overlay__index a { color: var(--ink-muted); text-decoration: none; }
+
+/* ---- G6 reveals (vertical fallback only — the engine owns motion under .hscroll-on) */
+.js:not(.hscroll-on) .chapter {
+  opacity: 0;
+  transform: translateY(var(--space-3));
+}
+.js:not(.hscroll-on) .chapter.is-in {
+  opacity: 1;
+  transform: translateY(0);
+  transition:
+    opacity var(--dur-entrance) var(--ease-out),
+    transform var(--dur-entrance) var(--ease-out);
+}
+@media (prefers-reduced-motion: reduce) {
+  .js:not(.hscroll-on) .chapter { opacity: 1; transform: none; }
+}
+
+/* ---- seam stitches */
+.seam {
+  position: absolute;
+  top: calc(-1 * var(--rail-w));
+  left: 0;
+  width: var(--seam-w);
+  height: var(--rail-w);
+  background-image: repeating-linear-gradient(
+    to right,
+    var(--pink) 0,
+    var(--pink) var(--space-1),
+    transparent var(--space-1),
+    transparent var(--space-2)
+  );
+  opacity: 0;
+}
+.js:not(.hscroll-on) .chapter.is-in .seam {
+  opacity: 1;
+  transform-origin: left;
+  animation: seam-draw var(--dur-base) var(--ease-thread) 1;
+}
+@keyframes seam-draw {
+  from { transform: scaleX(0); opacity: 0; }
+  to { transform: scaleX(1); opacity: 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .seam { opacity: 1; }
+}
+
+/* ---- footer knot draw */
+.footer__knot path {
+  stroke-dasharray: var(--knot-len);
+}
+.footer__knot.is-drawing path {
+  animation: knot-draw var(--dur-entrance) var(--ease-thread) 1 both;
+}
+@keyframes knot-draw {
+  from { stroke-dashoffset: var(--knot-len); }
+  to { stroke-dashoffset: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .footer__knot path { stroke-dasharray: none; }
+  .footer__knot.is-drawing path { animation: none; }
+}
+
+/* ===== hscroll — site-wide horizontal scroll + tactile depth (flag `hscroll`).
+   Engaged ONLY via the `.hscroll-on` class (set pre-paint by the head gate, kept
+   by the engine), never a media query — so the horizontal row exists only when
+   the scrub that drives it is running; otherwise the document is the native
+   vertical fallback. Every value here is a token, a var(), or an ALLOW value;
+   the depth MAGNITUDES are JS-written scalars (--depth-bg/--depth-fg/--depth-rot
+   /--depth-scale/--scrim, RUNTIME_PROPS in token-lint) mapped via calc(). */
+
+/* the scrub:1 is the single easing source — neutralise the global smooth scroll
+   (base.css top) so keyboard/Home/End/deep-link jumps don't double-ease. */
+.hscroll-on { scroll-behavior: auto; }
+/* NO vertical drop before the horizontal scrub (owner): a STICKY header sits in
+   flow and costs one header-height of vertical scroll before the pin reaches the
+   top. Take it OUT of flow under the corridor so the pinned viewport starts at
+   scroll 0 and horizontal motion begins on the very first pixel. Rooms already
+   pad their top by --deck-head-h (> header height), so nothing hides behind it. */
+.hscroll-on .topbar {
+  position: fixed;
+  left: 0;
+  right: 0;
+}
+/* main carries .wrap gutter padding + becomes the pin host; zero its inline
+   padding so the 100%-wide viewport never overflows (rooms pad themselves). */
+.hscroll-on #main { padding-inline: 0; }
+/* pre-paint HOLDING CLAMP: until the engine injects the viewport at idle, keep
+   the still-vertical document to one screen so the structural upgrade causes no
+   visible shift. `:has()` releases it the instant the viewport is appended. */
+.hscroll-on #main:not(:has(.hscroll__viewport)) { height: 100svh; overflow: hidden; }
+/* the engine HOISTS these wrappers' children into rooms; hide the emptied shells
+   so they leave no gap before the pinned stage (teardown un-hides them). */
+.hscroll-on #main > .products-pin,
+.hscroll-on #main > .story-stage { display: none; }
+
+.hscroll-on .hscroll__viewport {
+  width: 100%;
+  height: 100svh;
+  overflow: hidden; /* clips off-screen rooms; clip present from first paint */
+}
+.hscroll-on .hscroll__track {
+  display: flex;
+  flex-wrap: nowrap;
+  height: 100svh;
+  width: max-content;
+  will-change: transform;
+}
+/* ONE CONTINUOUS STRIP — rooms are flush and full-bleed with NO per-room 3D
+   (no rotateY / scale / translateZ / scrim): the site reads as a single page
+   that scrolls horizontally, not a carousel of cards. The only depth is a
+   subtle parallax drift + the grain. */
+.hscroll-on .hpanel {
+  flex: none;
+  /* CONTENT-WIDTH rooms (not a rigid 100vw page each): the corridor becomes one
+     continuous, denser flow — a narrow cover merges into the next room and
+     several rooms share the viewport (the Sylver model). Photo rooms override
+     back to full-bleed below. */
+  width: fit-content;
+  max-width: 100vw;
+  height: 100svh;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-block: var(--deck-head-h) var(--space-6);
+  padding-inline: var(--space-6);
+  box-sizing: border-box;
+  overflow: hidden;
+}
+/* full-bleed rooms keep a full viewport */
+.hscroll-on .hpanel:has(> .photo-chapter) { width: 100vw; }
+/* TALL rooms scroll INTERNALLY so copy is never clipped (content-reachability) */
+.hscroll-on .hpanel.is-tall {
+  justify-content: flex-start;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+/* blank-canvas COVER — each section opens on just its title, set large and low on
+   the clean ground ($10K: a point of view + hierarchy that breathes). */
+.hscroll-on .hpanel.is-cover {
+  justify-content: flex-end;
+  padding-block: var(--deck-head-h) var(--space-8);
+}
+/* the cover is just its title (a narrow room that merges into the next) */
+.hscroll-on .hpanel.is-cover .page-head__intro { display: none; }
+
+/* prose-heavy tall rooms flow into TWO columns so the copy FITS the room as an
+   editorial spread (engine adds .is-cols); the heading spans both columns. */
+.hscroll-on .hpanel.is-cols {
+  justify-content: center;
+  overflow: hidden;
+}
+.hscroll-on .hpanel.is-cols .chapter {
+  columns: 2;
+  column-gap: var(--space-6);
+  width: 100%;
+}
+.hscroll-on .hpanel.is-cols .chapter > h2 { column-span: all; }
+.hscroll-on .hpanel.is-cols .chapter p { max-width: none; }
+
+/* subtle parallax drift — a continuous depth cue (content leads, media counter-
+   drifts a touch as a room crosses centre), NOT a card flip. JS scalar × token. */
+.hscroll-on .hpanel > * {
+  transform: translateX(calc(var(--depth-fg, 0) * var(--space-3)));
+}
+.hscroll-on .hpanel .hero__weave,
+.hscroll-on .hpanel .photo-chapter__media,
+.hscroll-on .hpanel .story-scene__media {
+  transform: translateX(calc(var(--depth-bg, 0) * var(--space-2)));
+}
+
+/* ===== text-on-image continuity (owner): a PhotoChapter room becomes FULL-BLEED
+   imagery with the heading + copy overlaid on a legibility scrim, so the section
+   reads as one immersive plane (not image-beside-text) and flows into the next. */
+.hscroll-on .hpanel:has(> .photo-chapter) { padding: 0; }
+.hscroll-on .hpanel > .photo-chapter {
+  position: absolute;
+  inset: 0;
+  display: block;
+  gap: 0;
+  margin: 0;
+}
+.hscroll-on .hpanel > .photo-chapter .photo-chapter__media {
+  position: absolute;
+  inset: 0;
+}
+.hscroll-on .hpanel > .photo-chapter .photo-chapter__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border: none;
+  /* scroll-driven REVEAL (Halston): the photo clip-opens from a centre slit as
+     the room reaches centre (--reveal 0→1, written per frame by the engine). */
+  clip-path: inset(calc((1 - var(--reveal, 1)) * 50%) 0%);
+}
+.hscroll-on .hpanel > .photo-chapter::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: var(--z-imagery);
+  pointer-events: none;
+  background: linear-gradient(to top, var(--scrim-img), transparent 62%);
+}
+.hscroll-on .hpanel > .photo-chapter .photo-chapter__copy {
+  position: absolute;
+  inset: auto 0 0 0;
+  z-index: var(--z-thread);
+  margin: 0;
+  padding: var(--space-6) var(--gutter) var(--space-8) var(--gutter);
+  max-width: var(--measure-body);
+  color: var(--ground);
+}
+.hscroll-on .hpanel > .photo-chapter .photo-chapter__copy h2,
+.hscroll-on .hpanel > .photo-chapter .photo-chapter__copy p,
+.hscroll-on .hpanel > .photo-chapter .photo-chapter__copy .chapter__num {
+  color: var(--ground);
+}
+
+/* (no film grain — the owner wants pure flat colour, no texture/tooth) */
+
+/* thin TOP progress hairline (the bottom section bar carries the wayfinding) */
+.hscroll-on .thread-rail {
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: auto;
+  width: auto;
+  height: var(--rail-w);
+  background: var(--hairline);
+}
+.hscroll-on .thread-rail__fill {
+  transform-origin: left;
+  transform: scaleX(var(--progress));
+}
+
+/* ===== bottom SECTION BAR — a blurry, semi-transparent glass bar of the page's
+   sections; the active one highlights as the corridor moves through it. core.ts
+   builds .rail-index; under hscroll it docks centred at the bottom. */
+.hscroll-on .rail-index {
+  top: auto;
+  bottom: var(--space-3);
+  left: 50%;
+  right: auto;
+  transform: translateX(-50%);
+  z-index: var(--z-topbar);
+  max-width: 92vw;
+  background: var(--glass);
+  -webkit-backdrop-filter: blur(var(--space-2));
+  backdrop-filter: blur(var(--space-2));
+  border: var(--rail-w) solid var(--hairline);
+  border-radius: var(--radius-frame);
+  padding: var(--space-1) var(--space-3);
+}
+.hscroll-on .rail-index {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+/* running index readout — tracked caps, tabular figures: precise, corporate */
+.rail-index__count {
+  font-family: var(--font-utility);
+  font-size: var(--text-2xs);
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+  font-variant-numeric: var(--numeric);
+  color: var(--ink-muted);
+  white-space: nowrap;
+}
+.hscroll-on .rail-index ul.rail-index__dots {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: var(--space-2);
+  overflow: hidden;
+}
+.rail-index__dot {
+  display: block;
+  width: var(--space-1);
+  height: var(--space-1);
+  border-radius: 50%;
+  border: var(--rail-w) solid var(--ink-faint);
+  background: transparent;
+  transition:
+    background var(--dur-fast) var(--ease-out),
+    border-color var(--dur-fast) var(--ease-out);
+}
+.rail-index__dot:hover {
+  border-color: var(--pink);
+  background: var(--ink-faint);
+}
+.rail-index__dot.is-active {
+  background: var(--pink);
+  border-color: var(--pink);
+}
+.rail-index__dot:focus-visible {
+  outline: var(--rail-w) solid var(--pink);
+  outline-offset: var(--space-1);
+}
+
+/* masked HEADING RISE (Aston, resistive): each WORD rides up out of its own clip
+   mask, staggered, as the room nears centre. --reveal (0 at a room's edge → 1 at
+   centre) is the scrubbed scalar the engine writes per frame, so the reveal is
+   coupled to the scroll — the title "takes time to appear". Per word, the local
+   progress is a delayed, narrowed slice of --reveal: word --i starts later and
+   travels over a short window, so words resolve one after another (resistive, not
+   a pop). --n (word count) and --i (word index) come from the engine; default 1
+   keeps the title fully shown for SSR / no-JS. Transform + opacity only. */
+.hscroll-on .hpanel .has-rise { display: block; }
+.hscroll-on .hpanel .hrise {
+  display: inline-block;
+  overflow: clip;
+  vertical-align: top;
+}
+.hscroll-on .hpanel .hrise-w {
+  display: inline-block;
+  /* per-word delay (0.62 stagger span) + travel window (0.46): the last word
+     finishes only as the room settles at centre — a slow, weighty build. */
+  --start: calc(var(--i, 0) / var(--n, 1) * 0.62);
+  --local: clamp(0, (var(--reveal, 1) - var(--start)) / 0.46, 1);
+  transform: translateY(calc((1 - var(--local)) * 112%));
+  opacity: var(--local);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hscroll-on .hpanel > *,
+  .hscroll-on .hpanel .hero__weave,
+  .hscroll-on .hpanel .photo-chapter__media,
+  .hscroll-on .hpanel .story-scene__media { transform: none; }
+}

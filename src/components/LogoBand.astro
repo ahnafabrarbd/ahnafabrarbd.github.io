@@ -1,0 +1,65 @@
+---
+// LogoBand — keyline grid of re-toned (#D6D6D6 tonal, transparent) logos:
+// accreditations band + partners teaser/wall. Pink frame on hover where
+// interactive (wall). Logos are owner/live-site assets, re-toned tonal-only.
+import { Image } from 'astro:assets';
+import { resolveImage } from '../lib/images';
+
+interface Entry {
+  name: string;
+  file: string | null;
+}
+interface Props {
+  entries: Entry[];
+  label: string;
+  /** wall = larger cells + hover frames (Partners page); band = compact strip */
+  variant?: 'band' | 'wall';
+}
+const { entries, label, variant = 'band' } = Astro.props;
+const shipped = entries.filter((e) => e.file);
+const resolved = await Promise.all(
+  shipped.map(async (e) => ({ name: e.name, image: await resolveImage(e.file!) })),
+);
+---
+<ul class="logo-band" class:list={[`logo-band--${variant}`]} aria-label={label}>
+  {resolved.map(({ name, image }) => (
+    <li>
+      <Image src={image} alt={name} width={image.width} height={image.height} loading="lazy" format="webp" />
+      <span class="visually-hidden">{name}</span>
+    </li>
+  ))}
+</ul>
+
+<style>
+  /* keyline grid via per-cell inset lines (not a bleeding background): an
+     incomplete last row leaves clean ground, no grey filler band (ship-panel) */
+  .logo-band {
+    list-style: none;
+    display: grid;
+    gap: 0;
+    border-block-start: var(--rail-w) solid var(--hairline);
+    border-inline-start: var(--rail-w) solid var(--hairline);
+  }
+  .logo-band--band { grid-template-columns: repeat(auto-fill, minmax(var(--space-8), 1fr)); }
+  .logo-band--wall { grid-template-columns: repeat(auto-fill, minmax(calc(var(--space-8) + var(--space-6)), 1fr)); }
+  .logo-band li {
+    background: var(--ground);
+    box-shadow: inset calc(-1 * var(--rail-w)) calc(-1 * var(--rail-w)) 0 0 var(--hairline);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-3);
+    min-height: var(--space-7);
+    border: var(--radius-frame) solid transparent;
+  }
+  .logo-band--wall li:hover { border-color: var(--pink); }
+  .logo-band img {
+    max-height: var(--space-6);
+    width: auto;
+    object-fit: contain;
+    /* logos were re-toned #D6D6D6 for the dark theme; invert(1) maps to
+       #292929 on the new light ground (11.8:1 contrast, WCAG AAA) */
+    filter: invert(1);
+  }
+  .logo-band--wall img { max-height: var(--space-7); }
+</style>

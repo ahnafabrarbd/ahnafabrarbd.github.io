@@ -1,0 +1,167 @@
+---
+// Partners — the "⌐|_" L-shape page (owner). Scroll goes VERTICAL first, down a
+// ladder of partner brand NAMES (a sequence, not a logo chart), then turns
+// HORIZONTAL into the closing panel — one pinned scroll, Lenis-smoothed
+// (src/motion/lshape.ts). This page opts OUT of the horizontal corridor via the
+// Base `lshape` prop. Mobile / reduced-motion keep the natural vertical stack.
+import Base from '../layouts/Base.astro';
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import partnersData from '../data/partners.json';
+
+const { introSeed, partners } = partnersData;
+
+// Partner logos resolved by slug (name → kebab.png). Eager glob so the page can
+// pick the right ImageMetadata per brand; rendered as a uniform BLACK IMPRINT
+// (CSS filter) so 20 mismatched brand marks read as one disciplined ledger.
+const logoModules = import.meta.glob<{ default: ImageMetadata }>(
+  '../assets/logos/partners/*.png',
+  { eager: true },
+);
+const logoFor = (name: string): ImageMetadata | null => {
+  const slug = name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+  const hit = Object.entries(logoModules).find(([p]) => p.endsWith(`/${slug}.png`));
+  return hit ? hit[1].default : null;
+};
+if (!introSeed) throw new Error('partners.json: introSeed missing — wireframe 5');
+if (!Array.isArray(partners) || partners.length < 20) {
+  throw new Error(`partners.json: expected the full 20-brand wall, found ${partners?.length ?? 0}`);
+}
+---
+<Base
+  title="Partners — Rizvi Fashions Limited"
+  description="The retailers and brands Rizvi Fashions Limited manufactures for, including Primark, Pepco, Puma and REWE."
+  lshape
+>
+  <div class="lshape" data-lshape>
+    <div class="lshape__inner">
+      <div class="lshape__vert">
+        <header class="lshape__cover">
+          <span class="lshape__eyebrow u-caps">The retailers we make for</span>
+          <h1>Partners</h1>
+          <p>{introSeed}</p>
+        </header>
+        <ol class="lshape__ladder" aria-label="Partner brands">
+          {partners.map((p: { name: string }, i: number) => {
+            const logo = logoFor(p.name);
+            return (
+              <li class="lshape__rung">
+                <span class="lshape__rn u-num" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+                <span class="lshape__brand">{p.name}</span>
+                {logo && (
+                  <Image
+                    class="lshape__logo"
+                    src={logo}
+                    alt=""
+                    widths={[160, 320]}
+                    sizes="160px"
+                    loading="lazy"
+                    quality={90}
+                  />
+                )}
+              </li>
+            );
+          })}
+        </ol>
+      </div>
+      <section class="lshape__end" aria-label="Become a partner">
+        <span class="lshape__eyebrow u-caps">Become a partner</span>
+        <h2>Built to your brief — season after season.</h2>
+        <a class="lshape__cta u-caps" href="/contact/">Contact Us</a>
+      </section>
+    </div>
+  </div>
+</Base>
+
+<style>
+  /* ---- DEFAULT (mobile / reduced-motion / no-JS): a clean vertical stack —
+     cover, then the brand ladder, then the closing panel, scrolled top→bottom. */
+  .lshape__cover {
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding-block: var(--deck-head-h) var(--space-8);
+  }
+  .lshape__eyebrow {
+    color: var(--ink-muted);
+    letter-spacing: var(--tracking-caps-wide);
+  }
+  .lshape__cover h1 { margin-block: var(--space-3) 0; }
+  .lshape__cover p {
+    color: var(--ink-muted);
+    margin-block-start: var(--space-4);
+    max-width: var(--measure-body);
+  }
+
+  .lshape__ladder {
+    list-style: none;
+    border-top: var(--rail-w) solid var(--hairline);
+  }
+  .lshape__rung {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    padding-block: var(--space-4);
+    border-bottom: var(--rail-w) solid var(--hairline);
+    max-width: none;
+    transition: color var(--dur-base) var(--ease-out);
+  }
+  .lshape__rn {
+    color: var(--pink);
+    font-size: var(--text-sm);
+    letter-spacing: var(--tracking-num);
+    flex: none;
+  }
+  .lshape__brand {
+    flex: 1 1 auto; /* name takes the row; logo imprint sits flush right */
+    font-family: var(--font-display);
+    font-weight: var(--fw-display-sub);
+    font-size: var(--text-2xl);
+    line-height: var(--leading-tight);
+    letter-spacing: var(--tracking-display);
+    text-transform: uppercase;
+    color: var(--ink);
+  }
+  /* BLACK IMPRINT (owner): each brand mark flattened to one ink silhouette so 20
+     mismatched logos read as a uniform, professional ledger — not a colour chart.
+     Fixed height, intrinsic width, right-aligned beside the name. */
+  .lshape__logo {
+    flex: none;
+    height: var(--space-4);
+    width: auto;
+    object-fit: contain;
+    object-position: right center;
+    filter: brightness(0);
+    opacity: 0.72; /* resting imprint; full ink on row hover */
+    transition: opacity var(--dur-fast) var(--ease-out);
+  }
+  .lshape__rung:hover .lshape__brand { color: var(--pink); }
+  .lshape__rung:hover .lshape__logo { opacity: 1; }
+
+  .lshape__end {
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: var(--space-7) var(--gutter);
+    border-top: var(--rail-w) solid var(--hairline);
+  }
+  .lshape__end h2 {
+    margin-block: var(--space-3) var(--space-5);
+    max-width: var(--measure-title);
+  }
+  .lshape__cta {
+    align-self: flex-start;
+    color: var(--pink);
+    text-decoration: none;
+    border: var(--rail-w) solid var(--pink);
+    padding: var(--space-2) var(--space-4);
+    font-weight: var(--fw-body-strong);
+    letter-spacing: var(--tracking-nav);
+    transition:
+      background var(--dur-fast) var(--ease-out),
+      color var(--dur-fast) var(--ease-out);
+  }
+  .lshape__cta:hover { background: var(--pink); color: var(--ground); }
+</style>

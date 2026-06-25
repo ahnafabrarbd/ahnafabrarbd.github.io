@@ -1,0 +1,169 @@
+---
+// Our Products — wireframe 8 (pure ground). The page is ONE gallery of all
+// product cutouts grouped by category. Default layout (mobile, reduced-motion,
+// no-JS): a vertical list — each category is a horizontal native-scroll rail.
+// v1.1 (flag productsPin, desktop, motion on): src/motion/products.ts pins the
+// stage and scrubs the whole track horizontally as you scroll vertically — the
+// spec's "pinned horizontal gallery" (DESIGN.md scroll grammar). DOM stays in
+// logical reading order under the pin (RAILS §1.11). HARD category anchors
+// (#men…#new-born incl. the live "#underware" spelling) are preserved.
+import { Image, getImage } from 'astro:assets';
+import { getEntry } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import { slot, resolveImage } from '../lib/images';
+
+const entry = await getEntry('copy', 'our-products');
+if (!entry) throw new Error('copy/our-products missing — run: node setup/extract-copy.mjs');
+const { title, sections = [], categories = [] } = entry.data as {
+  title: string;
+  sections: Record<string, any>[];
+  categories: { id: string; label: string }[];
+};
+
+const REQUIRED = ['men', 'women', 'kid', 'underware', 'new-born'];
+const ids = new Set(categories.map((c) => c.id));
+const missing = REQUIRED.filter((a) => !ids.has(a));
+if (missing.length) throw new Error(`HARD product anchor(s) missing: #${missing.join(', #')} — RAILS.md §4`);
+
+const SLOT_FOR: Record<string, string> = {
+  men: 'mens', women: 'womens', kid: 'kids', underware: 'underwear', 'new-born': 'newborn',
+};
+
+const rails = await Promise.all(
+  categories.map(async ({ id, label }) => {
+    const s = slot('products', SLOT_FOR[id]) as { items?: { src: string; alt: string }[] };
+    const items = await Promise.all(
+      (s.items ?? []).map(async ({ src, alt }) => ({ image: await resolveImage(src), alt: alt ?? '' })),
+    );
+    return { id, label, items };
+  }),
+);
+
+const intro: string = sections[0]?.intro ?? '';
+if (!intro) throw new Error('copy/our-products: deck intro line missing');
+
+const firstItem = rails.find((r) => r.items.length > 0)?.items[0];
+const lcpPreload = firstItem
+  ? await getImage({ src: firstItem.image, widths: [380], sizes: '(min-width: 768px) 280px, 62vw', quality: 50, format: 'webp' })
+  : undefined;
+---
+<Base title={`${title} — Rizvi Fashions Limited`} description={intro} pure preloadImage={lcpPreload}>
+  <header class="page-head">
+    <h1>{title}</h1>
+    <p class="page-head__intro">{intro}</p>
+  </header>
+
+  <nav class="cat-index" aria-label="Product categories">
+    <ul>
+      {categories.map(({ id, label }) => (
+        <li><a class="u-caps" href={`#${id}`} data-cat-link={id}>{label}</a></li>
+      ))}
+    </ul>
+  </nav>
+
+  <section class="products-pin" data-products-pin>
+    <ol class="products-track">
+      {rails.map(({ id, label, items }, i) => (
+        <li class="cat-panel" id={id} data-cat={id}>
+          <header class="cat-panel__head">
+            <span class="chapter__num" aria-hidden="true"></span>
+            <h2>{label}</h2>
+          </header>
+          {items.length > 0 ? (
+            <ul class="cat-panel__rail" tabindex="0" aria-label={`${label} — product gallery`}>
+              {items.map(({ image, alt }, j) => (
+                <li>
+                  <Image
+                    src={image}
+                    alt={alt}
+                    widths={[380]}
+                    sizes="(min-width: 768px) 280px, 62vw"
+                    loading={i === 0 && j === 0 ? 'eager' : 'lazy'}
+                    fetchpriority={i === 0 && j === 0 ? 'high' : 'low'}
+                    quality={50}
+                    format="webp"
+                  />
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p class="cat-panel__empty u-caps">Imagery for this range is being prepared.</p>
+          )}
+        </li>
+      ))}
+    </ol>
+  </section>
+</Base>
+
+<style>
+  .page-head { padding-block: var(--space-7) var(--space-5); }
+  .page-head__intro { font-size: var(--text-md); margin-block-start: var(--space-4); }
+
+  /* category index: dimmed resting; the active category goes ink as the gallery
+     scrolls past it (set by products.ts; CSS-only fallback stays static) */
+  .cat-index { border-block: var(--rail-w) solid var(--hairline); padding-block: var(--space-3); }
+  .cat-index ul { list-style: none; display: flex; flex-wrap: wrap; gap: var(--space-2) var(--space-4); }
+  .cat-index a {
+    color: var(--ink-muted);
+    text-decoration: none;
+    display: inline-block;
+    padding-block: var(--space-1);
+    transition: color var(--dur-fast) var(--ease-out);
+  }
+  .cat-index a:hover { color: var(--ink); }
+  .cat-index a.is-active { color: var(--ink); }
+
+  /* ---- DEFAULT layout (mobile / reduced-motion / no-JS): vertical list, each
+     category a horizontal native-scroll rail. This is also the reduced-motion
+     designed alternative the spec calls for. */
+  .products-track {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-8);
+    padding-block: var(--space-6);
+  }
+  .cat-panel { counter-increment: chapter; }
+  .cat-panel__head { margin-block-end: var(--space-4); }
+  .cat-panel__rail {
+    list-style: none;
+    display: flex;
+    gap: var(--space-4);
+    overflow-x: auto;
+    scroll-snap-type: x proximity;
+    padding-block: var(--space-2);
+  }
+  .cat-panel__rail:focus-visible { outline-offset: var(--space-1); }
+  .cat-panel__rail > li { scroll-snap-align: start; flex: none; }
+  .cat-panel__rail img { height: auto; max-height: var(--card-h); width: auto; }
+  .cat-panel__empty { color: var(--ink-muted); }
+
+  /* ---- PINNED layout (desktop + motion): products.ts adds .is-pinned, lays the
+     track as one horizontal row, and ScrollTrigger scrubs it left as you scroll.
+     Applied via a class (not media query) so it only ever engages when the JS
+     that drives the scrub is actually running — otherwise the row would overflow. */
+  .products-pin.is-pinned { overflow: hidden; }
+  .products-pin.is-pinned .products-track {
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: var(--space-8);
+    height: 100svh;
+    align-items: center;
+    padding-block: 0;
+    width: max-content;
+    will-change: transform;
+  }
+  .products-pin.is-pinned .cat-panel {
+    flex: none;
+    height: 100svh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: var(--space-4);
+  }
+  .products-pin.is-pinned .cat-panel__rail {
+    overflow: visible;
+    padding-block: 0;
+  }
+  .products-pin.is-pinned .cat-panel__rail img { max-height: var(--card-h); }
+</style>

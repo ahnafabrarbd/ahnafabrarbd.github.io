@@ -1,0 +1,37 @@
+{
+  "slug": "/our-products/",
+  "deckSection": "6 · Our Products",
+  "title": "Our Products",
+  "sections": [
+    {
+      "id": null,
+      "heading": null,
+      "intro": "Apparel for every stage of life, in five categories.",
+      "body": [],
+      "items": [],
+      "stats": []
+    }
+  ],
+  "categories": [
+    {
+      "id": "men",
+      "label": "Men's Wear"
+    },
+    {
+      "id": "women",
+      "label": "Women's Wear"
+    },
+    {
+      "id": "kid",
+      "label": "Kids' Wear"
+    },
+    {
+      "id": "underware",
+      "label": "Underwear"
+    },
+    {
+      "id": "new-born",
+      "label": "Newborn"
+    }
+  ]
+}

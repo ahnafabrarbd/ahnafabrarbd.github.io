@@ -1,0 +1,58 @@
+[
+  {
+    "file": "assets/img/site/company-profile.jpg",
+    "width": 1920,
+    "height": 1280,
+    "source": "reference/site-assets/section/company-profile.jpg",
+    "treatment": "graded-v1",
+    "slot": "home.mission-teaser"
+  },
+  {
+    "file": "assets/img/site/overview.jpg",
+    "width": 1920,
+    "height": 1280,
+    "source": "reference/site-assets/section/overview.jpg",
+    "treatment": "graded-v1",
+    "slot": "home.breather"
+  },
+  {
+    "file": "assets/img/site/15-1-min.jpg",
+    "width": 1920,
+    "height": 1100,
+    "source": "reference/site-assets/section/15-1-min.jpg",
+    "treatment": "graded-v1",
+    "slot": "home.manufacturing-teaser"
+  },
+  {
+    "file": "assets/img/site/img_0976-scaled.jpg",
+    "width": 2560,
+    "height": 1232,
+    "source": "reference/site-assets/section/img_0976-e1599903136947-min-scaled.jpg",
+    "treatment": "graded-v1",
+    "slot": "home.vision-teaser"
+  },
+  {
+    "file": "assets/img/drive/DJI_0580_dev.jpeg",
+    "width": 5464,
+    "height": 3640,
+    "source": "reference/drive/rizvi/STIL/DJI_0580_dev.jpeg",
+    "treatment": "graded-v1",
+    "slot": "overview.breather-aerial"
+  },
+  {
+    "file": "assets/portraits/avatar-1577909_1280.webp",
+    "width": 1280,
+    "height": 1280,
+    "source": "reference/site-assets/portrait/avatar-1577909_1280.webp",
+    "treatment": "verbatim-portrait",
+    "slot": "management.chairman-portrait"
+  },
+  {
+    "file": "assets/portraits/Shaikh-Rezwan-Director-Sir.jpg",
+    "width": 794,
+    "height": 1054,
+    "source": "reference/site-assets/portrait/Shaikh-Rezwan-Director-Sir.jpg",
+    "treatment": "verbatim-portrait",
+    "slot": "management.director-portrait"
+  }
+]

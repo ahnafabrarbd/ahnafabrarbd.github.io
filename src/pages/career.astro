@@ -1,0 +1,74 @@
+---
+// Career — wireframe 9: one severe chapter. Deck paragraph verbatim (fidelity
+// gate); the email the deck itself carries is surfaced as a mailto link inside
+// a hairline-framed block (grammar of the overview BGMEA strip). No imagery.
+import { getEntry } from 'astro:content';
+import Base from '../layouts/Base.astro';
+
+const entry = await getEntry('copy', 'career');
+if (!entry) throw new Error('copy/career missing — run: node setup/extract-copy.mjs');
+const { title, sections = [] } = entry.data as { title: string; sections: Record<string, any>[] };
+
+// Deck-shape assertion (the gate is a gate): wireframe 9 is a single chapter
+// carrying exactly one body paragraph.
+const [section] = sections;
+const body: string[] = section?.body ?? [];
+if (!title || sections.length !== 1 || body.length !== 1)
+  throw new Error('copy/career: expected a single chapter with one body paragraph');
+
+// The brief keys the mailto block off the data: extract, never hardcode.
+const email = body[0].match(/[A-Za-z0-9._%+-]+@[A-Za-z0-9-]+(?:\.[A-Za-z0-9-]+)+/)?.[0] ?? null;
+if (!email) throw new Error('copy/career: deck paragraph carries no email for the mailto block');
+
+// Meta description = first deck sentence (the full paragraph overruns 155 chars).
+const description = `${body[0].split('. ')[0]}.`;
+---
+<Base title={`${title} — Rizvi Fashions Limited`} description={description}>
+  <section class="chapter career">
+    <span class="chapter__num" aria-hidden="true"></span>
+    <h1>{title}</h1>
+    {body.map((p) => <p>{p}</p>)}
+    <p class="career__mail">
+      <a href={`mailto:${email}`}>{email}</a>
+    </p>
+  </section>
+</Base>
+
+<style>
+  /* one short chapter: hold the ground before the footer seam */
+  .career {
+    padding-block-end: var(--space-8);
+  }
+  /* h1 takes the chapter-h2 rhythm (base.css scopes that rule to h2 only) */
+  .career h1 {
+    margin-block: var(--space-3) var(--space-4);
+  }
+
+  /* ---- hairline-framed mailto block — the page's single affordance */
+  .career__mail {
+    border: var(--rail-w) solid var(--hairline);
+    padding: var(--space-4);
+    margin-block: var(--space-6) 0;
+    max-width: var(--measure-body);
+  }
+  .career__mail a {
+    font-family: var(--font-utility);
+    font-weight: var(--fw-utility);
+    /* --text-base not --text-md: the mono address overran the framed box at
+       320px and broke mid-string "rizvifashions./com" (ship-panel polish).
+       Smaller mono fits the whole address on one line on the narrowest phone. */
+    font-size: var(--text-base);
+    letter-spacing: var(--tracking-num);
+    font-variant-numeric: var(--numeric);
+    color: var(--ink);
+    text-decoration-line: underline;
+    text-decoration-thickness: var(--rail-w);
+    text-decoration-color: var(--ink-muted);
+    overflow-wrap: normal;
+    transition: color var(--dur-fast) var(--ease-out);
+  }
+  .career__mail a:hover {
+    color: var(--pink);
+    text-decoration-color: var(--pink);
+  }
+</style>

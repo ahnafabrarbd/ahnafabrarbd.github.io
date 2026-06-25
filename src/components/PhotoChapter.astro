@@ -1,0 +1,70 @@
+---
+// PhotoChapter — alternating half-image chapter (wireframes 1/2/3): graded
+// photography one side, copy the other. Image via the slot system (sharp
+// derivatives, explicit dimensions). flip alternates the image side ≥768px.
+import { Image } from 'astro:assets';
+import { slotImage } from '../lib/images';
+
+interface Props {
+  page: string;
+  slotName: string;
+  id?: string | null;
+  heading?: string | null;
+  body?: string[];
+  flip?: boolean;
+  eager?: boolean;
+}
+const { page, slotName, id = null, heading = null, body = [], flip = false, eager = false } = Astro.props;
+const { image, alt } = await slotImage(page, slotName);
+---
+<section class="chapter photo-chapter" class:list={[{ 'photo-chapter--flip': flip }]} id={id ?? undefined}>
+  <div class="photo-chapter__media">
+    <Image
+      src={image}
+      alt={alt}
+      widths={[480, 768, 1024, 1280]}
+      sizes="(min-width: 768px) 50vw, 100vw"
+      loading={eager ? 'eager' : 'lazy'}
+      fetchpriority={eager ? 'high' : 'low'}
+      quality={75}
+      format="webp"
+    />
+  </div>
+  <div class="photo-chapter__copy">
+    <span class="chapter__num" aria-hidden="true"></span>
+    {heading && <h2>{heading}</h2>}
+    {body.map((p) => <p>{p}</p>)}
+    <slot />
+  </div>
+</section>
+
+<style>
+  .photo-chapter {
+    display: grid;
+    gap: var(--space-4);
+    align-items: center;
+  }
+  /* min-width:0 so the single mobile column can shrink below the copy's
+     min-content (a long display word) instead of forcing the page wider
+     than the viewport (G7 stress drill @320) */
+  .photo-chapter__media,
+  .photo-chapter__copy { min-width: 0; }
+  /* PHONE (a layout decision, not a shrink): the image bleeds edge-to-edge and
+     runs tall — an immersive section image, not a bordered thumbnail. */
+  .photo-chapter__media { margin-inline: calc(-1 * var(--gutter-mobile)); }
+  .photo-chapter__media img {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+  }
+  @media (min-width: 768px) {
+    .photo-chapter { grid-template-columns: 1fr 1fr; gap: var(--space-6); }
+    .photo-chapter--flip .photo-chapter__media { order: 2; }
+    .photo-chapter__media { margin-inline: 0; }
+    .photo-chapter__media img {
+      aspect-ratio: auto;
+      height: auto;
+      border: var(--rail-w) solid var(--hairline);
+    }
+  }
+</style>

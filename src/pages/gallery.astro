@@ -1,0 +1,148 @@
+---
+// Gallery — wireframe 10: editorial keyline grid by album captions. The four
+// deck captions (gallery.json items, verbatim) head four chapters; each chapter
+// renders its image-map album (gallery.* slots) as keyline cells with the
+// map's own alt text as the caption BELOW each plate (captions never invented,
+// never overlaid). Thin albums are honest — The Campus carries its single
+// aerial at full grid width; auto-fit collapses unused tracks so no album is
+// padded out with filler. Lightbox-free: plain figures (deck v1 grammar).
+// Chanel rule: a pink plate-count glyph beside each album heading was cut —
+// the chapter numeral is the page's only pink.
+import { Image } from 'astro:assets';
+import { getEntry } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import { slot, resolveImage } from '../lib/images';
+
+const entry = await getEntry('copy', 'gallery');
+if (!entry) throw new Error('copy/gallery missing — run: node setup/extract-copy.mjs');
+const { title, sections = [] } = entry.data as { title: string; sections: Record<string, any>[] };
+
+// Deck album caption → image-map slot (sensible name match, asserted below).
+const ALBUM_SLOTS: Record<string, string> = {
+  'The Campus': 'campus',
+  'Production Floors': 'production-floors',
+  'Cutting & Sewing': 'cutting-sewing',
+  'Finishing & Despatch': 'finishing-despatch',
+};
+
+// Fidelity assertions (the gate is a gate, not a hope): all four deck captions
+// must arrive, and none may exist without a mapped album — a fifth caption
+// would otherwise silently drop and fail the render diff.
+const captions: string[] = sections[0]?.items ?? [];
+for (const required of Object.keys(ALBUM_SLOTS)) {
+  if (!captions.includes(required))
+    throw new Error(`copy/gallery: album caption "${required}" missing from deck items`);
+}
+for (const caption of captions) {
+  if (!ALBUM_SLOTS[caption])
+    throw new Error(`copy/gallery: deck caption "${caption}" has no mapped image-map album`);
+}
+
+// slot() throws on a dead slot; resolveImage throws on a dead path — a broken
+// album fails the build, never ships blank.
+const albums = await Promise.all(
+  captions.map(async (caption) => {
+    const slotName = ALBUM_SLOTS[caption];
+    const s = slot('gallery', slotName) as { items?: { src: string; alt: string }[] };
+    const plates = await Promise.all(
+      (s.items ?? []).map(async ({ src, alt }) => ({
+        image: await resolveImage(src),
+        alt: alt ?? '',
+      })),
+    );
+    if (plates.length === 0) throw new Error(`image-map: gallery.${slotName} has no items`);
+    return { caption, slotName, plates };
+  }),
+);
+
+// Derivative hints per album width: 1-up plates run near full content width,
+// 2-/3-up cells run a half/third column at the rail breakpoint.
+const sizesFor = (n: number) =>
+  n >= 3
+    ? '(min-width: 768px) 31vw, 100vw'
+    : n === 2
+      ? '(min-width: 768px) 46vw, 100vw'
+      : '(min-width: 768px) 92vw, 100vw';
+// 1-up plates cap at 1024 — the perf budget outweighs retina sharpness on a
+// hazy aerial (G5 refactor: gallery was 679KB > 600KB with the 1920 rung and
+// LCP 2930ms with the 1280 rung)
+const widthsFor = (n: number) => (n === 1 ? [640, 1024] : [480, 768, 1280]);
+
+const description =
+  'Photographs from Rizvi Fashions Limited: the factory campus, production floors, cutting and sewing lines, and finishing and despatch.';
+---
+<Base title={`${title} — Rizvi Fashions Limited`} description={description}>
+  <header class="page-head">
+    <h1>{title}</h1>
+  </header>
+
+  {albums.map(({ caption, slotName, plates }, albumIndex) => (
+    <section class="chapter album" id={slotName}>
+      <span class="chapter__num" aria-hidden="true"></span>
+      <h2>{caption}</h2>
+      <div class="album__grid">
+        {plates.map(({ image, alt }, plateIndex) => (
+          <figure class="album__cell">
+            <Image
+              src={image}
+              alt={alt}
+              widths={widthsFor(plates.length)}
+              sizes={sizesFor(plates.length)}
+              loading="lazy"
+              fetchpriority="low"
+              quality={70}
+              format="webp"
+            />
+            <figcaption class="u-caps">{alt}</figcaption>
+          </figure>
+        ))}
+      </div>
+    </section>
+  ))}
+</Base>
+
+<style>
+  /* text-led first viewport (G5 refactor, Law 1): the title screen holds the
+     fold alone — the editorial pacing of the severe voice; plates begin below */
+  .page-head {
+    padding-block: var(--space-8) var(--space-7);
+    min-height: var(--card-h);
+    display: flex;
+    align-items: center;
+  }
+
+  /* ---- keyline album grid: hairline-gapped cells (trio/wall grammar);
+     auto-fit collapses unused tracks so thin albums stay honest */
+  .album__grid {
+    display: grid;
+    gap: var(--rail-w);
+    background: var(--hairline);
+    border: var(--rail-w) solid var(--hairline);
+    margin-block-start: var(--space-5);
+  }
+  @media (min-width: 768px) {
+    .album__grid {
+      grid-template-columns: repeat(
+        auto-fit,
+        minmax(calc(var(--space-8) + var(--space-8) + var(--space-6)), 1fr)
+      );
+    }
+  }
+  .album__cell {
+    background: var(--ground);
+    padding: var(--space-3);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+  .album__cell img {
+    width: 100%;
+    height: auto;
+  }
+  /* caption BELOW the plate, pinned to the cell foot so rows read level */
+  .album__cell figcaption {
+    color: var(--ink-muted);
+    margin-block-start: auto;
+    padding-block-start: var(--space-1);
+  }
+</style>

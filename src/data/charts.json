@@ -1,0 +1,29 @@
+{
+  "comment": "Growth-chart data decoded from the live static PNGs at G1 (RECON.md §Growth charts; reference/charts/*.png). Values are read from the original images — never invented. Rendered as inline SVG by GrowthChart.astro (V7 §10 / wireframe 3).",
+  "revenue": {
+    "caption": "Revenue growth, 2013–2024",
+    "unit": "USD million",
+    "points": [
+      { "label": "2013-14", "value": 0.2 },
+      { "label": "2014-15", "value": 1.5 },
+      { "label": "2015-16", "value": 4.8 },
+      { "label": "2016-17", "value": 13.6 },
+      { "label": "2017-18", "value": 17.3 },
+      { "label": "2018-19", "value": 21.7 },
+      { "label": "2019-20", "value": 23.3 },
+      { "label": "2020-21", "value": 30.7 },
+      { "label": "2021-22", "value": 46.2 },
+      { "label": "2022-23", "value": 53.0 },
+      { "label": "2023-24", "value": 58.3 }
+    ]
+  },
+  "futureGoal": {
+    "caption": "Future goal",
+    "unit": "USD million",
+    "points": [
+      { "label": "2024-25", "value": 70 },
+      { "label": "2025-26", "value": 90 },
+      { "label": "2026-27", "value": 100 }
+    ]
+  }
+}

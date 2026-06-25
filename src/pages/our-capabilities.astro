@@ -1,0 +1,282 @@
+---
+// Our Capabilities — wireframe 6: 8 chapters at HARD anchors (RAILS §4),
+// left-anchored titles, spec blocks from real recon values, photography via
+// the capabilities image slots. Sourcing renders a keyline image row of its
+// sub-slots (Trims = text-only cell — slot is todo-owner, no fake image);
+// Finishing + Knitting are spec-only rows (data-led, small lazy photos).
+import Base from '../layouts/Base.astro';
+import PhotoChapter from '../components/PhotoChapter.astro';
+import SpecBlock from '../components/SpecBlock.astro';
+import { Image } from 'astro:assets';
+import { getEntry } from 'astro:content';
+import { slot, slotImage } from '../lib/images';
+
+const entry = await getEntry('copy', 'our-capabilities');
+if (!entry) throw new Error('copy/our-capabilities missing — run: node setup/extract-copy.mjs');
+const { title, sections = [] } = entry.data as { title: string; sections: Record<string, any>[] };
+
+// HARD anchors — byte-exact live ids, asserted as a gate, not a hope (RAILS §4)
+const REQUIRED = [
+  'material-sourcing-management',
+  'product-development',
+  'sample',
+  'cutting',
+  'sewing',
+  'finishing',
+  'knitting',
+  'printing',
+];
+const ids = new Set(sections.map((s) => s.id));
+const missing = REQUIRED.filter((a) => !ids.has(a));
+if (missing.length) {
+  throw new Error(`HARD anchor(s) missing in copy/our-capabilities: #${missing.join(', #')} — RAILS.md §4`);
+}
+
+const byId = Object.fromEntries(sections.map((s) => [s.id, s])) as Record<string, Record<string, any>>;
+const sourcing = byId['material-sourcing-management'];
+const finishing = byId['finishing'];
+const knitting = byId['knitting'];
+
+// stats straight from the deck (label/value/unit verbatim; "source" is metadata)
+const statsOf = (s: Record<string, any>) =>
+  (s.stats ?? []).map(({ label, value, unit }: Record<string, any>) => ({ label, value, unit }));
+
+// sourcing sub-cells: one per deck subLabel, in deck order. A subLabel whose
+// slot has no src (Trims, todo-owner) renders as a text-only cell. An unknown
+// subLabel fails the build — every deck string must land somewhere.
+const SUB_SLOTS: Record<string, string> = {
+  Fabric: 'sourcing-fabric',
+  Trims: 'sourcing-trims',
+  Label: 'sourcing-label',
+  Accessories: 'sourcing-accessories',
+};
+const sourcingCells = await Promise.all(
+  ((sourcing.subLabels ?? []) as string[]).map(async (label) => {
+    const slotName = SUB_SLOTS[label];
+    if (!slotName) throw new Error(`our-capabilities: no image slot mapped for subLabel "${label}"`);
+    const s = slot('capabilities', slotName);
+    return s.src ? { label, ...(await slotImage('capabilities', slotName)) } : { label };
+  }),
+);
+const sourcingLead = await slotImage('capabilities', 'sourcing');
+
+// spec-only rows still honour the map's photos — lazy, small, no emphasis
+const finishingImg = await slotImage('capabilities', 'finishing');
+const knittingImg = await slotImage('capabilities', 'knitting');
+
+const firstBody: string =
+  sections.flatMap((s) => s.body ?? []).find((p: string) => typeof p === 'string' && p.length > 40) ?? title;
+const description = firstBody.length > 155 ? `${firstBody.slice(0, 152)}…` : firstBody;
+---
+<Base title={`${title} — Rizvi Fashions Limited`} description={description}>
+  <h1 class="cap-title">{title}</h1>
+
+  {/* 01 — Material Sourcing Management: keyline row of sub-slots */}
+  <section class="chapter" id="material-sourcing-management">
+    <span class="chapter__num" aria-hidden="true"></span>
+    <h2>{sourcing.heading}</h2>
+    {(sourcing.body ?? []).map((p: string) => <p>{p}</p>)}
+    <ul class="sourcing-row">
+      <li>
+        <figure>
+          <Image
+            src={sourcingLead.image}
+            alt={sourcingLead.alt}
+            widths={[320, 480]}
+            sizes="(min-width: 768px) 20vw, 50vw"
+            loading="eager"
+            format="webp"
+          />
+        </figure>
+      </li>
+      {sourcingCells.map((c) =>
+        'image' in c ? (
+          <li>
+            <figure>
+              <Image
+                src={c.image}
+                alt={c.alt}
+                widths={[320, 480]}
+                sizes="(min-width: 768px) 20vw, 50vw"
+                loading="lazy"
+                format="webp"
+              />
+              <figcaption class="u-caps sourcing-row__caption">{c.label}</figcaption>
+            </figure>
+          </li>
+        ) : (
+          <li class="sourcing-row__text-cell">
+            <span class="u-caps sourcing-row__caption">{c.label}</span>
+          </li>
+        ),
+      )}
+    </ul>
+  </section>
+
+  {/* 02 — Product Development */}
+  <PhotoChapter
+    page="capabilities"
+    slotName="product-development"
+    id={byId['product-development'].id}
+    heading={byId['product-development'].heading}
+    body={byId['product-development'].body}
+    flip
+  />
+
+  {/* 03 — Sampling */}
+  <PhotoChapter
+    page="capabilities"
+    slotName="sampling"
+    id={byId['sample'].id}
+    heading={byId['sample'].heading}
+    body={byId['sample'].body}
+  >
+    <SpecBlock stats={statsOf(byId['sample'])} />
+  </PhotoChapter>
+
+  {/* 04 — Cutting */}
+  <PhotoChapter
+    page="capabilities"
+    slotName="cutting"
+    id={byId['cutting'].id}
+    heading={byId['cutting'].heading}
+    body={byId['cutting'].body}
+    flip
+  >
+    <SpecBlock stats={statsOf(byId['cutting'])} />
+  </PhotoChapter>
+
+  {/* 05 — Sewing */}
+  <PhotoChapter
+    page="capabilities"
+    slotName="sewing"
+    id={byId['sewing'].id}
+    heading={byId['sewing'].heading}
+    body={byId['sewing'].body}
+  >
+    <SpecBlock stats={statsOf(byId['sewing'])} />
+  </PhotoChapter>
+
+  {/* 06 — Finishing: spec-only row */}
+  <section class="chapter" id="finishing">
+    <span class="chapter__num" aria-hidden="true"></span>
+    <h2>{finishing.heading}</h2>
+    <div class="spec-row">
+      <SpecBlock stats={statsOf(finishing)} />
+      <figure class="spec-row__media">
+        <Image
+          src={finishingImg.image}
+          alt={finishingImg.alt}
+          widths={[320, 480, 768]}
+          sizes="(min-width: 768px) 25vw, 100vw"
+          loading="lazy"
+          format="webp"
+        />
+      </figure>
+    </div>
+  </section>
+
+  {/* 07 — Knitting: spec-only row */}
+  <section class="chapter" id="knitting">
+    <span class="chapter__num" aria-hidden="true"></span>
+    <h2>{knitting.heading}</h2>
+    <div class="spec-row">
+      <SpecBlock stats={statsOf(knitting)} />
+      <figure class="spec-row__media">
+        <Image
+          src={knittingImg.image}
+          alt={knittingImg.alt}
+          widths={[320, 480, 768]}
+          sizes="(min-width: 768px) 25vw, 100vw"
+          loading="lazy"
+          format="webp"
+        />
+      </figure>
+    </div>
+  </section>
+
+  {/* 08 — Printing */}
+  <PhotoChapter
+    page="capabilities"
+    slotName="printing"
+    id={byId['printing'].id}
+    heading={byId['printing'].heading}
+    body={byId['printing'].body}
+    flip
+  >
+    <SpecBlock stats={statsOf(byId['printing'])} />
+  </PhotoChapter>
+</Base>
+
+<style>
+  .cap-title {
+    padding-block: var(--space-7) var(--space-5);
+  }
+
+  /* ---- sourcing keyline row: hairline grid cells, captions below imagery */
+  .sourcing-row {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--rail-w);
+    background: var(--hairline);
+    border: var(--rail-w) solid var(--hairline);
+    margin-block-start: var(--space-5);
+  }
+  @media (min-width: 768px) {
+    .sourcing-row {
+      grid-template-columns: repeat(5, 1fr);
+    }
+  }
+  .sourcing-row > li {
+    background: var(--ground);
+    padding: var(--space-2);
+    border-bottom: none;
+    max-width: none;
+    display: flex;
+  }
+  .sourcing-row figure {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+  .sourcing-row img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1;
+    object-fit: cover;
+  }
+  .sourcing-row__caption {
+    color: var(--ink-muted);
+    margin-block-start: var(--space-2);
+  }
+  /* Trims — slot is todo-owner: honest text cell, no placeholder imagery */
+  .sourcing-row__text-cell {
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+  .sourcing-row__text-cell .sourcing-row__caption {
+    margin-block-start: 0;
+  }
+
+  /* ---- spec-only rows (Finishing/Knitting): data leads, photo stays small */
+  .spec-row {
+    display: grid;
+    gap: var(--space-4);
+    align-items: center;
+  }
+  @media (min-width: 768px) {
+    .spec-row {
+      grid-template-columns: 3fr 1fr;
+    }
+  }
+  .spec-row :global(.stats) {
+    margin-block: 0;
+  }
+  .spec-row__media img {
+    width: 100%;
+    height: auto;
+    border: var(--rail-w) solid var(--hairline);
+  }
+</style>

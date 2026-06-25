@@ -1,0 +1,36 @@
+---
+// 404 — minimal, thread present, utility-caps message (wireframe 12).
+import Base from '../layouts/Base.astro';
+---
+<Base title="Page not found — Rizvi Fashions Limited" description="The page you are looking for does not exist." pure>
+  <section class="lost">
+    <p class="u-caps lost__code"><span class="lost__pink">404</span> · Thread lost</p>
+    <h1>This page does not exist</h1>
+    <p>The thread runs out here. Pick it up again from the start.</p>
+    <p><a class="lost__home u-caps" href="/">Return home</a></p>
+  </section>
+</Base>
+
+<style>
+  .lost { padding-block: var(--space-8); }
+  .lost__code { color: var(--ink-muted); margin-block-end: var(--space-4); }
+  .lost__pink { color: var(--pink); }
+  .lost h1 { margin-block-end: var(--space-4); }
+  .lost__home {
+    color: var(--pink);
+    display: inline-block;
+    border: var(--rail-w) solid var(--pink);
+    padding: var(--space-2) var(--space-3);
+    text-decoration: none;
+    font-family: var(--font-body);
+    font-weight: var(--fw-body-strong);
+    letter-spacing: var(--tracking-nav);
+    transition:
+      background var(--dur-fast) var(--ease-out),
+      color var(--dur-fast) var(--ease-out);
+  }
+  .lost__home:hover {
+    background: var(--pink);
+    color: var(--ground);
+  }
+</style>

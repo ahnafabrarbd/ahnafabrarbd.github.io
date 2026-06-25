@@ -1,0 +1,76 @@
+---
+// ProductRail — horizontal cutout gallery, CSS scroll-snap (zero JS at G5;
+// ScrollTrigger pinning is a G6 flag). DOM stays in logical reading order;
+// the scroller is keyboard-traversable (tabindex + native arrow scroll).
+// Cutouts float on pure black (page sets ground-pure).
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+interface Item {
+  image: ImageMetadata;
+  alt: string;
+}
+interface Props {
+  id: string;
+  label: string;
+  items: Item[];
+  /** the first rail eagerly loads its first cutout so the LCP isn't a
+   *  lazy in-viewport image painting late on throttle (G7 perf fix) */
+  eagerFirst?: boolean;
+}
+const { id, label, items, eagerFirst = false } = Astro.props;
+---
+<section class="chapter rail-chapter" id={id}>
+  <span class="chapter__num" aria-hidden="true"></span>
+  <h2>{label}</h2>
+  {items.length > 0 ? (
+    <div class="rail" tabindex="0" role="group" aria-label={`${label} — product gallery, scrolls horizontally`}>
+      <ul>
+        {items.map(({ image, alt }, i) => (
+          <li>
+            {/* portrait cutouts display ≤--card-h tall (~280px wide); 360/560
+                rungs cover 1x/2x. q58: soft-edged cutouts on pure black
+                compress hard (G6: rail enrichment pushed products >600KB) */}
+            <Image
+              src={image}
+              alt={alt}
+              widths={[380]}
+              sizes="(min-width: 768px) 280px, 62vw"
+              loading={eagerFirst && i === 0 ? 'eager' : 'lazy'}
+              fetchpriority={eagerFirst && i === 0 ? 'high' : 'low'}
+              quality={50}
+              format="webp"
+            />
+          </li>
+        ))}
+      </ul>
+    </div>
+  ) : (
+    <p class="rail-chapter__empty u-caps">Imagery for this range is being prepared.</p>
+  )}
+</section>
+
+<style>
+  .rail {
+    overflow-x: auto;
+    scroll-snap-type: x proximity;
+    /* breathing room so snapped items clear the gutter */
+    padding-block: var(--space-3);
+  }
+  .rail:focus-visible { outline-offset: var(--space-1); }
+  .rail ul {
+    list-style: none;
+    display: flex;
+    gap: var(--space-4);
+    width: max-content;
+  }
+  .rail li { scroll-snap-align: start; }
+  .rail img {
+    /* resolution-honest cap ≤420px (D-004) — token --card-h */
+    height: auto;
+    max-height: var(--card-h);
+    width: auto;
+  }
+  /* muted, not faint: must clear AA on the pure-black products ground */
+  .rail-chapter__empty { color: var(--ink-muted); }
+</style>

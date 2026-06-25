@@ -1,0 +1,88 @@
+{
+  "slug": null,
+  "deckSection": "Global Footer (all pages)",
+  "title": null,
+  "sections": [
+    {
+      "id": null,
+      "heading": "Contact Us",
+      "note": "Head Office and Factory blocks as on the Contact page",
+      "offices": [
+        {
+          "name": "Head Office",
+          "address": "158–160 Motijheel C/A, Modhumita Building, 4th Floor, Dhaka-1000, Bangladesh",
+          "phones": [
+            "+88 027 120 899",
+            "09617 000 444"
+          ],
+          "email": "info@rizvifashions.com"
+        },
+        {
+          "name": "Factory Office",
+          "address": "Anwar Jang Road, 1 No. Kalma Bazar, Savar, Dhaka-1341, Bangladesh",
+          "phones": [
+            "+880 9617 000 442",
+            "+880 1912 708 566"
+          ],
+          "email": "info@rizvifashions.com"
+        }
+      ],
+      "body": [],
+      "items": [],
+      "stats": []
+    },
+    {
+      "id": null,
+      "heading": "About Company",
+      "body": [],
+      "items": [
+        "Overview",
+        "Our Mission",
+        "Our Vision",
+        "Management",
+        "Manufacturing",
+        "Contact Us"
+      ],
+      "stats": []
+    },
+    {
+      "id": null,
+      "heading": "Our Capabilities",
+      "body": [],
+      "items": [
+        "Material Sourcing",
+        "Product Development",
+        "Sampling",
+        "Cutting",
+        "Sewing",
+        "Finishing",
+        "Knitting",
+        "Printing"
+      ],
+      "stats": []
+    },
+    {
+      "id": null,
+      "heading": "Our Products",
+      "body": [],
+      "items": [
+        "Men's Wear",
+        "Women's Wear",
+        "Kids' Wear",
+        "Underwear",
+        "Newborn"
+      ],
+      "stats": []
+    },
+    {
+      "id": null,
+      "heading": "Important Links",
+      "body": [],
+      "items": [
+        "Shakil Rizvi Stock Limited — Corporate Member, Dhaka Stock Exchange Ltd"
+      ],
+      "stats": []
+    }
+  ],
+  "copyright": "Copyright © 2025 Rizvi Fashions Limited. All rights reserved. Developed by Invento Software Limited."
+}

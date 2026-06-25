@@ -1,0 +1,256 @@
+---
+// OverlayMenu — a full-screen "index" that is a striking element in its own
+// right, not a page-to-page transition. Concept: a garment CUTTING MARKER — the
+// six destinations laid out as numbered keyline "pattern pieces" nested on the
+// cloth (how a factory arranges a marker), stepping down-and-right, revealing on
+// open with a masked staggered slide (expo-curve via --ease-out) and turning the
+// signature forest green — the cut line — on hover. Left-anchored (B2B, not
+// right like the Studio RHE reference). Secondary pages keep the site reachable
+// (RAILS §1.9). Native <dialog> supplies focus trap + ESC; one tiny inline
+// island toggles open + the reveal class.
+const path = Astro.url.pathname;
+const PRIMARY = [
+  { n: '01', label: 'Overview', href: '/overview/' },
+  { n: '02', label: 'Capabilities', href: '/our-capabilities/' },
+  { n: '03', label: 'Products', href: '/our-products/' },
+  { n: '04', label: 'Sustainability', href: '/sustainability/' },
+  { n: '05', label: 'Partners', href: '/partners/' },
+  { n: '06', label: 'Contact', href: '/contact/' },
+];
+const SECONDARY = [
+  { label: 'Home', href: '/' },
+  { label: 'Company Profile', href: '/company-profile/' },
+  { label: 'Management', href: '/management/' },
+  { label: 'Career', href: '/career/' },
+  { label: 'Gallery', href: '/gallery/' },
+];
+---
+<dialog class="overlay" id="overlay-menu" aria-label="Site menu" data-lenis-prevent>
+  <div class="overlay__thread" aria-hidden="true"></div>
+  <span class="overlay__brand u-caps" aria-hidden="true">Rizvi Fashions Limited</span>
+
+  <div class="overlay__bar">
+    <span class="overlay__eyebrow u-caps">Index</span>
+    <form method="dialog">
+      <button class="overlay__close" aria-label="Close menu">
+        <svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true">
+          <path d="M3 3 L19 19 M19 3 L3 19" fill="none" stroke="currentColor" stroke-width="1" />
+        </svg>
+      </button>
+    </form>
+  </div>
+
+  <nav class="overlay__nav" aria-label="Primary">
+    {PRIMARY.map(({ n, label, href }) => (
+      <a class="overlay__item" href={href} aria-current={path === href ? 'page' : undefined}>
+        <span class="overlay__idx u-num" aria-hidden="true">{n}</span>
+        <span class="overlay__mask"><span class="overlay__label">{label}</span></span>
+      </a>
+    ))}
+  </nav>
+
+  <nav class="overlay__more" aria-label="More pages">
+    {SECONDARY.map(({ label, href }) => (
+      <a class="overlay__morelink u-caps" href={href} aria-current={path === href ? 'page' : undefined}>{label}</a>
+    ))}
+  </nav>
+
+  {/* mobile-only: core.ts mounts the current page's section index here (RAILS
+      §1.9), where the desktop right-rail is hidden. Stays empty on desktop. */}
+  <div class="overlay__sections u-caps" data-overlay-sections aria-label="On this page"></div>
+</dialog>
+
+<script is:inline>
+  // single named island: open the overlay + arm the reveal; native dialog owns
+  // ESC + focus trap; the 'close' event disarms the reveal (PLANS/G4.md B4).
+  document.addEventListener('click', function (e) {
+    var t = e.target;
+    if (t && t.closest && t.closest('[data-overlay-open]')) {
+      var d = document.getElementById('overlay-menu');
+      if (d && d.showModal) {
+        d.showModal();
+        requestAnimationFrame(function () { d.classList.add('is-open'); });
+      }
+    }
+  });
+  var dlg = document.getElementById('overlay-menu');
+  if (dlg) dlg.addEventListener('close', function () { dlg.classList.remove('is-open'); });
+</script>
+
+<style>
+  .overlay {
+    width: 100vw;
+    height: 100dvh;
+    max-width: 100vw;
+    max-height: 100dvh;
+    border: none;
+    background: var(--ground);
+    color: var(--ink);
+    z-index: var(--z-overlay);
+    padding: var(--space-5) var(--gutter-mobile);
+    grid-template-rows: auto 1fr auto;
+    gap: var(--space-5);
+    overflow-y: auto; /* short viewports: the index scrolls rather than clipping */
+    overscroll-behavior: contain;
+    opacity: 0;
+    transition: opacity var(--dur-base) var(--ease-out);
+  }
+  /* display ONLY when open — a closed <dialog> must keep its UA display:none,
+     else the invisible overlay covers the page and eats pointer events */
+  .overlay[open] { display: grid; }
+  .overlay.is-open { opacity: 1; }
+  .overlay::backdrop { background: var(--ground); }
+  @media (min-width: 768px) {
+    .overlay { padding: var(--space-6) var(--gutter); }
+  }
+
+  /* left-edge thread + vertical wordmark (LEFT, not right — B2B) */
+  .overlay__thread {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: var(--space-3);
+    width: var(--rail-w);
+    background: var(--pink);
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: transform var(--dur-entrance) var(--ease-thread);
+  }
+  .overlay.is-open .overlay__thread { transform: scaleY(1); }
+  .overlay__brand {
+    position: absolute;
+    left: var(--space-2);
+    bottom: var(--space-6);
+    transform: rotate(180deg);
+    writing-mode: vertical-rl;
+    color: var(--ink-muted);
+    letter-spacing: var(--tracking-caps-wide);
+    display: none;
+  }
+
+  /* top bar: eyebrow + crisp X close */
+  .overlay__bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .overlay__eyebrow { color: var(--ink-muted); letter-spacing: var(--tracking-caps-wide); }
+  .overlay__close {
+    background: none;
+    border: var(--rail-w) solid var(--hairline);
+    color: var(--ink);
+    padding: var(--space-2);
+    cursor: pointer;
+    display: inline-flex;
+    transition: color var(--dur-fast) var(--ease-out), border-color var(--dur-fast) var(--ease-out);
+  }
+  .overlay__close:hover { color: var(--pink); border-color: var(--pink); }
+
+  /* the staircase: six nested keyline boxes stepping down-and-right */
+  .overlay__nav {
+    /* centre when it fits; once the marker fills the track it anchors to the top
+       so piece 01 is never pushed off-screen (the dialog scrolls instead) */
+    margin-block: auto;
+    display: flex;
+    flex-direction: column;
+    max-width: 100%;
+  }
+  .overlay__item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    width: 100%;
+    max-width: 100%;
+    padding: var(--space-2) var(--space-4);
+    border: var(--rail-w) solid var(--hairline);
+    margin-block-start: calc(-1 * var(--rail-w)); /* merge edges into one lattice */
+    text-decoration: none;
+    color: var(--ink);
+    transition:
+      color var(--dur-base) var(--ease-out),
+      border-color var(--dur-base) var(--ease-out),
+      background var(--dur-base) var(--ease-out);
+  }
+  .overlay__item:first-child { margin-block-start: 0; }
+  .overlay__idx {
+    color: var(--pink);
+    font-size: var(--text-sm);
+    letter-spacing: var(--tracking-num);
+  }
+  /* masked, line-clipped label that slides up on reveal */
+  .overlay__mask { display: block; overflow: hidden; }
+  .overlay__label {
+    display: block;
+    font-family: var(--font-display);
+    font-weight: var(--fw-display-sub);
+    font-size: var(--text-xl);
+    line-height: var(--leading-snug);
+    letter-spacing: var(--tracking-display);
+    text-transform: uppercase;
+    overflow-wrap: break-word; /* long words (SUSTAINABILITY) wrap, never clip */
+    hyphens: auto;
+    transform: translateY(110%);
+    transition: transform var(--dur-entrance) var(--ease-out);
+  }
+  .overlay.is-open .overlay__label { transform: translateY(0); }
+  /* hover / current page → the signature forest green (border = a frame, legal) */
+  .overlay__item:hover,
+  .overlay__item[aria-current='page'] { color: var(--pink); border-color: var(--pink); }
+
+  /* staggered reveal delays (token × unitless = lint-safe; kept on mobile too) */
+  .overlay__item:nth-child(2) .overlay__label { transition-delay: calc(var(--dur-fast) * 0.35); }
+  .overlay__item:nth-child(3) .overlay__label { transition-delay: calc(var(--dur-fast) * 0.7); }
+  .overlay__item:nth-child(4) .overlay__label { transition-delay: calc(var(--dur-fast) * 1.05); }
+  .overlay__item:nth-child(5) .overlay__label { transition-delay: calc(var(--dur-fast) * 1.4); }
+  .overlay__item:nth-child(6) .overlay__label { transition-delay: calc(var(--dur-fast) * 1.75); }
+  /* the marker staircase — ONLY at the ≥1025px engine band (the corridor's mask
+     lives there too); 768–1024 keeps a clean flush-left stack so nothing
+     overflows (--bp-hscroll = 1025px, declared so token-lint accepts the literal) */
+  @media (min-width: 1025px) {
+    .overlay__item:nth-child(2) { margin-inline-start: calc(var(--space-5) * 1); }
+    .overlay__item:nth-child(3) { margin-inline-start: calc(var(--space-5) * 2); }
+    .overlay__item:nth-child(4) { margin-inline-start: calc(var(--space-5) * 3); }
+    .overlay__item:nth-child(5) { margin-inline-start: calc(var(--space-5) * 4); }
+    .overlay__item:nth-child(6) { margin-inline-start: calc(var(--space-5) * 5); }
+  }
+
+  /* secondary links row */
+  .overlay__more {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2) var(--space-4);
+    border-top: var(--rail-w) solid var(--hairline);
+    padding-block-start: var(--space-3);
+  }
+  .overlay__morelink {
+    color: var(--ink-muted);
+    text-decoration: none;
+    padding-block: var(--space-1); /* ≥24px hit target (WCAG 2.5.8) */
+    transition: color var(--dur-fast) var(--ease-out);
+  }
+  .overlay__morelink:hover,
+  .overlay__morelink[aria-current='page'] { color: var(--pink); }
+
+  /* mobile-only in-page section index (the desktop right-rail covers this ≥768);
+     core.ts injects a .overlay__index list (styled globally in base.css) here */
+  .overlay__sections { margin-block-start: var(--space-3); }
+  @media (min-width: 768px) { .overlay__sections { display: none; } }
+
+  /* ≥1025px: the full marker — fit-content pieces, larger display face, the
+     vertical wordmark, and left padding that clears both wordmark and staircase.
+     768–1024 stays a flush-left stack at --text-xl (no overflow). */
+  @media (min-width: 1025px) {
+    .overlay { padding-left: var(--space-8); }
+    .overlay__item { width: fit-content; }
+    .overlay__label { font-size: var(--text-2xl); }
+    .overlay__brand { display: block; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .overlay, .overlay__thread, .overlay__label {
+      transition: none;
+      opacity: 1;
+      transform: none;
+    }
+  }
+</style>

@@ -1,0 +1,36 @@
+---
+// PullQuote — display-face pull for the MD's text-led chapter (wireframe 4):
+// the rhythm device for a portrait-less profile. Pink is NOT used in prose;
+// the keyline carries the emphasis.
+interface Props {
+  quote: string;
+  attribution?: string;
+}
+const { quote, attribution } = Astro.props;
+---
+<blockquote class="pull">
+  <p>{quote}</p>
+  {attribution && <footer class="u-caps">{attribution}</footer>}
+</blockquote>
+
+<style>
+  /* keyline, not pink: the palette law restricts pink to thread/numerals/
+     spec-glyphs/portrait-frames/focus — a quote border is none of those */
+  .pull {
+    border-left: var(--radius-frame) solid var(--hairline);
+    padding-left: var(--space-4);
+    margin-block: var(--space-5);
+    max-width: var(--measure-body);
+  }
+  .pull p {
+    font-family: var(--font-display);
+    font-weight: var(--fw-display-sub);
+    font-style: italic;
+    font-size: var(--text-lg);
+    line-height: var(--leading-snug);
+    color: var(--ink);
+    text-transform: none;
+    letter-spacing: var(--tracking-display);
+  }
+  .pull footer { color: var(--ink-muted); margin-block-start: var(--space-2); }
+</style>

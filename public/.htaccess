@@ -1,0 +1,63 @@
+# .htaccess — Rizvi Fashions static site (Astro build). ADDITIVE and defensive:
+# every block is wrapped in <IfModule> so it is a no-op where a module is
+# absent, and it changes only compression, caching and response headers. It
+# does NOT rewrite URLs, does NOT delete or override existing server rules, and
+# is safe to sit beside whatever the host already runs. (Apache / LiteSpeed.)
+#
+# Maintenance note for Zafir (HANDOFF.md): the only thing to keep in sync here
+# is the hashed-asset path — Astro emits fingerprinted files under /_astro/, so
+# those can cache forever; HTML must stay short-cache so content edits show.
+
+# ----------------------------------------------------------------------
+# Compression — text assets only (images/woff2 are already compressed)
+# ----------------------------------------------------------------------
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css text/plain text/xml \
+    application/javascript application/json application/xml \
+    image/svg+xml application/rss+xml
+</IfModule>
+
+# ----------------------------------------------------------------------
+# Caching — fingerprinted assets immutable; HTML always revalidated
+# ----------------------------------------------------------------------
+<IfModule mod_expires.c>
+  ExpiresActive On
+  # hashed, content-addressed assets — safe to cache for a year
+  <FilesMatch "\.(?:css|js|mjs|woff2|avif|webp|png|jpe?g|gif|ico|svg)$">
+    ExpiresDefault "access plus 1 year"
+  </FilesMatch>
+  # HTML is the content layer — never long-cache it
+  <FilesMatch "\.html$">
+    ExpiresDefault "access plus 0 seconds"
+  </FilesMatch>
+</IfModule>
+
+<IfModule mod_headers.c>
+  # immutable for fingerprinted files under Astro's /_astro/ and self-hosted fonts
+  <FilesMatch "\.(?:css|js|mjs|woff2|avif|webp)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+  <FilesMatch "\.html$">
+    Header set Cache-Control "public, max-age=0, must-revalidate"
+  </FilesMatch>
+
+  # ------------------------------------------------------------------
+  # Security headers (conservative — chosen NOT to break the site's
+  # own inline scripts or the contact form POST to /contact.php)
+  # ------------------------------------------------------------------
+  Header set X-Content-Type-Options "nosniff"
+  Header set X-Frame-Options "SAMEORIGIN"
+  Header set Referrer-Policy "strict-origin-when-cross-origin"
+  Header set Permissions-Policy "camera=(), microphone=(), geolocation=(), interest-cohort=()"
+  # CSP: lock framing/base/object and force https, but allow the site's own
+  # inline scripts (overlay + time-trap + count-up) and self-hosted assets.
+  # No third-party origins are needed — the site loads nothing external.
+  Header set Content-Security-Policy "default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; font-src 'self'; form-action 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'self'"
+</IfModule>
+
+# ----------------------------------------------------------------------
+# Pretty 404 (the designed page) — additive, only sets the document
+# ----------------------------------------------------------------------
+<IfModule mod_alias.c>
+  ErrorDocument 404 /404.html
+</IfModule>

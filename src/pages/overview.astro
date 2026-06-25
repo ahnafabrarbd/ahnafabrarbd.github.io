@@ -1,0 +1,189 @@
+---
+// Overview — wireframe 2: Who We Are as two chapters (floor photo via
+// PhotoChapter), Technology / Scale / Range as a keyline trio (the Range cell
+// carries the cutout constellation), the page's single aerial breather,
+// BGMEA membership strip in a hairline frame. Copy: src/data/copy/overview.json
+// verbatim (fidelity gate); imagery: image-map.json overview slots only.
+import type { ImageMetadata } from 'astro';
+import { Image } from 'astro:assets';
+import { getEntry } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import PhotoChapter from '../components/PhotoChapter.astro';
+import Breather from '../components/Breather.astro';
+import { slot, slotImage, resolveImage } from '../lib/images';
+
+const entry = await getEntry('copy', 'overview');
+if (!entry) throw new Error('copy/overview missing — run: node setup/extract-copy.mjs');
+const { title, sections = [] } = entry.data as { title: string; sections: Record<string, any>[] };
+
+// Deck-shape assertions (the gate is a gate, not a hope): the three wireframe
+// blocks must arrive intact from the extraction or the build fails here.
+const [who, trio, bgmea] = sections;
+if (!who?.heading || (who.body ?? []).length !== 2)
+  throw new Error('copy/overview: "Who We Are" must carry a heading + 2 paragraphs');
+const trioItems: { title: string; text: string }[] = trio?.items ?? [];
+for (const required of ['Technology', 'Scale', 'Range']) {
+  if (!trioItems.some((it) => it.title === required))
+    throw new Error(`copy/overview: trio item "${required}" missing`);
+}
+const bgmeaLine: string = bgmea?.body?.[0] ?? '';
+if (!bgmeaLine) throw new Error('copy/overview: BGMEA strip body missing');
+
+// Imagery — every overview slot in the map is used on this page.
+const trioMedia: Record<string, { image: ImageMetadata; alt: string }> = {
+  Technology: await slotImage('overview', 'technology'),
+  Scale: await slotImage('overview', 'scale'),
+};
+const rangeSlot = slot('overview', 'range') as { items?: { src: string; alt: string }[] };
+const constellation = await Promise.all(
+  (rangeSlot.items ?? []).map(async ({ src, alt }) => ({
+    image: await resolveImage(src),
+    alt: alt ?? '',
+  })),
+);
+if (constellation.length === 0) throw new Error('image-map: overview.range has no items');
+// Caption is the map's own alt text — never invented (RAILS: captions below).
+const aerialCaption = slot('overview', 'breather-aerial').alt ?? '';
+
+const p1: string = who.body[0];
+const description = p1.length > 155 ? `${p1.slice(0, 152)}…` : p1;
+---
+<Base title={`${title} — Rizvi Fashions Limited`} description={description}>
+  <header class="page-head">
+    <h1>{title}</h1>
+  </header>
+
+  {/* text-led first viewport (G5 refactor, Law 1): a half-viewport photo above
+      the fold carries a ~2.3s simulated-LCP floor that no byte-shaving beats —
+      the wireframe's "two text chapters, floor photo" permits the photo second */}
+  <section class="chapter" id="who-we-are">
+    <span class="chapter__num" aria-hidden="true"></span>
+    <h2>{who.heading}</h2>
+    <p>{who.body[0]}</p>
+  </section>
+
+  <PhotoChapter
+    page="overview"
+    slotName="who-we-are"
+    body={[who.body[1]]}
+    flip
+  />
+
+  {/* no id on the container: the rail scrollspy lists the inner Technology/
+      Scale/Range cells; an id here made the index show "Technology" twice
+      (container's first heading + the cell) — ship-panel data slip */}
+  <section class="chapter trio">
+    <span class="chapter__num" aria-hidden="true"></span>
+    <div class="trio__grid">
+      {trioItems.map(({ title: cellTitle, text }) => {
+        const media = trioMedia[cellTitle];
+        return (
+          <section class="trio__cell" id={cellTitle.toLowerCase()}>
+            <h2>{cellTitle}</h2>
+            <p>{text}</p>
+            {media ? (
+              <div class="trio__media trio__photo">
+                <Image
+                  src={media.image}
+                  alt={media.alt}
+                  widths={[480, 768]}
+                  sizes="(min-width: 768px) 28vw, 100vw"
+                  loading="lazy"
+                  fetchpriority="low"
+                  format="webp"
+                />
+              </div>
+            ) : (
+              <div class="trio__media trio__constellation">
+                {constellation.map(({ image, alt }) => (
+                  <Image
+                    src={image}
+                    alt={alt}
+                    aria-hidden={alt ? undefined : 'true'}
+                    widths={[160, 320]}
+                    sizes="(min-width: 768px) 8vw, 26vw"
+                    loading="lazy"
+                    format="webp"
+                  />
+                ))}
+              </div>
+            )}
+          </section>
+        );
+      })}
+    </div>
+  </section>
+
+  <Breather page="overview" slotName="breather-aerial" caption={aerialCaption} />
+
+  <section class="bgmea" id="bgmea">
+    <p class="u-caps bgmea__line">{bgmeaLine}</p>
+  </section>
+</Base>
+
+<style>
+  .page-head {
+    padding-block: var(--space-7) var(--space-6);
+  }
+
+  /* ---- keyline trio: hairline-gapped grid, media bottom-aligned per cell */
+  .trio__grid {
+    display: grid;
+    gap: var(--rail-w);
+    background: var(--hairline);
+    border: var(--rail-w) solid var(--hairline);
+    margin-block-start: var(--space-5);
+  }
+  @media (min-width: 768px) {
+    .trio__grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  .trio__cell {
+    background: var(--ground);
+    padding: var(--space-4);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+  .trio__cell h2 {
+    font-size: var(--text-lg);
+    font-weight: var(--fw-display-sub);
+    margin-block: 0;
+    max-width: none;
+  }
+  .trio__cell p {
+    margin-block-end: 0;
+  }
+  .trio__media {
+    margin-block-start: auto;
+  }
+  .trio__photo img {
+    width: 100%;
+    height: auto;
+    border: var(--rail-w) solid var(--hairline);
+  }
+  /* cutouts stay small + resolution-honest (natives ≈ 410–434px wide) */
+  .trio__constellation {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-2);
+    align-items: end;
+  }
+  .trio__constellation img {
+    width: 100%;
+    height: auto;
+  }
+
+  /* ---- BGMEA strip: deck line in utility caps inside a hairline frame */
+  .bgmea {
+    border: var(--rail-w) solid var(--hairline);
+    padding: var(--space-4);
+    margin-block: 0 var(--space-7);
+  }
+  .bgmea__line {
+    font-size: var(--text-xs);
+    color: var(--ink-body);
+    max-width: var(--measure-body);
+  }
+</style>

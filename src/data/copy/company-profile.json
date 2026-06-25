@@ -1,0 +1,98 @@
+{
+  "slug": "/company-profile/",
+  "deckSection": "3 · Company Profile",
+  "title": "Company Profile",
+  "sections": [
+    {
+      "id": "our-mission",
+      "heading": "Global Leadership",
+      "label": "Our Mission",
+      "body": [
+        "Rizvi Fashions Limited produces apparel for every stage of life — designed with precision, manufactured to international standards, and delivered with the reliability that serious partnership demands. Its approach to product development is integrative by design, joining advanced technology and close market intelligence to the particular needs and lives of the people who wear its garments. The standard the company sets itself admits no qualification: quality that is non-negotiable, and service that is unconditional."
+      ],
+      "items": [],
+      "stats": []
+    },
+    {
+      "id": null,
+      "heading": "Accreditations & Certifications",
+      "note": "heading only; logo band",
+      "body": [],
+      "items": [],
+      "stats": []
+    },
+    {
+      "id": "our-vision",
+      "heading": "Define Creativity",
+      "label": "Our Vision",
+      "body": [
+        "Rizvi Fashions Limited intends to remain a leading presence in the international manufacture of ready-made garments. The means are constant: innovation pursued with discipline, creativity applied with purpose, and a firm adherence to the social and environmental principles that give the company its character. We do not aim simply to meet our customers' expectations; we aim, deliberately and repeatedly, to exceed them."
+      ],
+      "items": [],
+      "stats": []
+    },
+    {
+      "id": null,
+      "block": "Capacity counters",
+      "heading": null,
+      "note": "as scripted on Home",
+      "body": [],
+      "items": [],
+      "stats": [
+        {
+          "label": "Cutting Capacity (Per Day)",
+          "value": "250,000",
+          "source": "recon",
+          "unit": "pcs"
+        },
+        {
+          "label": "Shipment Capacity (Per Month)",
+          "value": "5.5",
+          "source": "recon",
+          "unit": "M pcs"
+        },
+        {
+          "label": "Sewing Capacity (Per Day)",
+          "value": "220,000",
+          "source": "recon",
+          "unit": "pcs"
+        },
+        {
+          "label": "Finishing Capacity (Per Day)",
+          "value": "240,000",
+          "unit": "pcs"
+        }
+      ]
+    },
+    {
+      "id": "manufacturing",
+      "heading": "Manufacturing",
+      "note": "no subtitle",
+      "body": [
+        "Rizvi Fashions Limited specialises in knitwear, lingerie, outerwear, and infant apparel, manufactured across 74 fully integrated production lines on 410,177 square feet of purpose-built floor. A workforce of 5,120 professionals sustains an output of more than five million pieces each month. Production is carried on machinery from Juki, Brother, Golden Wheel, ZO JI, Pegasus, Siruba, and NISO, while dedicated Industrial Engineering and Quality Assurance teams hold every garment to the expectations of the company's international partners."
+      ],
+      "items": [],
+      "stats": []
+    },
+    {
+      "id": null,
+      "heading": "Our Partners",
+      "note": "heading only; logo band linking to the Partners page",
+      "body": [],
+      "items": [],
+      "stats": []
+    },
+    {
+      "id": null,
+      "heading": "Our Business Growth",
+      "intro": "A record of growth, stated plainly — and the trajectory set beyond it.",
+      "chartCaptions": [
+        "Revenue — USD million, by year",
+        "Future Goal — USD million, by year"
+      ],
+      "body": [],
+      "items": [],
+      "stats": []
+    }
+  ]
+}

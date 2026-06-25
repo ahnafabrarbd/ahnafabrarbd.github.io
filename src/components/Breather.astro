@@ -1,0 +1,46 @@
+---
+// Breather — the one permitted full-bleed image moment per long page
+// (RAILS §1.9): caption BELOW, never overlaid. Graded master via slot.
+import { Image } from 'astro:assets';
+import { slotImage } from '../lib/images';
+
+interface Props {
+  page: string;
+  slotName: string;
+  caption?: string;
+}
+const { page, slotName, caption } = Astro.props;
+const { image, alt } = await slotImage(page, slotName);
+---
+<figure class="breather">
+  <Image
+    src={image}
+    alt={alt}
+    widths={[768, 1280]}
+    sizes="100vw"
+    loading="lazy"
+    fetchpriority="low"
+    quality={65}
+    format="webp"
+  />
+  {caption && <figcaption class="u-caps">{caption}</figcaption>}
+</figure>
+
+<style>
+  .breather {
+    /* full-bleed out of .wrap, both directions */
+    margin-inline: calc(-1 * var(--gutter-mobile));
+    margin-block: var(--space-7);
+  }
+  @media (min-width: 768px) {
+    .breather { margin-inline: calc(-1 * var(--gutter)) calc(-1 * (var(--gutter) + var(--rail-offset))); }
+  }
+  .breather img { width: 100%; height: auto; }
+  .breather figcaption {
+    color: var(--ink-muted);
+    padding: var(--space-2) var(--gutter-mobile) 0;
+  }
+  @media (min-width: 768px) {
+    .breather figcaption { padding-inline: var(--gutter); }
+  }
+</style>

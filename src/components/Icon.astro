@@ -1,0 +1,27 @@
+---
+// Icon — renders a manifest slot (V7 §8.3: pages never import icon files
+// directly; swap = one line in src/illustrations/manifest.ts). Inlined at
+// build (<3KB each, §8.2); inherits currentColor → token-driven.
+import { readFileSync } from 'node:fs';
+import { join } from 'node:path';
+import { ILLUSTRATIONS } from '../illustrations/manifest';
+
+interface Props {
+  slot_name: string;
+  size?: number;
+}
+const { slot_name, size = 28 } = Astro.props;
+const path = ILLUSTRATIONS[slot_name];
+if (!path) throw new Error(`illustration manifest: no slot "${slot_name}"`);
+// resolve from the project root — import.meta.url relocates into dist/ at build
+const file = join(process.cwd(), path.replace(/^\//, ''));
+const svg = readFileSync(file, 'utf8').replace(
+  '<svg',
+  `<svg width="${size}" height="${size}" role="img" aria-hidden="true"`,
+);
+---
+<span class="icon" set:html={svg} />
+
+<style>
+  .icon { display: inline-flex; color: inherit; }
+</style>
