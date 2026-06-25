@@ -25,9 +25,12 @@ export const FLAGS = {
    *  continuous element (cross-document View Transitions, 0KB CSS) */
   unbrokenThread: true,
   /** v1.5 (owner) SUPERSEDES the vertical deck: the whole site is a horizontal
-   *  scroll — the user scrolls vertically and the page translates LEFT, each
-   *  top-level block a full-viewport "room", driven by GSAP pin+scrub with
-   *  tactile depth (parallax differential + rotateY + scale DOF + scrim).
+   *  scroll — the user scrolls vertically and the track translates LEFT, each
+   *  block a "room", driven by GSAP pin+scrub over a Lenis smooth-scroll. The
+   *  depth is restrained: a subtle bg/fg parallax drift + a bezier-eased per-room
+   *  clip/word REVEAL — no rotateY, no scale depth-of-field, no scrim, no grain
+   *  (richer depth is a deferred Phase-3 intent). The home hero is a vertical
+   *  front screen and the footer a vertical coda; the corridor is between them.
    *  Desktop ≥1025px + motion only; mobile / reduced-motion keep native vertical
    *  scroll (the markup is the fallback). src/motion/pinscroll.ts. */
   hscroll: true,

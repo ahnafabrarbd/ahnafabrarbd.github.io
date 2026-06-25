@@ -12,8 +12,10 @@
  * `contentinfo` a top-level landmark) — it is the vertical coda after the pin.
  *
  * Depth (restrained, "expensive not gimmicky"): a bg/fg parallax DIFFERENTIAL
- * (foreground leads, background counter-drifts) plus a small rotateY + scale
- * depth-of-field + edge scrim. All magnitudes are JS scalars written into CSS
+ * (foreground leads, background counter-drifts) plus a bezier-eased, ASYMMETRIC
+ * per-room REVEAL (clip-opening images + rising heading words) that never animates
+ * back out. NO rotateY, NO scale depth-of-field, NO scrim, NO grain — richer depth
+ * is a deferred Phase-3 intent. All magnitudes are JS scalars written into CSS
  * custom properties (token-lint never scans JS); CSS maps them to transforms via
  * calc() against tokens. Panel centres come from a CACHED layout (offsetLeft) +
  * the known track x — ZERO per-frame getBoundingClientRect, no reflow thrash.
