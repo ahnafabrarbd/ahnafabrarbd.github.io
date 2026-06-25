@@ -88,14 +88,16 @@ void main(){
   float ridge = pow(step(abs(nY-blended.x)*2.0,HALF_PI)*cos(2.0*(nY-blended.x)),5.0);
   float lines = 0.0;
   for (float i=1.0;i<3.0;i+=1.0){ lines += pow(max(fract(scaledY),fract(-scaledY)), i*2.0); }
-  float pattern = vMask*lines;
-  float cycleT = fullT*uColorCycleSpeed;
-  float rChannel = (pattern+lines*ridge)*(cos(blended.y+cycleT*0.234)*0.5+1.0);
-  float gChannel = (pattern+vMask*ridge)*(sin(blended.x+cycleT*1.745)*0.5+1.0);
-  float bChannel = (pattern+lines*ridge)*(cos(blended.x+cycleT*0.534)*0.5+1.0);
-  vec3 col = (rChannel*uColor1 + gChannel*uColor2 + bChannel*uColor3)*uBrightness;
-  float alpha = clamp(length(col),0.0,1.0);
-  gl_FragColor = vec4(col, alpha);
+  // CLEAN LINES ONLY: drop the ridge glow + per-channel colour cycling (that was
+  // the bulky "gradient" look). Just the wavy line field in one neutral ink hue,
+  // with the troughs pushed toward 0 so it reads as crisp hairlines, not a haze.
+  // ridge / cycle / extra colours kept referenced at zero weight so ogl sees no
+  // inactive uniforms (zero-console-warning gate).
+  vec3 tint = (uColor1 + uColor2 + uColor3) / 3.0;
+  float field = vMask * lines + ridge * 0.0 + uColorCycleSpeed * 0.0;
+  float crisp = clamp((field - 0.45) * 1.8, 0.0, 1.0); // floor the wash → distinct lines
+  float a = crisp * uBrightness;
+  gl_FragColor = vec4(tint, a);
 }
 `;
 
@@ -147,19 +149,21 @@ function boot(host: HTMLElement) {
     uniforms: {
       uTime: { value: 0 },
       uResolution: { value: [1, 1, 1] },
-      uSpeed: { value: 0.26 }, // unhurried drift — serious, not busy
-      uInnerLines: { value: 30 },
-      uOuterLines: { value: 34 },
-      uWarpIntensity: { value: 0.9 },
-      uRotation: { value: (-32 * Math.PI) / 180 },
-      uEdgeFadeWidth: { value: 0.0 },
+      uSpeed: { value: 0.18 }, // calm, unhurried drift
+      // warp must stay high or the field collapses to a blank band; THIN it instead
+      // (high line count) and LIGHTEN it (low brightness) for clean hairlines.
+      uInnerLines: { value: 28 },
+      uOuterLines: { value: 32 },
+      uWarpIntensity: { value: 0.85 }, // keep coverage; the crisp floor makes them lines
+      uRotation: { value: (-28 * Math.PI) / 180 },
+      uEdgeFadeWidth: { value: 0.15 }, // widen the band so lines spread across the field
       uColorCycleSpeed: { value: 0.0 }, // no hue cycle — monochrome ink, black & white
-      uBrightness: { value: 1.5 }, // ink is dark; lift so the lines read as charcoal on white
+      uBrightness: { value: 0.4 }, // max line opacity — faint light-grey hairlines
       uColor1: { value: ink },
       uColor2: { value: ink },
       uColor3: { value: ink },
       uMouse: { value: new Float32Array([0.5, 0.5]) },
-      uMouseInfluence: { value: 0.9 }, // gentle cursor pull
+      uMouseInfluence: { value: 0.5 }, // subtle cursor pull
       uEnableMouse: { value: true },
     },
   });
