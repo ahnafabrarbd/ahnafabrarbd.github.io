@@ -71,10 +71,8 @@ const STORY = [
   { id: 'manufacturing', n: '03', data: manufacturing, target: TEASER_TARGET['Manufacturing teaser'], ...(await slotImage('home', 'manufacturing-teaser')) },
 ];
 
-// hero weave — 5 QA-passed cutouts, decorative by design (empty alt + aria-hidden)
-const weave = slot('home', 'hero-weave') as { items?: { src: string; alt: string }[] };
-if (!weave.items?.length) throw new Error('image-map: home.hero-weave has no items');
-const panels = await Promise.all(weave.items.map((it) => resolveImage(it.src)));
+// hero field — the LineWaves WebGL canvas mounts into #hero-waves at idle
+// (src/motion/linewaves.ts), replacing the old image constellation.
 
 // environmental spec glyphs by cell order (manifest slots — V7 §8.3 one-line swap)
 const ENV_ICONS = ['env-recycle', 'env-water', 'env-energy'];
@@ -100,30 +98,11 @@ const description = heroBody.length > 155 ? `${heroBody.slice(0, 152)}…` : her
 ---
 <Base title={title} description={description} pure>
   <section class="hero">
+    <div id="hero-waves" class="hero__waves" aria-hidden="true"></div>
     <div class="hero__copy">
       <h1>{hero.heading}</h1>
       {hero.body.map((p: string) => <p>{p}</p>)}
       <a class="cta u-caps" href="/overview/">{hero.button}<span class="visually-hidden"> — Company Overview</span></a>
-    </div>
-    <div class="hero__weave" aria-hidden="true">
-      {panels.map((image, i) => (
-        <figure class={`hero__panel hero__panel--${i + 1}`}>
-          <Image
-            src={image}
-            alt=""
-            {/* single 340 rung: decorative garnish must not race the display
-                font for bandwidth (G5 refactor — the h1's font-swap LCP) */}
-            widths={[340]}
-            sizes="(min-width: 768px) 280px, 130px"
-            {/* decorative panels must never be the LCP (G5 refactor: home LCP
-                2276ms with eager panels) — the h1 carries first paint; G6
-                fades these in anyway */}
-            loading="lazy"
-            fetchpriority="low"
-            format="webp"
-          />
-        </figure>
-      ))}
     </div>
   </section>
 
@@ -203,69 +182,71 @@ const description = heroBody.length > 155 ? `${heroBody.slice(0, 152)}…` : her
   </section>
 </Base>
 
-{/* G6 home-only hero weave (flag heroWeave; GSAP loaded dynamically at idle,
-    home page alone — content pages keep 0KB). Storyboard: src/motion/weave.ts */}
+{/* home-only hero field: the LineWaves WebGL canvas (ogl), loaded dynamically at
+    idle on the home page alone — content pages stay 0KB. src/motion/linewaves.ts */}
 <script>
-  import '../motion/weave.ts';
+  import '../motion/linewaves.ts';
 </script>
 
 <style>
-  /* ---- hero: pure ground, static settled constellation (weave motion = G6) */
+  /* ---- hero: a centred thesis over the LineWaves field (the home signature).
+     The animated forest-green wave field fills the hero behind the copy; the
+     text is centred and width-capped for a calm, deliberate first screen. On
+     mobile / reduced-motion / no-WebGL the field simply never mounts and the
+     clean centred hero stands on its own. */
   .hero {
+    position: relative;
     min-height: 100svh;
     display: grid;
-    gap: var(--space-6);
-    align-content: center;
+    place-items: center;
     padding-block: var(--space-7);
+    overflow: hidden;
+    isolation: isolate;
+  }
+  .hero__waves {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+  .hero__waves :global(.hero-waves__canvas) {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+  .hero__copy {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    max-width: 60ch;
+    margin-inline: auto;
+    padding-inline: var(--gutter-mobile);
   }
   @media (min-width: 768px) {
-    .hero {
-      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-      align-items: center;
-    }
+    .hero__copy { padding-inline: var(--gutter); }
   }
-  .hero__copy p { margin-block: var(--space-4); }
-  /* the hero headline is a full SENTENCE in a half-width column — the global
-     display cap (8rem) is sized for short one-word page titles and overflowed
-     the column, so the hero gets its own fit-to-column scale that wraps at
-     word boundaries (ship-panel blocker fix). text-wrap:balance evens the rag. */
+  /* a soft scrim of the ground behind the copy keeps the headline legible over
+     the densest part of the field without hiding the motion at the edges */
+  .hero__copy::before {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    inset: calc(-1 * var(--space-6)) calc(-1 * var(--space-5));
+    background: radial-gradient(closest-side, var(--ground-pure), transparent);
+    opacity: 0.82;
+    pointer-events: none;
+  }
   .hero__copy h1 {
     font-size: var(--text-display-sub);
-    max-width: none;
+    max-width: 22ch;
+    text-wrap: balance;
   }
-
-  /* <768px: constellation stacks below the headline, smaller */
-  .hero__weave {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-2);
-    align-items: flex-start;
-  }
-  .hero__panel img {
-    height: calc(var(--space-8) + var(--space-4));
-    width: auto;
-  }
-  /* ≥768px: loose constellation right-of-centre — its own grid track, so the
-     panels can never cross the headline column; percent offsets per brief.
-     Offsets keep every left-anchored panel ≥2rem clear of the thread rail at
-     the 768px floor (panels are 2:3 portrait; widths follow from heights). */
-  @media (min-width: 768px) {
-    .hero__weave {
-      display: block;
-      position: relative;
-      min-height: calc(var(--card-h) + var(--space-8) + var(--space-7));
-    }
-    .hero__panel { position: absolute; z-index: var(--z-base); }
-    .hero__panel--1 { top: 4%; left: 2%; z-index: var(--z-imagery); }
-    .hero__panel--1 img { height: var(--card-h); }
-    .hero__panel--2 { top: 0; left: 28%; }
-    .hero__panel--2 img { height: calc(var(--card-h) - var(--space-7)); }
-    .hero__panel--3 { top: 48%; left: 18%; z-index: var(--z-imagery); }
-    .hero__panel--3 img { height: calc(var(--card-h) - var(--space-6)); }
-    .hero__panel--4 { top: 58%; right: 16%; }
-    .hero__panel--4 img { height: calc(var(--card-h) - var(--space-8)); }
-    .hero__panel--5 { top: 24%; right: 0; }
-    .hero__panel--5 img { height: calc(var(--card-h) - var(--space-8)); }
+  .hero__copy p {
+    margin-block: var(--space-4);
+    max-width: 52ch;
+    color: var(--ink-body);
   }
 
   /* ---- shared keyline CTA: forest green border with fill-on-hover */

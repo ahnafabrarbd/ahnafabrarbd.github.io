@@ -188,9 +188,9 @@ main { flex: 1; }
   z-index: 0;
   background:
     radial-gradient(38% 48% at 18% 26%, var(--pink), transparent 70%),
-    radial-gradient(42% 52% at 84% 38%, var(--ink-faint), transparent 72%),
+    radial-gradient(42% 52% at 84% 38%, var(--pink), transparent 72%),
     radial-gradient(46% 56% at 52% 92%, var(--pink), transparent 70%);
-  opacity: 0.22;
+  opacity: 0.28;
   filter: blur(var(--space-5));
   animation: stats-wash 26s var(--ease-inout) infinite alternate;
   pointer-events: none;
@@ -426,6 +426,12 @@ main { flex: 1; }
 }
 /* full-bleed rooms keep a full viewport */
 .hscroll-on .hpanel:has(> .photo-chapter) { width: 100vw; }
+/* the hero is the full-bleed opening screen — the LineWaves field + centred copy
+   own the whole first viewport before the corridor scrolls on to the figures */
+.hscroll-on .hpanel:has(> .hero) {
+  width: 100vw;
+  padding: 0;
+}
 /* TALL rooms scroll INTERNALLY so copy is never clipped (content-reachability) */
 .hscroll-on .hpanel.is-tall {
   justify-content: flex-start;
