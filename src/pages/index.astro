@@ -164,11 +164,13 @@ const description = heroBody.length > 155 ? `${heroBody.slice(0, 152)}…` : her
   <section class="chapter" id="partners">
     <span class="chapter__num" aria-hidden="true"></span>
     <h2>{partnersSection.heading}</h2>
-    <ul class="partners-band">
-      {TEASER_PARTNERS.map((name) => (
-        <li>{name}</li>
-      ))}
-    </ul>
+    <div class="partners-band" aria-label="Selected partners">
+      <ul class="partners-band__track" aria-hidden="true">
+        {[...TEASER_PARTNERS, ...TEASER_PARTNERS].map((name) => (
+          <li>{name}</li>
+        ))}
+      </ul>
+    </div>
     <a class="cta u-caps" href="/partners/">All Partners</a>
   </section>
 
@@ -310,13 +312,29 @@ const description = heroBody.length > 155 ? `${heroBody.slice(0, 152)}…` : her
   .story-stage.is-staged .story-scene[data-scene='0'] { opacity: 1; }
   .story-stage.is-staged .story-scene__media img { max-height: 70svh; will-change: transform; }
 
-  /* ---- partners teaser band: names only, display caps; logos live on /partners/ */
+  /* ---- partners teaser band: a slow rolling marquee of names (logos live on
+     /partners/). The track is duplicated and translated -50% for a seamless loop;
+     reduced-motion falls back to a static wrapped row. */
   .partners-band {
+    overflow: hidden;
+    width: 80vw;
+    max-width: 100%;
+    margin-block-end: var(--space-5);
+  }
+  .partners-band__track {
     list-style: none;
     display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-2) var(--space-5);
-    margin-block-end: var(--space-5);
+    flex-wrap: nowrap;
+    width: max-content;
+    gap: var(--space-5);
+    animation: partners-roll 28s linear infinite;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .partners-band__track {
+      animation: none;
+      flex-wrap: wrap;
+      width: auto;
+    }
   }
   .partners-band li {
     max-width: none;

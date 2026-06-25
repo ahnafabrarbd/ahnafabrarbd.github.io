@@ -128,8 +128,11 @@ if (!Array.isArray(partners) || partners.length < 20) {
      Fixed height, intrinsic width, right-aligned beside the name. */
   .lshape__logo {
     flex: none;
-    height: var(--space-4);
+    /* uniform contained box: every mark fits the same footprint at a readable
+       size, aspect preserved (portrait + landscape logos both sit neatly) */
+    height: var(--space-5);
     width: auto;
+    max-width: var(--space-8);
     object-fit: contain;
     object-position: right center;
     filter: brightness(0);

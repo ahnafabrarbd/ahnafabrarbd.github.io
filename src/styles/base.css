@@ -200,6 +200,12 @@ main { flex: 1; }
   50% { transform: translate3d(4%, -3%, 0) scale(1.14); }
   100% { transform: translate3d(-3%, 4%, 0) scale(1.06); }
 }
+/* home partners teaser marquee (track is duplicated; -50% loops seamlessly) */
+@keyframes partners-roll {
+  to {
+    transform: translateX(-50%);
+  }
+}
 @media (prefers-reduced-motion: reduce) {
   .stats::before { animation: none; }
 }
@@ -440,6 +446,8 @@ main { flex: 1; }
   justify-content: flex-start;
   overflow-y: auto;
   overscroll-behavior: contain;
+  /* clear the fixed bottom dots bar so the last row is fully readable when scrolled */
+  padding-bottom: var(--space-8);
 }
 /* blank-canvas COVER — each section opens on just its title, set large and low on
    the clean ground ($10K: a point of view + hierarchy that breathes). */
