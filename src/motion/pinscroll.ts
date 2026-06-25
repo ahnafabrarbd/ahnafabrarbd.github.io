@@ -385,7 +385,14 @@ if (
         // once it reaches centre OR has passed to the left — so nothing fades/closes
         // on the way out, and the opening cover (already at/left of centre) reads
         // crisp from first paint. Only rooms still ahead are partially revealed.
-        d.setReveal(clamp(1 - Math.max(0, off), 0, 1));
+        // The intra-room reveal is BEZIER-eased (easeInOutCubic): slow at the start
+        // and end of the room's travel so content unfurls deliberately, with room to
+        // breathe (owner: intra-section = very slow/heavy/intentional). Inter-room
+        // paging stays plain/smooth (the scrollToIndex glide is unchanged).
+        const rawReveal = clamp(1 - Math.max(0, off), 0, 1);
+        const easedReveal =
+          rawReveal < 0.5 ? 4 * rawReveal ** 3 : 1 - Math.pow(-2 * rawReveal + 2, 3) / 2;
+        d.setReveal(easedReveal);
       }
       activeIndex = best;
       setActive(best);
