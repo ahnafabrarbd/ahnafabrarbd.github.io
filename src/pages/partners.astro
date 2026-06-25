@@ -108,7 +108,7 @@ if (!Array.isArray(partners) || partners.length < 20) {
     transition: color var(--dur-base) var(--ease-out);
   }
   .lshape__rn {
-    color: var(--pink);
+    color: var(--accent);
     font-size: var(--text-sm);
     letter-spacing: var(--tracking-num);
     flex: none;
@@ -139,7 +139,7 @@ if (!Array.isArray(partners) || partners.length < 20) {
     opacity: 0.72; /* resting imprint; full ink on row hover */
     transition: opacity var(--dur-fast) var(--ease-out);
   }
-  .lshape__rung:hover .lshape__brand { color: var(--pink); }
+  .lshape__rung:hover .lshape__brand { color: var(--accent); }
   .lshape__rung:hover .lshape__logo { opacity: 1; }
 
   .lshape__end {
@@ -156,9 +156,9 @@ if (!Array.isArray(partners) || partners.length < 20) {
   }
   .lshape__cta {
     align-self: flex-start;
-    color: var(--pink);
+    color: var(--accent);
     text-decoration: none;
-    border: var(--rail-w) solid var(--pink);
+    border: var(--rail-w) solid var(--accent);
     padding: var(--space-2) var(--space-4);
     font-weight: var(--fw-body-strong);
     letter-spacing: var(--tracking-nav);
@@ -166,5 +166,5 @@ if (!Array.isArray(partners) || partners.length < 20) {
       background var(--dur-fast) var(--ease-out),
       color var(--dur-fast) var(--ease-out);
   }
-  .lshape__cta:hover { background: var(--pink); color: var(--ground); }
+  .lshape__cta:hover { background: var(--accent); color: var(--ground); }
 </style>

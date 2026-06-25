@@ -1,6 +1,6 @@
 ---
 // Header — sticky top bar: wordmark left (Cormorant italic), nav right (Montserrat caps).
-// Hover: ink-muted → ink on links; active page gets --pink accent. Menu opens overlay.
+// Hover: ink-muted → ink on links; active page gets --accent accent. Menu opens overlay.
 import OverlayMenu from './OverlayMenu.astro';
 
 const NAV = [
@@ -86,7 +86,7 @@ const NAV = [
   }
   /* tactile lift on hover — the link rises slightly toward the cursor */
   .topbar__nav a:hover { color: var(--ink); transform: translateY(-1px); }
-  .topbar__nav a[aria-current="page"] { color: var(--pink); }
+  .topbar__nav a[aria-current="page"] { color: var(--accent); }
   .topbar__nav li:not(:last-child) { display: none; }
   @media (min-width: 768px) {
     .topbar__nav li:not(:last-child) { display: block; }

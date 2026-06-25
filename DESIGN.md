@@ -2,7 +2,7 @@
 
 Audience lens (§2): sourcing managers at international fast-fashion retailers. Expensive = restraint, precision, pacing. Every visual decision below is a named token; shipped CSS may not contain a raw value absent from the `tokens` block (enforced by `setup/token-lint.mjs`).
 
-> Note: this project began as "rizvi-noir" (black ground, magenta accent, Clash/Switzer/Martian type) and was deliberately moved to the warm-editorial identity documented below. The prose here describes the **shipped** site. Token names are historical in one place — `--accent` was once `--pink`; see the rename note in the Tokens section.
+> Note: this project began as "rizvi-noir" (black ground, magenta accent, Clash/Switzer/Martian type) and was deliberately moved to the warm-editorial identity documented below. The prose here describes the **shipped** site. The accent token was renamed from the legacy `--pink` to `--accent` (its value is the forest green `#1A3828`).
 
 ## Concept — The Continuous Thread
 
@@ -30,7 +30,7 @@ Cormorant is a high-contrast Didone-class serif: its thick/thin stroke modulatio
 --ground: #F8F6F2;
 --ground-pure: #FFFFFF;
 --hairline: #E8E4DC;
---pink: #1A3828;
+--accent: #1A3828;
 --glass: rgba(248, 246, 242, 0.72);
 --scrim-img: rgba(17, 17, 17, 0.55);
 --shadow-soft: rgba(17, 17, 17, 0.06);
@@ -105,7 +105,7 @@ Notes (G4 addition, ratified by the G4 critic): `--bp-rail: 768px` tokenises the
 
 ## Thread specification (HARD bounds: never enters top bar, never crosses text or imagery)
 
-- **Form:** 1px `--pink` line, `--z-thread`, pointer-events none.
+- **Form:** 1px `--accent` line, `--z-thread`, pointer-events none.
 - **Preloader (first visit per session only):** SVG stroke draws the RIZVI wordmark ≤1.8s (`--dur-preloader-max`), then the stroke "releases" — translates to the right edge and becomes the rail. Session-cached via sessionStorage; reduced-motion ⇒ instant skip.
 - **Rail (≥768px):** fixed right edge at `--rail-offset`; height = scroll progress (grows top→bottom, pink above `--hairline` track below). Section labels hang left of the rail in `--font-utility` `--text-2xs` caps, `--tracking-caps`; active = `--ink`, inactive = `--ink-muted`; all clickable (scrollspy). The rail occupies the gutter — content max-width keeps text/imagery clear of it (the no-crossing rule is layout-guaranteed, not clipped).
 - **<768px:** bare 1px progress line, no labels; section index moves into the overlay menu.

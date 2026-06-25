@@ -43,14 +43,14 @@ const bars = points.map((p, i) => {
       <polyline
         points={bars.map((b) => `${b.cx},${b.y}`).join(' ')}
         fill="none"
-        stroke="var(--pink)"
+        stroke="var(--accent)"
         stroke-width="2"
       />
     )}
     {bars.map((b) => (
       <>
         {goal ? (
-          <circle cx={b.cx} cy={b.y} r="4" fill="var(--pink)" />
+          <circle cx={b.cx} cy={b.y} r="4" fill="var(--accent)" />
         ) : (
           <rect x={b.x} y={b.y} width={barW} height={b.h} fill="var(--ink)" />
         )}

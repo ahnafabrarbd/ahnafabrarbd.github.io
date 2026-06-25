@@ -111,7 +111,7 @@ const SECONDARY = [
     bottom: 0;
     left: var(--space-3);
     width: var(--rail-w);
-    background: var(--pink);
+    background: var(--accent);
     transform: scaleY(0);
     transform-origin: top;
     transition: transform var(--dur-entrance) var(--ease-thread);
@@ -144,7 +144,7 @@ const SECONDARY = [
     display: inline-flex;
     transition: color var(--dur-fast) var(--ease-out), border-color var(--dur-fast) var(--ease-out);
   }
-  .overlay__close:hover { color: var(--pink); border-color: var(--pink); }
+  .overlay__close:hover { color: var(--accent); border-color: var(--accent); }
 
   /* the staircase: six nested keyline boxes stepping down-and-right */
   .overlay__nav {
@@ -173,7 +173,7 @@ const SECONDARY = [
   }
   .overlay__item:first-child { margin-block-start: 0; }
   .overlay__idx {
-    color: var(--pink);
+    color: var(--accent);
     font-size: var(--text-sm);
     letter-spacing: var(--tracking-num);
   }
@@ -195,7 +195,7 @@ const SECONDARY = [
   .overlay.is-open .overlay__label { transform: translateY(0); }
   /* hover / current page → the signature forest green (border = a frame, legal) */
   .overlay__item:hover,
-  .overlay__item[aria-current='page'] { color: var(--pink); border-color: var(--pink); }
+  .overlay__item[aria-current='page'] { color: var(--accent); border-color: var(--accent); }
 
   /* staggered reveal delays (token × unitless = lint-safe; kept on mobile too) */
   .overlay__item:nth-child(2) .overlay__label { transition-delay: calc(var(--dur-fast) * 0.35); }
@@ -229,7 +229,7 @@ const SECONDARY = [
     transition: color var(--dur-fast) var(--ease-out);
   }
   .overlay__morelink:hover,
-  .overlay__morelink[aria-current='page'] { color: var(--pink); }
+  .overlay__morelink[aria-current='page'] { color: var(--accent); }
 
   /* mobile-only in-page section index (the desktop right-rail covers this ≥768);
      core.ts injects a .overlay__index list (styled globally in base.css) here */

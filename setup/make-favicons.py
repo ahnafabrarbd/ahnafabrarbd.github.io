@@ -11,7 +11,7 @@ ICONS = ROOT / "public/icons"
 ICONS.mkdir(parents=True, exist_ok=True)
 
 GROUND = (10, 10, 10)      # --ground #0A0A0A
-PINK = (172, 33, 113)      # --pink  #AC2171
+PINK = (172, 33, 113)      # --accent  #AC2171
 
 
 def draw(size: int) -> Image.Image:

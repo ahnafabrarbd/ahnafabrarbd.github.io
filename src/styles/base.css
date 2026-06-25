@@ -64,11 +64,11 @@ img, svg, video { display: block; max-width: 100%; }
 a { color: inherit; }
 
 :focus-visible {
-  outline: var(--radius-frame) solid var(--pink);
+  outline: var(--radius-frame) solid var(--accent);
   outline-offset: var(--radius-frame);
 }
 
-::selection { background: var(--pink); color: var(--ground); }
+::selection { background: var(--accent); color: var(--ground); }
 
 .visually-hidden {
   position: absolute;
@@ -152,7 +152,7 @@ main { flex: 1; }
   font-size: var(--text-lg);
   font-weight: var(--fw-utility);
   letter-spacing: var(--tracking-num);
-  color: var(--pink);
+  color: var(--accent);
   font-variant-numeric: var(--numeric);
 }
 .chapter__num::before { content: counter(chapter, decimal-leading-zero); }
@@ -187,9 +187,9 @@ main { flex: 1; }
   inset: calc(-1 * var(--space-6));
   z-index: 0;
   background:
-    radial-gradient(38% 48% at 18% 26%, var(--pink), transparent 70%),
-    radial-gradient(42% 52% at 84% 38%, var(--pink), transparent 72%),
-    radial-gradient(46% 56% at 52% 92%, var(--pink), transparent 70%);
+    radial-gradient(38% 48% at 18% 26%, var(--accent), transparent 70%),
+    radial-gradient(42% 52% at 84% 38%, var(--accent), transparent 72%),
+    radial-gradient(46% 56% at 52% 92%, var(--accent), transparent 70%);
   opacity: 0.28;
   filter: blur(var(--space-5));
   animation: stats-wash 26s var(--ease-inout) infinite alternate;
@@ -262,7 +262,7 @@ main { flex: 1; }
 .thread-rail__fill {
   position: absolute;
   inset: 0;
-  background: var(--pink);
+  background: var(--accent);
   --progress: 0;
   transform: scaleX(var(--progress));
   transform-origin: left;
@@ -336,8 +336,8 @@ main { flex: 1; }
   height: var(--rail-w);
   background-image: repeating-linear-gradient(
     to right,
-    var(--pink) 0,
-    var(--pink) var(--space-1),
+    var(--accent) 0,
+    var(--accent) var(--space-1),
     transparent var(--space-1),
     transparent var(--space-2)
   );
@@ -599,15 +599,15 @@ main { flex: 1; }
     border-color var(--dur-fast) var(--ease-out);
 }
 .rail-index__dot:hover {
-  border-color: var(--pink);
+  border-color: var(--accent);
   background: var(--ink-faint);
 }
 .rail-index__dot.is-active {
-  background: var(--pink);
-  border-color: var(--pink);
+  background: var(--accent);
+  border-color: var(--accent);
 }
 .rail-index__dot:focus-visible {
-  outline: var(--rail-w) solid var(--pink);
+  outline: var(--rail-w) solid var(--accent);
   outline-offset: var(--space-1);
 }
 
