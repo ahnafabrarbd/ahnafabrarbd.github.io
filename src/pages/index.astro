@@ -251,6 +251,16 @@ const EM_WORD = 'legacy';
     letter-spacing: var(--tracking-caps-wide);
     margin-block-end: var(--space-4);
   }
+  /* the Continuous Thread, marginally more felt: a short accent tick opens the
+     experience on the signature motif (the single flourish; stays restrained). */
+  .hero__eyebrow::before {
+    content: '';
+    display: block;
+    width: var(--space-4);
+    height: var(--rail-w);
+    background: var(--accent);
+    margin: 0 auto var(--space-3);
+  }
   /* dramatic but compact: a moderate Cormorant display (not the full 7rem) so the
      thesis, lead, and the three proof figures all live on the first screen —
      proof-forward beats pure scale for this audience (frontend-design judgement). */
