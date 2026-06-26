@@ -771,6 +771,18 @@ main { flex: 1; }
 .has-cursor [data-magnetic],
 .has-cursor .rail-index__dot { cursor: none; }
 
+/* hero entrance keyframes (kept at column 0 here, NOT in the indented index.astro
+   <style> block, so token-lint's @keyframes brace-reset works; the class rules
+   that use them live in index.astro). */
+@keyframes hero-rise-in {
+  from { opacity: 0; transform: translateY(110%); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes hero-enter {
+  from { opacity: 0; transform: translateY(var(--space-2)); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
 /* ---- 3. SCROLL CUE — a thin line that travels down under a quiet caps label,
    inviting the first scroll. Sits at the foot of the hero; fades once scrolling. */
 .scroll-cue {

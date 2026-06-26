@@ -94,13 +94,34 @@ const contactIntro = contact.sections[0] as Record<string, any>;
 const title = `${home.title} — Rizvi Fashions Limited`;
 const heroBody: string = hero.body[0];
 const description = heroBody.length > 155 ? `${heroBody.slice(0, 152)}…` : heroBody;
+
+// hero headline split into words for a staggered, masked Cormorant entrance
+// (pure CSS, server-split → no flash, no-JS safe). One word is set in italic as
+// a quiet editorial accent. Eyebrow facts ("Est. 2013", Dhaka) are verbatim from
+// the deck body / org data — nothing invented.
+const headingWords = hero.heading.split(/\s+/);
+const EM_WORD = 'legacy';
 ---
 <Base title={title} description={description} pure>
-  <section class="hero">
+  <section class="hero" data-hero>
     <div class="hero__copy">
-      <h1>{hero.heading}</h1>
-      {hero.body.map((p: string) => <p>{p}</p>)}
-      <a class="cta u-caps" href="/overview/">{hero.button}<span class="visually-hidden"> — Company Overview</span></a>
+      <p class="hero__eyebrow u-caps" data-enter style={`--i: 0`}>Est. 2013 · Dhaka, Bangladesh</p>
+      <h1 class="hero__title">
+        {headingWords.map((w: string, i: number) => (
+          <>
+            <span class="hero-rise"><span class:list={["hero-rise-w", { "hero-rise-w--em": w.toLowerCase().replace(/[^a-z]/g, '') === EM_WORD }]} style={`--i: ${i}`}>{w}</span></span>
+            {i < headingWords.length - 1 ? ' ' : ''}
+          </>
+        ))}
+      </h1>
+      {hero.body.map((p: string, i: number) => <p data-enter style={`--i: ${i + 1}`}>{p}</p>)}
+      <div class="hero__actions" data-enter style={`--i: ${hero.body.length + 1}`}>
+        <a class="cta u-caps" href="/overview/">{hero.button}<span class="visually-hidden"> — Company Overview</span></a>
+      </div>
+    </div>
+    <div class="scroll-cue" data-enter style={`--i: ${hero.body.length + 2}`} aria-hidden="true">
+      <span class="scroll-cue__label">Scroll</span>
+      <span class="scroll-cue__track"></span>
     </div>
   </section>
 
@@ -186,13 +207,16 @@ const description = heroBody.length > 155 ? `${heroBody.slice(0, 152)}…` : her
 </Base>
 
 <style>
-  /* ---- hero: a clean centred thesis on the plain ground — no background graphic. */
+  /* ---- hero: a clean centred thesis on the plain ground — no background graphic.
+     Elevated: a heritage eyebrow, a dramatic Cormorant headline that builds word
+     by word out of clip masks (server-split, pure CSS → no flash), one italic
+     accent word, and an animated scroll cue. */
   .hero {
     position: relative;
     min-height: 100svh;
     display: grid;
     place-items: center;
-    padding-block: var(--space-7);
+    padding-block: var(--space-8) var(--space-7);
   }
   .hero__copy {
     display: flex;
@@ -206,15 +230,58 @@ const description = heroBody.length > 155 ? `${heroBody.slice(0, 152)}…` : her
   @media (min-width: 768px) {
     .hero__copy { padding-inline: var(--gutter); }
   }
-  .hero__copy h1 {
-    font-size: var(--text-display-sub);
-    max-width: 22ch;
+  .hero__eyebrow {
+    color: var(--ink-muted);
+    letter-spacing: var(--tracking-caps-wide);
+    margin-block-end: var(--space-4);
+  }
+  .hero__title {
+    font-size: var(--text-display);
+    max-width: 18ch;
+    line-height: var(--leading-tight);
     text-wrap: balance;
   }
+  /* one word set in italic light Cormorant — a quiet editorial accent (typographic,
+     not coloured: the forest green stays a precise accent elsewhere). */
+  .hero-rise-w--em {
+    font-style: italic;
+    font-weight: var(--fw-display-sub);
+  }
+  /* masked word rise — each word lifts out of its own clip, staggered by --i. */
+  .hero-rise {
+    display: inline-block;
+    overflow: clip;
+    vertical-align: top;
+  }
+  .hero-rise-w {
+    display: inline-block;
+    animation: hero-rise-in var(--dur-entrance) var(--ease-expressive)
+      calc(var(--i, 0) * var(--dur-fast) * 0.4) both;
+  }
   .hero__copy p {
-    margin-block: var(--space-4);
+    margin-block: var(--space-4) 0;
     max-width: 52ch;
     color: var(--ink-body);
+  }
+  .hero__actions { margin-block-start: var(--space-5); }
+
+  /* supporting elements fade-rise in after the headline begins (staggered by --i,
+     held back ~one beat so the title leads). */
+  .hero [data-enter] {
+    animation: hero-enter var(--dur-entrance) var(--ease-out)
+      calc(var(--i, 0) * var(--dur-fast) * 0.6 + var(--dur-base)) both;
+  }
+
+  /* scroll cue anchored at the foot of the hero */
+  .hero .scroll-cue {
+    position: absolute;
+    inset: auto 0 var(--space-5) 0;
+    margin-inline: auto;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-rise-w,
+    .hero [data-enter] { animation: none; }
   }
 
   /* ---- shared keyline CTA: forest green border with fill-on-hover */
