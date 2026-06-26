@@ -1,0 +1,97 @@
+---
+// CapabilityMatrix — "Capabilities at a glance" (PROPOSAL.md Phase 3). Assembles
+// the 8 capability stages and their hard figures — already in the deck, but
+// scattered across 8 chapters — into ONE scannable production-flow ledger:
+// the vertical-integration RANGE (every stage in-house) + the SCALE (the figures
+// where measured). Each row links to its detail anchor (RAILS §4 ids preserved),
+// so the matrix is also a wayfinding index. No new claims: names/figures are the
+// existing deck data, re-presented.
+interface Stat { label: string; value: string; unit?: string }
+interface Section { id: string; heading: string; stats?: Stat[] }
+interface Props { sections: Section[]; label?: string }
+const { sections, label = 'Capabilities at a glance' } = Astro.props;
+---
+<section class="capmatrix" aria-label={label}>
+  <p class="capmatrix__eyebrow u-caps">{label}</p>
+  <ol class="capmatrix__list">
+    {sections.map((s, i) => (
+      <li class="capmatrix__row">
+        <a class="capmatrix__head" href={`#${s.id}`}>
+          <span class="capmatrix__n u-num" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+          <span class="capmatrix__name">{s.heading}</span>
+        </a>
+        {(s.stats?.length ?? 0) > 0 && (
+          <ul class="capmatrix__figs">
+            {s.stats!.map((st) => (
+              <li class="capmatrix__fig">
+                <span class="capmatrix__val u-num">{st.value}{st.unit ? ` ${st.unit}` : ''}</span>
+                <span class="capmatrix__lab u-caps">{st.label}</span>
+              </li>
+            ))}
+          </ul>
+        )}
+      </li>
+    ))}
+  </ol>
+</section>
+
+<style>
+  .capmatrix { margin-block: var(--space-5) var(--space-7); }
+  .capmatrix__eyebrow {
+    color: var(--ink-muted);
+    letter-spacing: var(--tracking-caps-wide);
+    margin-block-end: var(--space-3);
+  }
+  .capmatrix__list {
+    list-style: none;
+    border-top: var(--rail-w) solid var(--hairline);
+    max-width: none;
+  }
+  .capmatrix__row {
+    display: grid;
+    gap: var(--space-2) var(--space-5);
+    padding-block: var(--space-3);
+    border-bottom: var(--rail-w) solid var(--hairline);
+    max-width: none;
+    align-items: baseline;
+  }
+  @media (min-width: 768px) {
+    .capmatrix__row {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.6fr);
+    }
+  }
+  .capmatrix__head {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-3);
+    text-decoration: none;
+    color: var(--ink);
+    transition: color var(--dur-fast) var(--ease-out);
+  }
+  .capmatrix__head:hover { color: var(--accent); }
+  .capmatrix__n { color: var(--accent); font-size: var(--text-sm); flex: none; }
+  .capmatrix__name {
+    font-family: var(--font-display);
+    font-weight: var(--fw-display-sub);
+    font-size: var(--text-lg);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-display);
+    line-height: var(--leading-snug);
+  }
+  .capmatrix__figs {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2) var(--space-5);
+  }
+  .capmatrix__fig { display: grid; gap: 0; }
+  .capmatrix__val {
+    font-family: var(--font-utility);
+    font-variant-numeric: var(--numeric);
+    font-size: var(--text-md);
+    font-weight: var(--fw-utility-strong);
+    color: var(--ink);
+    letter-spacing: var(--tracking-num);
+  }
+  .capmatrix__lab { color: var(--ink-muted); }
+</style>

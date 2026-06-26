@@ -7,6 +7,7 @@
 import Base from '../layouts/Base.astro';
 import PhotoChapter from '../components/PhotoChapter.astro';
 import SpecBlock from '../components/SpecBlock.astro';
+import CapabilityMatrix from '../components/CapabilityMatrix.astro';
 import { Image } from 'astro:assets';
 import { getEntry } from 'astro:content';
 import { slot, slotImage } from '../lib/images';
@@ -70,6 +71,10 @@ const description = firstBody.length > 155 ? `${firstBody.slice(0, 152)}…` : f
 ---
 <Base title={`${title} — Rizvi Fashions Limited`} description={description}>
   <h1 class="cap-title">{title}</h1>
+
+  {/* Phase 3: the scannable capability ledger — vertical-integration range +
+      scale, links to each stage. Built from the same deck sections below. */}
+  <CapabilityMatrix sections={sections} />
 
   {/* 01 — Material Sourcing Management: keyline row of sub-slots */}
   <section class="chapter" id="material-sourcing-management">
