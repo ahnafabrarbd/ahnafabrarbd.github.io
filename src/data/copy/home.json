@@ -12,7 +12,12 @@
         "Established in 2013, Rizvi Fashions Limited is a 100% export-oriented knit composite and ready-made garment manufacturer. Compliant with international labour and environmental standards, and led by a management intent on Grade-1 standing, the company is positioned for measured, sustained growth in the world's apparel markets."
       ],
       "items": [],
-      "stats": []
+      "stats": [],
+      "proof": [
+        { "value": "5.5M", "label": "Pieces per month", "source": "recon" },
+        { "value": "74", "label": "Production lines", "source": "recon" },
+        { "value": "5,120", "label": "People", "source": "recon" }
+      ]
     },
     {
       "id": null,

@@ -115,13 +115,19 @@ const EM_WORD = 'legacy';
         ))}
       </h1>
       {hero.body.map((p: string, i: number) => <p data-enter style={`--i: ${i + 1}`}>{p}</p>)}
-      <div class="hero__actions" data-enter style={`--i: ${hero.body.length + 1}`}>
+      {hero.proof?.length > 0 && (
+        <ul class="hero__proof" data-enter style={`--i: ${hero.body.length + 1}`} aria-label="The operation at a glance">
+          {hero.proof.map((s: { value: string; label: string }) => (
+            <li>
+              <span class="hero__proof-val u-num">{s.value}</span>
+              <span class="hero__proof-label u-caps">{s.label}</span>
+            </li>
+          ))}
+        </ul>
+      )}
+      <div class="hero__actions" data-enter style={`--i: ${hero.body.length + 2}`}>
         <a class="cta u-caps" href="/overview/">{hero.button}<span class="visually-hidden"> — Company Overview</span></a>
       </div>
-    </div>
-    <div class="scroll-cue" data-enter style={`--i: ${hero.body.length + 2}`} aria-hidden="true">
-      <span class="scroll-cue__label">Scroll</span>
-      <span class="scroll-cue__track"></span>
     </div>
   </section>
 
@@ -216,7 +222,7 @@ const EM_WORD = 'legacy';
     min-height: 100svh;
     display: grid;
     place-items: center;
-    padding-block: var(--space-8) var(--space-7);
+    padding-block: var(--space-7) var(--space-6);
   }
   .hero__copy {
     display: flex;
@@ -235,9 +241,12 @@ const EM_WORD = 'legacy';
     letter-spacing: var(--tracking-caps-wide);
     margin-block-end: var(--space-4);
   }
+  /* dramatic but compact: a moderate Cormorant display (not the full 7rem) so the
+     thesis, lead, and the three proof figures all live on the first screen —
+     proof-forward beats pure scale for this audience (frontend-design judgement). */
   .hero__title {
-    font-size: var(--text-display);
-    max-width: 18ch;
+    font-size: clamp(var(--text-xl), 6vw, var(--text-2xl));
+    max-width: 20ch;
     line-height: var(--leading-tight);
     text-wrap: balance;
   }
@@ -263,6 +272,36 @@ const EM_WORD = 'legacy';
     max-width: 52ch;
     color: var(--ink-body);
   }
+  /* proof ledger: three quiet hard figures (real recon data) sitting under a
+     single Thread hairline — evidence beneath the thesis, tabular numerals, no
+     loud stat band (the headline keeps the boldness). */
+  .hero__proof {
+    list-style: none;
+    max-width: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-4) var(--space-6);
+    margin-block-start: var(--space-6);
+    padding-block-start: var(--space-4);
+    border-top: var(--rail-w) solid var(--hairline);
+  }
+  .hero__proof li {
+    display: grid;
+    gap: var(--space-1);
+    justify-items: center;
+  }
+  .hero__proof-val {
+    font-family: var(--font-utility);
+    font-variant-numeric: var(--numeric);
+    font-size: var(--text-xl);
+    font-weight: var(--fw-utility-strong);
+    color: var(--ink);
+    letter-spacing: var(--tracking-num);
+    line-height: var(--leading-snug);
+  }
+  .hero__proof-label { color: var(--ink-muted); }
+
   .hero__actions { margin-block-start: var(--space-5); }
 
   /* supporting elements fade-rise in after the headline begins (staggered by --i,
