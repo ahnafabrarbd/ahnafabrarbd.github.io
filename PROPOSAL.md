@@ -1,7 +1,15 @@
 # Proposal — Deepening the Proof, Within the Warm-Editorial Identity
 
-> Status: **approved to begin (local only, no push).** Phase 1 = hero proof figures (done).
-> Env stats remain blocked on owner-supplied real figures. Phases 2–4 queued.
+> Status (local only, no push):
+> - **Phase 1** — hero proof figures: **DONE**. Env stats: **BLOCKED** on owner figures.
+> - **Phase 2** — Compliance Wall: **DONE** (home + company-profile).
+> - **Phase 3** — Capability matrix: **DONE** (/our-capabilities/). Product matrix:
+>   **PARTIAL** — the 5-category range is already served by the existing `.cat-index`;
+>   a deeper product matrix (styles per category, fabric/GSM, MOQ) is **BLOCKED** on
+>   owner data and will not be fabricated.
+> - **Phase 4** — art direction / motion restraint / Thread: queued.
+> - Design audited with /ui-ux-pro-max (contrast, focus, responsive, a11y) — passing;
+>   one mobile layout fix applied.
 
 ## Thesis
 The site already *looks* expensive; the job is to make it *prove* expensive to a sourcing
