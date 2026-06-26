@@ -174,7 +174,10 @@ const description = heroBody.length > 155 ? `${heroBody.slice(0, 152)}…` : her
     <a class="cta u-caps" href="/partners/">All Partners</a>
   </section>
 
-  <section class="chapter" id="contact">
+  {/* CODA (owner): the "Write to Us" closing CTA leaves the horizontal corridor
+      and becomes a vertical closing screen above the footer — pinscroll.ts moves
+      any data-coda block past the pinned viewport. Plain vertical everywhere else. */}
+  <section class="chapter chapter--coda" id="contact" data-coda>
     <span class="chapter__num" aria-hidden="true"></span>
     <h2>{contactIntro.heading}</h2>
     <p>{contactIntro.subLine}</p>
@@ -233,6 +236,29 @@ const description = heroBody.length > 155 ? `${heroBody.slice(0, 152)}…` : her
   .cta:hover {
     background: var(--accent);
     color: var(--ground);
+  }
+
+  /* ---- contact CODA: under the corridor it leaves the horizontal strip and
+     becomes a quiet, centred closing screen that shares the final page with the
+     footer (owner: "occupy a page with the footer in the blank space above the
+     menu"). #main zeroes its inline padding under .hscroll-on, so re-add a gutter
+     and a leading hairline. In the vertical fallback it stays a normal chapter. */
+  .hscroll-on .chapter--coda {
+    min-height: 64svh;
+    display: grid;
+    place-items: center;
+    align-content: center;
+    text-align: center;
+    gap: var(--space-3);
+    padding-inline: var(--gutter);
+    padding-block: var(--space-8) var(--space-7);
+    border-top: var(--rail-w) solid var(--hairline);
+  }
+  .hscroll-on .chapter--coda .chapter__num { display: none; }
+  .hscroll-on .chapter--coda p {
+    max-width: 52ch;
+    color: var(--ink-body);
+    margin-block-end: 0;
   }
 
   /* ---- sustainability cards as keyline list rows */

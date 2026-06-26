@@ -88,6 +88,7 @@ if (
     // `.products-pin` (hoist its `.cat-panel`s) and `.story-stage` (hoist its
     // `.story-scene`s) so deep anchors (#underware, story ids) own a room.
     const blocks: HTMLElement[] = [];
+    const codas: HTMLElement[] = []; // vertical closing screen(s), see below
     for (const child of [...main.children] as HTMLElement[]) {
       if (child.tagName === 'SCRIPT') continue;
       // the home HERO stays a VERTICAL front screen ABOVE the corridor (owner):
@@ -95,6 +96,14 @@ if (
       // takes over and scrolls HORIZONTALLY. Leaving it out of the track keeps it
       // in place as the first child; the viewport is appended after it.
       if (child.classList.contains('hero')) continue;
+      // a CODA block (owner: the home "Write to Us" closing CTA) leaves the
+      // corridor too and becomes a VERTICAL closing screen AFTER the rooms, sharing
+      // the final screen with the footer — collected here, moved past the viewport
+      // below. It stays in <main> so teardown's block-restore is unaffected.
+      if (child.hasAttribute('data-coda')) {
+        codas.push(child);
+        continue;
+      }
       const inner = child.querySelector<HTMLElement>('.products-track, .story-stage__track');
       if (inner) {
         const cells = [...inner.children].filter((c): c is HTMLElement => c instanceof HTMLElement);
@@ -177,6 +186,12 @@ if (
       panels.push(cell);
     }
     main.appendChild(viewport); // the `:has(.hscroll__viewport)` clamp now releases
+    // move any CODA block(s) to AFTER the pinned viewport so DOM order reads
+    // hero (vertical) → corridor (horizontal) → coda (vertical) → footer (vertical).
+    // They were never wrapped in an .hpanel, so they keep their natural vertical
+    // layout and teardown leaves them in place (the restore inserts the other
+    // blocks relative to these still-present siblings, exactly as with the hero).
+    for (const c of codas) main.appendChild(c);
 
     // the first room of a content page is a blank-canvas COVER — just the section
     // title (a bare h1 or a .page-head), set large and low on the clean ground.
