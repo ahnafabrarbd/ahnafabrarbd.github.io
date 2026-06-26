@@ -73,6 +73,12 @@ if (!Array.isArray(partners) || partners.length < 20) {
   </div>
 </Base>
 
+{/* immersive vertical motion for this lshape page (weighty Lenis glide + staggered
+    rung reveal). Self-gates on [data-lshape]; bails on mobile / reduced-motion. */}
+<script>
+  import '../motion/partners.ts';
+</script>
+
 <style>
   /* ---- DEFAULT (mobile / reduced-motion / no-JS): a clean vertical stack —
      cover, then the brand ladder, then the closing panel, scrolled top→bottom. */
@@ -167,4 +173,25 @@ if (!Array.isArray(partners) || partners.length < 20) {
       color var(--dur-fast) var(--ease-out);
   }
   .lshape__cta:hover { background: var(--accent); color: var(--ground); }
+
+  /* ---- immersive reveal (partners.ts): the cover, each brand rung and the
+     closing panel rest slightly low + transparent, then rise into place as they
+     enter view — a deliberate, weighty build down the ladder. Gated on `.js` so a
+     no-JS page never hides anything (the static stack is the fallback); the rise
+     class is only applied by partners.ts once it has decided to animate. */
+  :global(.js) .lshape-rise {
+    opacity: 0;
+    transform: translateY(var(--space-4));
+    transition:
+      opacity var(--dur-entrance) var(--ease-out),
+      transform var(--dur-entrance) var(--ease-out),
+      color var(--dur-base) var(--ease-out);
+  }
+  :global(.js) .lshape-rise.is-risen {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    :global(.js) .lshape-rise { opacity: 1; transform: none; }
+  }
 </style>
