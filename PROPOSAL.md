@@ -7,9 +7,15 @@
 >   **PARTIAL** — the 5-category range is already served by the existing `.cat-index`;
 >   a deeper product matrix (styles per category, fabric/GSM, MOQ) is **BLOCKED** on
 >   owner data and will not be fabricated.
-> - **Phase 4** — art direction / motion restraint / Thread: queued.
-> - Design audited with /ui-ux-pro-max (contrast, focus, responsive, a11y) — passing;
->   one mobile layout fix applied.
+> - **Phase 4** — Thread tick **DONE** (hero); art-direction spec + shot list **DONE**
+>   (ART-DIRECTION.md) but the grade pass + new photography are owner-dependent
+>   (**BLOCKED**, will not generate images); motion restraint: entrance curtain
+>   **KEPT** (owner preference overrides the reduce-ceremony suggestion).
+> - Design audited with /ui-ux-pro-max each phase (contrast, focus, responsive,
+>   a11y, overflow, console) — passing; mobile compliance-wall fix applied.
+> - **Owner-blocked (will not fabricate):** real env figures; lead time / MOQ /
+>   sampling turnaround / audit grade; new photography incl. R-008 welfare replace;
+>   deeper product matrix data.
 
 ## Thesis
 The site already *looks* expensive; the job is to make it *prove* expensive to a sourcing
