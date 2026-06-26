@@ -49,10 +49,12 @@
   Header set X-Frame-Options "SAMEORIGIN"
   Header set Referrer-Policy "strict-origin-when-cross-origin"
   Header set Permissions-Policy "camera=(), microphone=(), geolocation=(), interest-cohort=()"
-  # CSP: lock framing/base/object and force https, but allow the site's own
-  # inline scripts (overlay + time-trap + count-up) and self-hosted assets.
-  # No third-party origins are needed — the site loads nothing external.
-  Header set Content-Security-Policy "default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; font-src 'self'; form-action 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'self'"
+  # CSP: lock framing/base/object and force https, allow the site's own inline
+  # scripts (overlay + form handler + count-up), self-hosted assets, and the
+  # Web3Forms endpoint the contact form submits to (connect-src + form-action).
+  # NOTE: GitHub Pages ignores .htaccess entirely — this is kept only for a future
+  # header-capable host; the live CSP on Pages is whatever GitHub serves (none here).
+  Header set Content-Security-Policy "default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; font-src 'self'; connect-src 'self' https://api.web3forms.com; form-action 'self' https://api.web3forms.com; base-uri 'self'; object-src 'none'; frame-ancestors 'self'"
 </IfModule>
 
 # ----------------------------------------------------------------------

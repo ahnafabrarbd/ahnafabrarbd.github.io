@@ -23,6 +23,16 @@ if (!writeUs?.subLine || !writeUs?.privacyNote || !writeUs?.button) {
   throw new Error('copy/contact: "Write to Us" needs subLine + privacyNote + button — deck drift');
 }
 
+// Static form submission (GitHub Pages has no backend): Web3Forms, a single
+// public access key, posted client-side via fetch. Key comes from the build env;
+// a labelled placeholder ships if unset so the build never blocks. See .env.example.
+const CONTACT_ACCESS_KEY = import.meta.env.PUBLIC_CONTACT_ACCESS_KEY ?? 'YOUR_WEB3FORMS_ACCESS_KEY';
+if (!import.meta.env.PUBLIC_CONTACT_ACCESS_KEY) {
+  console.warn(
+    'contact: PUBLIC_CONTACT_ACCESS_KEY is unset — shipping a placeholder. The live form will not deliver until you set it (see .env.example / README).',
+  );
+}
+
 const contacts = sections.find((s) => s.heading === 'Key Contacts');
 if (!contacts?.people?.length) {
   throw new Error('copy/contact: "Key Contacts" carries no people — deck drift');
@@ -55,7 +65,11 @@ const description = lead.length > 155 ? `${lead.slice(0, 152)}…` : lead;
     <h2>{writeUs.heading}</h2>
     <p class="write-sub">{writeUs.subLine}</p>
 
-    <form class="enquiry" method="POST" action="/contact.php">
+    <form class="enquiry" id="enquiry-form" method="POST" action="https://api.web3forms.com/submit">
+      {/* Web3Forms access key (public by design). No-JS: posts straight to the
+          service; with JS: intercepted by the inline script and sent via fetch. */}
+      <input type="hidden" name="access_key" value={CONTACT_ACCESS_KEY} />
+      <input type="hidden" name="from_name" value="Rizvi Fashions website" />
       <div class="enquiry__field">
         <label class="u-caps" for="enquiry-name">Name</label>
         <input type="text" id="enquiry-name" name="name" required autocomplete="name" />
@@ -84,9 +98,36 @@ const description = lead.length > 155 ? `${lead.slice(0, 152)}…` : lead;
       <input type="hidden" name="ts" value="" />
 
       <button class="enquiry__submit" type="submit">{writeUs.button}</button>
+      <p class="enquiry__status" id="enquiry-status" role="status" aria-live="polite"></p>
     </form>
-    {/* the page's single permitted inline script: stamp the time-trap */}
-    <script is:inline>document.querySelector('input[name="ts"]').value = Math.floor(Date.now() / 1000);</script>
+    {/* progressive enhancement: stamp the time-trap, then submit via fetch to
+        Web3Forms (no page navigation), with honeypot + time-trap drop, an
+        aria-live status, and a disabled button in flight. No-JS posts directly. */}
+    <script is:inline set:html={`(function(){
+      var form=document.getElementById('enquiry-form'); if(!form) return;
+      var ts=form.elements['ts']; if(ts) ts.value=Math.floor(Date.now()/1000);
+      var status=document.getElementById('enquiry-status');
+      var btn=form.querySelector('.enquiry__submit');
+      form.addEventListener('submit',function(e){
+        e.preventDefault();
+        if(form.elements['website'] && form.elements['website'].value) return;
+        var now=Math.floor(Date.now()/1000);
+        if(ts && now - Number(ts.value||0) < 3) return;
+        btn.disabled=true; if(status){status.textContent='Sending…';}
+        fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify({
+          access_key: form.elements['access_key'].value,
+          from_name: form.elements['from_name'].value,
+          name: form.elements['name'].value,
+          email: form.elements['email'].value,
+          subject: form.elements['subject'].value || 'New enquiry — Rizvi Fashions website',
+          message: form.elements['message'].value
+        })}).then(function(r){return r.json();}).then(function(j){
+          if(j && j.success){ if(status) status.textContent='Thank you — your message has been sent.'; form.reset(); }
+          else { if(status) status.textContent='Sorry, something went wrong. Please email us at info@rizvifashions.com.'; }
+          btn.disabled=false;
+        }).catch(function(){ if(status) status.textContent='Network error. Please email us at info@rizvifashions.com.'; btn.disabled=false; });
+      });
+    })();`} />
 
     <p class="write-fallback">
       Prefer email? <a href="mailto:info@rizvifashions.com">info@rizvifashions.com</a>
@@ -209,6 +250,16 @@ const description = lead.length > 155 ? `${lead.slice(0, 152)}…` : lead;
   .enquiry__submit:hover {
     background: transparent;
     color: var(--ink);
+  }
+  .enquiry__submit:disabled {
+    opacity: 0.55;
+    cursor: progress;
+  }
+  .enquiry__status {
+    margin-block-start: var(--space-3);
+    color: var(--ink-muted);
+    font-size: var(--text-sm);
+    min-height: var(--space-3);
   }
 
   .write-fallback {
