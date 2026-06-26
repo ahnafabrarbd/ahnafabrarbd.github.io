@@ -57,11 +57,15 @@ const resolved = await Promise.all(
     grid-template-columns: var(--space-7) minmax(0, 1fr);
     align-items: start;
   }
+  /* mobile: mark + name/certifies on row 1; the "Removes" line spans full width
+     below (not trapped in the narrow mark column) */
+  .cwall__removes { grid-column: 1 / -1; }
   @media (min-width: 768px) {
     .cwall__row {
       grid-template-columns: var(--space-8) minmax(0, 1.3fr) minmax(0, 1fr);
       align-items: center;
     }
+    .cwall__removes { grid-column: auto; }
   }
   .cwall__mark {
     display: flex;
