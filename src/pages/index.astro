@@ -284,8 +284,13 @@ const EM_WORD = 'legacy';
     .hero [data-enter] { animation: none; }
   }
 
-  /* ---- shared keyline CTA: forest green border with fill-on-hover */
+  /* ---- shared keyline CTA: forest-green border; on hover an accent fill SWEEPS in
+     from the left (a pseudo-element scaleX) and the label flips to the ground tone
+     — more couture than an instant background flip. */
   .cta {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
     display: inline-block;
     color: var(--accent);
     text-decoration: none;
@@ -296,14 +301,20 @@ const EM_WORD = 'legacy';
     font-weight: var(--fw-body-strong);
     letter-spacing: var(--tracking-nav);
     text-transform: uppercase;
-    transition:
-      background var(--dur-fast) var(--ease-out),
-      color var(--dur-fast) var(--ease-out);
+    transition: color var(--dur-base) var(--ease-out);
   }
-  .cta:hover {
+  .cta::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
     background: var(--accent);
-    color: var(--ground);
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform var(--dur-base) var(--ease-expressive);
   }
+  .cta:hover { color: var(--ground); }
+  .cta:hover::before { transform: scaleX(1); }
 
   /* ---- contact CODA: under the corridor it leaves the horizontal strip and
      becomes a quiet, centred closing screen that shares the final page with the

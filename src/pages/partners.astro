@@ -161,6 +161,9 @@ if (!Array.isArray(partners) || partners.length < 20) {
     max-width: var(--measure-title);
   }
   .lshape__cta {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
     align-self: flex-start;
     color: var(--accent);
     text-decoration: none;
@@ -168,11 +171,20 @@ if (!Array.isArray(partners) || partners.length < 20) {
     padding: var(--space-2) var(--space-4);
     font-weight: var(--fw-body-strong);
     letter-spacing: var(--tracking-nav);
-    transition:
-      background var(--dur-fast) var(--ease-out),
-      color var(--dur-fast) var(--ease-out);
+    transition: color var(--dur-base) var(--ease-out);
   }
-  .lshape__cta:hover { background: var(--accent); color: var(--ground); }
+  .lshape__cta::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform var(--dur-base) var(--ease-expressive);
+  }
+  .lshape__cta:hover { color: var(--ground); }
+  .lshape__cta:hover::before { transform: scaleX(1); }
 
   /* ---- immersive reveal (partners.ts): the cover, each brand rung and the
      closing panel rest slightly low + transparent, then rise into place as they
