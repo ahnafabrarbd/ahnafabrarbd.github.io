@@ -1,7 +1,7 @@
 # Rizvi Fashions — Corporate Profile (redesign)
 
 A high-end, editorial corporate-profile website for **Rizvi Fashions Limited**, a B2B garment
-manufacturer. Built as a fast, static **Astro 5** site with a desktop horizontal "corridor"
+manufacturer. Built as a fast, static **Astro 7** site with a desktop horizontal "corridor"
 scroll experience (GSAP + Lenis), an off-white / forest-green two-colour scheme, and a
 Cormorant + Montserrat type system.
 
@@ -14,7 +14,7 @@ Cormorant + Montserrat type system.
 
 ## Run it locally
 
-Requires **Node 20+**.
+Requires **Node 22.12+** (Astro 7; the deploy workflow runs Node 22).
 
 ```bash
 npm install
