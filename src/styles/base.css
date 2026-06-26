@@ -665,3 +665,172 @@ main { flex: 1; }
   .hscroll-on .hpanel .photo-chapter__media,
   .hscroll-on .hpanel .story-scene__media { transform: none; }
 }
+
+/* ============================================================================
+   PREMIUM LAYER — orchestrated motion + material depth (premium.ts drives the
+   bespoke cursor + magnetic pull + hero entrance). Everything below is gated on
+   capability (fine pointer / motion) and degrades to the disciplined base.
+   ========================================================================== */
+
+/* ---- 1. CINEMATIC PRELOADER — a theatre-curtain reveal on the first visit of a
+   session. The ground-pure panel holds on the wordmark while a hairline draws,
+   then lifts away to reveal the page. Pre-paint head gate adds `.preloaded`
+   (returning visit / reduced-motion / no-JS) to skip it entirely — no flash. */
+.preloader {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-preloader);
+  background: var(--ground-pure);
+  display: grid;
+  place-items: center;
+  will-change: transform;
+  animation: preloader-wipe var(--dur-entrance) var(--ease-expressive) var(--dur-slow) forwards;
+}
+.preloaded .preloader { display: none; }
+.preloader__inner {
+  display: grid;
+  justify-items: center;
+  gap: var(--space-3);
+}
+.preloader__mark {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: var(--fw-display);
+  font-size: var(--text-2xl);
+  letter-spacing: var(--tracking-display);
+  text-transform: uppercase;
+  color: var(--ink);
+  animation: preloader-mark var(--dur-entrance) var(--ease-out) both;
+}
+.preloader__line {
+  width: var(--space-8);
+  height: var(--rail-w);
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left center;
+  animation: preloader-line var(--dur-entrance) var(--ease-thread) var(--dur-fast) forwards;
+}
+@keyframes preloader-wipe {
+  to { transform: translateY(-101%); }
+}
+@keyframes preloader-mark {
+  from { opacity: 0; transform: translateY(var(--space-1)); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes preloader-line {
+  to { transform: scaleX(1); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .preloader { display: none; }
+}
+
+/* ---- 2. BESPOKE CURSOR — a small ink dot that tracks the pointer exactly with a
+   larger accent ring trailing on a lerp (premium.ts). Fine-pointer + motion only;
+   premium.ts creates the elements and adds `.has-cursor` so the native cursor is
+   hidden only where ours runs. Form fields keep the native caret/cursor. */
+.cursor-dot,
+.cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: var(--z-preloader);
+  pointer-events: none;
+  border-radius: 50%;
+  will-change: transform;
+  opacity: 0;
+}
+.cursor-ready .cursor-dot,
+.cursor-ready .cursor-ring { opacity: 1; }
+.cursor-dot {
+  width: var(--space-1);
+  height: var(--space-1);
+  margin: calc(var(--space-1) / -2) 0 0 calc(var(--space-1) / -2);
+  background: var(--accent);
+  transition: opacity var(--dur-base) var(--ease-out);
+}
+.cursor-ring {
+  width: var(--cursor-ring);
+  height: var(--cursor-ring);
+  margin: calc(var(--cursor-ring) / -2) 0 0 calc(var(--cursor-ring) / -2);
+  border: var(--rail-w) solid var(--ink-faint);
+  /* scale + tone shift on interactive hover are CSS transitions on this element;
+     the per-frame follow transform is composed by premium.ts via a CSS var. */
+  transform: translate3d(var(--cursor-x, 0), var(--cursor-y, 0), 0) scale(var(--cursor-scale, 1));
+  transition:
+    border-color var(--dur-base) var(--ease-out),
+    background var(--dur-base) var(--ease-out),
+    opacity var(--dur-base) var(--ease-out);
+}
+.cursor-ring.is-hover {
+  border-color: var(--accent);
+  background: var(--accent-tint);
+}
+.has-cursor,
+.has-cursor a,
+.has-cursor button,
+.has-cursor [data-magnetic],
+.has-cursor .rail-index__dot { cursor: none; }
+
+/* ---- 3. SCROLL CUE — a thin line that travels down under a quiet caps label,
+   inviting the first scroll. Sits at the foot of the hero; fades once scrolling. */
+.scroll-cue {
+  display: inline-grid;
+  justify-items: center;
+  gap: var(--space-1);
+  color: var(--ink-muted);
+  transition: opacity var(--dur-base) var(--ease-out);
+}
+.scroll-cue__label {
+  font-family: var(--font-utility);
+  font-size: var(--text-2xs);
+  letter-spacing: var(--tracking-caps-wide);
+  text-transform: uppercase;
+}
+.scroll-cue__track {
+  position: relative;
+  width: var(--rail-w);
+  height: var(--space-5);
+  background: var(--hairline);
+  overflow: hidden;
+}
+.scroll-cue__track::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--accent);
+  transform-origin: top;
+  animation: scroll-cue-run 2.4s var(--ease-inout) infinite;
+}
+@keyframes scroll-cue-run {
+  0% { transform: translateY(-100%) scaleY(0.5); }
+  55% { transform: translateY(100%) scaleY(0.5); }
+  100% { transform: translateY(100%) scaleY(0.5); }
+}
+.scroll-cue.is-gone { opacity: 0; }
+@media (prefers-reduced-motion: reduce) {
+  .scroll-cue__track::after { animation: none; transform: translateY(0); }
+}
+
+/* ---- 4. MATERIAL DEPTH — lift the frosted bars off the page with a richer,
+   layered shadow (replaces the single hairline shadow) so they read as glass
+   floating above the document. */
+.topbar { box-shadow: var(--shadow-raise); }
+.hscroll-on .rail-index { box-shadow: var(--shadow-lift); }
+
+/* ---- 5. IMAGE HOVER — in the vertical document a contained editorial photo
+   lifts and warms slightly under the pointer (a quiet, premium tell). The
+   corridor owns these transforms, so scope OUT of .hscroll-on. */
+.js:not(.hscroll-on) .story-scene__media,
+.js:not(.hscroll-on) .photo-chapter__media { overflow: hidden; }
+.js:not(.hscroll-on) .story-scene__media img,
+.js:not(.hscroll-on) .photo-chapter__media img {
+  transition: transform var(--dur-lux) var(--ease-expressive);
+}
+.js:not(.hscroll-on) .story-scene__media:hover img,
+.js:not(.hscroll-on) .photo-chapter__media:hover img {
+  transform: scale(1.04);
+}
+@media (prefers-reduced-motion: reduce) {
+  .js:not(.hscroll-on) .story-scene__media:hover img,
+  .js:not(.hscroll-on) .photo-chapter__media:hover img { transform: none; }
+}

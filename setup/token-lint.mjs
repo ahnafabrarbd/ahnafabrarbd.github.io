@@ -82,6 +82,10 @@ const RUNTIME_PROPS = new Set([
   // per word; --start / --local are component-scoped calc()s derived from them.
   // Plumbing for the scroll-coupled text reveal, not design tokens.
   '--i', '--n', '--start', '--local',
+  // bespoke-cursor follow scalars: premium.ts writes the lerped ring position
+  // (--cursor-x/--cursor-y) and hover scale (--cursor-scale) per frame. Runtime
+  // plumbing for transform-only cursor motion, not design tokens.
+  '--cursor-x', '--cursor-y', '--cursor-scale',
 ]);
 // every var(--x) reference and every --x: definition collected across the tree.
 // after scanning, each reference must resolve to a real DEFINITION that ships

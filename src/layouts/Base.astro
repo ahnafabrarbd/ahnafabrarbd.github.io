@@ -107,8 +107,24 @@ const orgLd = {
         set:html={`if(matchMedia('(min-width:1025px)').matches&&!matchMedia('(prefers-reduced-motion:reduce)').matches){document.documentElement.classList.add('hscroll-on')}`}
       />
     )}
+    {/* PRE-PAINT preloader gate: show the entrance curtain only on the FIRST page
+        of a session, and never under reduced-motion. Adds `.preloaded` (skip the
+        curtain — base.css hides it) synchronously so there is no flash either way. */}
+    <script
+      is:inline
+      set:html={`try{if(matchMedia('(prefers-reduced-motion:reduce)').matches||sessionStorage.getItem('rzv:seen')){document.documentElement.classList.add('preloaded')}else{sessionStorage.setItem('rzv:seen','1')}}catch(e){document.documentElement.classList.add('preloaded')}`}
+    />
   </head>
   <body class:list={[{ 'is-pure': pure }]}>
+    {/* entrance curtain — lifts away to reveal the page (first visit of a session
+        only; the head gate adds `.preloaded` to skip it). premium.ts removes it
+        from the DOM once the wipe finishes. Decorative, so aria-hidden. */}
+    <div class="preloader" aria-hidden="true">
+      <div class="preloader__inner">
+        <span class="preloader__mark">Rizvi Fashions</span>
+        <span class="preloader__line"></span>
+      </div>
+    </div>
     <a class="skip-link" href="#main">Skip to content</a>
     <Header />
     <ThreadRail />
@@ -121,6 +137,11 @@ const orgLd = {
         The module sets .js itself: if it ever fails to load, nothing hides. */}
     <script>
       import '../motion/core.ts';
+    </script>
+    {/* premium interaction layer: bespoke cursor, magnetic CTAs, scroll-cue,
+        curtain removal. Self-gates per effect (fine pointer / motion). */}
+    <script>
+      import '../motion/premium.ts';
     </script>
     {/* hscroll engine (flag-gated): horizontal pin+scrub+depth. DYNAMIC import
         behind the ≥1025px + motion gate so mobile / reduced-motion never fetch

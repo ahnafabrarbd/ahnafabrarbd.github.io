@@ -11,6 +11,9 @@
   --glass: rgba(248, 246, 242, 0.72);
   --scrim-img: rgba(17, 17, 17, 0.55);
   --shadow-soft: rgba(17, 17, 17, 0.06);
+  --shadow-raise: 0 0.5rem 1.5rem rgba(17, 17, 17, 0.08);
+  --shadow-lift: 0 1.25rem 3rem rgba(17, 17, 17, 0.12);
+  --accent-tint: rgba(26, 56, 40, 0.06);
   --font-display: 'Cormorant', Georgia, serif;
   --font-body: 'Montserrat', system-ui, sans-serif;
   --font-utility: 'Montserrat', system-ui, sans-serif;
@@ -59,10 +62,14 @@
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-inout: cubic-bezier(0.65, 0, 0.35, 1);
   --ease-thread: cubic-bezier(0.6, 0.05, 0.2, 1);
+  --ease-expressive: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
   --dur-fast: 200ms;
   --dur-base: 450ms;
+  --dur-slow: 700ms;
   --dur-entrance: 900ms;
   --dur-entrance-max: 1200ms;
+  --dur-lux: 1500ms;
   --dur-preloader-max: 1800ms;
   --z-base: 0;
   --z-imagery: 10;
@@ -76,4 +83,5 @@
   --card-h: 26rem;
   --seam-w: 120px;
   --knot-len: 90;
+  --cursor-ring: 2.5rem;
 }

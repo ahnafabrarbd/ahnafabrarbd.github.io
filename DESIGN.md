@@ -34,6 +34,9 @@ Cormorant is a high-contrast Didone-class serif: its thick/thin stroke modulatio
 --glass: rgba(248, 246, 242, 0.72);
 --scrim-img: rgba(17, 17, 17, 0.55);
 --shadow-soft: rgba(17, 17, 17, 0.06);
+--shadow-raise: 0 0.5rem 1.5rem rgba(17, 17, 17, 0.08);
+--shadow-lift: 0 1.25rem 3rem rgba(17, 17, 17, 0.12);
+--accent-tint: rgba(26, 56, 40, 0.06);
 --font-display: 'Cormorant', Georgia, serif;
 --font-body: 'Montserrat', system-ui, sans-serif;
 --font-utility: 'Montserrat', system-ui, sans-serif;
@@ -82,10 +85,14 @@ Cormorant is a high-contrast Didone-class serif: its thick/thin stroke modulatio
 --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
 --ease-inout: cubic-bezier(0.65, 0, 0.35, 1);
 --ease-thread: cubic-bezier(0.6, 0.05, 0.2, 1);
+--ease-expressive: cubic-bezier(0.16, 1, 0.3, 1);
+--ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
 --dur-fast: 200ms;
 --dur-base: 450ms;
+--dur-slow: 700ms;
 --dur-entrance: 900ms;
 --dur-entrance-max: 1200ms;
+--dur-lux: 1500ms;
 --dur-preloader-max: 1800ms;
 --z-base: 0;
 --z-imagery: 10;
@@ -99,6 +106,7 @@ Cormorant is a high-contrast Didone-class serif: its thick/thin stroke modulatio
 --card-h: 26rem;
 --seam-w: 120px;
 --knot-len: 90;
+--cursor-ring: 2.5rem;
 ```
 
 Notes (G4 addition, ratified by the G4 critic): `--bp-rail: 768px` tokenises the rail/label breakpoint already named in the thread spec prose — media queries cannot consume `var()`, so the breakpoint value must be a token for token-lint to admit it. (G5 addition, pending critic ratification at G5 close): `--card-h: 26rem` — cutout card/panel height cap ≈ 416px, the token form of D-004's "resolution-honest sizes ≤420px" rule for product-rail and hero-weave panels. (G6 additions, same protocol): `--seam-w: 120px` — the thread-spec prose's "~120px" stitched seam segment, tokenised; `--knot-len: 90` — the selvedge-knot SVG path length for its stroke-draw (dasharray/dashoffset unit). Type scale is a 1.31 modular ratio off 17px body; radius-0 is the default everywhere (radius-frame only on portrait hover frames); `--numeric` is applied as `font-variant-numeric: tabular-nums` on every `--font-utility` element (the spec blocks demand true tabular figures); entrances run `--dur-entrance`→`--dur-entrance-max` `--ease-out`, transform/opacity only.
