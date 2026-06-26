@@ -1,0 +1,106 @@
+---
+// ComplianceWall — the explained accreditation ledger (PROPOSAL.md Phase 2).
+// Turns the silent logo grid into proof a sourcing buyer can act on: each mark
+// paired with what it certifies and what risk it removes, sourced from the data
+// layer (src/data/accreditations.json), never hardcoded. Rendered as full-width
+// keyline rows (the site's editorial ledger idiom — NOT a card grid / badge wall).
+import { Image } from 'astro:assets';
+import { resolveImage } from '../lib/images';
+
+interface Entry {
+  name: string;
+  file: string | null;
+  certifies?: string;
+  removes?: string;
+}
+interface Props {
+  entries: Entry[];
+  label: string;
+}
+const { entries, label } = Astro.props;
+const shipped = entries.filter((e) => e.file);
+const resolved = await Promise.all(
+  shipped.map(async (e) => ({ ...e, image: await resolveImage(e.file!) })),
+);
+---
+<ul class="cwall" aria-label={label}>
+  {resolved.map(({ name, image, certifies, removes }) => (
+    <li class="cwall__row">
+      <span class="cwall__mark">
+        <Image src={image} alt={name} width={image.width} height={image.height} loading="lazy" format="webp" />
+      </span>
+      <div class="cwall__body">
+        <h3 class="cwall__name">{name}</h3>
+        {certifies && <p class="cwall__certifies">{certifies}</p>}
+      </div>
+      {removes && (
+        <p class="cwall__removes">
+          <span class="cwall__removes-k u-caps">Removes</span>
+          {removes}
+        </p>
+      )}
+    </li>
+  ))}
+</ul>
+
+<style>
+  .cwall {
+    list-style: none;
+    max-width: none;
+    border-top: var(--rail-w) solid var(--hairline);
+  }
+  .cwall__row {
+    display: grid;
+    gap: var(--space-2) var(--space-4);
+    padding-block: var(--space-4);
+    border-bottom: var(--rail-w) solid var(--hairline);
+    grid-template-columns: var(--space-7) minmax(0, 1fr);
+    align-items: start;
+  }
+  @media (min-width: 768px) {
+    .cwall__row {
+      grid-template-columns: var(--space-8) minmax(0, 1.3fr) minmax(0, 1fr);
+      align-items: center;
+    }
+  }
+  .cwall__mark {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+  }
+  .cwall__mark img {
+    max-height: var(--space-5);
+    width: auto;
+    object-fit: contain;
+    /* the marks are re-toned #D6D6D6; invert maps them to near-ink on the light
+       ground (matches LogoBand, WCAG-safe) */
+    filter: invert(1);
+  }
+  /* certification names read as proper nouns / acronyms — Montserrat, cased, for
+     scannability; Cormorant display stays reserved for the section heading. */
+  .cwall__name {
+    font-family: var(--font-body);
+    font-size: var(--text-base);
+    font-weight: var(--fw-body-strong);
+    text-transform: none;
+    letter-spacing: normal;
+    line-height: var(--leading-snug);
+    color: var(--ink);
+  }
+  .cwall__certifies {
+    margin-block-start: var(--space-1);
+    max-width: var(--measure-body);
+    font-size: var(--text-sm);
+    color: var(--ink-body);
+  }
+  .cwall__removes {
+    max-width: var(--measure-body);
+    font-size: var(--text-sm);
+    color: var(--ink-muted);
+  }
+  .cwall__removes-k {
+    display: block;
+    margin-block-end: var(--space-1);
+    color: var(--accent);
+  }
+</style>

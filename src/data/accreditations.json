@@ -1,75 +1,103 @@
 {
-  "comment": "Curator pass 2026-06-10 (setup/retone-accreditations.py, tonal machinery from setup/retone-logos.py): all 14 accreditation marks in reference/site-assets/accreditation/ identified by vision from the mark itself \u2014 no invented certifications. Known-set cross-check: amfori, Better Work Bangladesh, STeP, OCS, GRS, RCS, BSCI present; NO BGMEA mark exists in the source folder \u2014 do not add one. file paths are relative to src/; file=null means the #D6D6D6 re-tone failed the dark-ground legibility check (needs-manual, preview kept in setup/retone-preview/).",
+  "comment": "Curator pass 2026-06-10 (setup/retone-accreditations.py, tonal machinery from setup/retone-logos.py): all 14 accreditation marks in reference/site-assets/accreditation/ identified by vision from the mark itself - no invented certifications. Known-set cross-check: amfori, Better Work Bangladesh, STeP, OCS, GRS, RCS, BSCI present; NO BGMEA mark exists in the source folder - do not add one. file paths are relative to src/; file=null means the #D6D6D6 re-tone failed the dark-ground legibility check (needs-manual, preview kept in setup/retone-preview/). complianceComment: the 'certifies' / 'removes' lines (Phase 2 / PROPOSAL.md) describe the PUBLIC scope of each external standard and the buyer risk it addresses - they make no claim about Rizvi beyond displaying the mark, and assert no specific audit grade or date (that is the flagged content gap). OWNER/LEGAL REVIEW recommended before relying on this copy.",
   "logos": [
     {
       "name": "amfori BSCI",
       "file": "assets/logos/accreditations/amfori-bsci.png",
-      "identified": true
+      "identified": true,
+      "certifies": "Audited social-compliance performance across the supply chain against the amfori BSCI Code of Conduct.",
+      "removes": "the risk of unmonitored labour conditions in your supply chain."
     },
     {
       "name": "Better Work Bangladesh",
       "file": "assets/logos/accreditations/better-work-bangladesh.png",
-      "identified": true
+      "identified": true,
+      "certifies": "Participation in the ILO and IFC programme that improves labour standards and working conditions.",
+      "removes": "doubt over independent oversight of factory working conditions."
     },
     {
       "name": "BSCI",
       "file": "assets/logos/accreditations/bsci.png",
-      "identified": true
+      "identified": true,
+      "certifies": "Social-compliance auditing against the Business Social Compliance Initiative code.",
+      "removes": "exposure to undocumented labour practices on the floor."
     },
     {
       "name": "Global Recycled Standard (GRS)",
       "file": "assets/logos/accreditations/global-recycled-standard.png",
-      "identified": true
+      "identified": true,
+      "certifies": "Verified recycled content with full chain of custody, plus environmental and social criteria.",
+      "removes": "the risk of unsubstantiated recycled-content claims."
     },
     {
       "name": "Global Organic Textile Standard (GOTS)",
       "file": "assets/logos/accreditations/gots.png",
-      "identified": true
+      "identified": true,
+      "certifies": "Organic fibre content together with environmentally and socially responsible processing.",
+      "removes": "uncertainty over organic claims and chemical inputs."
     },
     {
       "name": "Higg Index",
       "file": "assets/logos/accreditations/higg-index.png",
-      "identified": true
+      "identified": true,
+      "certifies": "Standardised measurement of the facility's environmental and social impact (Cascale / SAC).",
+      "removes": "the absence of comparable sustainability data across suppliers."
     },
     {
       "name": "OEKO-TEX Standard 100",
       "file": "assets/logos/accreditations/oeko-tex-standard-100.png",
-      "identified": true
+      "identified": true,
+      "certifies": "Every component tested against strict limits for harmful substances.",
+      "removes": "the risk of restricted substances reaching the finished garment."
     },
     {
       "name": "OEKO-TEX Standard 100 (Confidence in Textiles badge)",
       "file": "assets/logos/accreditations/oeko-tex-standard-100-badge.png",
-      "identified": true
+      "identified": true,
+      "certifies": "Independent laboratory testing of materials for chemical safety.",
+      "removes": "concern over harmful chemistry in the product."
     },
     {
       "name": "OEKO-TEX STeP",
       "file": "assets/logos/accreditations/oeko-tex-step.png",
-      "identified": true
+      "identified": true,
+      "certifies": "Sustainable textile production at the facility level - chemicals, environment, social and quality management.",
+      "removes": "uncertainty about responsible production at the plant."
     },
     {
       "name": "Organic Content Standard (OCS)",
       "file": "assets/logos/accreditations/organic-content-standard.png",
-      "identified": true
+      "identified": true,
+      "certifies": "Verified organic material content with chain of custody from source to product.",
+      "removes": "the risk of overstated organic-content claims."
     },
     {
       "name": "Recycled Claim Standard (RCS)",
       "file": "assets/logos/accreditations/recycled-claim-standard.png",
-      "identified": true
+      "identified": true,
+      "certifies": "Verified recycled input with chain of custody through the supply chain.",
+      "removes": "the risk of unverified recycled-input claims."
     },
     {
       "name": "RMG Sustainability Council (RSC)",
       "file": "assets/logos/accreditations/rmg-sustainability-council.png",
-      "identified": true
+      "identified": true,
+      "certifies": "Building, fire and electrical safety with ongoing worker-safety oversight in Bangladesh.",
+      "removes": "structural and fire-safety risk when sourcing from the region."
     },
     {
       "name": "Sedex",
       "file": "assets/logos/accreditations/sedex.png",
-      "identified": true
+      "identified": true,
+      "certifies": "Ethical-trade data and SMETA audit findings shared transparently with buyers.",
+      "removes": "blind spots in responsible-sourcing due diligence."
     },
     {
       "name": "WRAP",
       "file": "assets/logos/accreditations/wrap.png",
-      "identified": true
+      "identified": true,
+      "certifies": "Lawful, humane and ethical manufacturing at the facility (Worldwide Responsible Accredited Production).",
+      "removes": "doubt over factory-level social compliance."
     }
   ]
 }

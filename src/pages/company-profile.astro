@@ -7,6 +7,7 @@ import Base from '../layouts/Base.astro';
 import PhotoChapter from '../components/PhotoChapter.astro';
 import SpecBlock from '../components/SpecBlock.astro';
 import LogoBand from '../components/LogoBand.astro';
+import ComplianceWall from '../components/ComplianceWall.astro';
 import GrowthChart from '../components/GrowthChart.astro';
 import { getEntry } from 'astro:content';
 import accreditations from '../data/accreditations.json';
@@ -61,7 +62,7 @@ const description = firstBody.length > 155 ? `${firstBody.slice(0, 152)}…` : f
   <section class="chapter">
     <span class="chapter__num" aria-hidden="true"></span>
     <h2>{accreditationsCopy.heading}</h2>
-    <LogoBand entries={accreditations.logos} label={accreditationsCopy.heading} variant="band" />
+    <ComplianceWall entries={accreditations.logos} label={accreditationsCopy.heading} />
   </section>
 
   <section class="chapter" id={vision.id}>

@@ -7,7 +7,7 @@
 // slug/anchor registry (RAILS §4, byte-exact with Footer's map).
 import Base from '../layouts/Base.astro';
 import SpecBlock from '../components/SpecBlock.astro';
-import LogoBand from '../components/LogoBand.astro';
+import ComplianceWall from '../components/ComplianceWall.astro';
 import { Image } from 'astro:assets';
 import { slot, resolveImage, slotImage } from '../lib/images';
 import home from '../data/copy/home.json';
@@ -185,7 +185,7 @@ const EM_WORD = 'legacy';
   <section class="chapter" id="accreditations">
     <span class="chapter__num" aria-hidden="true"></span>
     <h2>{accredSection.heading}</h2>
-    <LogoBand entries={accreditations.logos} label={accredSection.heading} variant="band" />
+    <ComplianceWall entries={accreditations.logos} label={accredSection.heading} />
   </section>
 
   <section class="chapter" id="partners">
