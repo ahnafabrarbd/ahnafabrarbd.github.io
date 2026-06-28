@@ -151,7 +151,13 @@ function revealsAndStitches() {
 /* ---- B6: spec count-up — markup carries the verbatim final value; we only
         animate TOWARD it, and always end by restoring the exact string */
 function countUp() {
-  const cells = [...document.querySelectorAll<HTMLElement>('.stats dd')];
+  // Every figure on the site counts up on first reveal: spec cells, the hero
+  // proof row, and the capability "at a glance" matrix values.
+  const cells = [
+    ...document.querySelectorAll<HTMLElement>('.stats dd'),
+    ...document.querySelectorAll<HTMLElement>('.hero__proof-val'),
+    ...document.querySelectorAll<HTMLElement>('.capmatrix__val'),
+  ];
   const ease = bezierFromToken('--ease-out');
   const dur = durMs('--dur-entrance');
   const io = new IntersectionObserver(

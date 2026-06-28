@@ -44,21 +44,26 @@ const { sections, label = 'Capabilities at a glance' } = Astro.props;
   }
   .capmatrix__list {
     list-style: none;
-    border-top: var(--rail-w) solid var(--hairline);
     max-width: none;
+    /* two-column matrix at desktop so the eight stages sit in two short
+       columns of four — no overflow under the section-pagination overlay */
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0 var(--space-7);
+    border-top: var(--rail-w) solid var(--hairline);
+  }
+  @media (min-width: 768px) {
+    .capmatrix__list {
+      grid-template-columns: 1fr 1fr;
+    }
   }
   .capmatrix__row {
     display: grid;
-    gap: var(--space-2) var(--space-5);
-    padding-block: var(--space-3);
+    gap: var(--space-3);
+    padding-block: var(--space-4);
     border-bottom: var(--rail-w) solid var(--hairline);
     max-width: none;
-    align-items: baseline;
-  }
-  @media (min-width: 768px) {
-    .capmatrix__row {
-      grid-template-columns: minmax(0, 1fr) minmax(0, 1.6fr);
-    }
+    align-content: start;
   }
   .capmatrix__head {
     display: flex;

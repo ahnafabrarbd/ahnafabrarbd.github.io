@@ -300,11 +300,15 @@
   },
   "underwear": {
    "status": "final-seed",
-   "note": "on-model loungewear/intimates rail — one suitable STIL on-model shot (yellow lace-trim cami lounge set); remaining cutouts retired with the cutout style; only one model shot in the set fits this category, so the rail is kept tasteful at one rather than padded",
+   "note": "owner-supplied intimates cutouts on transparent ground: men's striped boxer brief and women's lace bralette + brief set (replaces the retired yellow loungewear shot)",
    "items": [
     {
-     "src": "assets/img/drive/products/underwear-01.jpg",
-     "alt": "Female model wearing a Rizvi-made pale-yellow cotton camisole with lace-trim hem and matching lounge trousers, full-length on a light studio background"
+     "src": "assets/img/drive/products/underwear-01.png",
+     "alt": "Rizvi-made men's navy-and-blue fine-striped boxer brief on a form, presented on a transparent ground"
+    },
+    {
+     "src": "assets/img/drive/products/underwear-02.png",
+     "alt": "Rizvi-made women's black lace bralette and matching brief set on a form, presented on a transparent ground"
     }
    ]
   },
