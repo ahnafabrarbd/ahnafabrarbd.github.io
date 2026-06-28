@@ -106,11 +106,47 @@ const copyright = footer.copyright.replace(/\b20\d\d\b/, String(year));
     <p class="footer__legal u-caps">{copyright}</p>
   </div>
 </footer>
+<script>
+  // A slow, contemplative arrival for the closing footer — it rises and settles
+  // gently as you reach the end, giving the final corridor segment room to be
+  // read before the page closes. Reduced-motion / no-IO resolves instantly.
+  const f = document.querySelector('.footer');
+  if (f) {
+    const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduced || !('IntersectionObserver' in window)) {
+      f.classList.add('is-in');
+    } else {
+      const io = new IntersectionObserver(
+        (entries) => {
+          for (const e of entries) {
+            if (e.isIntersecting) { f.classList.add('is-in'); io.disconnect(); }
+          }
+        },
+        { threshold: 0.12 },
+      );
+      io.observe(f);
+    }
+  }
+</script>
 
 <style>
   .footer {
     border-top: var(--rail-w) solid var(--hairline);
     margin-block-start: var(--space-8);
+    /* extra lead-in space so the footer arrives as a calm coda, not abruptly */
+    padding-block-start: var(--space-5);
+  }
+  /* slow settle on arrival (the contemplative goodbye) */
+  .js .footer__in {
+    opacity: 0;
+    transform: translateY(var(--space-4));
+    transition:
+      opacity var(--dur-lux) var(--ease-out),
+      transform var(--dur-lux) var(--ease-out);
+  }
+  .js .footer.is-in .footer__in { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .js .footer__in { opacity: 1; transform: none; transition: none; }
   }
   .footer__in {
     padding: var(--space-6) var(--gutter-mobile);

@@ -82,6 +82,10 @@ const RUNTIME_PROPS = new Set([
   // per word; --start / --local are component-scoped calc()s derived from them.
   // Plumbing for the scroll-coupled text reveal, not design tokens.
   '--i', '--n', '--start', '--local',
+  // product-gallery image index (our-products.astro): per-<li> stagger delay for
+  // the scroll-in accumulation. Same family as --i/--n — a runtime index, not a
+  // design token.
+  '--j',
   // bespoke-cursor follow scalars: premium.ts writes the lerped ring position
   // (--cursor-x/--cursor-y) and hover scale (--cursor-scale) per frame. Runtime
   // plumbing for transform-only cursor motion, not design tokens.

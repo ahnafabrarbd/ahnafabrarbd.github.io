@@ -72,7 +72,7 @@ const lcpPreload = firstItem
           {items.length > 0 ? (
             <ul class="cat-panel__rail" tabindex="0" aria-label={`${label} — product gallery`}>
               {items.map(({ image, alt }, j) => (
-                <li>
+                <li class="cat-img" style={`--j: ${j}`}>
                   <Image
                     src={image}
                     alt={alt}
@@ -93,11 +93,47 @@ const lcpPreload = firstItem
       ))}
     </ol>
   </section>
+
+  <script>
+    // Reveal each category's images in sequence as the category scrolls into
+    // view (works under the corridor scrub and the vertical fallback alike).
+    const cats = document.querySelectorAll('.cat-panel');
+    const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduced || !('IntersectionObserver' in window)) {
+      cats.forEach((c) => c.classList.add('is-revealing'));
+    } else {
+      const io = new IntersectionObserver(
+        (entries) => {
+          for (const e of entries) {
+            if (e.isIntersecting) { e.target.classList.add('is-revealing'); io.unobserve(e.target); }
+          }
+        },
+        { threshold: 0.2 },
+      );
+      cats.forEach((c) => io.observe(c));
+    }
+  </script>
 </Base>
 
 <style>
   .page-head { padding-block: var(--space-7) var(--space-5); }
   .page-head__intro { font-size: var(--text-md); margin-block-start: var(--space-4); }
+
+  /* products accumulate: as each category enters, its garments slide in one
+     after another (per-image stagger via --j), the category itself staying put.
+     .js-gated so no-JS shows them all; reduced-motion resolves instantly. */
+  .js .cat-img {
+    opacity: 0;
+    transform: translateX(var(--space-4));
+    transition:
+      opacity var(--dur-slow) var(--ease-out),
+      transform var(--dur-slow) var(--ease-out);
+    transition-delay: calc(var(--j) * var(--dur-base));
+  }
+  .js .cat-panel.is-revealing .cat-img { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .js .cat-img { opacity: 1; transform: none; transition: none; }
+  }
 
   /* category index: dimmed resting; the active category goes ink as the gallery
      scrolls past it (set by products.ts; CSS-only fallback stays static) */
