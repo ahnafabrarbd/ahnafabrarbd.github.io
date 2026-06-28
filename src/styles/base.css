@@ -451,7 +451,7 @@ main { flex: 1; }
   overflow: hidden;
 }
 /* full-bleed rooms keep a full viewport */
-.hscroll-on .hpanel:has(> .photo-chapter) { width: 100vw; }
+.hscroll-on .hpanel:has(> .photo-chapter:not(.photo-chapter--grid)) { width: 100vw; }
 /* TALL rooms scroll INTERNALLY so copy is never clipped (content-reachability) */
 .hscroll-on .hpanel.is-tall {
   justify-content: flex-start;
@@ -525,19 +525,19 @@ main { flex: 1; }
 /* ===== text-on-image continuity (owner): a PhotoChapter room becomes FULL-BLEED
    imagery with the heading + copy overlaid on a legibility scrim, so the section
    reads as one immersive plane (not image-beside-text) and flows into the next. */
-.hscroll-on .hpanel:has(> .photo-chapter) { padding: 0; }
-.hscroll-on .hpanel > .photo-chapter {
+.hscroll-on .hpanel:has(> .photo-chapter:not(.photo-chapter--grid)) { padding: 0; }
+.hscroll-on .hpanel > .photo-chapter:not(.photo-chapter--grid) {
   position: absolute;
   inset: 0;
   display: block;
   gap: 0;
   margin: 0;
 }
-.hscroll-on .hpanel > .photo-chapter .photo-chapter__media {
+.hscroll-on .hpanel > .photo-chapter:not(.photo-chapter--grid) .photo-chapter__media {
   position: absolute;
   inset: 0;
 }
-.hscroll-on .hpanel > .photo-chapter .photo-chapter__media img {
+.hscroll-on .hpanel > .photo-chapter:not(.photo-chapter--grid) .photo-chapter__media img {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -546,7 +546,7 @@ main { flex: 1; }
      the room reaches centre (--reveal 0→1, written per frame by the engine). */
   clip-path: inset(calc((1 - var(--reveal, 1)) * 50%) 0%);
 }
-.hscroll-on .hpanel > .photo-chapter::after {
+.hscroll-on .hpanel > .photo-chapter:not(.photo-chapter--grid)::after {
   content: '';
   position: absolute;
   inset: 0;
@@ -554,7 +554,7 @@ main { flex: 1; }
   pointer-events: none;
   background: linear-gradient(to top, var(--scrim-img), transparent 62%);
 }
-.hscroll-on .hpanel > .photo-chapter .photo-chapter__copy {
+.hscroll-on .hpanel > .photo-chapter:not(.photo-chapter--grid) .photo-chapter__copy {
   position: absolute;
   inset: auto 0 0 0;
   z-index: var(--z-thread);
@@ -563,10 +563,29 @@ main { flex: 1; }
   max-width: var(--measure-body);
   color: var(--ground);
 }
-.hscroll-on .hpanel > .photo-chapter .photo-chapter__copy h2,
-.hscroll-on .hpanel > .photo-chapter .photo-chapter__copy p,
-.hscroll-on .hpanel > .photo-chapter .photo-chapter__copy .chapter__num {
+.hscroll-on .hpanel > .photo-chapter:not(.photo-chapter--grid) .photo-chapter__copy h2,
+.hscroll-on .hpanel > .photo-chapter:not(.photo-chapter--grid) .photo-chapter__copy p,
+.hscroll-on .hpanel > .photo-chapter:not(.photo-chapter--grid) .photo-chapter__copy .chapter__num {
   color: var(--ground);
+}
+
+/* the GRID PhotoChapter variant opts OUT of full-bleed: it keeps a small,
+   grid-aligned image beside the copy in the corridor (text-led, image to the
+   side) instead of becoming an immersive plane. */
+.hscroll-on .hpanel > .photo-chapter--grid {
+  position: relative;
+  inset: auto;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: var(--space-6);
+  align-items: center;
+  width: min(100%, calc(var(--space-8) * 8));
+}
+.hscroll-on .hpanel > .photo-chapter--grid .photo-chapter__media img {
+  max-height: 60svh;
+  width: 100%;
+  object-fit: cover;
+  border: var(--rail-w) solid var(--hairline);
 }
 
 /* (no film grain — the owner wants pure flat colour, no texture/tooth) */

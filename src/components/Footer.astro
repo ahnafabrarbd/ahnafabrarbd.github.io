@@ -95,8 +95,8 @@ const copyright = footer.copyright.replace(/\b20\d\d\b/, String(year));
           ['Partners', '/partners/'],
           ['Career', '/career/'],
           ['Gallery', '/gallery/'],
-          ['Contact', '/contact/'],
           ['Privacy', '/privacy/'],
+          ['Contact', '/contact/'],
         ].map(([label, url]) => (
           <li><a href={url}>{label}</a></li>
         ))}
@@ -210,13 +210,23 @@ const copyright = footer.copyright.replace(/\b20\d\d\b/, String(year));
     transition: color var(--dur-fast) var(--ease-out);
   }
   address a:hover { color: var(--accent); }
+  /* two stacked columns of page links you can navigate by: fills column-first so
+     Home sits at the top of the first column and Contact at the foot of the
+     second (six rows each). Falls back to a single column on narrow screens. */
   .footer__index {
     list-style: none;
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-2) var(--space-3);
+    display: grid;
+    grid-template-columns: max-content;
+    gap: var(--space-2) var(--space-6);
     border-top: var(--rail-w) solid var(--hairline);
     padding-block-start: var(--space-3);
+  }
+  @media (min-width: 768px) {
+    .footer__index {
+      grid-template-columns: max-content max-content;
+      grid-template-rows: repeat(6, auto);
+      grid-auto-flow: column;
+    }
   }
   .footer__index a {
     color: var(--ink-muted);

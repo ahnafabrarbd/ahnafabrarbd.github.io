@@ -41,7 +41,7 @@ const description = firstBody.length > 155 ? `${firstBody.slice(0, 152)}…` : f
 
   {sections.map((s) =>
     s.id === PHOTO_ID ? (
-      <PhotoChapter page="sustainability" slotName={PHOTO_ID} id={s.id} heading={s.heading} body={s.body} flip>
+      <PhotoChapter page="sustainability" slotName={PHOTO_ID} id={s.id} heading={s.heading} body={s.body} flip grid>
         {(s.items ?? []).length > 0 && (
           <ul class="keyline-list">
             {s.items.map((it: string) => <li>{it}</li>)}

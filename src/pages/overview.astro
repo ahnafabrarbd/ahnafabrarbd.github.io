@@ -114,11 +114,15 @@ const description = p1.length > 155 ? `${p1.slice(0, 152)}…` : p1;
     </div>
   </section>
 
-  <Breather page="overview" slotName="breather-aerial" caption={aerialCaption} />
-
-  <section class="bgmea" id="bgmea">
-    <p class="u-caps bgmea__line">{bgmeaLine}</p>
-  </section>
+  {/* BGMEA membership: text laid OVER the aerial image as one continuous segment
+      (owner #27) — in the corridor PhotoChapter becomes full-bleed text-on-image;
+      vertical fallback is image-beside-text. */}
+  <PhotoChapter
+    page="overview"
+    slotName="breather-aerial"
+    id="bgmea"
+    body={[bgmeaLine]}
+  />
 </Base>
 
 <style>

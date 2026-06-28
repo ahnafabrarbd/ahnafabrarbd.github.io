@@ -13,11 +13,14 @@ interface Props {
   body?: string[];
   flip?: boolean;
   eager?: boolean;
+  /** keep a small grid-aligned image beside the copy even in the corridor
+      (opts out of the full-bleed text-on-image treatment) */
+  grid?: boolean;
 }
-const { page, slotName, id = null, heading = null, body = [], flip = false, eager = false } = Astro.props;
+const { page, slotName, id = null, heading = null, body = [], flip = false, eager = false, grid = false } = Astro.props;
 const { image, alt } = await slotImage(page, slotName);
 ---
-<section class="chapter photo-chapter" class:list={[{ 'photo-chapter--flip': flip }]} id={id ?? undefined}>
+<section class="chapter photo-chapter" class:list={[{ 'photo-chapter--flip': flip, 'photo-chapter--grid': grid }]} id={id ?? undefined}>
   <div class="photo-chapter__media">
     <Image
       src={image}
