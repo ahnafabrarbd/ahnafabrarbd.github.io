@@ -771,6 +771,16 @@ main { flex: 1; }
 .has-cursor [data-magnetic],
 .has-cursor .rail-index__dot { cursor: none; }
 
+/* When the overlay menu is open, hand control back to the native pointer so it
+   stays visible and clickable across the whole screen — not just the buttons
+   the bespoke ring lit up. The custom dot/ring fade out for the duration. */
+.has-cursor:has(.overlay[open]) { cursor: auto; }
+.has-cursor:has(.overlay[open]) a,
+.has-cursor:has(.overlay[open]) button,
+.has-cursor:has(.overlay[open]) [data-magnetic] { cursor: pointer; }
+.has-cursor:has(.overlay[open]) .cursor-dot,
+.has-cursor:has(.overlay[open]) .cursor-ring { opacity: 0; }
+
 /* hero entrance keyframes (kept at column 0 here, NOT in the indented index.astro
    <style> block, so token-lint's @keyframes brace-reset works; the class rules
    that use them live in index.astro). */

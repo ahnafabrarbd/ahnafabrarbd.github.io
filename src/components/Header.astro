@@ -3,24 +3,47 @@
 // Hover: ink-muted → ink on links; active page gets --accent accent. Menu opens overlay.
 import OverlayMenu from './OverlayMenu.astro';
 
-const NAV = [
+// "About Us" groups the company pages behind a dropdown; the rest sit inline.
+const ABOUT = [
   { label: 'Overview', href: '/overview/' },
-  { label: 'Capabilities', href: '/our-capabilities/' },
-  { label: 'Products', href: '/our-products/' },
-  { label: 'Sustainability', href: '/sustainability/' },
-  { label: 'Partners', href: '/partners/' },
-  { label: 'Contact', href: '/contact/' },
+  { label: 'Company Profile', href: '/company-profile/' },
+  { label: 'Management', href: '/management/' },
+  { label: 'Gallery', href: '/gallery/' },
 ];
+const NAV = [
+  { label: 'Capabilities', href: '/our-capabilities/' },
+  { label: 'Partners', href: '/partners/' },
+  { label: 'Sustainability', href: '/sustainability/' },
+  { label: 'Products', href: '/our-products/' },
+];
+const path = Astro.url.pathname;
+const aboutActive = ABOUT.some(({ href }) => href === path);
 ---
 <header class="topbar">
   <div class="topbar__in">
     <a class="topbar__mark" href="/">
+      <img class="topbar__logo" src="/logo-mark.png" alt="" width="396" height="395" />
       <span class="topbar__rizvi">Rizvi</span><span class="topbar__fashions">&nbsp;Fashions</span>
     </a>
     <nav class="topbar__nav" aria-label="Primary">
       <ul>
+        <li class="topbar__about">
+          <button
+            class="topbar__dropbtn"
+            type="button"
+            aria-expanded="false"
+            aria-controls="about-menu"
+            aria-current={aboutActive ? 'page' : undefined}
+            data-about-toggle
+          >About Us<svg class="topbar__caret" viewBox="0 0 12 8" aria-hidden="true" width="12" height="8"><path d="M1 1.5 6 6.5 11 1.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <div class="topbar__drop" id="about-menu" role="menu">
+            {ABOUT.map(({ label, href }) => (
+              <a role="menuitem" href={href} aria-current={path === href ? 'page' : undefined}>{label}</a>
+            ))}
+          </div>
+        </li>
         {NAV.map(({ label, href }) => (
-          <li><a href={href} aria-current={Astro.url.pathname === href ? 'page' : undefined}>{label}</a></li>
+          <li><a href={href} aria-current={path === href ? 'page' : undefined}>{label}</a></li>
         ))}
         <li>
           <button class="topbar__menu" type="button" data-overlay-open aria-haspopup="dialog">Menu</button>
@@ -29,6 +52,23 @@ const NAV = [
     </nav>
   </div>
 </header>
+<script>
+  // Click-to-toggle the About Us dropdown; close on outside-click or Escape.
+  const btn = document.querySelector<HTMLButtonElement>('[data-about-toggle]');
+  const wrap = btn?.closest('.topbar__about');
+  if (btn && wrap) {
+    const close = () => { wrap.classList.remove('is-open'); btn.setAttribute('aria-expanded', 'false'); };
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const open = wrap.classList.toggle('is-open');
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    document.addEventListener('click', (e) => {
+      if (!wrap.contains(e.target as Node)) close();
+    });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') close(); });
+  }
+</script>
 <OverlayMenu />
 
 <style>
@@ -54,6 +94,9 @@ const NAV = [
     .topbar__in { padding-inline: var(--gutter); }
   }
   .topbar__mark {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
     font-family: var(--font-display);
     font-weight: var(--fw-display);
     font-style: italic;
@@ -63,6 +106,12 @@ const NAV = [
     color: var(--ink);
     text-decoration: none;
     line-height: var(--leading-tight);
+  }
+  .topbar__logo {
+    display: block;
+    width: auto;
+    height: var(--space-4);
+    /* the brand mark stays its own pink — the one warm accent the bar allows */
   }
   .topbar__fashions { font-weight: var(--fw-display-sub); color: var(--ink-muted); }
   .topbar__nav ul {
@@ -124,4 +173,74 @@ const NAV = [
       transform var(--dur-fast) var(--ease-out);
   }
   .topbar__menu:hover { color: var(--ink); transform: translateY(-1px); }
+
+  /* ---- About Us dropdown ---- */
+  .topbar__about { position: relative; }
+  .topbar__dropbtn {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-1);
+    background: none;
+    border: none;
+    color: var(--ink-muted);
+    font-family: var(--font-body);
+    font-size: var(--text-sm);
+    font-weight: var(--fw-body-strong);
+    letter-spacing: var(--tracking-nav);
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: color var(--dur-fast) var(--ease-out);
+  }
+  .topbar__dropbtn:hover,
+  .topbar__about.is-open .topbar__dropbtn { color: var(--ink); }
+  .topbar__dropbtn[aria-current="page"] { color: var(--accent); }
+  .topbar__caret {
+    transition: transform var(--dur-base) var(--ease-expressive);
+  }
+  .topbar__about.is-open .topbar__caret { transform: rotate(180deg); }
+  .topbar__drop {
+    position: absolute;
+    top: calc(100% + var(--space-2));
+    left: 0;
+    min-width: 13rem;
+    display: grid;
+    background: var(--ground-pure);
+    border: var(--rail-w) solid var(--hairline);
+    box-shadow: 0 var(--space-1) var(--space-4) var(--shadow-soft);
+    padding: var(--space-2) 0;
+    /* smooth open: fade + lift in, gated behind .is-open; hidden to AT + pointer
+       when closed via visibility so it can still transition */
+    opacity: 0;
+    transform: translateY(calc(-1 * var(--space-1)));
+    visibility: hidden;
+    pointer-events: none;
+    transition:
+      opacity var(--dur-base) var(--ease-out),
+      transform var(--dur-base) var(--ease-expressive),
+      visibility 0s linear var(--dur-base);
+  }
+  .topbar__about.is-open .topbar__drop {
+    opacity: 1;
+    transform: translateY(0);
+    visibility: visible;
+    pointer-events: auto;
+    transition:
+      opacity var(--dur-base) var(--ease-out),
+      transform var(--dur-base) var(--ease-expressive),
+      visibility 0s;
+  }
+  .topbar__drop a {
+    display: block;
+    padding: var(--space-2) var(--space-4);
+    color: var(--ink-muted);
+    text-decoration: none;
+    font-family: var(--font-body);
+    font-size: var(--text-sm);
+    font-weight: var(--fw-body-strong);
+    letter-spacing: var(--tracking-nav);
+    text-transform: uppercase;
+    transition: color var(--dur-fast) var(--ease-out), background var(--dur-fast) var(--ease-out);
+  }
+  .topbar__drop a:hover { color: var(--ink); background: var(--glass); }
+  .topbar__drop a[aria-current="page"] { color: var(--accent); }
 </style>

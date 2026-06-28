@@ -16,13 +16,13 @@ interface Props {
 const { points, caption, unit = 'USD M', goal = false } = Astro.props;
 
 const W = 760;
-const H = 300;
-const PAD = { t: 24, r: 8, b: 56, l: 8 };
+const H = 470;
+const PAD = { t: 44, r: 8, b: 76, l: 8 };
 const max = Math.max(...points.map((p) => p.value)) * 1.12;
 const innerW = W - PAD.l - PAD.r;
 const innerH = H - PAD.t - PAD.b;
 const slotW = innerW / points.length;
-const barW = Math.min(slotW * 0.55, 56);
+const barW = Math.min(slotW * 0.62, 60);
 const bars = points.map((p, i) => {
   const h = (p.value / max) * innerH;
   return {
@@ -54,8 +54,8 @@ const bars = points.map((p, i) => {
         ) : (
           <rect x={b.x} y={b.y} width={barW} height={b.h} fill="var(--ink)" />
         )}
-        <text class="growth__val" x={b.cx} y={b.y - 12} text-anchor="middle" fill="var(--ink)">{b.value}</text>
-        <text class="growth__lbl" x={b.cx} y={PAD.t + innerH + 22} text-anchor="middle" fill="var(--ink-muted)">{b.label}</text>
+        <text class="growth__val" x={b.cx} y={b.y - 16} text-anchor="middle" fill="var(--ink)">{b.value}</text>
+        <text class="growth__lbl" x={b.cx} y={PAD.t + innerH + 30} text-anchor="middle" fill="var(--ink-muted)">{b.label}</text>
       </>
     ))}
   </svg>
@@ -72,7 +72,7 @@ const bars = points.map((p, i) => {
   }
   /* one step larger than the page scale: the SVG viewBox scales DOWN on
      mobile, where xs/2xs labels went near-illegible (G5 critic FIX) */
-  .growth__val { font-size: var(--text-sm); font-weight: var(--fw-utility-strong); }
-  .growth__lbl { font-size: var(--text-xs); letter-spacing: var(--tracking-num); }
+  .growth__val { font-size: var(--text-xl); font-weight: var(--fw-utility-strong); }
+  .growth__lbl { font-size: var(--text-base); letter-spacing: var(--tracking-num); }
   .growth figcaption { color: var(--ink-muted); margin-block-start: var(--space-2); }
 </style>
