@@ -43,6 +43,7 @@ const copyright = footer.copyright.replace(/\b20\d\d\b/, String(year));
 <footer class="footer">
   <div class="footer__in">
     <div class="footer__mark">
+      <img class="footer__logo" src="/logo-mark.png" alt="" width="396" height="395" />
       <span>Rizvi Fashions Limited</span>
       <svg class="footer__knot" width="40" height="16" viewBox="0 0 40 16" aria-hidden="true">
         <path d="M0 8 H22 C30 8 30 2 25 2 C20 2 20 14 28 14 H40" fill="none" stroke="var(--accent)" stroke-width="1" />
@@ -118,6 +119,11 @@ const copyright = footer.copyright.replace(/\b20\d\d\b/, String(year));
   }
   @media (min-width: 768px) {
     .footer__in { padding-inline: var(--gutter); }
+  }
+  .footer__logo {
+    display: block;
+    width: auto;
+    height: var(--space-5);
   }
   .footer__mark {
     display: flex;
