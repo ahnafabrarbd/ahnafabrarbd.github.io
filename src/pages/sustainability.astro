@@ -27,8 +27,17 @@ if (missing.length) {
   throw new Error(`HARD anchor(s) missing in copy/sustainability: #${missing.join(', #')} — RAILS.md §4`);
 }
 
-// the single image-led chapter on this page (image-map sustainability section)
-const PHOTO_ID = 'health-and-family-wellbeing';
+// the image-led chapters on this page — each names a curated image-map slot.
+// They alternate image-side down the page (PHOTO_IDS index parity drives flip,
+// keeping the original Health chapter on its established side).
+const PHOTO_IDS = [
+  'health-and-family-wellbeing',
+  'safe-and-healthy-work-environment',
+  'educational-and-professional-development',
+  'equality-and-acceptance',
+  'best-practices',
+];
+const photoIndex = (id: string) => PHOTO_IDS.indexOf(id);
 
 const firstBody: string =
   sections.flatMap((s) => s.body ?? []).find((p: string) => typeof p === 'string' && p.length > 40) ?? title;
@@ -40,8 +49,8 @@ const description = firstBody.length > 155 ? `${firstBody.slice(0, 152)}…` : f
   </header>
 
   {sections.map((s) =>
-    s.id === PHOTO_ID ? (
-      <PhotoChapter page="sustainability" slotName={PHOTO_ID} id={s.id} heading={s.heading} body={s.body} flip grid>
+    photoIndex(s.id) !== -1 ? (
+      <PhotoChapter page="sustainability" slotName={s.id} id={s.id} heading={s.heading} body={s.body} flip={photoIndex(s.id) % 2 === 0} grid>
         {(s.items ?? []).length > 0 && (
           <ul class="keyline-list">
             {s.items.map((it: string) => <li>{it}</li>)}

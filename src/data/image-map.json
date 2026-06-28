@@ -588,6 +588,30 @@
    "alt": "A worker carries her child past the breast-feeding corner at the factory",
    "origin": "drive",
    "note": "AI-provenance flag R-008 - owner sign-off before production"
+  },
+  "safe-and-healthy-work-environment": {
+   "src": "assets/img/site/fire-safety.jpg",
+   "status": "final",
+   "alt": "A factory floor with an emergency evacuation plan, fire extinguishers and a fire-hydrant cabinet on the wall",
+   "origin": "old-site"
+  },
+  "educational-and-professional-development": {
+   "src": "assets/img/site/skills-training.jpg",
+   "status": "final",
+   "alt": "Trainees observing a skills-development demonstration at a sewing line",
+   "origin": "old-site"
+  },
+  "equality-and-acceptance": {
+   "src": "assets/img/site/equality-workers.png",
+   "status": "final",
+   "alt": "Two Rizvi Fashions workers standing together on the factory floor",
+   "origin": "old-site"
+  },
+  "best-practices": {
+   "src": "assets/img/site/medical-checkup.jpg",
+   "status": "final",
+   "alt": "A worker receiving a free on-site medical check-up from a member of the factory medical staff",
+   "origin": "old-site"
   }
  },
  "gallery": {
