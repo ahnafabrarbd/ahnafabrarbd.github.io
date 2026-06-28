@@ -63,6 +63,22 @@ const copyright = footer.copyright.replace(/\b20\d\d\b/, String(year));
         ))}
       </section>
 
+      <nav class="footer__col" aria-label="Pages">
+        <h2 class="u-caps">Pages</h2>
+        <ul>
+          {[
+            ['Home', '/'],
+            ['Company Profile', '/company-profile/'],
+            ['Management', '/management/'],
+            ['Career', '/career/'],
+            ['Gallery', '/gallery/'],
+            ['Contact', '/contact/'],
+          ].map(([label, url]) => (
+            <li><a href={url}>{label}</a></li>
+          ))}
+        </ul>
+      </nav>
+
       {columns.map((col: any) => (
         <nav class="footer__col" aria-label={col.heading}>
           <h2 class="u-caps">{col.heading}</h2>
@@ -157,7 +173,7 @@ const copyright = footer.copyright.replace(/\b20\d\d\b/, String(year));
     gap: var(--space-5);
   }
   @media (min-width: 768px) {
-    .footer__cols { grid-template-columns: 2fr 1fr 1fr 1fr 1fr; gap: var(--space-4); }
+    .footer__cols { grid-template-columns: 2fr 1fr 1fr 1fr 1fr 1fr; gap: var(--space-4); }
   }
   .footer__col h2 {
     color: var(--ink-muted);
