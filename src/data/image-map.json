@@ -236,7 +236,7 @@
  "products": {
   "mens": {
    "status": "final-seed",
-   "note": "on-model lookbook rail — menswear; professional STIL shots on neutral light-grey seamless, replacing the older cutouts (curated best 4 of the men's candidates)",
+   "note": "on-model lookbook rail — menswear; professional STIL shots on neutral light-grey seamless, replacing the older cutouts (curated best 4 of the men's candidates) | live-site images appended (owner 2026-06-29)",
    "items": [
     {
      "src": "assets/img/drive/products/mens-01.jpg",
@@ -253,12 +253,60 @@
     {
      "src": "assets/img/drive/products/mens-04.jpg",
      "alt": "Mature male model wearing a Rizvi-made grey marl slogan tee with olive chinos and white sneakers, full-length on a light-grey studio background"
+    },
+    {
+     "src": "assets/img/drive/products/mens-live-01.png",
+     "alt": "Rizvi-made men's apparel on a studio ground"
+    },
+    {
+     "src": "assets/img/drive/products/mens-live-02.png",
+     "alt": "Rizvi-made men's apparel on a studio ground"
+    },
+    {
+     "src": "assets/img/drive/products/mens-live-03.png",
+     "alt": "Rizvi-made men's apparel on a studio ground"
+    },
+    {
+     "src": "assets/img/drive/products/mens-live-04.png",
+     "alt": "Rizvi-made men's apparel on a studio ground"
+    },
+    {
+     "src": "assets/img/drive/products/mens-live-05.png",
+     "alt": "Rizvi-made men's apparel on a studio ground"
+    },
+    {
+     "src": "assets/img/drive/products/mens-live-06.png",
+     "alt": "Rizvi-made men's apparel on a studio ground"
+    },
+    {
+     "src": "assets/img/drive/products/mens-live-07.png",
+     "alt": "Rizvi-made men's apparel on a studio ground"
+    },
+    {
+     "src": "assets/img/drive/products/mens-live-08.png",
+     "alt": "Rizvi-made men's apparel on a studio ground"
+    },
+    {
+     "src": "assets/img/drive/products/mens-live-09.png",
+     "alt": "Rizvi-made men's apparel on a studio ground"
+    },
+    {
+     "src": "assets/img/drive/products/mens-live-10.png",
+     "alt": "Rizvi-made men's apparel on a studio ground"
+    },
+    {
+     "src": "assets/img/drive/products/mens-live-11.png",
+     "alt": "Rizvi-made men's apparel on a studio ground"
+    },
+    {
+     "src": "assets/img/drive/products/mens-live-12.png",
+     "alt": "Rizvi-made men's apparel on a studio ground"
     }
    ]
   },
   "womens": {
    "status": "final-seed",
-   "note": "on-model lookbook rail — womenswear; professional STIL shots on neutral light-grey/off-white seamless, replacing the older cutouts (curated best 4 of the women's candidates)",
+   "note": "on-model lookbook rail — womenswear; professional STIL shots on neutral light-grey/off-white seamless, replacing the older cutouts (curated best 4 of the women's candidates) | live-site images appended (owner 2026-06-29)",
    "items": [
     {
      "src": "assets/img/drive/products/womens-01.jpg",
@@ -275,12 +323,88 @@
     {
      "src": "assets/img/drive/products/womens-04.jpg",
      "alt": "Female model wearing a Rizvi-made sky-blue sleeveless empire-waist tunic with pink cargo trousers and white sneakers, full-length on an off-white studio background"
+    },
+    {
+     "src": "assets/img/drive/products/womens-live-01.png",
+     "alt": "Rizvi-made women's apparel on a studio ground"
+    },
+    {
+     "src": "assets/img/drive/products/womens-live-02.png",
+     "alt": "Rizvi-made women's apparel on a studio ground"
+    },
+    {
+     "src": "assets/img/drive/products/womens-live-03.png",
+     "alt": "Rizvi-made women's apparel on a studio ground"
+    },
+    {
+     "src": "assets/img/drive/products/womens-live-04.png",
+     "alt": "Rizvi-made women's apparel on a studio ground"
+    },
+    {
+     "src": "assets/img/drive/products/womens-live-05.png",
+     "alt": "Rizvi-made women's apparel on a studio ground"
+    },
+    {
+     "src": "assets/img/drive/products/womens-live-06.png",
+     "alt": "Rizvi-made women's apparel on a studio ground"
+    },
+    {
+     "src": "assets/img/drive/products/womens-live-07.png",
+     "alt": "Rizvi-made women's apparel on a studio ground"
+    },
+    {
+     "src": "assets/img/drive/products/womens-live-08.png",
+     "alt": "Rizvi-made women's apparel on a studio ground"
+    },
+    {
+     "src": "assets/img/drive/products/womens-live-09.png",
+     "alt": "Rizvi-made women's apparel on a studio ground"
+    },
+    {
+     "src": "assets/img/drive/products/womens-live-10.png",
+     "alt": "Rizvi-made women's apparel on a studio ground"
+    },
+    {
+     "src": "assets/img/drive/products/womens-live-11.png",
+     "alt": "Rizvi-made women's apparel on a studio ground"
+    },
+    {
+     "src": "assets/img/drive/products/womens-live-12.png",
+     "alt": "Rizvi-made women's apparel on a studio ground"
+    },
+    {
+     "src": "assets/img/drive/products/womens-live-13.png",
+     "alt": "Rizvi-made women's apparel on a studio ground"
+    },
+    {
+     "src": "assets/img/drive/products/womens-live-14.png",
+     "alt": "Rizvi-made women's apparel on a studio ground"
+    },
+    {
+     "src": "assets/img/drive/products/womens-live-15.png",
+     "alt": "Rizvi-made women's apparel on a studio ground"
+    },
+    {
+     "src": "assets/img/drive/products/womens-live-16.png",
+     "alt": "Rizvi-made women's apparel on a studio ground"
+    },
+    {
+     "src": "assets/img/drive/products/womens-live-17.png",
+     "alt": "Rizvi-made women's apparel on a studio ground"
+    },
+    {
+     "src": "assets/img/drive/products/womens-live-18.png",
+     "alt": "Rizvi-made women's apparel on a studio ground"
+    },
+    {
+     "src": "assets/img/drive/products/womens-live-19.png",
+     "alt": "Rizvi-made women's apparel on a studio ground"
     }
    ]
   },
   "kids": {
    "status": "final-seed",
-   "note": "on-model lookbook rail — kidswear; professional STIL shots on neutral light-grey/off-white seamless, replacing the older cutouts (curated mix of boys and girls)",
+   "note": "on-model lookbook rail — kidswear; professional STIL shots on neutral light-grey/off-white seamless, replacing the older cutouts (curated mix of boys and girls) | live-site images appended (owner 2026-06-29)",
    "items": [
     {
      "src": "assets/img/drive/products/kids-01.jpg",
@@ -297,6 +421,54 @@
     {
      "src": "assets/img/drive/products/kids-04.jpg",
      "alt": "Young girl modelling a Rizvi-made yellow Sonic graphic tee with lime-green shorts and high-top trainers, full-length on an off-white studio background"
+    },
+    {
+     "src": "assets/img/drive/products/kids-live-01.png",
+     "alt": "Rizvi-made kids' apparel on a studio ground"
+    },
+    {
+     "src": "assets/img/drive/products/kids-live-02.png",
+     "alt": "Rizvi-made kids' apparel on a studio ground"
+    },
+    {
+     "src": "assets/img/drive/products/kids-live-03.png",
+     "alt": "Rizvi-made kids' apparel on a studio ground"
+    },
+    {
+     "src": "assets/img/drive/products/kids-live-04.png",
+     "alt": "Rizvi-made kids' apparel on a studio ground"
+    },
+    {
+     "src": "assets/img/drive/products/kids-live-05.png",
+     "alt": "Rizvi-made kids' apparel on a studio ground"
+    },
+    {
+     "src": "assets/img/drive/products/kids-live-06.png",
+     "alt": "Rizvi-made kids' apparel on a studio ground"
+    },
+    {
+     "src": "assets/img/drive/products/kids-live-07.png",
+     "alt": "Rizvi-made kids' apparel on a studio ground"
+    },
+    {
+     "src": "assets/img/drive/products/kids-live-08.png",
+     "alt": "Rizvi-made kids' apparel on a studio ground"
+    },
+    {
+     "src": "assets/img/drive/products/kids-live-09.png",
+     "alt": "Rizvi-made kids' apparel on a studio ground"
+    },
+    {
+     "src": "assets/img/drive/products/kids-live-10.png",
+     "alt": "Rizvi-made kids' apparel on a studio ground"
+    },
+    {
+     "src": "assets/img/drive/products/kids-live-11.png",
+     "alt": "Rizvi-made kids' apparel on a studio ground"
+    },
+    {
+     "src": "assets/img/drive/products/kids-live-12.png",
+     "alt": "Rizvi-made kids' apparel on a studio ground"
     }
    ]
   },
@@ -304,21 +476,109 @@
    "status": "final-seed",
    "note": "underwear rail sourced from the live rizvifashions.com/our-products/ Underwear tab (owner 2026-06-29); the two transparent cutouts were removed",
    "items": [
-    { "src": "assets/img/drive/products/underwear-live-01.png", "alt": "Rizvi-made scallop-edge seamless briefs in a three-pack — grey, blush and ivory" },
-    { "src": "assets/img/drive/products/underwear-live-02.png", "alt": "Rizvi-made navy polka-dot 'Jolie' women's brief" },
-    { "src": "assets/img/drive/products/underwear-live-03.png", "alt": "Rizvi-made nude 'Brillante' women's brief" },
-    { "src": "assets/img/drive/products/underwear-live-04.png", "alt": "Rizvi-made set of three printed women's briefs — 'Boudeuse', 'Brillante' and 'Jolie'" },
-    { "src": "assets/img/drive/products/underwear-live-05.png", "alt": "Rizvi-made men's cotton boxer briefs in navy and green" },
-    { "src": "assets/img/drive/products/underwear-live-06.png", "alt": "Rizvi-made women's paisley-print lace-trim thong" },
-    { "src": "assets/img/drive/products/underwear-live-07.png", "alt": "Rizvi-made women's pink scalloped lace brief" },
-    { "src": "assets/img/drive/products/underwear-live-08.png", "alt": "Rizvi-made women's black satin side-tie brief" },
-    { "src": "assets/img/drive/products/underwear-live-09.png", "alt": "Rizvi-made women's grey floral-print thong" }
+    {
+     "src": "assets/img/drive/products/underwear-live-01.png",
+     "alt": "Rizvi-made scallop-edge seamless briefs in a three-pack — grey, blush and ivory"
+    },
+    {
+     "src": "assets/img/drive/products/underwear-live-02.png",
+     "alt": "Rizvi-made navy polka-dot 'Jolie' women's brief"
+    },
+    {
+     "src": "assets/img/drive/products/underwear-live-03.png",
+     "alt": "Rizvi-made nude 'Brillante' women's brief"
+    },
+    {
+     "src": "assets/img/drive/products/underwear-live-04.png",
+     "alt": "Rizvi-made set of three printed women's briefs — 'Boudeuse', 'Brillante' and 'Jolie'"
+    },
+    {
+     "src": "assets/img/drive/products/underwear-live-05.png",
+     "alt": "Rizvi-made men's cotton boxer briefs in navy and green"
+    },
+    {
+     "src": "assets/img/drive/products/underwear-live-06.png",
+     "alt": "Rizvi-made women's paisley-print lace-trim thong"
+    },
+    {
+     "src": "assets/img/drive/products/underwear-live-07.png",
+     "alt": "Rizvi-made women's pink scalloped lace brief"
+    },
+    {
+     "src": "assets/img/drive/products/underwear-live-08.png",
+     "alt": "Rizvi-made women's black satin side-tie brief"
+    },
+    {
+     "src": "assets/img/drive/products/underwear-live-09.png",
+     "alt": "Rizvi-made women's grey floral-print thong"
+    }
    ]
   },
   "newborn": {
-   "status": "todo-owner",
-   "note": "no cutout in the set depicts a newborn/infant garment (the only candidate, 007_m, is a school-age boy = kidswear); rail intentionally empty so the page renders an honest 'imagery being prepared' state — owner to supply newborn imagery",
-   "items": []
+   "status": "final-seed",
+   "note": "no cutout in the set depicts a newborn/infant garment (the only candidate, 007_m, is a school-age boy = kidswear); rail intentionally empty so the page renders an honest 'imagery being prepared' state — owner to supply newborn imagery | live-site images appended (owner 2026-06-29)",
+   "items": [
+    {
+     "src": "assets/img/drive/products/newborn-live-01.png",
+     "alt": "Rizvi-made newborn apparel on a studio ground"
+    },
+    {
+     "src": "assets/img/drive/products/newborn-live-02.png",
+     "alt": "Rizvi-made newborn apparel on a studio ground"
+    },
+    {
+     "src": "assets/img/drive/products/newborn-live-03.png",
+     "alt": "Rizvi-made newborn apparel on a studio ground"
+    },
+    {
+     "src": "assets/img/drive/products/newborn-live-04.png",
+     "alt": "Rizvi-made newborn apparel on a studio ground"
+    },
+    {
+     "src": "assets/img/drive/products/newborn-live-05.png",
+     "alt": "Rizvi-made newborn apparel on a studio ground"
+    },
+    {
+     "src": "assets/img/drive/products/newborn-live-06.png",
+     "alt": "Rizvi-made newborn apparel on a studio ground"
+    },
+    {
+     "src": "assets/img/drive/products/newborn-live-07.png",
+     "alt": "Rizvi-made newborn apparel on a studio ground"
+    },
+    {
+     "src": "assets/img/drive/products/newborn-live-08.png",
+     "alt": "Rizvi-made newborn apparel on a studio ground"
+    },
+    {
+     "src": "assets/img/drive/products/newborn-live-09.png",
+     "alt": "Rizvi-made newborn apparel on a studio ground"
+    },
+    {
+     "src": "assets/img/drive/products/newborn-live-10.png",
+     "alt": "Rizvi-made newborn apparel on a studio ground"
+    },
+    {
+     "src": "assets/img/drive/products/newborn-live-11.png",
+     "alt": "Rizvi-made newborn apparel on a studio ground"
+    },
+    {
+     "src": "assets/img/drive/products/newborn-live-12.png",
+     "alt": "Rizvi-made newborn apparel on a studio ground"
+    },
+    {
+     "src": "assets/img/drive/products/newborn-live-13.png",
+     "alt": "Rizvi-made newborn apparel on a studio ground"
+    },
+    {
+     "src": "assets/img/drive/products/newborn-live-14.png",
+     "alt": "Rizvi-made newborn apparel on a studio ground"
+    },
+    {
+     "src": "assets/img/drive/products/newborn-live-15.png",
+     "alt": "Rizvi-made newborn apparel on a studio ground"
+    }
+   ]
   }
  },
  "sustainability": {
