@@ -264,6 +264,11 @@ if (
     // the photo clip-opens as the room reaches centre; CSS maps --reveal). The
     // pin is stretched (SCROLL_FACTOR) so MORE scrolling is needed per sub-section.
     const SCROLL_FACTOR = 2.7; // lots of room to breathe: ~2.7× scroll distance per room (less sensitive, more tactile)
+    // a long, deliberate FREEZE on the final room before the pin releases to the
+    // footer (owner): the track finishes early, then holds while the extra scroll
+    // distance is consumed — a contemplative goodbye that gives the last segment
+    // time to be read. Extends the pin end by this fraction.
+    const END_HOLD = 0.2;
     const ease = (t: number) => 1 - Math.pow(1 - t, 3); // easeOutCubic glide for paging
     const clamp = (v: number, a: number, b: number) => Math.max(a, Math.min(b, v));
 
@@ -428,7 +433,9 @@ if (
     const st = ScrollTrigger.create({
       trigger: viewport,
       start: 'top top',
-      end: () => '+=' + distance() * SCROLL_FACTOR, // weightier: more scroll per room
+      // weightier: more scroll per room, PLUS an end-hold tail (END_HOLD) the
+      // track does not move through — the final-room freeze.
+      end: () => '+=' + distance() * SCROLL_FACTOR * (1 + END_HOLD),
       pin: true,
       pinSpacing: true,
       anticipatePin: 1,
@@ -441,9 +448,12 @@ if (
       },
       onRefresh: () => remeasure(),
       onUpdate: (self) => {
-        const x = -distance() * self.progress;
+        // remap so the track completes within the first 1/(1+END_HOLD) of the
+        // pinned scroll, then HOLDS on the last room for the END_HOLD tail.
+        const scrollP = Math.min(1, self.progress * (1 + END_HOLD));
+        const x = -distance() * scrollP;
         setX(x);
-        render(self.progress, x);
+        render(scrollP, x);
       },
     });
 
@@ -476,7 +486,11 @@ if (
         total <= 0
           ? (st.start as number)
           : (st.start as number) +
-            clamp((centres[i] - innerWidth / 2) / total, 0, 1) * ((st.end as number) - (st.start as number));
+            // divide by (1 + END_HOLD): the track completes within the first
+            // 1/(1+END_HOLD) of the pin range (the rest is the end-hold freeze),
+            // so a room's centre maps to that compressed sub-range.
+            (clamp((centres[i] - innerWidth / 2) / total, 0, 1) / (1 + END_HOLD)) *
+              ((st.end as number) - (st.start as number));
       // bezier-eased glide between sub-sections (owner); immediate = instant jump
       lenis.scrollTo(top, immediate ? { immediate: true } : { duration: 1.1, easing: ease });
       return true;

@@ -302,16 +302,17 @@
   },
   "underwear": {
    "status": "final-seed",
-   "note": "owner-supplied intimates cutouts on transparent ground: men's striped boxer brief and women's lace bralette + brief set (replaces the retired yellow loungewear shot)",
+   "note": "underwear rail sourced from the live rizvifashions.com/our-products/ Underwear tab (owner 2026-06-29); the two transparent cutouts were removed",
    "items": [
-    {
-     "src": "assets/img/drive/products/underwear-01.png",
-     "alt": "Rizvi-made men's navy-and-blue fine-striped boxer brief on a form, presented on a transparent ground"
-    },
-    {
-     "src": "assets/img/drive/products/underwear-02.png",
-     "alt": "Rizvi-made women's black lace bralette and matching brief set on a form, presented on a transparent ground"
-    }
+    { "src": "assets/img/drive/products/underwear-live-01.png", "alt": "Rizvi-made scallop-edge seamless briefs in a three-pack — grey, blush and ivory" },
+    { "src": "assets/img/drive/products/underwear-live-02.png", "alt": "Rizvi-made navy polka-dot 'Jolie' women's brief" },
+    { "src": "assets/img/drive/products/underwear-live-03.png", "alt": "Rizvi-made nude 'Brillante' women's brief" },
+    { "src": "assets/img/drive/products/underwear-live-04.png", "alt": "Rizvi-made set of three printed women's briefs — 'Boudeuse', 'Brillante' and 'Jolie'" },
+    { "src": "assets/img/drive/products/underwear-live-05.png", "alt": "Rizvi-made men's cotton boxer briefs in navy and green" },
+    { "src": "assets/img/drive/products/underwear-live-06.png", "alt": "Rizvi-made women's paisley-print lace-trim thong" },
+    { "src": "assets/img/drive/products/underwear-live-07.png", "alt": "Rizvi-made women's pink scalloped lace brief" },
+    { "src": "assets/img/drive/products/underwear-live-08.png", "alt": "Rizvi-made women's black satin side-tie brief" },
+    { "src": "assets/img/drive/products/underwear-live-09.png", "alt": "Rizvi-made women's grey floral-print thong" }
    ]
   },
   "newborn": {

@@ -82,32 +82,6 @@ const copyright = footer.copyright.replace(/\b20\d\d\b/, String(year));
       </nav>
     </div>
 
-    <nav aria-label="All pages">
-      <ul class="footer__index">
-        {[
-          ['Home', '/'],
-          ['Overview', '/overview/'],
-          ['Company Profile', '/company-profile/'],
-          ['Management', '/management/'],
-          ['Capabilities', '/our-capabilities/'],
-          ['Products', '/our-products/'],
-          ['Sustainability', '/sustainability/'],
-          ['Partners', '/partners/'],
-          ['Career', '/career/'],
-          ['Gallery', '/gallery/'],
-          ['Privacy', '/privacy/'],
-          ['Contact', '/contact/'],
-        ].map(([label, url], i) => (
-          <li class="footer__ix">
-            <a href={url}>
-              <span class="footer__ix-n u-num" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
-              <span class="footer__ix-label">{label}</span>
-            </a>
-          </li>
-        ))}
-      </ul>
-    </nav>
-
     <p class="footer__legal u-caps">{copyright}</p>
   </div>
 </footer>
@@ -215,53 +189,5 @@ const copyright = footer.copyright.replace(/\b20\d\d\b/, String(year));
     transition: color var(--dur-fast) var(--ease-out);
   }
   address a:hover { color: var(--accent); }
-  /* the page index as a numbered editorial lattice, echoing the overlay menu:
-     each page a bordered cell (merged into one lattice), the number in accent,
-     the label in the display face, with a staircase indent on the wide engine. */
-  .footer__index {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    border-top: var(--rail-w) solid var(--hairline);
-    padding-block-start: var(--space-4);
-    max-width: 100%;
-  }
-  .footer__ix { max-width: 100%; }
-  .footer__ix a {
-    display: flex;
-    align-items: baseline;
-    gap: var(--space-4);
-    padding: var(--space-2) var(--space-3);
-    border: var(--rail-w) solid var(--hairline);
-    margin-block-start: calc(-1 * var(--rail-w)); /* merge edges into one lattice */
-    text-decoration: none;
-    color: var(--ink);
-    transition: color var(--dur-base) var(--ease-out), border-color var(--dur-base) var(--ease-out);
-  }
-  .footer__ix:first-child a { margin-block-start: 0; }
-  .footer__ix a:hover { color: var(--accent); border-color: var(--accent); }
-  .footer__ix-n {
-    color: var(--accent);
-    font-size: var(--text-sm);
-    letter-spacing: var(--tracking-num);
-    flex: none;
-  }
-  .footer__ix-label {
-    font-family: var(--font-display);
-    font-weight: var(--fw-display-sub);
-    font-size: var(--text-md);
-    line-height: var(--leading-snug);
-    letter-spacing: var(--tracking-display);
-    text-transform: uppercase;
-  }
-  /* the marker staircase — only on the wide engine band, capped so it never runs
-     off-screen (12 items): it climbs for the first six, then holds. */
-  @media (min-width: 1025px) {
-    .footer__ix:nth-child(2) a { margin-inline-start: calc(var(--space-4) * 1); }
-    .footer__ix:nth-child(3) a { margin-inline-start: calc(var(--space-4) * 2); }
-    .footer__ix:nth-child(4) a { margin-inline-start: calc(var(--space-4) * 3); }
-    .footer__ix:nth-child(5) a { margin-inline-start: calc(var(--space-4) * 4); }
-    .footer__ix:nth-child(n + 6) a { margin-inline-start: calc(var(--space-4) * 5); }
-  }
   .footer__legal { color: var(--ink-muted); }
 </style>
