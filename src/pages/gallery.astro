@@ -121,12 +121,12 @@ const description =
     margin-block-start: var(--space-5);
   }
   @media (min-width: 768px) {
-    .album__grid {
-      grid-template-columns: repeat(
-        auto-fit,
-        minmax(calc(var(--space-8) + var(--space-8) + var(--space-6)), 1fr)
-      );
-    }
+    /* keep albums horizontal — two-up on tablet, three-up on wide — so they read
+       as a spread rather than a tall vertical stack (also holds in the corridor) */
+    .album__grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (min-width: 1100px) {
+    .album__grid { grid-template-columns: repeat(3, 1fr); }
   }
   .album__cell {
     background: var(--ground);

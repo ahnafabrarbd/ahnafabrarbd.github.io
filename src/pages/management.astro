@@ -122,8 +122,16 @@ const description = firstBody.length > 155 ? `${firstBody.slice(0, 152)}…` : f
     margin-block-start: var(--space-1);
   }
 
-  /* team keyline rows — base .chapter li supplies the hairline seam; rows widen
-     past the body measure so the portrait column sits clear of the text */
+  /* the two leaders sit side by side (horizontal), not stacked — each a column
+     with its portrait above the bio */
+  .team {
+    max-width: none;
+    display: grid;
+    gap: var(--space-6);
+  }
+  @media (min-width: 768px) {
+    .team { grid-template-columns: 1fr 1fr; gap: var(--space-7); }
+  }
   .team .person {
     max-width: none;
     display: grid;
