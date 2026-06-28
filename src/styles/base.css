@@ -500,7 +500,7 @@ main { flex: 1; }
   grid-template-columns: 1fr 1fr;
   column-gap: var(--space-6);
   max-width: none;
-  width: min(100%, 64rem);
+  width: 100%;
 }
 .hscroll-on .hpanel:not(.is-cols) .keyline-list > li,
 .hscroll-on .hpanel:not(.is-cols) .chapter ul > li { max-width: none; }

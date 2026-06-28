@@ -1,0 +1,76 @@
+{
+  "campaign": "rizvi-noir — The Continuous Thread",
+  "promptVersion": "v7",
+  "v7_migrated": true,
+  "session": 4,
+  "day": 2,
+  "currentGate": "DELIVERED",
+  "position": "CAMPAIGN DELIVERED. G0-G8 all closed. Site ships: 11 pages, Lighthouse 100x4 (products BP 96 inherent low-res, passing), 60fps, cross-engine clean, 0 overflow, showpiece + motion live, contact form built, full owner+dev doc set, deployable rizvi-site.zip. Final ship review: SHIP (3 rounds). Owner items: delete .env/.env.save; R-008 sign-off; partners intro/All-Partners labels; newborn+mono-logo+hi-res imagery (IMAGES_TODO). v1.1 polish in REVIEWS/G8-ship-review.md.",
+  "gates": {
+    "G0": {
+      "status": "complete",
+      "evidence": "commit 2a5b684; PROGRESS.md §G0"
+    },
+    "G1": {
+      "status": "complete",
+      "evidence": "RECON.md + recon-findings.json; PROGRESS.md §G1; crawl in reference/crawl/"
+    },
+    "G2": {
+      "status": "complete-with-carryover",
+      "evidence": "PROGRESS.md §G2; image-map.json 40 slots; drive-review.json 51 reviews; cutout-qa.json 47 inspections (24/21/2); Drive 54/54; CUTOUTS_TODO.md carries: birefnet comparison, 23 re-mattes, G4-time derivatives"
+    },
+    "G3": {
+      "status": "complete",
+      "evidence": "DESIGN.md (tokens+thread+storyboard+wireframes), INSPIRATION.md, D-007/D-009, token-lint clean, bake-off screenshots qa/bakeoff/, panel verdict in PROGRESS.md §G3; commits 5aff651+6ac52a8. Note: D-006 (CF7) voided at V7 boot (D-014)."
+    },
+    "G4": {
+      "status": "complete-with-carryover",
+      "evidence": "PROGRESS.md §G4 (S2); RAILS.md; PLANS/G4.md; REVIEWS/G4-skeleton.md (PASS, scores avg 8.25, template test NO); REPORTS/perf/_summary.json (100x4 all 11 pages, 69-90KB transfer); REPORTS/screens/ (22 shots, zero console); commits 46d3d83/e9735a5/25206b6/26073ed. Carryover: birefnet §12.2 comparison (download in flight)."
+    },
+    "G5": {
+      "status": "complete-with-carryover",
+      "evidence": "PROGRESS.md §Session 3; PLANS/G5.md (12 criteria all met); REVIEWS/G5-pages.md (11/11 PASS, template 'no' x11, adjudications); REPORTS/perf/_summary.json (100x4x11, 68-507KB); fidelity 245/0; links 823/0; form 17/17; swap test PASS; commits 62e501f..29fc75f + close commit. Carryover: birefnet-win post-processing (8 files), manual-retouch cutout class (G7), polish register."
+    },
+    "G6": {
+      "status": "complete-with-carryover",
+      "evidence": "REVIEWS/G6-motion.md (Opus audit PASS after 2 BLOCKERs fixed+verified: undefined motion tokens -> tokens.css + token-lint hardened; home §1.9 rail index). REPORTS/motion/fps.json (4x throttle, 60fps median 16.7ms, 0 long tasks >50ms, 347 frames/page x3); perf 100x4x11; fidelity 245/0; links 832/0; no-JS complete; reduced-motion designed states; GSAP licence verified. Commits 9471c90, 881b47d (birefnet), ff598ed (blocker fixes). Carryover: manual-retouch cutout class -> G7."
+    },
+    "G7": {
+      "status": "complete",
+      "evidence": "REVIEWS/G7-showpiece-panel.md. Showpiece 'The Unbroken Thread' (D-019, cross-doc View Transitions, 0KB, VT fires on nav verified). Preloader REFUSED 3-0 (D-020). §6.6 stress drills all clear (REPORTS/stress/): 0 overflow across 66 combos, keyboard PASS, JS-disabled 0 broken, cross-engine chromium/webkit/firefox 0 console errors. npm audit 0 high/critical. Purge: phosphor dep + 2 dead components. Additive .htaccess. perf 100x4x11. Commits 5d44fdb, 8ebfc5f, 5b11fcb."
+    },
+    "G8": {
+      "status": "complete",
+      "evidence": "REVIEWS/G8-ship-review.md (3 rounds, final verdict SHIP). Deliverables: FINAL_REPORT.md, GO-LIVE.md, HANDOFF.md, SECURITY-NOTES.md, CREDITS.md, PREVIEW.html, rizvi-site.zip (9.75MB, 0 secrets, .htaccess+contact.php). All gates green: perf 100x4x11, fidelity 245/0, links 0-fail, stress drills all clear, cross-engine 0 console. Commits 6129797, 9b53a5d, 5609406 + close."
+    }
+  },
+  "retiredGates": "V5-era G9/G10 numbering removed at V7 boot — V7 campaign plan ends at G8 (§12).",
+  "fallbacksActive": [
+    "birefnet §12.2 CLOSED (8 wins finished+staged at G6); manual-retouch cutout class (stamps/forms/hardware) → owner cleaner-sources list"
+  ],
+  "lastUpdated": "2026-06-11",
+  "facts": {
+    "phpFloor": "8.0 (x-powered-by: PHP/8.0.30) — relevant only to contact-form option (a), V7 §9",
+    "pinkHex": "#AC2171",
+    "ga4": "VOID per D-012 — V7 bans analytics; was G-J1B3RTG2HV via MonsterInsights 8.16",
+    "yoastInProd": false,
+    "liveFormPlugin": "JupiterX Raven form widget (dies with WordPress — retired wholesale)",
+    "crawlDelay": 20,
+    "typeSystem": "Clash Display / Switzer / Martian Mono (D-009)",
+    "formEngine": "self-hosted contact.php (D-017) — built + mock-tested 17/17; live send = owner GO-LIVE step",
+    "stack": "Astro 5.x static + hand-written CSS + GSAP (D-010)",
+    "slugs": [
+      "/",
+      "/overview/",
+      "/company-profile/",
+      "/management/",
+      "/gallery/",
+      "/our-capabilities/",
+      "/our-products/",
+      "/sustainability/",
+      "/career/",
+      "/contact/",
+      "/partners/ (new)"
+    ]
+  }
+}

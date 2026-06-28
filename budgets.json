@@ -1,0 +1,27 @@
+{
+  "comment": "V7 §6.1 hard budgets — build-failing, measured on astro build served locally (gzip), mobile emulation, default Lighthouse throttling, EVERY page. scripts/perf-gate.mjs enforces.",
+  "scores": {
+    "performance": 95,
+    "accessibility": 95,
+    "best-practices": 95,
+    "seo": 95
+  },
+  "metricsMs": {
+    "first-contentful-paint": 1500,
+    "largest-contentful-paint": 2000,
+    "total-blocking-time": 200,
+    "interaction-to-next-paint": 200
+  },
+  "cumulativeLayoutShift": 0.05,
+  "transferKB": {
+    "script": 90,
+    "stylesheet": 50,
+    "document": 35,
+    "font": 180,
+    "lcpImage": 180,
+    "totalHome": 900,
+    "totalOther": 600
+  },
+  "fontFilesMax": 5,
+  "consoleErrorsMax": 0
+}

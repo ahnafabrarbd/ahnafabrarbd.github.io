@@ -130,6 +130,22 @@ const EM_WORD = 'legacy';
       <div class="hero__actions" data-enter style={`--i: ${hero.body.length + 2}`}>
         <a class="cta u-caps" href="/overview/">{hero.button}<span class="visually-hidden"> — Company Overview</span></a>
       </div>
+      {/* small grid-aligned brand film — muted loop, plays quietly as the page
+          is scrolled. preload=none keeps it off the LCP path (perf rail). */}
+      <figure class="hero__film" data-enter style={`--i: ${hero.body.length + 3}`} aria-hidden="true">
+        <video
+          class="hero__film-vid"
+          autoplay
+          muted
+          loop
+          playsinline
+          preload="none"
+          poster="/og.png"
+        >
+          <source src="/media/hero-loop.webm" type="video/webm" />
+          <source src="/media/hero-loop.mp4" type="video/mp4" />
+        </video>
+      </figure>
     </div>
   </section>
 
@@ -220,6 +236,29 @@ const EM_WORD = 'legacy';
     <p>{contactIntro.subLine}</p>
     <a class="cta u-caps" href="/contact/">Contact Us</a>
   </section>
+
+  <script>
+    // Slow, contemplative reveal of the closing "Write to Us" screen as it
+    // arrives — works in both the corridor and the vertical fallback. Reduced
+    // motion (or no-IO) resolves it immediately so it is never stuck hidden.
+    const coda = document.querySelector('.chapter--coda');
+    if (coda) {
+      const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (reduced || !('IntersectionObserver' in window)) {
+        coda.classList.add('is-in');
+      } else {
+        const io = new IntersectionObserver(
+          (entries) => {
+            for (const e of entries) {
+              if (e.isIntersecting) { coda.classList.add('is-in'); io.disconnect(); }
+            }
+          },
+          { threshold: 0.25 },
+        );
+        io.observe(coda);
+      }
+    }
+  </script>
 </Base>
 
 <style>
@@ -323,6 +362,22 @@ const EM_WORD = 'legacy';
   .hero__proof-label { color: var(--ink-muted); }
 
   .hero__actions { margin-block-start: var(--space-5); }
+  /* small, grid-aligned film panel — sits centred under the actions, framed with
+     the site hairline, never dominating the typographic hero */
+  .hero__film {
+    margin-block-start: var(--space-6);
+    width: min(100%, calc(var(--space-8) + var(--space-7) + var(--space-7)));
+    aspect-ratio: 16 / 9;
+    border: var(--rail-w) solid var(--hairline);
+    overflow: hidden;
+    background: var(--accent-tint);
+  }
+  .hero__film-vid {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
 
   /* supporting elements fade-rise in after the headline begins (staggered by --i,
      held back ~one beat so the title leads). */
@@ -380,18 +435,36 @@ const EM_WORD = 'legacy';
      footer (owner: "occupy a page with the footer in the blank space above the
      menu"). #main zeroes its inline padding under .hscroll-on, so re-add a gutter
      and a leading hairline. In the vertical fallback it stays a normal chapter. */
-  .hscroll-on .chapter--coda {
-    min-height: 64svh;
+  /* the closing "Write to Us" screen is centred in BOTH modes (owner: middle,
+     not left) and given a full, breathing screen so the approach to it reads as
+     a slow, contemplative goodbye rather than an abrupt jump. */
+  .chapter--coda {
+    min-height: 92svh;
     display: grid;
     place-items: center;
     align-content: center;
     text-align: center;
-    gap: var(--space-3);
-    padding-inline: var(--gutter);
+    gap: var(--space-4);
     padding-block: var(--space-8) var(--space-7);
+  }
+  .chapter--coda > * { max-width: 60ch; margin-inline: auto; }
+  .chapter--coda .chapter__num { display: none; }
+  /* slow reveal as the screen arrives — a long, eased fade-and-rise (the
+     immersive settle). core.ts adds .is-in on enter; reduced-motion shows it
+     resolved (rule below). */
+  .js .chapter--coda > * {
+    opacity: 0;
+    transform: translateY(var(--space-4));
+    transition:
+      opacity var(--dur-lux) var(--ease-out),
+      transform var(--dur-lux) var(--ease-out);
+  }
+  .js .chapter--coda.is-in > * { opacity: 1; transform: none; }
+  .hscroll-on .chapter--coda {
+    min-height: 92svh;
+    padding-inline: var(--gutter);
     border-top: var(--rail-w) solid var(--hairline);
   }
-  .hscroll-on .chapter--coda .chapter__num { display: none; }
   .hscroll-on .chapter--coda p {
     max-width: 52ch;
     color: var(--ink-body);

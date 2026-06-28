@@ -1,0 +1,1272 @@
+{
+ "pages": [
+  {
+   "slug": "home",
+   "documentTitle": "Rizvi Fashion",
+   "h1": [],
+   "outline": [
+    "h2: Creating sustainable impact in apparel industry",
+    "h2: Sustainability",
+    "h2: Taking Action to Save Our Planet.",
+    "h2: Accreditations & Certifications",
+    "h2: Services Built Around our Customers",
+    "h3: Product Development Model",
+    "h3: Material Sourcing Management",
+    "h3: Saving Water",
+    "h2: Our Client's"
+   ],
+   "anchors": [
+    "jupiterx-main",
+    "our-mission",
+    "our-vision",
+    "manufacturing",
+    "financial-stability",
+    "health-and-family-wellbeing",
+    "educational-and-professional-development",
+    "safe-and-healthy-work-environment",
+    "equality-and-acceptance",
+    "best-practices",
+    "product-development",
+    "material-sourcing-management"
+   ],
+   "images": [
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/01/logo-white.png",
+     "context": "header-logo",
+     "alt": "Rizvi Fashion"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/01/slider1-1024x587-min.png",
+     "context": "mission-teaser-hero",
+     "alt": "slider1"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/01/15-1-min.jpg",
+     "context": "vision-teaser",
+     "alt": "vision"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/01/img_0976-e1599903136947-min-scaled.jpg",
+     "context": "manufacturing-teaser",
+     "alt": "manufacturing"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/02/leadership-1.png",
+     "context": "mission-icon",
+     "alt": "leadership"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/02/creative-tools.png",
+     "context": "vision-icon",
+     "alt": "creative-tools"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/02/bra.png",
+     "context": "manufacturing-icon",
+     "alt": "manufacturing-icon"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/02/cutting-1.png",
+     "context": "process-icon",
+     "alt": "cutting"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/02/shipping.png",
+     "context": "process-icon",
+     "alt": "shipping"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/02/cutting-2.png",
+     "context": "process-icon",
+     "alt": "cutting-2"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/02/clothing.png",
+     "context": "process-icon",
+     "alt": "clothing"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/02/recycle.png",
+     "context": "environmental-stat-icon",
+     "alt": "recycle"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/02/save-water.png",
+     "context": "environmental-stat-icon",
+     "alt": "save-water"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/02/energy.png",
+     "context": "environmental-stat-icon",
+     "alt": "energy"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/01/Product-development-model.jpg",
+     "context": "service-teaser",
+     "alt": "Product Development Model"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/01/material.jpg",
+     "context": "service-teaser",
+     "alt": "Material Sourcing"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/01/saving-water.jpg",
+     "context": "service-teaser",
+     "alt": "Saving Water"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/01/1.png",
+     "context": "accreditation-logo",
+     "alt": "certification-1"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2025/02/logo_dark.png",
+     "context": "accreditation-logo",
+     "alt": "logo-dark"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2025/02/amfori-1.png",
+     "context": "accreditation-logo",
+     "alt": "amfori"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/01/4.png",
+     "context": "accreditation-logo",
+     "alt": "certification-4"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/01/5.png",
+     "context": "accreditation-logo",
+     "alt": "certification-5"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2025/02/BW-Bangladesh-Stacked-rgb.png",
+     "context": "accreditation-logo",
+     "alt": "BW-Bangladesh"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2025/02/images.png",
+     "context": "accreditation-logo",
+     "alt": "images"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2025/02/csm_STeP_21f9689b94.png",
+     "context": "accreditation-logo",
+     "alt": "STEP"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2025/02/image-removebg-preview-70.png",
+     "context": "accreditation-logo",
+     "alt": "image-removebg-preview-70"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/01/666-e1595230122775.png",
+     "context": "accreditation-logo",
+     "alt": "certification-666"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2025/02/ocs-logo.jpg",
+     "context": "accreditation-logo",
+     "alt": "OCS"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2025/02/GRS.png",
+     "context": "accreditation-logo",
+     "alt": "GRS"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2025/02/23_Logo_RCS.png",
+     "context": "accreditation-logo",
+     "alt": "RCS"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2025/02/Figure-6-BSCI-Audit.jpg",
+     "context": "accreditation-logo",
+     "alt": "BSCI"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/01/client1.png",
+     "context": "partner-logo",
+     "alt": "client1"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2025/02/Primark_Logo_03.2024__1_-removebg-preview-1.png",
+     "context": "partner-logo",
+     "alt": "Primark"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/01/client2-e1594871892550.png",
+     "context": "partner-logo",
+     "alt": "client2"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2025/02/Pepco_logo_logotype-1.png",
+     "context": "partner-logo",
+     "alt": "Pepco"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/01/client3-1.png",
+     "context": "partner-logo",
+     "alt": "client3"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2025/02/up-scanwear_apparel_logo.png",
+     "context": "partner-logo",
+     "alt": "Scanwear"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/01/client4-e1595299173100.png",
+     "context": "partner-logo",
+     "alt": "client4"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/01/client5.png",
+     "context": "partner-logo",
+     "alt": "client5"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/01/client6-1-e1595229652501.png",
+     "context": "partner-logo",
+     "alt": "client6"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2025/02/rewe_logo-removebg-preview.png",
+     "context": "partner-logo",
+     "alt": "Rewe"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2025/02/download-2.png",
+     "context": "partner-logo",
+     "alt": "partner-logo"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/01/client-11-1-e1595229746789-1.png",
+     "context": "partner-logo",
+     "alt": "client-11"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/01/index.png",
+     "context": "partner-logo",
+     "alt": "index"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2025/02/WhatsApp_Image_2025-02-02_at_2.28.07_PM-removebg-preview-1.png",
+     "context": "partner-logo",
+     "alt": "WhatsApp-partner"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2025/02/WhatsApp-Image-2025-02-02-at-3.17.24-PM-1.jpeg",
+     "context": "partner-logo",
+     "alt": "WhatsApp-partner-2"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2025/02/194843-large_default-1-2.jpg",
+     "context": "partner-logo",
+     "alt": "partner-logo-2"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2025/02/trade-mark-tex-bd.png",
+     "context": "partner-logo",
+     "alt": "trade-mark-tex"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2025/02/JackWillsLogo.svg.png",
+     "context": "partner-logo",
+     "alt": "JackWills"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2025/02/lonsdale-lomdon.png",
+     "context": "partner-logo",
+     "alt": "Lonsdale"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2025/02/puma-1.png",
+     "context": "partner-logo",
+     "alt": "Puma"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2020/06/srsl-logo-e1541066548141.png",
+     "context": "footer-logo",
+     "alt": "Rizvi corporate logo"
+    }
+   ],
+   "notes": "Page structure: No h1 tags present. Page uses Elementor page builder (theme: JupiterX). Layout: (1) Header with logo + navigation (overlapped on page) \u2192 (2) Mission/Vision/Manufacturing 3-card carousel teaser (hover-reveal with background images) \u2192 (3) 4-step process icons (cutting, shipping, secondary cutting, clothing) \u2192 (4) Sustainability heading + 6 flip-box cards carousel (Financial Stability, Health & Family Wellbeing, Educational & Professional Development, Safe & Healthy Work Environment, Equality & Acceptance, Best Practices) with anchor links to sustainability page \u2192 (5) Environmental stats section (3 icons: recycle, save-water, energy) with counter values (0 values displayed) \u2192 (6) Accreditation carousel (14 logos in order: 1, logo_dark, amfori, 4, 5, BW-Bangladesh, images, STEP, image-removebg, 666, OCS, GRS, RCS, BSCI) \u2192 (7) Three service teaser banners (Product Development Model, Material Sourcing Management, Saving Water) with links to localhost URLs (broken links to our-capabilities section) \u2192 (8) Client carousel (20 partner logos including Primark, Pepco, Scanwear, Rewe, JackWills, Lonsdale, Puma, etc.) \u2192 (9) Footer with contact info, navigation columns, company address, phone/email, and developer credit. Contact: Phone +88 027 120 899 / 09617 000 444 / +880 9617 000 442; Email info@rizvifashions.com. Footer has 4 main nav columns: About Company, Our Capabilities, Our Products, Important Links. Sustainability cards link to http://rizvifashions.com/sustainability/ with fragment anchors. All carousel sections use Swiper.js. Environmental stats display raw numbers (likely animation placeholders). Service teasers use localhost URLs (indicates staging environment). No hero video/animation detected \u2014 static mission/vision teaser with hover effect. Header template ID 204, main page ID 159, footer ID 268."
+  },
+  {
+   "slug": "overview",
+   "documentTitle": "Overview \u2013 Rizvi Fashion",
+   "h1": [
+    "Overview"
+   ],
+   "outline": [
+    "h2: Overview",
+    "h2: Who we are"
+   ],
+   "anchors": [
+    "jupiterx-main",
+    "menu-6acfc79",
+    "menu-mobile-6acfc79"
+   ],
+   "images": [
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/01/logo-white.png",
+     "alt": "Rizvi Fashion",
+     "context": "header-logo"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/03/about-7.png",
+     "alt": "",
+     "context": "manufacturing-stats-strip"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2020/06/srsl-logo-e1541066548141.png",
+     "alt": "",
+     "context": "partner-logo-bgmea"
+    }
+   ],
+   "notes": "Page structure: Header (Logo + Nav) -> Hero section with \"Overview\" h2 -> Two-column content section with \"Who we are\" h2 on right column -> Manufacturing stats strip (about-7.png, 1366x143, horizontal bar) -> BGMEA partner logo strip -> Footer with Contact/Factory info. Key content blocks: (1) Who We Are copy - 100% export oriented unit established 2013, factory infrastructure details; (2) Technology/Scale/Range - CAD-CAM tools, 2631 modern machines, 5.0-5.5M pcs/month capacity, 5120 employees, product range (Trousers, Jersey, T-shirts, Polo-Shirts, Hoodie, Sweatshirt, Shorts, Lingerie, Babies Wear, Underwear, knitwear); (3) BGMEA strip - membership in Bangladesh Garment Manufacturers and Exporters Association mentioned in second content block. Page uses Elementor page builder with sections (bc0ab43=hero, 80298b8=Who We Are, 5acb8f71=content+spacer, b5ba89a=BGMEA image strip). No text overlays on images. Footer is 5-column layout (Contact US/Head Office/Factory, About Company links, Our Capabilities links, plus two unlabeled columns)."
+  },
+  {
+   "slug": "company-profile",
+   "documentTitle": "Company Profile \u2013 Rizvi Fashion",
+   "h1": [
+    "Company Profile"
+   ],
+   "outline": [
+    "h2: Our Mission / Global Leadership",
+    "h2: Accreditations & Certifications",
+    "h2: Our Vision / Define Creativity",
+    "h2: Manufacturing / Lingerie (Undergarment) & Outwear Products",
+    "h2: Our Client's",
+    "h2: Our business growth",
+    "h2: Contact US",
+    "h2: Head Office",
+    "h2: Factory",
+    "h2: About Company",
+    "h2: OUR CAPABILITIES",
+    "h2: OUR products",
+    "h2: important link"
+   ],
+   "anchors": [
+    "our-mission",
+    "our-vision",
+    "manufacturing"
+   ],
+   "images": [
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2025/02/Untitled-1.png",
+     "context": "revenue-chart",
+     "alt": "Revenue in Million USD/Year"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2025/02/Future-Goal-2.png",
+     "context": "future-goal-chart",
+     "alt": "Future Goal in Million USD/Year"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/02/cutting-1.png",
+     "context": "manufacturing-process",
+     "alt": "Cutting process"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/02/cutting-2.png",
+     "context": "manufacturing-process",
+     "alt": "Cutting process"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/02/shipping.png",
+     "context": "manufacturing-process",
+     "alt": "Shipping"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/02/clothing.png",
+     "context": "manufacturing-process",
+     "alt": "Clothing"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/01/1.png",
+     "context": "accreditation",
+     "alt": "Accreditation logo"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2025/02/logo_dark.png",
+     "context": "accreditation",
+     "alt": "Accreditation logo"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2025/02/amfori-1.png",
+     "context": "accreditation",
+     "alt": "amfori"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/01/4.png",
+     "context": "accreditation",
+     "alt": "Accreditation logo"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/01/5.png",
+     "context": "accreditation",
+     "alt": "Accreditation logo"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2025/02/BW-Bangladesh-Stacked-rgb.png",
+     "context": "accreditation",
+     "alt": "Bangladesh certification"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2025/02/images.png",
+     "context": "accreditation",
+     "alt": "Accreditation logo"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2025/02/csm_STeP_21f9689b94.png",
+     "context": "accreditation",
+     "alt": "STeP certification"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2025/02/image-removebg-preview-70.png",
+     "context": "accreditation",
+     "alt": "Accreditation logo"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/01/666-e1595230122775.png",
+     "context": "accreditation",
+     "alt": "Accreditation logo"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2025/02/ocs-logo.jpg",
+     "context": "accreditation",
+     "alt": "OCS certification"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2025/02/GRS.png",
+     "context": "accreditation",
+     "alt": "GRS"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2025/02/23_Logo_RCS.png",
+     "context": "accreditation",
+     "alt": "RCS"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2025/02/Figure-6-BSCI-Audit.jpg",
+     "context": "accreditation",
+     "alt": "BSCI Audit"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/01/client1.png",
+     "context": "partner-logo",
+     "alt": "client1"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2025/02/Pepco_logo_logotype-1.png",
+     "context": "partner-logo",
+     "alt": "Pepco"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/01/client4-e1595299173100.png",
+     "context": "partner-logo",
+     "alt": "client4"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/01/client8-e1595299490606.png",
+     "context": "partner-logo",
+     "alt": "client8"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/01/client2-e1594871892550.png",
+     "context": "partner-logo",
+     "alt": "client2"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/01/client3-1.png",
+     "context": "partner-logo",
+     "alt": "client3"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2025/02/up-scanwear_apparel_logo.png",
+     "context": "partner-logo",
+     "alt": "Scanwear apparel"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/01/client5.png",
+     "context": "partner-logo",
+     "alt": "client5"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/01/client6-1-e1595229652501.png",
+     "context": "partner-logo",
+     "alt": "client6"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2025/02/rewe_logo-removebg-preview.png",
+     "context": "partner-logo",
+     "alt": "REWE"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2025/02/download-2.png",
+     "context": "partner-logo",
+     "alt": "download"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/01/client-11-1-e1595229746789-1.png",
+     "context": "partner-logo",
+     "alt": "client-11"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2025/02/puma-1.png",
+     "context": "partner-logo",
+     "alt": "PUMA"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/01/index.png",
+     "context": "partner-logo",
+     "alt": "index"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2025/02/194843-large_default-1-2.jpg",
+     "context": "partner-logo",
+     "alt": "partner logo"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2025/02/WhatsApp-Image-2025-02-02-at-3.17.24-PM-1.jpeg",
+     "context": "partner-logo",
+     "alt": "WhatsApp Image"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2025/02/WhatsApp_Image_2025-02-02_at_2.28.07_PM-removebg-preview-1.png",
+     "context": "partner-logo",
+     "alt": "WhatsApp Image"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2025/02/trade-mark-tex-bd-1.png",
+     "context": "partner-logo",
+     "alt": "Trade Mark Tex BD"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2025/02/lonsdale-lomdon.png",
+     "context": "partner-logo",
+     "alt": "Lonsdale London"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2025/02/JackWillsLogo.svg.png",
+     "context": "partner-logo",
+     "alt": "Jack Wills"
+    }
+   ],
+   "chartData": "Revenue chart (Untitled-1.png) and Future Goal chart (Future-Goal-2.png) are rendered as static PNG images (855x465px). The HTML contains only the image files without embedded JSON or canvas rendering. Exact numeric data points cannot be extracted from the HTML as they are embedded in the image files themselves, not as recoverable text or data attributes.",
+   "notes": "Page uses Elementor page builder with JupiterX theme. Key sections: (1) Hero with Company Profile title. (2) Our Mission section (id=our-mission) with vertical jet-headline widget. (3) Accreditations & Certifications with image carousel of 14 certification logos. (4) Our Vision section (id=our-vision) with vertical jet-headline widget. (5) Manufacturing section (id=manufacturing) with capacity counters: Cutting Capacity (250,000 pcs daily), Shipment Capacity (5.5M pcs per month), Sewing Capacity (220,000 pcs per day), Finishing Capacity (240,000 pcs per day). (6) Business Growth section with two static PNG charts: Revenue and Future Goal. (7) Manufacturing image carousel with 4 process images. (8) Clients carousel (20 partner logos). (9) Footer with address and links. Primary widget types used: counter, heading, jet-headline, image-carousel, image, text-editor, icon-list, raven-heading, social-icons. The page has jet_parallax_layout effects on sections. All chart images are static PNGs with no data extraction possible from HTML."
+  },
+  {
+   "slug": "/management/",
+   "documentTitle": "Management \u2013 Rizvi Fashion",
+   "h1": [],
+   "outline": [
+    "h2: MD. SHAKIL RIZVI",
+    "h2: Managing Director",
+    "h3: REHANA RIZVI",
+    "h3: SHAIKH REZWAN",
+    "h2: Contact US",
+    "h2: Head Office",
+    "h2: Factory",
+    "h2: About Company",
+    "h2: OUR CAPABILITIES",
+    "h2: OUR products",
+    "h2: important link"
+   ],
+   "anchors": [
+    "jupiterx-main"
+   ],
+   "images": [
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/03/avatar-1577909_1280.webp",
+     "context": "team-member-portrait",
+     "alt": "REHANA RIZVI - Chairman"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2025/09/Shaikh-Rezwan-Director-Sir.jpg",
+     "context": "team-member-portrait",
+     "alt": "SHAIKH REZWAN - Director"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2020/06/srsl-logo-e1541066548141.png",
+     "context": "company-affiliate-logo",
+     "alt": "Shakil Rizvi Stock Limited (SRSL)"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/01/logo-white.png",
+     "context": "site-branding",
+     "alt": "Rizvi Fashion logo"
+    }
+   ],
+   "notes": "Page has two main sections: (1) Managing Director's Profile - text-only, no portrait image, covering MD Md. Shakil Rizvi's background; (2) Management Team grid with 2 visible members (REHANA RIZVI as Chairman with generic avatar placeholder, SHAIKH REZWAN as Director with actual photo). Both team members use Elementor/Jet team-member widgets with cover-hover image effects. MD Profile section is visually separate from Management Team section. SRSL logo (Shakil Rizvi Stock Limited affiliate) is presented as clickable element linking to #jupiterx-main. Page uses Elementor page builder with Jet advanced elements for team widgets and headlines. No h1 tags present on page."
+  },
+  {
+   "slug": "our-capabilities",
+   "documentTitle": "Our Capabilities \u2013 Rizvi Fashion",
+   "h1": [],
+   "outline": [
+    "h2: Our Capabilities",
+    "h2: Material Sourcing Management",
+    "h2: Product Development",
+    "h2: Sample",
+    "h2: Cutting",
+    "h2: Sewing",
+    "h2: Finishing",
+    "h2: Knitting",
+    "h2: Printing"
+   ],
+   "anchors": [
+    "our-capabilities",
+    "material-sourcing-management",
+    "product-development",
+    "sample",
+    "cutting",
+    "sewing",
+    "finishing",
+    "knitting",
+    "printing"
+   ],
+   "images": [
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/03/threads_large.webp",
+     "context": "hero-image: Material Sourcing Management section"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/03/fabric.jpg",
+     "context": "sub-label-background: Fabric category under Material Sourcing Management"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/03/garment-labelling.jpeg",
+     "context": "sub-label-background: Label category under Material Sourcing Management"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/03/images.jpg",
+     "context": "sub-label-background: Accessories category under Material Sourcing Management"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/03/product-development.jpg",
+     "context": "section-image: Product Development"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/03/sample.jpg",
+     "context": "section-image: Sample"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/03/cutting1.jpg",
+     "context": "section-image: Cutting"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/03/sewing.jpg",
+     "context": "section-image: Sewing"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/03/finishing.jpg",
+     "context": "section-image: Finishing"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/03/knitting.jpg",
+     "context": "section-image: Knitting"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/05/printing.png",
+     "context": "section-image: Printing"
+    }
+   ],
+   "notes": "Page structure: Hero intro (Our Capabilities title) followed by 8 capability sections in logical workflow order. Material Sourcing Management has hero image (threads_large.webp) with 4 sub-label categories: Fabric, Trims, Label, Accessories (each backed by fancybox background images: fabric.jpg, garment-labelling.jpeg, images.jpg respectively; Trims category image not found in crawl). Each subsequent section (Product Development through Printing) has a corresponding section hero image. Raven-counter stat widgets display capacity metrics: Sample (2 counters), Cutting (2), Sewing (3), Finishing (1), Knitting (2), Printing (1). No H1 present; page uses H2 for all section headings. Note: \"Lable\" misspelled as \"Lable\" in source appears in Material Sourcing sub-labels."
+  },
+  {
+   "slug": "our-products",
+   "documentTitle": "Our Products \u2014 Rizvi Fashion",
+   "h1": [
+    "Our Products"
+   ],
+   "outline": [
+    "h2: Our Products"
+   ],
+   "anchors": [
+    "men",
+    "women",
+    "kid",
+    "underware",
+    "new-born"
+   ],
+   "images": [
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/03/img_0602-243x300-2.png",
+     "alt": "",
+     "context": "product:men's-wear"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/03/img_0625-242x300-1.png",
+     "alt": "",
+     "context": "product:men's-wear"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/03/img20210818103124-267x300-1.png",
+     "alt": "",
+     "context": "product:men's-wear"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/03/img20210818103609-258x300-1.png",
+     "alt": "",
+     "context": "product:men's-wear"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/03/img20210818110610-232x300-1.png",
+     "alt": "",
+     "context": "product:men's-wear"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/03/img20210818115726-257x300-1.png",
+     "alt": "",
+     "context": "product:men's-wear"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/03/img20210818115921-300x266-1.png",
+     "alt": "",
+     "context": "product:men's-wear"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/03/img20210818120059-1-269x300-1.png",
+     "alt": "",
+     "context": "product:men's-wear"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/03/img20210818120210-274x300-1.png",
+     "alt": "",
+     "context": "product:men's-wear"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/03/img20210818120351-300x231-1.png",
+     "alt": "",
+     "context": "product:men's-wear"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/03/primark-boxer-shorts-mens-boys-trunks-keyhole-fly-3-pack-black-underwear-pants-293x300-1.png",
+     "alt": "",
+     "context": "product:men's-wear"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/03/uk-online-232x300-1.png",
+     "alt": "",
+     "context": "product:men's-wear"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/03/img20210818114353-1-273x300-1.png",
+     "alt": "",
+     "context": "product:women's-wear"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/03/img20210818101400-226x300-1.png",
+     "alt": "",
+     "context": "product:women's-wear"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/03/img20210818100109-2-229x300-1.png",
+     "alt": "",
+     "context": "product:women's-wear"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/03/img20210818100020-235x300-1.png",
+     "alt": "",
+     "context": "product:women's-wear"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/03/img20210818093252-226x300-1.png",
+     "alt": "",
+     "context": "product:women's-wear"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/03/img20210818093203-228x300-1.png",
+     "alt": "",
+     "context": "product:women's-wear"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/03/img_1520-300x131-1.png",
+     "alt": "",
+     "context": "product:women's-wear"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/03/img_1518-300x256-1.png",
+     "alt": "",
+     "context": "product:women's-wear"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/03/img_1515-300x257-1.png",
+     "alt": "",
+     "context": "product:women's-wear"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/03/img_1514-300x143-1.png",
+     "alt": "",
+     "context": "product:women's-wear"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/03/img_1511-300x224-1.png",
+     "alt": "",
+     "context": "product:women's-wear"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/03/img_1510-300x235-1.png",
+     "alt": "",
+     "context": "product:women's-wear"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/03/img_0920-300x240-2.png",
+     "alt": "",
+     "context": "product:women's-wear"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/03/img_0917-300x240-2.png",
+     "alt": "",
+     "context": "product:women's-wear"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/03/img_0914-300x240-2.png",
+     "alt": "",
+     "context": "product:women's-wear"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/03/img_0911-300x258-1.png",
+     "alt": "",
+     "context": "product:women's-wear"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/03/img_0900-200x300-1.png",
+     "alt": "",
+     "context": "product:women's-wear"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/03/img_0885-300x222-2.png",
+     "alt": "",
+     "context": "product:women's-wear"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/03/img_1483-300x210-1.png",
+     "alt": "",
+     "context": "product:women's-wear"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/03/img_0904-300x215-2.png",
+     "alt": "",
+     "context": "product:kid's-wear"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/03/img_0905-300x221-2.png",
+     "alt": "",
+     "context": "product:kid's-wear"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/03/img_0921-300x212-2.png",
+     "alt": "",
+     "context": "product:kid's-wear"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/03/img_0943-300x214-2.png",
+     "alt": "",
+     "context": "product:kid's-wear"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/03/img20210818094944-229x300-1.png",
+     "alt": "",
+     "context": "product:kid's-wear"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/03/img20210818095000-226x300-1.png",
+     "alt": "",
+     "context": "product:kid's-wear"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/03/img20210818095119-220x300-1.png",
+     "alt": "",
+     "context": "product:kid's-wear"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/03/img20210818101911-259x300-1.png",
+     "alt": "",
+     "context": "product:kid's-wear"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/03/img20210818102040-296x300-1.png",
+     "alt": "",
+     "context": "product:kid's-wear"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/03/img20210818102156-276x300-1.png",
+     "alt": "",
+     "context": "product:kid's-wear"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/03/img20210818111426-291x300-1.png",
+     "alt": "",
+     "context": "product:kid's-wear"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/03/img20210818111514-262x300-1.png",
+     "alt": "",
+     "context": "product:kid's-wear"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/03/img_0877-300x200-1.png",
+     "alt": "",
+     "context": "product:underwear"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/03/img_0921-300x220-1.png",
+     "alt": "",
+     "context": "product:underwear"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/03/img_0922-300x218-1.png",
+     "alt": "",
+     "context": "product:underwear"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/03/img_0924-300x192-1.png",
+     "alt": "",
+     "context": "product:underwear"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/03/img_0930-300x237-1.png",
+     "alt": "",
+     "context": "product:underwear"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/03/img_1478-300x215-1.png",
+     "alt": "",
+     "context": "product:underwear"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/03/img_1480-300x205-1.png",
+     "alt": "",
+     "context": "product:underwear"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/03/img_1481-300x211-1.png",
+     "alt": "",
+     "context": "product:underwear"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/03/img_1483-300x210-1.png",
+     "alt": "",
+     "context": "product:underwear"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/03/img20210818102114-231x300-1.png",
+     "alt": "",
+     "context": "product:new-born"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/03/img20210818110915-238x300-1.png",
+     "alt": "",
+     "context": "product:new-born"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/03/img20210818111005-300x288-1.png",
+     "alt": "",
+     "context": "product:new-born"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/03/img20210818111054-300x297-1.png",
+     "alt": "",
+     "context": "product:new-born"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/03/img20210818111112-217x300-1.png",
+     "alt": "",
+     "context": "product:new-born"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/03/img20210818111307-266x300-1.png",
+     "alt": "",
+     "context": "product:new-born"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/03/img20210818111903-223x300-1.png",
+     "alt": "",
+     "context": "product:new-born"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/03/img20210818111933-219x300-1.png",
+     "alt": "",
+     "context": "product:new-born"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/03/img20210818111948-222x300-1.png",
+     "alt": "",
+     "context": "product:new-born"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/03/img20210818112001-230x300-1.png",
+     "alt": "",
+     "context": "product:new-born"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/03/img20210818112032-247x300-1.png",
+     "alt": "",
+     "context": "product:new-born"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/03/img20210818112138-287x300-1.png",
+     "alt": "",
+     "context": "product:new-born"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/03/img20210818112235-275x300-1.png",
+     "alt": "",
+     "context": "product:new-born"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/03/img20210818112343-255x300-1.png",
+     "alt": "",
+     "context": "product:new-born"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/03/img20210818112405-300x284-1.png",
+     "alt": "",
+     "context": "product:new-born"
+    }
+   ],
+   "notes": "Page built with Elementor page builder using Raven tabs widget for category navigation. Five product categories displayed via horizontal tabbed interface: Men's Wear (12 images), Women's Wear (19 images), Kid's Wear (12 images), Underwear (9 images), New Born (15 images). Products rendered in 4-column WordPress gallery grid with lightbox functionality. All 67 product images lack alt text (empty alt attributes). Tab IDs: men, women, kid, underware (note spelling), new-born. Gallery markup uses gallery-item figures with lightbox data attributes. No introductory text or category descriptions present; products display directly beneath tabs."
+  },
+  {
+   "slug": "sustainability",
+   "documentTitle": "Sustainability \u2014 Rizvi Fashion",
+   "h1": [
+    "Sustainability"
+   ],
+   "outline": [
+    "h2: Financial Stability",
+    "h2: Health and Family Wellbeing",
+    "h2: Safe and Healthy Work Environment",
+    "h2: Educational and Professional Development",
+    "h2: Equality and Acceptance",
+    "h2: Best Practices"
+   ],
+   "anchors": [
+    "financial-stability",
+    "health-and-family-wellbeing",
+    "safe-and-healthy-work-environment",
+    "educational-and-professional-development",
+    "equality-and-acceptance",
+    "best-practices"
+   ],
+   "images": [
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/01/logo-white.png",
+     "alt": "",
+     "context": "header-logo"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2020/06/srsl-logo-e1541066548141.png",
+     "alt": "",
+     "context": "partnership-logo"
+    }
+   ],
+   "notes": "Page uses Elementor page builder with six main sections accessed via anchor navigation. Each section contains an introductory paragraph followed by bullet-point list of initiatives. No h1 tag present; main h2 is \"Sustainability\". Bullet lists embedded as span elements within elementor-widget containers. Favicons (150x150 and standard) are standard header assets, not page content \u2014 excluded. All six sections have matching id attributes in section HTML tags. Contact/address info appears at end of Best Practices section. No hero image or full-width content imagery present; layout is text-heavy with emphasis on structured lists."
+  },
+  {
+   "slug": "gallery",
+   "documentTitle": "Gallery \u2014 Rizvi Fashion",
+   "h1": [
+    "Gallery"
+   ],
+   "outline": [
+    "h2: Gallery",
+    "h3: Gallery 1",
+    "h3: Gallery 2",
+    "h3: Gallery 3",
+    "h3: Gallery 4",
+    "h3: Gallery 5",
+    "h3: Gallery 6",
+    "h2: Contact US",
+    "h2: Head Office",
+    "h2: Factory",
+    "h2: About Company",
+    "h2: OUR CAPABILITIES",
+    "h2: OUR products",
+    "h2: important link"
+   ],
+   "anchors": [
+    "5c9e7f9",
+    "5c9e7f96a8a3af",
+    "5c9e7f9bf22772",
+    "5c9e7f9e7ef66d",
+    "5c9e7f923e81df",
+    "5c9e7f9aeac78c",
+    "5c9e7f975d2f12"
+   ],
+   "images": [
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/03/overview.jpg",
+     "context": "gallery: cover-grid item 1 + main image"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/03/company-profile.jpg",
+     "context": "gallery: cover-grid item 2 + main image"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/03/product-development.jpg",
+     "context": "gallery: cover-grid item 3 + main image"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/03/contact.jpg",
+     "context": "gallery: cover-grid item 4 + main image"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/03/knitting.jpg",
+     "context": "gallery: cover-grid item 5 + main image"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/elementor/thumbs/overview-q6s1722bd1ugykokpnvnftrfow02awpimu1gj52z08.jpg",
+     "context": "gallery: thumbnail"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/elementor/thumbs/company-profile-q6s1722bd1ugykokpnvnftrfow02awpimu1gj52z08.jpg",
+     "context": "gallery: thumbnail"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/elementor/thumbs/product-development-q6s1722bd1ugykokpnvnftrfow02awpimu1gj52z08.jpg",
+     "context": "gallery: thumbnail"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/elementor/thumbs/contact-q6s1706mzdrwbcrb0n2eau8ii49bvii1ykqhkl5rco.jpg",
+     "context": "gallery: thumbnail"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/01/logo-white.png",
+     "context": "branding"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/01/favicon.png",
+     "context": "site icon"
+    }
+   ],
+   "notes": "Gallery page uses Elementor with Raven Photo Album widget (raven-photo-album-skin-cover). Structure: 3-column grid on desktop, 2-column on tablet, 1-column mobile (cover_columns: 3, cover_columns_tablet: 2, cover_columns_mobile: 1). Six gallery items arranged as cover cards with circular thumbnail carousels. Each item has a main clickable link to full-size image and lightbox slideshow via data-elementor-lightbox-slideshow attribute. Lightbox functionality integrated via Elementor's lightbox (not a separate plugin \u2014 native to Elementor widget). Thumbnails displayed inline under each gallery item title (Gallery 1-6). All gallery content images from 2023/03/ directory. No separate lightbox plugin detected; Elementor handles slideshow/lightbox natively. Footer contains additional section headings (Contact US, Head Office, Factory, etc.) from footer template. JupiterX theme active with Elementor page builder."
+  },
+  {
+   "slug": "career",
+   "documentTitle": "Career \u2014 Rizvi Fashion",
+   "h1": [],
+   "outline": [
+    "h2: Career",
+    "h2: Under Construction..."
+   ],
+   "anchors": [
+    "jupiterx-main",
+    "jupiterx-site",
+    "elementor-2902"
+   ],
+   "images": [
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/01/logo-white.png",
+     "alt": "",
+     "context": "header-logo"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2020/06/srsl-logo-e1541066548141.png",
+     "alt": "",
+     "context": "corporate-member-logo-footer"
+    }
+   ],
+   "notes": "Page ID: 2902. Elementor-based layout using JupiterX theme. Page currently displays only \"Career\" h2 heading in a full-width hero section (elementor-element-bc0ab43) followed by a content section (elementor-element-e9e1746) with \"Under Construction...\" h2 heading. No forms present. No actual career content implemented. Page structure: header (elementor-204) > main content area (elementor-2902) > footer (elementor-268). Navigation includes About Us, Overview, Company Profile, Management, Gallery, Our Capabilities, Our Products, Sustainability, Career, and Contact menu items in header."
+  },
+  {
+   "slug": "contact",
+   "documentTitle": "Contact &#8211; Rizvi Fashion",
+   "h1": [],
+   "outline": [
+    "h2: Drop Us a Line",
+    "h2: Key Contacts",
+    "h2: MR. SHAKIL RIZVI",
+    "h2: Managing Director",
+    "h2: SHAIKH REZWAN",
+    "h2: Director",
+    "h2: Marketing & Merchandising",
+    "h2: MUHAMMAD MIZANUR RAHMAN",
+    "h2: Deputy General Manager",
+    "h3: Head Office",
+    "h3: Factory Office"
+   ],
+   "anchors": [
+    "form-field-d9450cd",
+    "form-field-4245b33",
+    "form-field-f716c78",
+    "form-field-5be179b",
+    "form-field-71febfd",
+    "form-field-d3e380f-xawy",
+    "elementor-element-7e330ab",
+    "elementor-element-8d7b237"
+   ],
+   "images": [
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/01/logo-white.png",
+     "context": "header logo"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/03/head-office.png",
+     "context": "contact-card: head office icon"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/03/factory.png",
+     "context": "contact-card: factory office icon"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2023/03/corporate-office-icon1.png",
+     "context": "page hero/section image"
+    },
+    {
+     "url": "https://rizvifashions.com/wp-content/uploads/2020/06/srsl-logo-e1541066548141.png",
+     "context": "footer/partner logo"
+    }
+   ],
+   "notes": "Built with Elementor page builder (v3.13.2) + Raven form plugin (JupiterX theme ecosystem). Contact form uses RAVEN FORM widget (not WPForms/CF7/Gravity Forms). Form ID: 377792f6, POST ID: 1979. Form method=post, client-side handling. No reCAPTCHA configured (recaptcha_badge/theme/size all null). Two Google Maps embeds: (1) Head Office at \"158-160, Motijheel C/A Modhumita Building 4th Floor Dhaka-1000, Bangladesh\" zoom 15; (2) Factory at \"Anwar Jang Road, 1 No, Kalma Bazar, Savar, Dhaka-1341, Bangladesh\" zoom 15. Key contacts section lists 3 people: Shakil Rizvi (MD, rizvi@rizvifashions.com), Shaikh Rezwan (Director, shaikhrezwan@rizvifashions.com), Muhammad Mizanur Rahman (DGM, mizan@rizvifashions.com) with cell +8801674-173462. Multiple phone/email variants in footer footer: info@rizvifashions.com repeated, +88027120899, 09617000444, +8809617000442, +8801912708566. Acceptance checkbox with privacy text present (optional). No H1 tag on page. Section order: hero \u2192 form section \u2192 key contacts block \u2192 office address cards \u2192 maps \u2192 footer."
+  }
+ ],
+ "stack": {
+  "theme": "JupiterX v2.0.4 (active theme, evidenced by /wp-content/themes/jupiterx paths in CSS/JS, meta generator, page classes wp-theme-jupiterx, elementor-kit references)",
+  "plugins": [
+   {
+    "name": "Elementor",
+    "evidence": "ver=3.13.2 in elementor-frontend-css, elementor-frontend-js, elementor-icons-css, meta generator tag: 'Elementor 3.13.2; features: e_dom_optimization, e_optimized_assets_loading, e_optimized_css_loading, a11y_improvements, additional_custom_breakpoints; settings: css_print_method-external, google_font-enabled, font_display-auto'. Path: /wp-content/plugins/elementor"
+   },
+   {
+    "name": "Jet Blog",
+    "evidence": "ver=2.3.1 in jet-blog-css and jet-blog-js. Path: /wp-content/plugins/jet-blog"
+   },
+   {
+    "name": "Jet Elements",
+    "evidence": "ver=2.6.9 in jet-elements-css, jet-elements-skin-css, jet-elements-js. Path: /wp-content/plugins/jet-elements. Includes anime.js v2.2.0"
+   },
+   {
+    "name": "Jet Popup",
+    "evidence": "ver=2.0.0 in jet-popup-frontend-css, jet-popup-frontend-js, jet-popup-elementor-frontend-js. Path: /wp-content/plugins/jet-popup"
+   },
+   {
+    "name": "Jet Tabs",
+    "evidence": "ver=2.1.21 in jet-tabs-frontend-css, jet-tabs-frontend-js. Path: /wp-content/plugins/jet-tabs"
+   },
+   {
+    "name": "JupiterX Core",
+    "evidence": "ver=7.0 in jupiterx-core-raven-frontend-css, jupiterx-core-raven-frontend-js. Path: /wp-content/plugins/jupiterx-core. Includes smartmenus v1.1.0, url-polyfill v1.1.7, WooCommerce quick view integration (wc-quick-view.js)"
+   },
+   {
+    "name": "Menu Icons",
+    "evidence": "ver=0.13.5 in menu-icons-extra-css. Path: /wp-content/plugins/menu-icons"
+   },
+   {
+    "name": "ThePlus (The Plus) Elementor Addon",
+    "evidence": "ver=5.1.3 in plus-pre-loader-css-css, plus-pre-loader-js-js, plus-pre-loader-js2-js, plus-icons-mind-css-css. Path: /wp-content/plugins/theplus_elementor_addon"
+   },
+   {
+    "name": "Google Analytics for WordPress (MonsterInsights)",
+    "evidence": "ver=8.16 in monsterinsights-frontend-script-js comment: 'This site uses the Google Analytics by MonsterInsights plugin v8.16 - Using Analytics tracking'. Path: /wp-content/plugins/google-analytics-for-wordpress"
+   }
+  ],
+  "yoast": "No Yoast SEO (wordpress-seo) detected. No yoast-schema-graph, wpseo meta tags, or Yoast-specific handles found in any HTML files. SEO meta management appears to be handled by WordPress core and Elementor only. Canonical links present (rel=canonical). Schema.org markup present using itemscope/itemtype (WebPage, WPHeader, WPFooter). No og: or twitter: meta tags detected in crawled pages.",
+  "analytics": "MonsterInsights (Google Analytics for WordPress) v8.16 active. GA4 Measurement ID: G-J1B3RTG2HV. GTags loaded from //www.googletagmanager.com/gtag/js?id=G-J1B3RTG2HV with forceSSL=true and link_attribution=true. dataLayer configured. Developer ID: dZGIzZG. No alternative analytics pixels detected (no gtag string-only IDs, no MonsterInsights legacy GA IDs in visible HTML).",
+  "fonts": "Google Fonts loaded via https://fonts.googleapis.com/css. Families detected: 1) Open Sans (weights: 100, 100italic, 200, 200italic, 300, 300italic, 400, 400italic, 500, 500italic, 600, 600italic, 700, 700italic, 800, 800italic, 900, 900italic); 2) Oxygen (same weights, detected in some pages). Font display=auto. Preconnect to fonts.gstatic.com. Font Awesome 5.15.3 (via Elementor: all.min.css, brands.min.css, fontawesome.min.css). Font Awesome 4 shim v5.15.3 for backward compatibility. Eicons (Elementor Icons) v5.20.0."
+ }
+}
