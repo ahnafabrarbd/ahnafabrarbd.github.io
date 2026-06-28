@@ -443,7 +443,9 @@ main { flex: 1; }
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding-block: var(--deck-head-h) var(--space-6);
+  /* reserve room at the foot for the fixed pagination bar so the last row of a
+     near-full panel is never clipped — and the centred block sits a touch higher */
+  padding-block: var(--deck-head-h) var(--space-8);
   padding-inline: var(--space-6);
   box-sizing: border-box;
   overflow: hidden;
@@ -487,6 +489,27 @@ main { flex: 1; }
 }
 .hscroll-on .hpanel.is-cols .chapter > h2 { column-span: all; }
 .hscroll-on .hpanel.is-cols .chapter p { max-width: none; }
+
+/* In the corridor, the deck's bullet rows lay out as a wide 2-column box matrix
+   rather than one tall vertical stack — so welfare/best-practice panels read as
+   a short horizontal spread that fits the viewport instead of overflowing under
+   the pagination bar (and needing an internal vertical scroll). */
+.hscroll-on .hpanel:not(.is-cols) .keyline-list,
+.hscroll-on .hpanel:not(.is-cols) .chapter ul {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: var(--space-6);
+  max-width: none;
+  width: min(100%, 64rem);
+}
+.hscroll-on .hpanel:not(.is-cols) .keyline-list > li,
+.hscroll-on .hpanel:not(.is-cols) .chapter ul > li { max-width: none; }
+/* a long stacked heading must not eat the room — cap its scale in the corridor
+   so the body + matrix sit up near the top, fully visible. */
+.hscroll-on .hpanel .chapter > h2 {
+  font-size: clamp(var(--text-lg), 4vw, var(--text-2xl));
+  line-height: var(--leading-snug);
+}
 
 /* subtle parallax drift — a continuous depth cue (content leads, media counter-
    drifts a touch as a room crosses centre), NOT a card flip. JS scalar × token. */
