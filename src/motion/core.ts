@@ -159,7 +159,9 @@ function countUp() {
     ...document.querySelectorAll<HTMLElement>('.capmatrix__val'),
   ];
   const ease = bezierFromToken('--ease-out');
-  const dur = durMs('--dur-entrance');
+  // match the supplied AnimatedNumber spring (bounce: 0, duration ~2000ms): a
+  // long, smooth, critically-damped settle rather than a quick tick.
+  const dur = 2000;
   const io = new IntersectionObserver(
     (entries) => {
       for (const e of entries) {

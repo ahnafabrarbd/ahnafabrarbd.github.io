@@ -494,16 +494,14 @@ main { flex: 1; }
    rather than one tall vertical stack — so welfare/best-practice panels read as
    a short horizontal spread that fits the viewport instead of overflowing under
    the pagination bar (and needing an internal vertical scroll). */
-.hscroll-on .hpanel:not(.is-cols) .keyline-list,
-.hscroll-on .hpanel:not(.is-cols) .chapter ul {
+.hscroll-on .hpanel:not(.is-cols) .keyline-list {
   display: grid;
   grid-template-columns: 1fr 1fr;
   column-gap: var(--space-6);
   max-width: none;
   width: 100%;
 }
-.hscroll-on .hpanel:not(.is-cols) .keyline-list > li,
-.hscroll-on .hpanel:not(.is-cols) .chapter ul > li { max-width: none; }
+.hscroll-on .hpanel:not(.is-cols) .keyline-list > li { max-width: none; }
 /* a long stacked heading must not eat the room — cap its scale in the corridor
    so the body + matrix sit up near the top, fully visible. */
 .hscroll-on .hpanel .chapter > h2 {

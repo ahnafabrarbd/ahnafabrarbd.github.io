@@ -24,12 +24,9 @@ if (!md?.person?.name || !md?.person?.role || !(md.body?.length > 0)) {
   throw new Error('copy/management: MD profile section (person + body) missing — deck drift');
 }
 
-// HARD (RAILS / wireframe 4): the MD profile is text-led — live has no portrait.
-// Build-fail if anyone ever wires an image into the slot.
-const mdPortrait = slot('management', 'md-portrait');
-if (mdPortrait.src) {
-  throw new Error('management.md-portrait must stay empty — the MD profile is text-led (HARD, as live)');
-}
+// Owner override (2026-06-29): the MD profile now carries his portrait, sourced
+// from the live site. Resolved via the slot system like the other leaders.
+const mdPortrait = await slotImage('management', 'md-portrait');
 
 // Pull-quote rhythm: ONE strong sentence ALREADY PRESENT in the MD body,
 // rendered twice (body verbatim + pull). Byte-exact or the build fails.
@@ -70,9 +67,23 @@ const description = firstBody.length > 155 ? `${firstBody.slice(0, 152)}…` : f
   <section class="chapter md-profile">
     <span class="chapter__num" aria-hidden="true"></span>
     <h2>{md.heading}</h2>
-    <div class="person-id">
-      <h3>{md.person.name}</h3>
-      <p class="u-caps">{md.person.role}</p>
+    <div class="md-profile__lead">
+      <figure class="md-profile__portrait">
+        <Image
+          src={mdPortrait.image}
+          alt={mdPortrait.alt}
+          widths={[320, 480]}
+          sizes="(min-width: 768px) 320px, 70vw"
+          loading="eager"
+          fetchpriority="high"
+          quality={80}
+          format="webp"
+        />
+      </figure>
+      <div class="md-profile__id">
+        <h3>{md.person.name}</h3>
+        <p class="u-caps">{md.person.role}</p>
+      </div>
     </div>
     {md.body.map((p: string, i: number) => (
       <Fragment>
@@ -110,16 +121,39 @@ const description = firstBody.length > 155 ? `${firstBody.slice(0, 152)}…` : f
 </Base>
 
 <style>
-  /* MD identity — a quiet masthead for the portrait-less profile (text-led, HARD) */
-  .person-id {
+  /* MD masthead — portrait beside the name/role, then the body flows below at
+     full measure (owner override: the profile now carries his photograph) */
+  .md-profile__lead {
+    display: grid;
+    gap: var(--space-4);
+    align-items: center;
     margin-block-end: var(--space-5);
   }
-  .person-id h3 {
-    font-size: var(--text-xl);
+  @media (min-width: 768px) {
+    .md-profile__lead {
+      grid-template-columns: auto 1fr;
+      gap: var(--space-6);
+    }
   }
-  .person-id p {
+  .md-profile__portrait {
+    inline-size: min(70vw, calc(var(--space-8) * 2));
+    aspect-ratio: 4 / 5;
+    overflow: hidden;
+    border: var(--radius-frame) solid var(--accent);
+  }
+  .md-profile__portrait img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .md-profile__id h3 {
+    font-size: var(--text-2xl);
+    line-height: var(--leading-tight);
+  }
+  .md-profile__id p {
     color: var(--ink-muted);
-    margin-block-start: var(--space-1);
+    margin-block-start: var(--space-2);
   }
 
   /* the two leaders sit side by side (horizontal), not stacked — each a column

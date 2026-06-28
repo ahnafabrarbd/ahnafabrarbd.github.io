@@ -15,14 +15,15 @@ interface Props {
 }
 const { points, caption, unit = 'USD M', goal = false } = Astro.props;
 
-const W = 760;
-const H = 470;
-const PAD = { t: 44, r: 8, b: 76, l: 8 };
+// wide aspect so the eleven bars + value labels spread out and never collide
+const W = 1320;
+const H = 460;
+const PAD = { t: 44, r: 12, b: 72, l: 12 };
 const max = Math.max(...points.map((p) => p.value)) * 1.12;
 const innerW = W - PAD.l - PAD.r;
 const innerH = H - PAD.t - PAD.b;
 const slotW = innerW / points.length;
-const barW = Math.min(slotW * 0.62, 60);
+const barW = Math.min(slotW * 0.5, 64);
 const bars = points.map((p, i) => {
   const h = (p.value / max) * innerH;
   return {
@@ -72,7 +73,7 @@ const bars = points.map((p, i) => {
   }
   /* one step larger than the page scale: the SVG viewBox scales DOWN on
      mobile, where xs/2xs labels went near-illegible (G5 critic FIX) */
-  .growth__val { font-size: var(--text-xl); font-weight: var(--fw-utility-strong); }
-  .growth__lbl { font-size: var(--text-base); letter-spacing: var(--tracking-num); }
+  .growth__val { font-size: var(--text-md); font-weight: var(--fw-utility-strong); }
+  .growth__lbl { font-size: var(--text-sm); letter-spacing: var(--tracking-num); }
   .growth figcaption { color: var(--ink-muted); margin-block-start: var(--space-2); }
 </style>

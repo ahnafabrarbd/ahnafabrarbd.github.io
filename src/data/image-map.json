@@ -129,8 +129,10 @@
  "management": {
   "md-portrait": {
    "status": "final-seed",
-   "src": null,
-   "note": "HARD: live site has no MD portrait - text-led profile preserved"
+   "src": "assets/portraits/shakil-rizvi-md.jpg",
+   "alt": "Md. Shakil Rizvi, Managing Director",
+   "origin": "live-site",
+   "note": "owner override (2026-06-29): MD portrait now sourced from rizvifashions.com/management/ and shown in the profile"
   },
   "chairman-portrait": {
    "src": "assets/portraits/avatar-1577909_1280.webp",
