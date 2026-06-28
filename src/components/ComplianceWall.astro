@@ -44,33 +44,36 @@ const resolved = await Promise.all(
 </ul>
 
 <style>
+  /* a compact certification matrix: each mark its own keyline cell, laid out in
+     a responsive grid so the full set sits in a few short rows — no long ledger
+     that overflows the section-pagination overlay. */
   .cwall {
     list-style: none;
     max-width: none;
-    border-top: var(--rail-w) solid var(--hairline);
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--rail-w);
+    background: var(--hairline);
+    border: var(--rail-w) solid var(--hairline);
+  }
+  @media (min-width: 600px) {
+    .cwall { grid-template-columns: 1fr 1fr; }
+  }
+  @media (min-width: 980px) {
+    .cwall { grid-template-columns: 1fr 1fr 1fr; }
   }
   .cwall__row {
     display: grid;
-    gap: var(--space-2) var(--space-4);
-    padding-block: var(--space-4);
-    border-bottom: var(--rail-w) solid var(--hairline);
-    grid-template-columns: var(--space-7) minmax(0, 1fr);
-    align-items: start;
-  }
-  /* mobile: mark + name/certifies on row 1; the "Removes" line spans full width
-     below (not trapped in the narrow mark column) */
-  .cwall__removes { grid-column: 1 / -1; }
-  @media (min-width: 768px) {
-    .cwall__row {
-      grid-template-columns: var(--space-8) minmax(0, 1.3fr) minmax(0, 1fr);
-      align-items: center;
-    }
-    .cwall__removes { grid-column: auto; }
+    gap: var(--space-2);
+    padding: var(--space-4);
+    background: var(--ground);
+    align-content: start;
   }
   .cwall__mark {
     display: flex;
     align-items: center;
     justify-content: flex-start;
+    min-height: var(--space-5);
   }
   .cwall__mark img {
     max-height: var(--space-5);
