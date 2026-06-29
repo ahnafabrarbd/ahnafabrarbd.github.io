@@ -61,7 +61,7 @@ const people = await Promise.all(
 const firstBody: string = md.body[0];
 const description = firstBody.length > 155 ? `${firstBody.slice(0, 152)}…` : firstBody;
 ---
-<Base title={`${title} — Rizvi Fashions Limited`} description={description}>
+<Base title={`${title} — Rizvi Fashions Limited`} description={description} lshape>
   <h1>{title}</h1>
 
   <section class="chapter md-profile">
@@ -156,15 +156,36 @@ const description = firstBody.length > 155 ? `${firstBody.slice(0, 152)}…` : f
     margin-block-start: var(--space-2);
   }
 
-  /* the two leaders sit side by side (horizontal), not stacked — each a column
-     with its portrait above the bio */
+  /* the two leaders sit in a HORIZONTAL scroll rail (owner): after scrolling
+     DOWN through the MD profile, you scroll ACROSS to read the other two. Mobile
+     keeps a simple vertical stack. */
   .team {
     max-width: none;
     display: grid;
     gap: var(--space-6);
   }
   @media (min-width: 768px) {
-    .team { grid-template-columns: 1fr 1fr; gap: var(--space-7); }
+    .team {
+      display: flex;
+      flex-wrap: nowrap;
+      gap: var(--space-7);
+      overflow-x: auto;
+      scroll-snap-type: x proximity;
+      padding-block: var(--space-3);
+      /* always-visible, easy-to-grab scrollbar so the rail reads as scrollable */
+      scrollbar-width: auto;
+      scrollbar-color: var(--accent) var(--hairline);
+      scrollbar-gutter: stable;
+    }
+    .team::-webkit-scrollbar {
+      height: var(--space-2);
+      -webkit-appearance: none;
+    }
+    .team::-webkit-scrollbar-track { background: var(--hairline); }
+    .team::-webkit-scrollbar-thumb {
+      background: var(--accent);
+      border-radius: var(--radius-frame);
+    }
   }
   .team .person {
     max-width: none;
@@ -175,6 +196,9 @@ const description = firstBody.length > 155 ? `${firstBody.slice(0, 152)}…` : f
   }
   @media (min-width: 768px) {
     .team .person {
+      flex: none;
+      width: min(88vw, calc(var(--space-8) * 5));
+      scroll-snap-align: start;
       grid-template-columns: var(--space-8) 1fr;
     }
   }
