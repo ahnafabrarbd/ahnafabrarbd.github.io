@@ -157,6 +157,9 @@ const SECONDARY = [
     max-width: 100%;
   }
   .overlay__item {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
     display: flex;
     align-items: center;
     gap: var(--space-4);
@@ -169,14 +172,26 @@ const SECONDARY = [
     color: var(--ink);
     transition:
       color var(--dur-base) var(--ease-out),
-      border-color var(--dur-base) var(--ease-out),
-      background var(--dur-base) var(--ease-out);
+      border-color var(--dur-base) var(--ease-out);
+  }
+  /* forest-green fill that sweeps in from the left on hover/active — the same
+     grammar as the .cta "Learn more" button (owner). */
+  .overlay__item::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform var(--dur-base) var(--ease-expressive);
   }
   .overlay__item:first-child { margin-block-start: 0; }
   .overlay__idx {
     color: var(--accent);
     font-size: var(--text-sm);
     letter-spacing: var(--tracking-num);
+    transition: color var(--dur-base) var(--ease-out);
   }
   /* masked, line-clipped label that slides up on reveal */
   .overlay__mask { display: block; overflow: hidden; }
@@ -194,9 +209,14 @@ const SECONDARY = [
     transition: transform var(--dur-entrance) var(--ease-out);
   }
   .overlay.is-open .overlay__label { transform: translateY(0); }
-  /* hover / current page → the signature forest green (border = a frame, legal) */
+  /* hover / current page → the green fill sweeps in; text + index flip to the
+     ground colour for contrast on the forest-green field */
   .overlay__item:hover,
-  .overlay__item[aria-current='page'] { color: var(--accent); border-color: var(--accent); }
+  .overlay__item[aria-current='page'] { color: var(--ground); border-color: var(--accent); }
+  .overlay__item:hover::before,
+  .overlay__item[aria-current='page']::before { transform: scaleX(1); }
+  .overlay__item:hover .overlay__idx,
+  .overlay__item[aria-current='page'] .overlay__idx { color: var(--ground); }
 
   /* staggered reveal delays (token × unitless = lint-safe; kept on mobile too) */
   .overlay__item:nth-child(2) .overlay__label { transition-delay: calc(var(--dur-fast) * 0.35); }
