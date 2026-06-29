@@ -157,10 +157,21 @@ const orgLd = {
         }
       </script>
     )}
-    {/* Partners is a PLAIN VERTICAL page (owner): it opts out of the corridor via
-        `lshape` and loads NO motion engine — the default CSS stack scrolls
-        top→bottom. (The retired L-shape engine src/motion/lshape.ts is no longer
-        imported anywhere.) */}
+    {/* the PLAIN-VERTICAL (`lshape`) pages — Management, Partners — get an
+        immersive weighty smooth-scroll (Lenis), the corridor's hand-feel without
+        the horizontal pin. Dynamic import behind the same desktop+motion gate so
+        mobile / reduced-motion keep the native scroll. (The retired L-shape
+        engine src/motion/lshape.ts is no longer imported anywhere.) */}
+    {lshape && (
+      <script>
+        if (
+          matchMedia('(min-width: 1025px)').matches &&
+          !matchMedia('(prefers-reduced-motion: reduce)').matches
+        ) {
+          import('../motion/smooth.ts');
+        }
+      </script>
+    )}
   </body>
 </html>
 
