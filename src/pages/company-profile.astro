@@ -59,7 +59,7 @@ const description = firstBody.length > 155 ? `${firstBody.slice(0, 152)}…` : f
     {mission.body.map((p: string) => <p>{p}</p>)}
   </section>
 
-  <section class="chapter">
+  <section class="chapter" id="accreditations-and-certifications">
     <span class="chapter__num" aria-hidden="true"></span>
     <h2>{accreditationsCopy.heading}</h2>
     <ComplianceWall entries={accreditations.logos} label={accreditationsCopy.heading} />
