@@ -503,10 +503,14 @@ main { flex: 1; }
 }
 .hscroll-on .hpanel:not(.is-cols) .keyline-list > li { max-width: none; }
 /* a long stacked heading must not eat the room — cap its scale in the corridor
-   so the body + matrix sit up near the top, fully visible. */
-.hscroll-on .hpanel .chapter > h2 {
+   so the body + matrix sit up near the top, fully visible. Applies to EVERY
+   panel heading (plain chapters AND nested PhotoChapter __copy h2s, which the
+   old `.chapter > h2` selector missed → they rendered at full display size and
+   overflowed the room). Tightened top margin so the block sits up near the top. */
+.hscroll-on .hpanel h2 {
   font-size: clamp(var(--text-lg), 4vw, var(--text-2xl));
   line-height: var(--leading-snug);
+  margin-block: 0 var(--space-3);
 }
 
 /* subtle parallax drift — a continuous depth cue (content leads, media counter-
@@ -578,6 +582,39 @@ main { flex: 1; }
   gap: var(--space-6);
   align-items: center;
   width: min(100%, calc(var(--space-8) * 8));
+}
+/* WELFARE panels (a photo + a long bullet list, e.g. Best Practices, Educational):
+   spread WIDE so the whole section fits ONE screen with no internal scroll (owner
+   meta-rule). The image is held small and on a FIXED side (order overrides the
+   flip so the wide copy column is reliable), and the bullet list flows into
+   columns rather than stacking into a tall single file. */
+.hscroll-on .hpanel:has(> .photo-chapter--grid .keyline-list) { width: 96vw; }
+.hscroll-on .hpanel > .photo-chapter--grid:has(.keyline-list) {
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  gap: var(--space-7);
+  width: 100%;
+}
+.hscroll-on .hpanel > .photo-chapter--grid:has(.keyline-list) .photo-chapter__media { order: 0; }
+.hscroll-on .hpanel > .photo-chapter--grid:has(.keyline-list) .photo-chapter__copy { order: 1; }
+.hscroll-on .hpanel > .photo-chapter--grid:has(.keyline-list) .photo-chapter__media img {
+  max-height: 78svh;
+}
+.hscroll-on .hpanel .photo-chapter--grid .keyline-list {
+  columns: 3;
+  column-gap: var(--space-5);
+  border-top: none;
+}
+.hscroll-on .hpanel .photo-chapter--grid .keyline-list > li {
+  break-inside: avoid;
+  max-width: none;
+  padding-block: var(--space-2);
+}
+/* tighter heading + intro in welfare panels so the list clears the fold */
+.hscroll-on .hpanel > .photo-chapter--grid:has(.keyline-list) .photo-chapter__copy h2 {
+  font-size: clamp(var(--text-md), 3vw, var(--text-xl));
+}
+.hscroll-on .hpanel > .photo-chapter--grid:has(.keyline-list) .photo-chapter__copy p {
+  margin-block-end: var(--space-2);
 }
 .hscroll-on .hpanel > .photo-chapter--grid .photo-chapter__media img {
   max-height: 60svh;
