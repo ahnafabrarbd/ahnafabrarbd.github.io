@@ -589,6 +589,12 @@
    "origin": "drive",
    "note": "AI-provenance flag R-008 - owner sign-off before production"
   },
+  "financial-stability": {
+   "src": "assets/img/site/financial-growth.jpg",
+   "status": "final",
+   "alt": "A green seedling growing from a pile of coins — financial growth and saving",
+   "origin": "old-site"
+  },
   "safe-and-healthy-work-environment": {
    "src": "assets/img/site/fire-safety.jpg",
    "status": "final",
