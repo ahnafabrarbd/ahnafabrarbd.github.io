@@ -513,6 +513,28 @@ main { flex: 1; }
   margin-block: 0 var(--space-3);
 }
 
+/* home Sustainability index: the six keyline rows stack too tall for one screen —
+   flow them into TWO columns (each row stacks title/text/link) so all six fit the
+   horizontal room without an internal scroll (owner meta-rule). */
+.hscroll-on .hpanel:has(.sus-rows) { width: 92vw; }
+.hscroll-on .hpanel .sus-rows {
+  columns: 2;
+  column-gap: var(--space-7);
+  border-top: none;
+}
+.hscroll-on .hpanel .sus-rows li {
+  display: block;
+  break-inside: avoid;
+}
+
+/* the revenue chart reads small in its content-width room — give it a full-bleed
+   room and a large figure so the eleven bars carry the panel (owner: ~2× size). */
+.hscroll-on .hpanel[data-anchor='growth'] { width: 100vw; }
+.hscroll-on .hpanel[data-anchor='growth'] .growth {
+  width: 92vw;
+  margin-inline: auto;
+}
+
 /* subtle parallax drift — a continuous depth cue (content leads, media counter-
    drifts a touch as a room crosses centre), NOT a card flip. JS scalar × token. */
 .hscroll-on .hpanel > * {

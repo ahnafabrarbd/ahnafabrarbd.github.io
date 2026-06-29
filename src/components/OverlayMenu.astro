@@ -10,19 +10,20 @@
 // island toggles open + the reveal class.
 const path = Astro.url.pathname;
 const PRIMARY = [
-  { n: '01', label: 'Overview', href: '/overview/' },
-  { n: '02', label: 'Capabilities', href: '/our-capabilities/' },
-  { n: '03', label: 'Products', href: '/our-products/' },
-  { n: '04', label: 'Sustainability', href: '/sustainability/' },
-  { n: '05', label: 'Partners', href: '/partners/' },
+  { n: '01', label: 'Home', href: '/' },
+  { n: '02', label: 'Company Profile', href: '/company-profile/' },
+  { n: '03', label: 'Management', href: '/management/' },
+  { n: '04', label: 'Gallery', href: '/gallery/' },
+  { n: '05', label: 'Career', href: '/career/' },
   { n: '06', label: 'Contact', href: '/contact/' },
 ];
 const SECONDARY = [
-  { label: 'Home', href: '/' },
-  { label: 'Company Profile', href: '/company-profile/' },
-  { label: 'Management', href: '/management/' },
-  { label: 'Career', href: '/career/' },
-  { label: 'Gallery', href: '/gallery/' },
+  { label: 'Overview', href: '/overview/' },
+  { label: 'Capabilities', href: '/our-capabilities/' },
+  { label: 'Products', href: '/our-products/' },
+  { label: 'Sustainability', href: '/sustainability/' },
+  { label: 'Partners', href: '/partners/' },
+  { label: 'Contact', href: '/contact/' },
 ];
 ---
 <dialog class="overlay" id="overlay-menu" aria-label="Site menu" data-lenis-prevent>

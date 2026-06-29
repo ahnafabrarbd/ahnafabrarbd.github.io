@@ -168,6 +168,21 @@ const lcpPreload = firstItem
     overflow-x: auto;
     scroll-snap-type: x proximity;
     padding-block: var(--space-2);
+    /* always-visible, easy-to-grab scrollbar (owner): the native macOS overlay
+       bar auto-hides, so each range gets a persistent forest-green track on the
+       hairline so the rail reads as scrollable and is simple to drag. */
+    scrollbar-width: auto;
+    scrollbar-color: var(--accent) var(--hairline);
+    scrollbar-gutter: stable;
+  }
+  .cat-panel__rail::-webkit-scrollbar {
+    height: var(--space-2);
+    -webkit-appearance: none;
+  }
+  .cat-panel__rail::-webkit-scrollbar-track { background: var(--hairline); }
+  .cat-panel__rail::-webkit-scrollbar-thumb {
+    background: var(--accent);
+    border-radius: var(--radius-frame);
   }
   .cat-panel__rail:focus-visible { outline-offset: var(--space-1); }
   .cat-panel__rail > li { scroll-snap-align: start; flex: none; }
