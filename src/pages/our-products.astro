@@ -165,12 +165,12 @@ const lcpPreload = firstItem
     list-style: none;
     display: flex;
     gap: var(--space-4);
-    overflow-x: auto;
+    /* `scroll` (not `auto`) RESERVES + always shows the bar — combined with the
+       styled webkit track below it stays visible whether or not you're dragging,
+       on every range (owner: a persistent, functional scrollbar). */
+    overflow-x: scroll;
     scroll-snap-type: x proximity;
     padding-block: var(--space-2);
-    /* always-visible, easy-to-grab scrollbar (owner): the native macOS overlay
-       bar auto-hides, so each range gets a persistent forest-green track on the
-       hairline so the rail reads as scrollable and is simple to drag. */
     scrollbar-width: auto;
     scrollbar-color: var(--accent) var(--hairline);
     scrollbar-gutter: stable;

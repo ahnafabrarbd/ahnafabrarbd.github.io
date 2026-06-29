@@ -625,11 +625,13 @@ main { flex: 1; }
   columns: 3;
   column-gap: var(--space-5);
   border-top: none;
+  font-size: var(--text-sm);
+  line-height: var(--leading-snug);
 }
 .hscroll-on .hpanel .photo-chapter--grid .keyline-list > li {
   break-inside: avoid;
   max-width: none;
-  padding-block: var(--space-2);
+  padding-block: var(--space-1);
 }
 /* tighter heading + intro in welfare panels so the list clears the fold */
 .hscroll-on .hpanel > .photo-chapter--grid:has(.keyline-list) .photo-chapter__copy h2 {
