@@ -566,29 +566,6 @@ if (
     };
     addEventListener('keydown', onKey);
 
-    // ---- 11b. WHEEL HANDOFF for tall rooms (owner: horizontal → vertical →
-    // horizontal, seamless). When a tall (internally-scrolling) room is centred,
-    // the wheel scrolls it VERTICALLY until it tops/bottoms; only then does the
-    // event pass through to Lenis and the corridor resume its HORIZONTAL scrub.
-    // Capture phase + stopImmediatePropagation consumes the wheel before Lenis's
-    // own window listener so the two never fight. Mirrors the keyboard routing.
-    const onWheel = (e: WheelEvent) => {
-      if (document.querySelector('dialog[open]')) return; // overlay isolates the corridor
-      const room = panels[activeIndex];
-      if (!room || !room.classList.contains('is-tall')) return;
-      const dy = e.deltaY;
-      if (!dy) return;
-      const atTop = room.scrollTop <= 0;
-      const atBottom = room.scrollTop + room.clientHeight >= room.scrollHeight - 1;
-      if ((dy > 0 && !atBottom) || (dy < 0 && !atTop)) {
-        e.preventDefault();
-        e.stopImmediatePropagation();
-        room.scrollTop += dy;
-      }
-      // at the vertical bound: fall through → Lenis advances the corridor
-    };
-    addEventListener('wheel', onWheel, { capture: true, passive: false });
-
     // ---- 12. Settle. Resolve any arrival hash AFTER refresh, in a double rAF.
     ScrollTrigger.refresh();
     remeasure();
@@ -630,7 +607,6 @@ if (
       lenis.destroy(); // hands scrolling back to the browser for the vertical doc
       st.kill();
       removeEventListener('keydown', onKey);
-      removeEventListener('wheel', onWheel, true);
       removeEventListener('resize', onResize);
       mqMotion.removeEventListener('change', onMotionChange);
       document.removeEventListener('click', onClick, true);

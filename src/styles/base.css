@@ -502,6 +502,35 @@ main { flex: 1; }
   width: 100%;
 }
 .hscroll-on .hpanel:not(.is-cols) .keyline-list > li { max-width: none; }
+/* Accreditations ledger fits the corridor as a HORIZONTAL spread (owner: the
+   accreditations segment is horizontal like every other segment — never a
+   vertical scroll). The fourteen marks flow into compact columns; each row
+   stacks logo → name → certification, with the "Removes" sales line dropped in
+   the dense corridor view (it stays on the native vertical document). */
+.hscroll-on .hpanel:has(.cwall) { width: 96vw; }
+/* a smaller heading on this dense panel so all fourteen marks clear the fold */
+.hscroll-on .hpanel:has(.cwall) h2 {
+  font-size: clamp(var(--text-base), 2.4vw, var(--text-lg));
+  margin-block-end: var(--space-2);
+}
+.hscroll-on .hpanel .cwall {
+  columns: 5;
+  column-gap: var(--space-5);
+  border-top: none;
+  font-size: var(--text-xs);
+}
+.hscroll-on .hpanel .cwall .cwall__row {
+  display: block;
+  break-inside: avoid;
+  padding-block: var(--space-1);
+  border-bottom: none;
+}
+.hscroll-on .hpanel .cwall .cwall__certifies { font-size: var(--text-xs); line-height: var(--leading-snug); }
+.hscroll-on .hpanel .cwall .cwall__mark { justify-content: flex-start; margin-block-end: var(--space-1); }
+.hscroll-on .hpanel .cwall .cwall__mark img { max-height: var(--space-4); }
+.hscroll-on .hpanel .cwall .cwall__certifies { max-width: none; margin-block-start: 0; }
+.hscroll-on .hpanel .cwall .cwall__removes { display: none; }
+
 /* a long stacked heading must not eat the room — cap its scale in the corridor
    so the body + matrix sit up near the top, fully visible. Applies to EVERY
    panel heading (plain chapters AND nested PhotoChapter __copy h2s, which the
