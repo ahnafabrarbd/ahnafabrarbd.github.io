@@ -92,26 +92,28 @@ const description = firstBody.length > 155 ? `${firstBody.slice(0, 152)}…` : f
     <a class="profile-more u-caps" href="/partners/">All partners</a>
   </section>
 
-  <section class="chapter">
+  <section class="chapter growth-section" id="our-business-growth">
     <span class="chapter__num" aria-hidden="true"></span>
     <h2>{growth.heading}</h2>
     {growth.intro && <p>{growth.intro}</p>}
-    <div class="profile-chart">
-      <h3 class="u-caps">{revenueCaption}</h3>
-      <GrowthChart
-        points={charts.revenue.points}
-        caption={charts.revenue.caption}
-        unit={charts.revenue.unit}
-      />
-    </div>
-    <div class="profile-chart">
-      <h3 class="u-caps">{goalCaption}</h3>
-      <GrowthChart
-        points={charts.futureGoal.points}
-        caption={charts.futureGoal.caption}
-        unit={charts.futureGoal.unit}
-        goal
-      />
+    <div class="profile-charts">
+      <div class="profile-chart">
+        <h3 class="u-caps">{revenueCaption}</h3>
+        <GrowthChart
+          points={charts.revenue.points}
+          caption={charts.revenue.caption}
+          unit={charts.revenue.unit}
+        />
+      </div>
+      <div class="profile-chart">
+        <h3 class="u-caps">{goalCaption}</h3>
+        <GrowthChart
+          points={charts.futureGoal.points}
+          caption={charts.futureGoal.caption}
+          unit={charts.futureGoal.unit}
+          goal
+        />
+      </div>
     </div>
   </section>
 </Base>
@@ -141,5 +143,20 @@ const description = firstBody.length > 155 ? `${firstBody.slice(0, 152)}…` : f
   }
   .profile-chart :global(.growth) {
     margin-block: var(--space-2) 0;
+  }
+  /* the two charts sit SIDE BY SIDE (revenue left, future-goal right) rather than
+     stacked, so the goal chart no longer falls below the fold (owner). */
+  @media (min-width: 768px) {
+    .profile-charts {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-6);
+      align-items: end;
+    }
+  }
+  /* in the corridor the growth room goes full-bleed so the two side-by-side
+     charts each render large (~1.5x of the old single-column size). */
+  :global(.hscroll-on .hpanel:has(.growth-section)) {
+    width: 96vw;
   }
 </style>
