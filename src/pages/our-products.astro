@@ -70,22 +70,30 @@ const lcpPreload = firstItem
             <h2>{label}</h2>
           </header>
           {items.length > 0 ? (
-            <ul class="cat-panel__rail" tabindex="0" aria-label={`${label} — product gallery`}>
-              {items.map(({ image, alt }, j) => (
-                <li class="cat-img" style={`--j: ${j}`}>
-                  <Image
-                    src={image}
-                    alt={alt}
-                    widths={[380]}
-                    sizes="(min-width: 768px) 280px, 62vw"
-                    loading={i === 0 && j === 0 ? 'eager' : 'lazy'}
-                    fetchpriority={i === 0 && j === 0 ? 'high' : 'low'}
-                    quality={50}
-                    format="webp"
-                  />
-                </li>
-              ))}
-            </ul>
+            <div class="cat-panel__viewport">
+              <button class="rail-nav rail-nav--prev" type="button" aria-label={`Previous — ${label}`}>
+                <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M10 2 L4 8 L10 14" fill="none" stroke="currentColor" stroke-width="2" /></svg>
+              </button>
+              <ul class="cat-panel__rail" tabindex="0" aria-label={`${label} — product gallery`}>
+                {items.map(({ image, alt }, j) => (
+                  <li class="cat-img" style={`--j: ${j}`}>
+                    <Image
+                      src={image}
+                      alt={alt}
+                      widths={[380]}
+                      sizes="(min-width: 768px) 280px, 62vw"
+                      loading={i === 0 && j === 0 ? 'eager' : 'lazy'}
+                      fetchpriority={i === 0 && j === 0 ? 'high' : 'low'}
+                      quality={50}
+                      format="webp"
+                    />
+                  </li>
+                ))}
+              </ul>
+              <button class="rail-nav rail-nav--next" type="button" aria-label={`Next — ${label}`}>
+                <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M6 2 L12 8 L6 14" fill="none" stroke="currentColor" stroke-width="2" /></svg>
+              </button>
+            </div>
           ) : (
             <p class="cat-panel__empty u-caps">Imagery for this range is being prepared.</p>
           )}
@@ -116,6 +124,17 @@ const lcpPreload = firstItem
       );
       cats.forEach((c) => io.observe(c));
     }
+
+    // Chevron navigation: each arrow scrolls its range's gallery by ~a screenful.
+    document.querySelectorAll('.rail-nav').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const vp = btn.closest('.cat-panel__viewport');
+        const rail = vp?.querySelector('.cat-panel__rail') as HTMLElement | null;
+        if (!rail) return;
+        const dir = btn.classList.contains('rail-nav--next') ? 1 : -1;
+        rail.scrollBy({ left: dir * rail.clientWidth * 0.8, behavior: 'smooth' });
+      });
+    });
 
     // Click any garment → enlarge it alone, centred, in the native <dialog>
     // top-layer (sits above the corridor transforms). Click / Esc closes.
@@ -192,35 +211,58 @@ const lcpPreload = firstItem
     justify-content: start;
     align-content: start;
     gap: var(--space-3) var(--space-4);
-    /* `scroll` (not `auto`) RESERVES + always shows the bar — combined with the
-       styled webkit track below it stays visible whether or not you're dragging,
-       on every range (owner: a persistent, functional scrollbar). */
-    overflow-x: scroll;
+    overflow-x: auto;
     scroll-snap-type: x proximity;
     padding-block: var(--space-2);
-    scrollbar-width: auto;
-    scrollbar-color: var(--accent) var(--hairline);
-    scrollbar-gutter: stable;
+    /* no scrollbar — the flanking chevron buttons are the navigation (owner) */
+    scrollbar-width: none;
   }
-  .cat-panel__rail::-webkit-scrollbar {
-    height: var(--space-2);
-    -webkit-appearance: none;
-  }
-  .cat-panel__rail::-webkit-scrollbar-track { background: var(--hairline); }
-  .cat-panel__rail::-webkit-scrollbar-thumb {
-    background: var(--accent);
-    border-radius: var(--radius-frame);
-  }
+  .cat-panel__rail::-webkit-scrollbar { display: none; }
   .cat-panel__rail:focus-visible { outline-offset: var(--space-1); }
+
+  /* viewport: chevron | gallery | chevron, the arrows flanking each range as the
+     catalogue navigation (replaces the scrollbar) */
+  .cat-panel__viewport {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: center;
+    gap: var(--space-3);
+  }
+  .rail-nav {
+    flex: none;
+    inline-size: var(--space-6);
+    block-size: var(--space-6);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: var(--rail-w) solid var(--hairline);
+    color: var(--ink);
+    cursor: pointer;
+    transition:
+      color var(--dur-fast) var(--ease-out),
+      border-color var(--dur-fast) var(--ease-out);
+  }
+  .rail-nav:hover,
+  .rail-nav:focus-visible { color: var(--accent); border-color: var(--accent); }
+  .rail-nav svg { inline-size: var(--space-3); block-size: var(--space-3); }
   .cat-panel__rail > li { scroll-snap-align: start; }
-  /* smaller so two rows + the heading + scrollbar all clear one screen */
+  /* smaller, minimal cards (owner: less screen-space, more elegant) — two quiet
+     rows of compact garments rather than a dense wall */
   .cat-panel__rail img {
     height: auto;
-    max-height: 30svh;
+    max-height: 24svh;
     width: auto;
     cursor: zoom-in; /* clickable → opens the centred lightbox */
   }
   .cat-panel__empty { color: var(--ink-muted); }
+
+  /* in the corridor each range fills the viewport so the gallery scrolls INSIDE
+     its row — between the two chevrons — instead of widening the room past the
+     screen (which would push the right chevron off-screen). */
+  :global(.hscroll-on .hpanel:has(.cat-panel__viewport)) { width: 100vw; }
+  :global(.hscroll-on .hpanel:has(.cat-panel__viewport) .cat-panel) { width: 100%; }
+  .cat-panel__viewport { min-width: 0; max-width: 100%; }
 
   /* ---- LIGHTBOX: a clicked garment enlarges alone, centred on a dim ground.
      Native <dialog> top-layer sits above the corridor transforms. */
