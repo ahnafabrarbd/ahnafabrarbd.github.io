@@ -16,9 +16,10 @@ const mqFloor = matchMedia('(min-width: 1025px)');
 if (mqFloor.matches && !mqMotion.matches) {
   import('lenis')
     .then(({ default: Lenis }) => {
-      // weighty lerp glide + reduced wheel sensitivity so the scroll feels slow
-      // and intentional (matches the corridor's Lenis physics).
-      const lenis = new Lenis({ lerp: 0.06, wheelMultiplier: 0.85, touchMultiplier: 0.9 });
+      // higher lerp = the page settles quickly with little glide (more friction,
+      // less "slippery"); a modest wheelMultiplier keeps each notch a relaxed,
+      // controlled step rather than a long coast (owner: increase friction).
+      const lenis = new Lenis({ lerp: 0.12, wheelMultiplier: 0.7, touchMultiplier: 0.9 });
       const raf = (time: number) => {
         lenis.raf(time);
         requestAnimationFrame(raf);
