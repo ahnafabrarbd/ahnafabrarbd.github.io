@@ -19,7 +19,7 @@ if (mqFloor.matches && !mqMotion.matches) {
       // higher lerp = the page settles quickly with little glide (more friction,
       // less "slippery"); a modest wheelMultiplier keeps each notch a relaxed,
       // controlled step rather than a long coast (owner: increase friction).
-      const lenis = new Lenis({ lerp: 0.48, wheelMultiplier: 0.7, touchMultiplier: 0.9 });
+      const lenis = new Lenis({ lerp: 0.96, wheelMultiplier: 0.7, touchMultiplier: 0.9 });
       const raf = (time: number) => {
         lenis.raf(time);
         requestAnimationFrame(raf);
