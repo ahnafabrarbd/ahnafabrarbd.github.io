@@ -668,8 +668,9 @@
      "alt": "An active sewing line"
     },
     {
-     "src": "assets/img/site/sewing-line-juki.jpg",
-     "alt": "A machinist works a flatlock seam"
+     "src": "assets/img/site/flatlock-seam-siruba.jpg",
+     "alt": "A machinist guides a black garment through a Siruba flatlock machine",
+     "noCaption": true
     }
    ]
   },

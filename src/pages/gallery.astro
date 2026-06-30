@@ -43,11 +43,15 @@ for (const caption of captions) {
 const albums = await Promise.all(
   captions.map(async (caption) => {
     const slotName = ALBUM_SLOTS[caption];
-    const s = slot('gallery', slotName) as { items?: { src: string; alt: string }[] };
+    const s = slot('gallery', slotName) as {
+      items?: { src: string; alt: string; noCaption?: boolean }[];
+    };
     const plates = await Promise.all(
-      (s.items ?? []).map(async ({ src, alt }) => ({
+      (s.items ?? []).map(async ({ src, alt, noCaption }) => ({
         image: await resolveImage(src),
         alt: alt ?? '',
+        // owner: a plate may carry alt (accessibility) yet show no visible caption
+        caption: noCaption ? '' : (alt ?? ''),
       })),
     );
     if (plates.length === 0) throw new Error(`image-map: gallery.${slotName} has no items`);
@@ -81,7 +85,7 @@ const description =
       <span class="chapter__num" aria-hidden="true"></span>
       <h2>{caption}</h2>
       <div class="album__grid">
-        {plates.map(({ image, alt }, plateIndex) => (
+        {plates.map(({ image, alt, caption }, plateIndex) => (
           <figure class="album__cell">
             <Image
               src={image}
@@ -93,7 +97,7 @@ const description =
               quality={70}
               format="webp"
             />
-            <figcaption class="u-caps">{alt}</figcaption>
+            {caption && <figcaption class="u-caps">{caption}</figcaption>}
           </figure>
         ))}
       </div>
