@@ -51,14 +51,29 @@ const SUB_SLOTS: Record<string, string> = {
   Label: 'sourcing-label',
   Accessories: 'sourcing-accessories',
 };
+// Per-cell caption override (owner): '' hides the caption, a string replaces the
+// deck subLabel. Cells not listed fall back to the deck subLabel.
+const CAPTION_OVERRIDE: Record<string, string> = {
+  Fabric: '',
+  Trims: '',
+};
+// owner restructure 2026-06-30: the Label and Accessories cells are dropped and
+// replaced by a single Procurement Department cell appended after the rest.
+const DROPPED = new Set(['Label', 'Accessories']);
 const sourcingCells = await Promise.all(
-  ((sourcing.subLabels ?? []) as string[]).map(async (label) => {
-    const slotName = SUB_SLOTS[label];
-    if (!slotName) throw new Error(`our-capabilities: no image slot mapped for subLabel "${label}"`);
-    const s = slot('capabilities', slotName);
-    return s.src ? { label, ...(await slotImage('capabilities', slotName)) } : { label };
-  }),
+  ((sourcing.subLabels ?? []) as string[])
+    .filter((label) => !DROPPED.has(label))
+    .map(async (label) => {
+      const slotName = SUB_SLOTS[label];
+      if (!slotName) throw new Error(`our-capabilities: no image slot mapped for subLabel "${label}"`);
+      const s = slot('capabilities', slotName);
+      return s.src ? { label, ...(await slotImage('capabilities', slotName)) } : { label };
+    }),
 );
+sourcingCells.push({
+  label: 'Procurement Department',
+  ...(await slotImage('capabilities', 'sourcing-procurement')),
+});
 const sourcingLead = await slotImage('capabilities', 'sourcing');
 
 // spec-only rows still honour the map's photos — lazy, small, no emphasis
@@ -106,7 +121,11 @@ const description = firstBody.length > 155 ? `${firstBody.slice(0, 152)}…` : f
                 loading="lazy"
                 format="webp"
               />
-              <figcaption class="u-caps sourcing-row__caption">{c.label}</figcaption>
+              {(c.label in CAPTION_OVERRIDE ? CAPTION_OVERRIDE[c.label] : c.label) && (
+                <figcaption class="u-caps sourcing-row__caption">
+                  {c.label in CAPTION_OVERRIDE ? CAPTION_OVERRIDE[c.label] : c.label}
+                </figcaption>
+              )}
             </figure>
           </li>
         ) : (

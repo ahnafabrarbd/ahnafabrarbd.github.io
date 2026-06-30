@@ -31,25 +31,25 @@
    ]
   },
   "mission-teaser": {
-   "src": "assets/img/site/company-profile.jpg",
+   "src": "assets/img/site/mission-boardroom.jpg",
    "status": "final-seed",
-   "alt": "Sewing line at the Rizvi Fashions factory: a machinist works a flatlock seam",
-   "origin": "live-site",
-   "note": "1920x1280, editorial-grade (D-008)"
+   "alt": "Rizvi Fashions leadership team in a boardroom meeting beneath the company mark",
+   "origin": "owner-supplied",
+   "note": "owner swap 2026-06-30 (was company-profile.jpg)"
   },
   "vision-teaser": {
-   "src": "assets/img/site/img_0976-scaled.jpg",
+   "src": "assets/img/site/vision-showroom.jpg",
    "status": "final-seed",
-   "alt": "Product development showroom with garment ranges on display walls",
-   "origin": "live-site",
-   "note": "2560x1232 showroom panorama"
+   "alt": "Rizvi Fashions product showroom with garment ranges along lit display walls beneath the company mark",
+   "origin": "owner-supplied",
+   "note": "owner swap 2026-06-30 (was img_0976-scaled.jpg)"
   },
   "manufacturing-teaser": {
-   "src": "assets/img/site/15-1-min.jpg",
+   "src": "assets/img/site/manufacturing-juki-line.jpg",
    "status": "final-seed",
-   "alt": "A production aisle between sewing lines on the factory floor",
-   "origin": "live-site",
-   "note": "1920x1100 deep-perspective floor shot"
+   "alt": "Machine operators at Juki sewing stations along a Rizvi Fashions production line",
+   "origin": "owner-supplied",
+   "note": "owner swap 2026-06-30 (was 15-1-min.jpg)"
   },
   "breather": {
    "src": "assets/img/site/overview.jpg",
@@ -61,11 +61,11 @@
  },
  "overview": {
   "who-we-are": {
-   "src": "assets/img/site/overview.jpg",
+   "src": "assets/img/site/who-we-are-floor.jpg",
    "status": "final-seed",
-   "alt": "The folding and packing area of the factory at full operation",
-   "origin": "live-site",
-   "note": "1920x1280"
+   "alt": "Composite of the self-sufficient campus: sewing lines, a Juki operator, and the knitting hall",
+   "origin": "owner-supplied",
+   "note": "owner swap 2026-06-30 (collage; was overview.jpg)"
   },
   "technology": {
    "src": "assets/img/site/img_0976-scaled.jpg",
@@ -75,11 +75,11 @@
    "note": "reused from home vision-teaser - acceptable cross-page reuse, logged"
   },
   "scale": {
-   "src": "assets/img/site/15-1-min.jpg",
+   "src": "assets/img/site/scale-qc-aisle.jpg",
    "status": "final-seed",
-   "alt": "Rows of sewing stations stretching the length of a production floor",
-   "origin": "live-site",
-   "note": ""
+   "alt": "An end-of-line QC checking aisle running the length of a production floor",
+   "origin": "owner-supplied",
+   "note": "owner swap 2026-06-30 (was 15-1-min.jpg)"
   },
   "range": {
    "status": "final-seed",
@@ -100,20 +100,20 @@
    ]
   },
   "breather-aerial": {
-   "src": "assets/img/drive/DJI_0580_dev.jpeg",
+   "src": "assets/img/site/campus-breather.jpg",
    "status": "final-seed",
-   "alt": "Aerial view of the Rizvi Fashions campus rising above the tree canopy",
-   "origin": "drive",
-   "note": "grade toward dark ground; sole breather on this page"
+   "alt": "The Rizvi Fashions campus buildings rising above the tree canopy",
+   "origin": "owner-supplied",
+   "note": "owner swap 2026-06-30 (was DJI_0580_dev.jpeg); sole breather on this page"
   }
  },
  "company-profile": {
   "manufacturing": {
-   "src": "assets/img/site/sewing.jpg",
+   "src": "assets/img/site/manufacturing-floor-aisle.jpg",
    "status": "final-seed",
-   "alt": "Machinists at work on an active sewing line",
-   "origin": "live-site",
-   "note": "958x676"
+   "alt": "A central aisle between sewing units with buyer-line signage on a Rizvi Fashions production floor",
+   "origin": "owner-supplied",
+   "note": "owner swap 2026-06-30 (was sewing.jpg)"
   },
   "chart-revenue": {
    "status": "final-seed",
@@ -151,18 +151,18 @@
  },
  "capabilities": {
   "sourcing": {
-   "src": "assets/img/site/threads_large.webp",
+   "src": "assets/img/site/sourcing-hallway.jpg",
    "status": "final-seed",
-   "alt": "Spools of dyed thread in the material store",
-   "origin": "live-site",
-   "note": "480x320 - small render only"
+   "alt": "Fabric store with buyer-line racks along the corridor",
+   "origin": "owner-supplied",
+   "note": "owner swap 2026-06-30 (was threads_large.webp)"
   },
   "sourcing-fabric": {
-   "src": "assets/img/site/fabric.jpg",
+   "src": "assets/img/site/fabric-store.jpg",
    "status": "final-seed",
-   "alt": "Folded knit fabric stock",
-   "origin": "live-site",
-   "note": ""
+   "alt": "Shelved fabric and trim cartons in the material store",
+   "origin": "owner-supplied",
+   "note": "owner swap 2026-06-30 (was fabric.jpg); caption suppressed"
   },
   "sourcing-label": {
    "src": "assets/img/site/garment-labelling.jpeg",
@@ -179,58 +179,67 @@
    "note": ""
   },
   "sourcing-trims": {
-   "status": "todo-owner",
-   "src": null,
-   "note": "live site never had a Trims image; owner to supply"
+   "status": "final-seed",
+   "src": "assets/img/site/trims-inspection.jpg",
+   "alt": "The fabric inspection area with rolls under review",
+   "origin": "owner-supplied",
+   "note": "owner swap 2026-06-30 (was placeholder text cell); caption suppressed"
+  },
+  "sourcing-procurement": {
+   "status": "final-seed",
+   "src": "assets/img/site/procurement-department.jpg",
+   "alt": "The procurement department at work",
+   "origin": "owner-supplied",
+   "note": "owner add 2026-06-30; replaces the Label and Accessories cells"
   },
   "product-development": {
-   "src": "assets/img/site/product-development.jpg",
+   "src": "assets/img/site/product-development-fitting.jpg",
    "status": "final-seed",
-   "alt": "Pattern development work in the sample room",
-   "origin": "live-site",
-   "note": "525x350 - small render only"
+   "alt": "Sample-room fitting of a polo on a form in the development section",
+   "origin": "owner-supplied",
+   "note": "owner swap 2026-06-30 (was product-development.jpg)"
   },
   "sampling": {
-   "src": "assets/img/site/sample.jpg",
+   "src": "assets/img/site/sampling-room.jpg",
    "status": "final-seed",
-   "alt": "Sample garments under review",
-   "origin": "live-site",
-   "note": ""
+   "alt": "Pattern masters fitting a sample garment in the sample room",
+   "origin": "owner-supplied",
+   "note": "owner swap 2026-06-30 (was sample.jpg)"
   },
   "cutting": {
-   "src": "assets/img/site/cutting1.jpg",
+   "src": "assets/img/site/cutting-operator.jpg",
    "status": "final-seed",
-   "alt": "The cutting floor with fabric laid for cutting",
-   "origin": "live-site",
-   "note": "958x676"
+   "alt": "A cutting operator running a straight-knife through a fabric lay",
+   "origin": "owner-supplied",
+   "note": "owner swap 2026-06-30 (was cutting1.jpg)"
   },
   "sewing": {
-   "src": "assets/img/site/sewing.jpg",
+   "src": "assets/img/site/sewing-hikari-line.jpg",
    "status": "final-seed",
    "alt": "An active sewing line",
-   "origin": "live-site",
-   "note": "958x676"
+   "origin": "owner-supplied",
+   "note": "owner swap 2026-06-30 (was sewing.jpg)"
   },
   "finishing": {
-   "src": "assets/img/site/finishing.jpg",
+   "src": "assets/img/site/finishing-packing.jpg",
    "status": "final-seed",
-   "alt": "Finishing and pressing stations",
-   "origin": "live-site",
-   "note": ""
+   "alt": "Operators packing finished garments into polybags at the finishing line",
+   "origin": "owner-supplied",
+   "note": "owner swap 2026-06-30 (was finishing.jpg)"
   },
   "knitting": {
-   "src": "assets/img/site/knitting.jpg",
+   "src": "assets/img/site/knitting-hall.jpg",
    "status": "final-seed",
-   "alt": "Circular knitting machines",
-   "origin": "live-site",
-   "note": ""
+   "alt": "The circular knitting hall with creels running the length of the aisle",
+   "origin": "owner-supplied",
+   "note": "owner swap 2026-06-30 (was knitting.jpg)"
   },
   "printing": {
-   "src": "assets/img/site/printing.png",
+   "src": "assets/img/site/printing-tables.jpg",
    "status": "final-seed",
-   "alt": "Screen printing tables",
-   "origin": "live-site",
-   "note": ""
+   "alt": "Screen-printing on long print tables along the printing floor",
+   "origin": "owner-supplied",
+   "note": "owner swap 2026-06-30 (was printing.png)"
   }
  },
  "products": {
@@ -596,10 +605,11 @@
    "origin": "old-site"
   },
   "safe-and-healthy-work-environment": {
-   "src": "assets/img/site/fire-safety.jpg",
+   "src": "assets/img/site/safe-environment-collage.jpg",
    "status": "final",
-   "alt": "A factory floor with an emergency evacuation plan, fire extinguishers and a fire-hydrant cabinet on the wall",
-   "origin": "old-site"
+   "alt": "Four scenes of workplace safety and care: a fire-safety station, first-aid training, an on-site medical check, and a fire-evacuation drill",
+   "origin": "owner-supplied",
+   "note": "owner swap 2026-06-30: 2x2 collage (was fire-safety.jpg)"
   },
   "educational-and-professional-development": {
    "src": "assets/img/site/skills-training.jpg",
@@ -608,16 +618,18 @@
    "origin": "old-site"
   },
   "equality-and-acceptance": {
-   "src": "assets/img/site/equality-workers.png",
+   "src": "assets/img/site/equality-team.jpg",
    "status": "final",
-   "alt": "Two Rizvi Fashions workers standing together on the factory floor",
-   "origin": "old-site"
+   "alt": "Three Rizvi Fashions workers in QC vests smiling together on the sewing floor",
+   "origin": "owner-supplied",
+   "note": "owner swap 2026-06-30 (was equality-workers.png)"
   },
   "best-practices": {
-   "src": "assets/img/site/medical-checkup.jpg",
+   "src": "assets/img/site/best-practices-medical.jpg",
    "status": "final",
-   "alt": "A worker receiving a free on-site medical check-up from a member of the factory medical staff",
-   "origin": "old-site"
+   "alt": "A worker in a Rizvi Fashions vest receiving medicine at the on-site medical desk from factory medical staff",
+   "origin": "owner-supplied",
+   "note": "owner swap 2026-06-30 (was medical-checkup.jpg)"
   }
  },
  "gallery": {
@@ -625,7 +637,7 @@
    "status": "final-seed",
    "items": [
     {
-     "src": "assets/img/drive/DJI_0580_dev.jpeg",
+     "src": "assets/img/site/campus-aerial.jpg",
      "alt": "Aerial view of the factory campus"
     }
    ],
@@ -635,11 +647,11 @@
    "status": "final-seed",
    "items": [
     {
-     "src": "assets/img/site/overview.jpg",
+     "src": "assets/img/site/floor-folding-packing.jpg",
      "alt": "Folding and packing area"
     },
     {
-     "src": "assets/img/site/15-1-min.jpg",
+     "src": "assets/img/site/floor-sewing-aisle.jpg",
      "alt": "A production aisle between sewing lines"
     }
    ]
@@ -648,15 +660,15 @@
    "status": "final-seed",
    "items": [
     {
-     "src": "assets/img/site/cutting1.jpg",
+     "src": "assets/img/site/cutting-floor.jpg",
      "alt": "The cutting floor"
     },
     {
-     "src": "assets/img/site/sewing.jpg",
+     "src": "assets/img/site/sewing-line-juki.jpg",
      "alt": "An active sewing line"
     },
     {
-     "src": "assets/img/site/company-profile.jpg",
+     "src": "assets/img/site/sewing-line-juki.jpg",
      "alt": "A machinist works a flatlock seam"
     }
    ]
@@ -665,11 +677,11 @@
    "status": "final-seed",
    "items": [
     {
-     "src": "assets/img/site/finishing.jpg",
+     "src": "assets/img/site/finishing-stations.jpg",
      "alt": "Finishing and pressing stations"
     },
     {
-     "src": "assets/img/site/knitting.jpg",
+     "src": "assets/img/site/knitting-circular.jpg",
      "alt": "Circular knitting machines"
     }
    ]

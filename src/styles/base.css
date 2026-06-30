@@ -244,8 +244,12 @@ main { flex: 1; }
 .hscroll-on .hpanel .stats {
   grid-template-columns: none;
   grid-auto-flow: column;
-  grid-auto-columns: minmax(var(--space-8), max-content);
+  /* equal columns that share the panel width so the row never overruns the
+     viewport (a 3-stat row was cropping its last cell) */
+  grid-auto-columns: minmax(0, 1fr);
+  max-width: 100%;
 }
+.hscroll-on .hpanel .stats > div { padding-inline: var(--space-2); }
 .hscroll-on .hpanel .stats dd { white-space: nowrap; }
 /* corridor: the accreditation logo band lays out as TWO horizontal rows spanning
    its true width (not a tall, squashed 2-column stack). Logos keep their original
